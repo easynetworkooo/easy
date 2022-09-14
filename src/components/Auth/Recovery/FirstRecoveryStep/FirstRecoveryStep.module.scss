@@ -1,0 +1,24 @@
+@import "src/styles/vars";
+
+.stepsBlock {
+  margin-bottom: 24px;
+}
+
+.textBlock {
+  padding: 0 80px;
+  margin-bottom: 56px;
+  span{
+    color: $gray;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+  }
+}
+
+.inputBlock {
+  padding: 0 40px;
+  margin-bottom: 48px;
+}
+
+.nextStepBlock {
+  padding: 0 40px;
+}

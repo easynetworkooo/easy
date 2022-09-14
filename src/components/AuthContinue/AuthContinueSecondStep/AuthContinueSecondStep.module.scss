@@ -1,0 +1,34 @@
+@import "src/styles/vars";
+
+.secondStepBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepsBlock {
+  margin-bottom: 24px;
+}
+
+.helperTextBlock {
+  margin-bottom: 50px;
+  span{
+    color: $gray;
+    font-size: 21px;
+  }
+}
+
+.interestsBlock {
+  width: 100%;
+  margin-bottom: 70px;
+  padding: 0 10%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.buttonDoneBlock {
+  width: 100%;
+  padding: 0 35%;
+}

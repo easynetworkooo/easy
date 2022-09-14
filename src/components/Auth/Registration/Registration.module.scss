@@ -1,0 +1,50 @@
+@import "src/styles/vars";
+
+.registrationBlock {
+  flex: 1;
+  display: flex;
+  margin: 160px 110px 160px 110px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registrationHeader {
+  h2 {
+    font-size: 24px;
+  }
+}
+
+.authWithGoogle {
+  width: 100%;
+  padding: 48px 40px 56px 40px;
+}
+
+.linesWithText {
+  margin-bottom: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputBlock {
+  width: 100%;
+  padding: 0 40px;
+  margin-top: 24px;
+}
+
+.registrationButtonBlock {
+  width: 100%;
+  padding: 0 40px;
+  margin-top: 48px;
+}
+
+.loginBlock {
+  margin-top: 48px;
+
+  .login {
+    margin-left: 6px;
+    cursor: pointer;
+    color: $purple;
+    line-height: 19px;
+  }
+}

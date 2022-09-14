@@ -1,0 +1,20 @@
+@import "src/styles/vars";
+
+.input {
+  width: 100%;
+  background: #F8F9FA;
+  border: 1px solid #F8F9FA;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 10px 16px 11px 16px;
+  color: $dark;
+}
+
+.input:focus {
+  outline: 0;
+  border: 1px solid $purple;
+}
+
+.input::placeholder {
+  color: $HelperGray;
+}

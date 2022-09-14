@@ -1,0 +1,30 @@
+.authLogoBlock {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  max-width: 50%;
+  flex-direction: column;
+  background: linear-gradient(210.91deg, #1B22D7 -2.36%, #000000 109.15%);
+  border-radius: 10px 0px 0px 10px;
+}
+
+.authLogoName {
+  margin-top: 160px;
+}
+
+.authLogoDescription {
+  margin-top: 30px;
+  span{
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 36px;
+    color: #FFFFFF;
+  }
+}
+
+.authLogoImage {
+  margin: 120px 26px 96px 50px;
+  image{
+    width: 100%;
+  }
+}

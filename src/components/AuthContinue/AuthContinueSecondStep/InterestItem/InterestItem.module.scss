@@ -1,0 +1,23 @@
+@import "src/styles/vars";
+
+.interest {
+  background: $LightWhite;
+  padding: 10px;
+  margin: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  span {
+    color: $gray;
+  }
+}
+
+.interestChosen {
+  background: $dark;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 14px;
+  cursor: pointer;
+  span {
+    color: $white;
+  }
+}

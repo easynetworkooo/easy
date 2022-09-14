@@ -1,0 +1,16 @@
+@import "src/styles/vars";
+
+.line {
+  width: 100%;
+  border-bottom: solid 1px #E9ECEF;
+}
+
+.lineText {
+  position: relative;
+  top: 5px;
+  margin-right: 24px;
+  margin-left: 24px;
+  span{
+    color: $gray;
+  }
+}

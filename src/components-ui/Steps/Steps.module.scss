@@ -1,0 +1,17 @@
+.stepsBlock {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.stepBlock {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.line {
+  position: relative;
+  bottom: 25px;
+  width: 32px;
+  border-bottom: solid 1px #E9ECEF;
+}
