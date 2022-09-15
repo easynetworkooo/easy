@@ -3,14 +3,19 @@ import styles from "./ThirdRecoveryStep.module.scss";
 import { Button, Input, Steps } from "../../../../components-ui";
 import { userSlice } from "../../../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../../../hooks/redux";
+import { useNavigate } from "react-router-dom";
+import { AUTH_CONTINUE } from "../../../../constants/nameRoutesConsts";
 
 export const ThirdRecoveryStep = () => {
 
     const {login} = userSlice.actions
     const dispatch = useAppDispatch()
 
+    const navigate = useNavigate()
+
     const saveAndLoginHandler = () => {
         dispatch(login({name: 'Stas', continueAuth: true}))
+        navigate(AUTH_CONTINUE)
     }
 
     return (

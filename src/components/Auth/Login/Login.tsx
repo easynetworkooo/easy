@@ -5,6 +5,8 @@ import { Button, Input } from "../../../components-ui";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
 import { useAppDispatch } from "../../../hooks/redux";
 import { userSlice } from "../../../store/reducers/UserSlice";
+import { useNavigate } from "react-router-dom";
+import { AUTH_CONTINUE } from "../../../constants/nameRoutesConsts";
 
 export interface LoginProps {
     changeAuthStatus: (status: string) => void
@@ -15,12 +17,15 @@ export const Login: FC<LoginProps> = ({changeAuthStatus}) => {
     const {login} = userSlice.actions
     const dispatch = useAppDispatch()
 
+    const navigate = useNavigate()
+
     const [isEmail, setEmail] = useState('')
     const [isPassword, setPassword] = useState('')
 
     const loginHandler = () => {
         if (isEmail === 'test' && isPassword === 'test') {
             dispatch(login({name: 'Stas', continueAuth: true}))
+            navigate(AUTH_CONTINUE)
         }
     }
 

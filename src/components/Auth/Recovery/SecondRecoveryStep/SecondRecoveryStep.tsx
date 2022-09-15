@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styles from "./SecondRecoveryStep.module.scss";
 import { Button, Steps } from "../../../../components-ui";
 import ReactCodeInput from "react-code-input";

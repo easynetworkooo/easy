@@ -1,0 +1,37 @@
+@import "src/styles/vars";
+
+.navigationBlock {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid $Gray200;
+}
+
+.logoNavigationBlock {
+  padding: 0 140px;
+}
+
+.itemsNavigationBlock {
+  display: flex;
+}
+
+.itemNavigation {
+  margin-right: 32px;
+}
+
+.link {
+  color: $HelperGray;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.linkActive, .link:hover, .linkActive:hover {
+  font-weight: 600;
+  color: $TextDark;
+  cursor: pointer;
+}
+
+
+
+

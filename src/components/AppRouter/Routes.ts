@@ -1,9 +1,11 @@
-import { AUTH, AUTH_CONTINUE, PEOPLE_AND_PROJECTS } from "../../constants/nameRoutesConsts";
-import { AuthPage, PeopleAndProjectsPage } from "../../pages";
-import { AuthContinuePage } from "../../pages/Auth-continue-page/AuthContinuePage";
+import { MY_BLOG, PEOPLE_AND_PROJECTS, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
+import { MyBlogPage, PeopleAndProjectsPage, SubscriptionPage } from "../../pages";
+
+
 
 export const routes = [
-    {path: AUTH, Element: AuthPage},
     {path: PEOPLE_AND_PROJECTS, Element: PeopleAndProjectsPage},
-    {path: AUTH_CONTINUE, Element: AuthContinuePage}
+    {path: MY_BLOG, Element: MyBlogPage},
+    {path: SUBSCRIPTIONS, Element: SubscriptionPage},
 ]
+

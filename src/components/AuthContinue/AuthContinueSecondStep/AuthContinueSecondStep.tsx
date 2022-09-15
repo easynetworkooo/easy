@@ -4,12 +4,16 @@ import { Button, Steps } from "../../../components-ui";
 import { InterestItem } from "./InterestItem/IntrestItem";
 import { userSlice } from "../../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../../hooks/redux";
+import { useNavigate } from "react-router-dom";
+import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
 
 
 export const AuthContinueSecondStep: FC = () => {
 
     const {endAuth} = userSlice.actions
     const dispatch = useAppDispatch()
+
+    const navigate = useNavigate()
 
     const interestItems = [
         'Solidity Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer',
@@ -22,6 +26,7 @@ export const AuthContinueSecondStep: FC = () => {
 
     const endAuthHandler = () => {
         dispatch(endAuth())
+        navigate(PEOPLE_AND_PROJECTS)
     }
 
 
