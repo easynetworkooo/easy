@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './AuthGoogleButton.module.scss'
-import gmailImage from '../../../assets/Auth/auth-gmail-image.png'
+import gmailImage from '../../../assets/Auth/authGmail.svg'
 
 export const AuthGoogleButton = () => {
     return (

@@ -1,0 +1,59 @@
+@import "src/styles/vars";
+
+.profileBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 40px 32px 40px;
+}
+
+.profileAvatar {
+  img {
+    width: 250px;
+  }
+}
+
+.profileName {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  h2 {
+    line-height: 36px;
+    font-size: 21px;
+    font-weight: 400;
+  }
+}
+
+.profileElements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuLinksProfile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 45px;
+}
+
+.buttonCreateProject {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.walletConnection {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 30px 0;
+  background-color: $LightWhite;
+  span {
+    color: $HelperGray;
+  }
+}

@@ -1,0 +1,15 @@
+@import "../../../styles/vars";
+
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    color: $gray;
+  }
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+}

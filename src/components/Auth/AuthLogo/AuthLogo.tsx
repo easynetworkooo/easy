@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AuthLogo.module.scss'
 import authLogo from '../../../assets/Auth/auth-logo.png'
-import authLogoName from '../../../assets/Auth/auth-logo-name.png'
+import authLogoName from '../../../assets/Auth/authLogoName.svg'
 
 export const AuthLogo = () => {
     return (

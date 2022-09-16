@@ -22,14 +22,27 @@
 .link {
   color: $HelperGray;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.link:hover {
+  color: $HelperGray;
+  cursor: pointer;
+  font-weight: 400;
 }
 
 
-.linkActive, .link:hover, .linkActive:hover {
-  font-weight: 600;
+.linkActive, .linkActive:hover {
+  text-shadow: 0 0 .65px $TextDark, 0 0 .65px $TextDark;
   color: $TextDark;
   cursor: pointer;
+}
+
+.notificationsBlock {
+  margin-left: 19.5%;
+  img{
+    cursor: pointer ;
+  }
 }
 
 
