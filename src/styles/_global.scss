@@ -1,5 +1,19 @@
 @import 'vars';
 
+::-webkit-scrollbar {
+  width: 4px;
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #CED4DA;
+  border-radius: 4px;
+}
+
 span {
   font-size: 16px;
   font-family: 'Inter', sans-serif;

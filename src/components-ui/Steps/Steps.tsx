@@ -32,12 +32,12 @@ export const Steps: FC<StepsProps> = ({steps}) => {
     return (
         <div className={styles.stepsBlock}>
             {steps.map((item, index) =>
-                <>
+                <div key={index}>
                     {index + 1 <= steps.length && index + 1 !== 1 && <div className={styles.line}/>}
                     <div className={styles.stepBlock}>
                         <img src={checkSteps(item)} alt="step"/>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

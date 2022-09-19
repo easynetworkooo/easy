@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from './Navigation.module.scss'
 import navigationLogo from '../../assets/Navigation/NavigationLogo.svg'
-import notifications from '../../assets/Navigation/Notifications.svg'
-import notificationsActive from '../../assets/Navigation/NotificationsActive.svg'
+import notifications from '../../assets/UI/Notifications.svg'
+import notificationsActive from '../../assets/UI/NotificationsActive.svg'
 import { MY_BLOG, PEOPLE_AND_PROJECTS, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
+import { Modal } from "../Modal/Modal";
+import { Notifications } from "./Notifications/Notifications";
 
 export const Navigation = () => {
 
-    const checkActiveLink = ({isActive} : any) => isActive ? styles.linkActive : styles.link
+    const checkActiveLink = ({isActive}: any) => isActive ? styles.linkActive : styles.link
 
-    const [isActiveNotifications, setActiveNotifications] = useState(false)
+    const [isActiveNotifications, setActiveNotifications] = useState(true)
+    const [isModalNotifications, setModalNotifications] = useState(false)
 
     return (
         <nav className={styles.navigationBlock}>
@@ -29,8 +32,15 @@ export const Navigation = () => {
                 </div>
             </div>
             <div className={styles.notificationsBlock}>
-                <img src={isActiveNotifications ? notificationsActive : notifications} alt="notifications" onClick={() => setActiveNotifications(!isActiveNotifications)}/>
+                <img src={isActiveNotifications ? notificationsActive : notifications} alt="notifications"
+                     onClick={() => {
+                         setActiveNotifications(false)
+                         setModalNotifications(true)
+                     }}/>
             </div>
+            <Modal active={isModalNotifications} setActive={setModalNotifications}>
+                <Notifications activeNotifications={isActiveNotifications}/>
+            </Modal>
         </nav>
     );
 };

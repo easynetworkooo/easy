@@ -1,0 +1,81 @@
+@import "src/styles/vars";
+
+.notificationContainer {
+  width: 50vw;
+  max-height: 80vh;
+}
+
+.headerNotifications {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid $Gray200;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  span {
+    margin-left: 10px;
+    color: $TextSecondary;
+  }
+}
+
+.allNotificationsBlock {
+  padding-right: 10px;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.notificationsBlock {
+  border-right: 4px;
+  padding: 16px;
+  margin-bottom: 8px;
+  background-color: $Gray200;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationsDate {
+  span {
+    font-size: 12px;
+    color: $SecondaryDark;
+  }
+}
+
+.notifications {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.notificationAvatar {
+  margin-right: 16px;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.name {
+  margin-right: 16px;
+  span {
+    cursor: pointer;
+    color: $blue;
+  }
+}
+
+.action {
+  span {
+    font-size: 12px;
+    color: $gray;
+  }
+}

@@ -39,8 +39,10 @@ export const AuthContinueSecondStep: FC = () => {
                 <span>Choose 3 of your crypto interests</span>
             </div>
             <div className={styles.interestsBlock}>
-                {interestItems.map(interest =>
-                    <InterestItem interest={interest}/>
+                {interestItems.map((interest, key) =>
+                    <div key={key}>
+                        <InterestItem interest={interest}/>
+                    </div>
                 )}
             </div>
             <div className={styles.buttonDoneBlock}>
