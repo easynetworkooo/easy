@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './ProfileInformation.module.scss'
-import { IconElement } from "./IconElement/IconElement";
-import { Button } from "../../components-ui";
+import { Button, IconElement } from "../../components-ui";
 import defaultAvatar from '../../assets/Profile/Default-avatar.png'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
@@ -30,9 +29,9 @@ export const ProfileInformation = () => {
                     <h2>Black Jack</h2>
                 </div>
                 <div className={styles.profileElements}>
-                    <IconElement image={like} count={25}/>
-                    <IconElement image={repost} count={31}/>
-                    <IconElement image={view} count={12}/>
+                    <IconElement image={like} count={25} type={'light'}/>
+                    <IconElement image={repost} count={31} type={'light'}/>
+                    <IconElement image={view} count={12} type={'light'}/>
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>

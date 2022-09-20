@@ -1,0 +1,54 @@
+@import "src/styles/vars";
+
+.commentBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $Gray200;
+  border-radius: 4px;
+  gap: 8px;
+  padding: 16px;
+}
+
+.headerInformation {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.timeCreated {
+  font-size: 12px;
+  line-height: 15px;
+  color: $HelperGray;
+}
+
+.commentText {
+  p {
+    font-size: 14px;
+    line-height: 120%;
+  }
+}
+
+.actionComment {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

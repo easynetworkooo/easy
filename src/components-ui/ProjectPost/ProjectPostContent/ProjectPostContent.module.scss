@@ -1,0 +1,87 @@
+@import "src/styles/vars";
+
+.projectPost {
+  padding: 24px;
+  border-radius: 4px;
+  gap: 16px;
+  background-color: $LightWhite;
+}
+
+.informationProjectPostBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.avatarProjectPostCreator {
+  img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  line-height: 28px;
+}
+
+.projectIndicator {
+  padding: 4px 8px;
+  background-color: $Gray200;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+  text-align: center;
+  color: $gray;
+}
+
+.timePosted {
+  font-size: 12px;
+  line-height: 15px;
+  color: $HelperGray;
+}
+
+.indicatorBlock {
+  display: flex;
+  width: 100%;
+  margin-left: 140px;
+}
+
+.statusIndicator {
+  margin-right: 8px;
+  border-radius: 16px;
+  height: 18px;
+  width: 90px;
+  padding: 3px 8px;
+  background-color: $green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 10px;
+    color: $white;
+  }
+}
+
+.textProjectPostBlock {
+  p {
+    line-height: 17px;
+  }
+}
+
+.iconsProjectPostBlock {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 36px;
+}

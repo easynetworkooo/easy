@@ -1,0 +1,34 @@
+@import "src/styles/vars";
+
+.inputFindBlock {
+  display: flex;
+  align-items: center;
+  padding: 9px 0 9px 16px;
+  background-color: $LightWhite;
+}
+
+.inputFindIcon {
+  margin-right: 10px;
+  img {
+    height: 22px;
+    width: 22px;
+  }
+}
+
+.inputFind {
+  width: 100%;
+  input {
+    padding-right: 16px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    background-color: $LightWhite;
+  }
+  input::placeholder {
+    color: $HelperGray;
+  }
+  input:focus {
+    outline: 0;
+    border: 0px solid $purple;
+  }
+}

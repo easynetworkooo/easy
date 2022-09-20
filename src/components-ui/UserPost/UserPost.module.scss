@@ -1,0 +1,12 @@
+@import "src/styles/vars";
+
+.modalContent {
+  width: 684px;
+  max-height: 90vh;
+}
+
+.comments {
+  border-top: 1px solid $Gray200;
+  margin: 0 24px;
+  padding: 24px 0;
+}
