@@ -1,0 +1,38 @@
+@import "src/styles/vars";
+
+.inputSendBlock {
+  width: 100%;
+  padding: 24px 0;
+  border-top: 1px solid $Gray200;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.textareaSendBlock {
+  width: 93%;
+}
+
+.textarea {
+  width: 100%;
+  resize: none;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.buttonSend {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  margin-left: 5px;
+  img {
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+}

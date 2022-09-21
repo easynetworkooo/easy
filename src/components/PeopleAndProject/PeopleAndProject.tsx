@@ -9,11 +9,7 @@ const usersPosts = [
         type: 'project',
         icon: avatarProject,
         name: 'Tingram',
-        postedTime: '3 minutes ago',
         text: 'Думаю что курс крипты сейчас будет колебаться на одном уровне. Возможно примерно 20к. Время халвинга ещё не пришло и не придёт в ближайшие годы…',
-        likes: 30,
-        comments: 10,
-        reposts: 1
     },
     {
         icon: avatar,

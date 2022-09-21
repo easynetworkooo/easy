@@ -12,10 +12,13 @@ export interface ProjectPostContentProps {
     icon: string
     name: string
     text: string
+    currentCount: number
+    maxCount: number
     setActiveModal: (boolean: boolean) => void
 }
 
-export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, text, setActiveModal}) => {
+export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, text, setActiveModal, currentCount, maxCount}) => {
+
     return (
         <div className={styles.projectPost}>
             <div className={styles.informationProjectPostBlock}>
@@ -30,10 +33,11 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                     <span className={styles.timePosted}>3 minutes ago</span>
                 </div>
                 <div className={styles.indicatorBlock}>
-                    <div className={styles.statusIndicator}>
-                        <span>Sale Live</span>
+                    <div
+                        className={currentCount !== maxCount ? styles.statusIndicator : `${styles.statusIndicator} ${styles.statusIndicatorEnded}`}>
+                        <span>{currentCount === maxCount ? 'Sale Ended' : 'Sale Live'}</span>
                     </div>
-                    <Indicator currentCount={140} maxCount={200}/>
+                    <Indicator currentCount={currentCount} maxCount={maxCount}/>
                 </div>
             </div>
             <div className={styles.textProjectPostBlock}>

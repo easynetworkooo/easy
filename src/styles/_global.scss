@@ -64,3 +64,26 @@ a {
   text-decoration: none;
   color: $TextDark;
 }
+
+textarea {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 10px 24px;
+  background-color: $LightWhite;
+  border: 1px solid $LightWhite;
+  border-radius: 4px;
+}
+
+textarea::placeholder {
+  color: $HelperGray;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+textarea:focus {
+  outline: 0;
+  border: 1px solid $purple;
+}

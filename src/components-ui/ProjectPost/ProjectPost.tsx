@@ -17,10 +17,10 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
 
     return (
         <>
-            <ProjectPostContent text={text} name={name} icon={icon} setActiveModal={setActiveModal}/>
+            <ProjectPostContent text={text} name={name} icon={icon} setActiveModal={setActiveModal} currentCount={120} maxCount={200}/>
             <Modal active={isActiveModal} setActive={setActiveModal}>
                 <div className={styles.modalContent}>
-                    <ProjectPostContent icon={icon} name={name} text={text} setActiveModal={setActiveModal}/>
+                    <ProjectPostContent icon={icon} name={name} text={text} setActiveModal={setActiveModal} currentCount={120} maxCount={200}/>
                     <div className={styles.comments}>
                         <CommentsPost/>
                     </div>

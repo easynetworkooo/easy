@@ -1,0 +1,25 @@
+@import "src/styles/vars";
+
+.subscriptionsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 684px;
+}
+
+.headBlock {
+  display: flex;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.sortBlock {
+  margin-right: 16px;
+}
+
+.postsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
