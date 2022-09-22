@@ -4,7 +4,8 @@ import {
     MY_BLOG,
     PEOPLE_AND_PROJECTS,
     SUBSCRIPTIONS,
-    WALLET
+    WALLET,
+    PROJECTS, USERS
 } from "../../constants/nameRoutesConsts";
 import {
     CommunityPage, CreateProjectPage,
@@ -12,9 +13,10 @@ import {
     MyBlogPage,
     PeopleAndProjectsPage,
     SubscriptionPage,
-    WalletPage
+    WalletPage,
+    UserPage,
+    ProjectPage
 } from "../../pages";
-
 
 
 export const routes = [
@@ -25,5 +27,7 @@ export const routes = [
     {path: COMMUNITY, Element: CommunityPage},
     {path: WALLET, Element: WalletPage},
     {path: CREATE_PROJECT, Element: CreateProjectPage},
+    {path: USERS + '/:userId', Element: UserPage},
+    {path: PROJECTS + '/:projectId', Element: ProjectPage},
 ]
 

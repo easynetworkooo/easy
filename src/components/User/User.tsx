@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './PeopleAndProjects.module.scss'
-import { ButtonsSorter, InputFind, ProjectPost, UserPost } from "../../components-ui";
-import avatar from '../../assets/UI/AvatarUser.png'
-import avatarProject from '../../assets/UI/AvatarProject.png'
+import styles from './User.module.scss'
+import avatarProject from "../../assets/UI/AvatarProject.png";
+import avatar from "../../assets/UI/AvatarUser.png";
+import { ProjectPost, UserPost } from "../../components-ui";
+import { UserHeader } from "./UserHeader/UserHeader";
 
 const usersPosts = [
     {
@@ -23,17 +24,10 @@ const usersPosts = [
     },
 ]
 
-export const PeopleAndProject = () => {
+export const User = () => {
     return (
-        <div className={styles.peopleAndProjectContainer}>
-            <div className={styles.headBlock}>
-                <div className={styles.sortBlock}>
-                    <ButtonsSorter/>
-                </div>
-                <div className={styles.findBlock}>
-                    <InputFind/>
-                </div>
-            </div>
+        <div className={styles.userContainer}>
+            <UserHeader/>
             <div className={styles.postsBlock}>
                 {usersPosts.map((item) =>
                     <>

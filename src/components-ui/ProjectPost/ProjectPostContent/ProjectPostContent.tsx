@@ -6,6 +6,8 @@ import like from "../../../assets/UI/Likes.svg";
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
+import { useNavigate } from "react-router-dom";
+import { PROJECTS } from "../../../constants/nameRoutesConsts";
 
 
 export interface ProjectPostContentProps {
@@ -19,6 +21,8 @@ export interface ProjectPostContentProps {
 
 export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, text, setActiveModal, currentCount, maxCount}) => {
 
+    const navigate = useNavigate()
+
     return (
         <div className={styles.projectPost}>
             <div className={styles.informationProjectPostBlock}>
@@ -26,7 +30,7 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                     <img src={icon} alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <div className={styles.name}>
+                    <div className={styles.name} onClick={() => navigate(`${PROJECTS}/tingram` )}>
                         <span>{name}</span>
                         <span className={styles.projectIndicator}>Project</span>
                     </div>

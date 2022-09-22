@@ -1,0 +1,14 @@
+@import "src/styles/vars";
+
+.userContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.postsBlock {
+  width: 684px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}

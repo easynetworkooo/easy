@@ -5,6 +5,8 @@ import like from "../../../assets/UI/Likes.svg";
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
+import { useNavigate } from "react-router-dom";
+import { USERS } from "../../../constants/nameRoutesConsts";
 
 export interface UserPostContentProps {
     icon: string
@@ -14,6 +16,9 @@ export interface UserPostContentProps {
 }
 
 export const UserPostContent:FC<UserPostContentProps> = ({icon, text, name, setActiveModal}) => {
+
+    const navigate = useNavigate()
+
     return (
         <div className={styles.post}>
             <div className={styles.informationPostBlock}>
@@ -21,7 +26,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({icon, text, name, setA
                     <img src={icon} alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <span className={styles.name}>{name}</span>
+                    <span className={styles.name} onClick={() => navigate(`${USERS}/st.koryk`)}>{name}</span>
                     <span className={styles.timePosted}>3 minutes ago</span>
                 </div>
             </div>
