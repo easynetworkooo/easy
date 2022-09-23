@@ -3,6 +3,7 @@ import styles from './Project.module.scss'
 import { ProjectHeader } from "./ProjectHeader/ProjectHeader";
 import { ProjectBlog } from "./ProjectBlog/ProjectBlog";
 import { ProjectAbout } from "./ProjectAbout/ProjectAbout";
+import { ProjectDeposit } from "./ProjectDeposit/ProjectDeposit";
 
 export const Project = () => {
 
@@ -30,8 +31,8 @@ export const Project = () => {
                     </div>
                     {checkTabs()}
                 </div>
-                <div className={styles.projectInformationBlock}>
-
+                <div className={styles.projectDepositInformationBlock}>
+                    <ProjectDeposit/>
                 </div>
             </div>
         </div>

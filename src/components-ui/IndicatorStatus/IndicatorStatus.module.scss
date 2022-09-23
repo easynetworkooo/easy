@@ -1,0 +1,21 @@
+@import "src/styles/vars";
+
+.statusIndicator {
+  margin-right: 8px;
+  border-radius: 16px;
+  height: 18px;
+  width: 90px;
+  padding: 3px 8px;
+  background-color: $green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 10px;
+    color: $white;
+  }
+}
+
+.statusIndicatorEnded {
+  background-color: $purple;
+}

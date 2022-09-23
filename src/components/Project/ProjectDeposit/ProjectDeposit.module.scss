@@ -1,0 +1,86 @@
+@import "src/styles/vars";
+
+.projectDepositBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.indicatorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.indicatorStatus {
+  display: flex;
+  align-items: center;
+  .indicatorTime {
+    font-size: 12px;
+    font-weight: 400;
+    color: $gray;
+  }
+}
+
+.depositAmountBlock {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: $LightWhite;
+  border-radius: 4px;
+  padding: 24px;
+  input {
+    background-color: $Gray200;
+  }
+}
+
+.amountText {
+  font-weight: 400;
+  font-size: 12px;
+  color: $gray;
+}
+
+.depositInformationBlock {
+  padding: 24px;
+  border-radius: 4px;
+  background-color: $LightWhite;
+}
+
+.informationDeposit {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $Gray200;
+
+  .title {
+    font-weight: 400;
+    font-size: 12px;
+    color: $gray;
+  }
+
+  .value {
+    font-weight: 500;
+    line-height: 15px;
+    font-size: 12px;
+  }
+
+  .highlightValue {
+    font-weight: 500;
+    line-height: 15px;
+    font-size: 12px;
+    color: $purple;
+  }
+}
+
+.information:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}

@@ -1,0 +1,49 @@
+@import "src/styles/vars";
+
+.projectAboutBlock {
+  margin-top: 24px;
+  background-color: $LightWhite;
+  padding: 24px 16px 24px 24px;
+}
+
+.projectAbout {
+  height: 500px;
+  padding-right: 24px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.aboutPoint {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $Gray200;
+
+  .title {
+    font-weight: 400;
+    font-size: 12px;
+    color: $gray;
+  }
+
+  .value {
+    font-weight: 500;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  .highlightValue {
+    font-weight: 500;
+    line-height: 15px;
+    font-size: 12px;
+    color: $blue;
+    text-align: right;
+  }
+}
+
+.aboutPoint:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}

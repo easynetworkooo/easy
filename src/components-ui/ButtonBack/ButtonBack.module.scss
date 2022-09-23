@@ -1,0 +1,16 @@
+@import "src/styles/vars";
+
+.buttonBack {
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+  span {
+    font-size: 14px;
+    color: $blue;
+  }
+}

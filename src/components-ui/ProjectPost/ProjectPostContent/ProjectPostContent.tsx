@@ -8,6 +8,7 @@ import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
 import { useNavigate } from "react-router-dom";
 import { PROJECTS } from "../../../constants/nameRoutesConsts";
+import { IndicatorStatus } from "../../IndicatorStatus/IndicatorStatus";
 
 
 export interface ProjectPostContentProps {
@@ -37,10 +38,7 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                     <span className={styles.timePosted}>3 minutes ago</span>
                 </div>
                 <div className={styles.indicatorBlock}>
-                    <div
-                        className={currentCount !== maxCount ? styles.statusIndicator : `${styles.statusIndicator} ${styles.statusIndicatorEnded}`}>
-                        <span>{currentCount === maxCount ? 'Sale Ended' : 'Sale Live'}</span>
-                    </div>
+                    <IndicatorStatus/>
                     <Indicator currentCount={currentCount} maxCount={maxCount}/>
                 </div>
             </div>
