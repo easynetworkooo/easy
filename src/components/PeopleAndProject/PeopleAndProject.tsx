@@ -35,14 +35,14 @@ export const PeopleAndProject = () => {
                 </div>
             </div>
             <div className={styles.postsBlock}>
-                {usersPosts.map((item) =>
-                    <>
+                {usersPosts.map((item, index) =>
+                    <div key={index}>
                         {item.type === 'project'
                             ?
                             <ProjectPost icon={item.icon} name={item.name} text={item.text}/>
                             : <UserPost icon={item.icon} name={item.name} text={item.text}/>
                         }
-                    </>
+                    </div>
                 )}
             </div>
         </div>

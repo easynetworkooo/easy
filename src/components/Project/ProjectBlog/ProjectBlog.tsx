@@ -34,10 +34,10 @@ const usersPosts = [
 export const ProjectBlog = () => {
     return (
         <div className={styles.projectPosts}>
-            {usersPosts.map((item) =>
-                <>
+            {usersPosts.map((item, index) =>
+                <div key={index}>
                     <UserPost icon={item.icon} name={item.name} text={item.text}/>
-                </>
+                </div>
             )}
         </div>
     );

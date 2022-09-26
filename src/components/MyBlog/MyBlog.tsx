@@ -39,10 +39,10 @@ export const MyBlog = () => {
     return (
         <div className={styles.myBlogContainer}>
             <div className={styles.myPostsBlock} style={{height: `${712 - isSubtractTextarea}px`}}>
-                {usersPosts.map((item) =>
-                    <>
+                {usersPosts.map((item, index) =>
+                    <div key={index}>
                         <UserPost icon={item.icon} name={item.name} text={item.text}/>
-                    </>
+                    </div>
                 )}
             </div>
             <div className={styles.sendBlock}>

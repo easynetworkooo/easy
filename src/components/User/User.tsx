@@ -22,10 +22,10 @@ export const User = () => {
         <div className={styles.userContainer}>
             <UserHeader/>
             <div className={styles.postsBlock}>
-                {usersPosts.map((item) =>
-                    <>
+                {usersPosts.map((item, index) =>
+                    <div key={index}>
                         <UserPost icon={item.icon} name={item.name} text={item.text}/>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

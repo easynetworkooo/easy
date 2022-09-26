@@ -1,0 +1,70 @@
+@import "src/styles/vars";
+
+.messagesContainer {
+  display: flex;
+}
+
+.userMessagesBlock {
+  padding-right: 12px;
+  border-right: 1px solid $Gray200;
+}
+
+.userMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 420px;
+  height: 750px;
+  padding-right: 12px;
+  overflow-y: scroll;
+}
+
+.messagesBlock {
+  width: 100%;
+  padding: 10px 12px 10px 24px;
+}
+
+.messagesBlockNone {
+  display: none;
+}
+
+.messages {
+  padding-right: 10px;
+  margin-bottom: 20px;
+  overflow-y: scroll;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-right: 100px;
+  padding: 24px;
+  gap: 8px;
+  border-radius: 4px;
+  background-color: $LightWhite;
+}
+
+.text {
+  line-height: 17px;
+  font-size: 14px;
+}
+
+.timeSend {
+  text-align: right;
+  font-size: 12px;
+  line-height: 15px;
+  color: $HelperGray;
+}
+
+.yourMessage {
+  background-color: $Purple100;
+  margin-left: 100px;
+  margin-right: 0;
+
+  .timeSend {
+    color: $Purple300;
+  }
+}
