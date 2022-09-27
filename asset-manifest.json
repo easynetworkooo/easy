@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/easy/static/css/main.574e9614.css",
+    "main.js": "/easy/static/js/main.b1c68671.js",
+    "static/media/auth-logo.png": "/easy/static/media/auth-logo.40d6f639ac8fc5d88858.png",
+    "static/media/Default-avatar.png": "/easy/static/media/Default-avatar.27ab966a31ca8c5b201f.png",
+    "static/media/AvatarUser.png": "/easy/static/media/AvatarUser.1fae5062be8566e317b3.png",
+    "static/media/InstagramLink.svg": "/easy/static/media/InstagramLink.e2749116bea461a685bd3ab3fd278ea1.svg",
+    "static/media/NavigationLogo.svg": "/easy/static/media/NavigationLogo.7ded774d61dcb00fdb119b23e61b742d.svg",
+    "static/media/authLogoName.svg": "/easy/static/media/authLogoName.792f433ab74d524a8c8b3778edafc4cd.svg",
+    "static/media/Repost.svg": "/easy/static/media/Repost.897fd312e75697ae05d0b46f30badf6a.svg",
+    "static/media/Notifications.svg": "/easy/static/media/Notifications.5b0749b935aee7894aece964cfa97924.svg",
+    "static/media/NotificationsActive.svg": "/easy/static/media/NotificationsActive.a897484369c5bd680709d8f73580442b.svg",
+    "static/media/Comments.svg": "/easy/static/media/Comments.73e760c5c26acd8459510b720945af3e.svg",
+    "static/media/NetworkLink.svg": "/easy/static/media/NetworkLink.d679290df5726e118690b53797a72840.svg",
+    "static/media/TwitterLink.svg": "/easy/static/media/TwitterLink.27aacf0dd11bb222173e89e9a8cd9f29.svg",
+    "static/media/Community.svg": "/easy/static/media/Community.2bd3f0171254998eb9717444be4ab3c8.svg",
+    "static/media/ActiveCommunity.svg": "/easy/static/media/ActiveCommunity.2211ff5bad96d55adec70d8b793f00a3.svg",
+    "static/media/authGmail.svg": "/easy/static/media/authGmail.3d3d3081d439f9660e364ac4f4b13cda.svg",
+    "static/media/TelegramLink.svg": "/easy/static/media/TelegramLink.6879846423a30067f7530a5f871f875a.svg",
+    "static/media/ActiveWallet.svg": "/easy/static/media/ActiveWallet.6da814be362c398600d6ea059f792414.svg",
+    "static/media/Wallet.svg": "/easy/static/media/Wallet.c1d630e0018970207da3c775883134c0.svg",
+    "static/media/close.svg": "/easy/static/media/close.774cc4bde4cbe34e48f31fc83326ce7e.svg",
+    "index.html": "/easy/index.html",
+    "static/media/Share.svg": "/easy/static/media/Share.7a32cf47b6f8d6ede76308db2cf5abf8.svg",
+    "static/media/Like.svg": "/easy/static/media/Like.6b8caf4e006fe08373dcf2ce00608848.svg",
+    "static/media/Likes.svg": "/easy/static/media/Likes.db6a50f25b8d091e9354db5a149b7d95.svg",
+    "static/media/View.svg": "/easy/static/media/View.349e95b1bc417c5ac7d8db91a90bdac0.svg",
+    "static/media/FacebookLink.svg": "/easy/static/media/FacebookLink.a847be1b5ea538a194fd981e0d1c16b1.svg",
+    "static/media/SendHover.svg": "/easy/static/media/SendHover.b21d19c0a7264a2da17ea6ba9514653a.svg",
+    "static/media/Send.svg": "/easy/static/media/Send.7d12447987144237ff4f1c7bf1d0bcf2.svg",
+    "static/media/Search.svg": "/easy/static/media/Search.fb8f6770f9b6db9e1f7a344c76faf569.svg",
+    "static/media/ActiveMessages.svg": "/easy/static/media/ActiveMessages.6caece098e1eeb326d22ca73cdc780dd.svg",
+    "static/media/Messages.svg": "/easy/static/media/Messages.f89c710efbe8f976848e377948ebc043.svg",
+    "static/media/arrowLeft.svg": "/easy/static/media/arrowLeft.f901680e073f3d173b119b338a311b1f.svg",
+    "main.574e9614.css.map": "/easy/static/css/main.574e9614.css.map",
+    "main.b1c68671.js.map": "/easy/static/js/main.b1c68671.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.574e9614.css",
+    "static/js/main.b1c68671.js"
+  ]
+}
