@@ -1,0 +1,23 @@
+@import "src/styles/vars";
+
+.communityContainer {
+  width: 684px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabsBlock {
+  display: flex;
+  gap: 32px;
+}
+
+.tab {
+  color: $gray;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.active {
+  text-shadow: 0 0 .65px $TextDark, 0 0 .65px $TextDark;
+  color: $TextDark;
+}

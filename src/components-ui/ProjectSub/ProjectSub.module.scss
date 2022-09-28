@@ -1,0 +1,62 @@
+@import "src/styles/vars";
+
+.projectSubBlock {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 16px 24px;
+  gap: 16px;
+  border-radius: 4px;
+  background-color: $LightWhite;
+  cursor: pointer;
+}
+
+.projectName {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.projectAvatar {
+  img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project {
+  padding: 4px 8px;
+  border-radius: 2px;
+  background-color: $Gray200;
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: $gray;
+    line-height: 15px;
+  }
+}
+
+.lastActivity {
+  span {
+    color: $HelperGray;
+    font-size: 12px;
+  }
+}
+
+.progressIndicatorBlock {
+  display: flex;
+  width: 300px;
+}

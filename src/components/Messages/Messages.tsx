@@ -7,7 +7,7 @@ import { InputSend } from "../../components-ui";
 const usersMessages = [
     {
         name: 'Darlene Robertson',
-        text: 'Listen, buddy, hello! Tell me an interesting project in which you can ...',
+        text: 'Ha, cool idea! Theoretically you can...',
         messages: [
             {
                 who: 'to me',
@@ -19,7 +19,7 @@ const usersMessages = [
         ]
     },
     {
-        name: 'Darlene Robertson', text: 'Listen, buddy, hello! Tell me an interesting project in which you can ...',
+        name: 'Darlene Robertson', text: 'Okeeee',
         messages: [
             {
                 who: 'to me',
@@ -39,7 +39,7 @@ const usersMessages = [
         ]
     },
     {
-        name: 'Darlene Robertson', text: 'Listen, buddy, hello! Tell me an interesting project in which you can ...',
+        name: 'Darlene Robertson', text: 'I think...',
         messages: [
             {
                 who: 'to me',
@@ -71,7 +71,9 @@ export const Messages = () => {
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
                 <div className={styles.messages} style={{height: `${720 - isMessageBlockHeight}px`}}>
                     {isOpenMessages !== null && usersMessages[isOpenMessages].messages.map((item, index) =>
-                        <div className={item.who === 'to me' ? styles.message : `${styles.message} ${styles.yourMessage}`} key={index}>
+                        <div
+                            className={item.who === 'to me' ? styles.message : `${styles.message} ${styles.yourMessage}`}
+                            key={index}>
                             <p className={styles.text}>{item.text}</p>
                             <span className={styles.timeSend}>56 minutes ago</span>
                         </div>

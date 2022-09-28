@@ -1,0 +1,59 @@
+@import "src/styles/vars";
+
+.walletConnectBlock {
+  margin-top: 16px;
+}
+
+.header {
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.selections {
+  display: flex;
+  gap: 24px;
+}
+
+.walletSelection, .blockchainSelection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: $gray;
+  }
+}
+
+.selection {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  gap: 16px;
+  border: 1px solid $LightWhite;
+  border-radius: 4px;
+  cursor: pointer;
+  span {
+    font-size: 16px;
+    color: $TextDark;
+    font-weight: 400;
+  }
+  .progressDeveloping {
+    display: none;
+  }
+}
+
+.unActiveSelection {
+  background-color: $Gray200;
+  cursor: default;
+  span {
+    color: $HelperGray;
+  }
+  .progressDeveloping {
+    margin-left: 20px;
+    font-size: 12px;
+    display: block;
+  }
+}

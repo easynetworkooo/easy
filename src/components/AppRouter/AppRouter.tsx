@@ -14,7 +14,7 @@ export const AppRouter = () => {
 
     return (
         <Routes>
-            <Route key={"*"} path={"*"} element={isAuth ? <Navigate to={AUTH_CONTINUE}/> : <AuthPage/>}/>
+            <Route key={"/easy"} path={"/easy"} element={isAuth ? <Navigate to={AUTH_CONTINUE}/> : <AuthPage/>}/>
             <Route key={"/"} path={"/"} element={isAuth ? <Navigate to={AUTH_CONTINUE}/> : <AuthPage/>}/>
             <Route key={AUTH} path={AUTH} element={isAuth ? <Navigate to={AUTH_CONTINUE}/> : <AuthPage/>}/>
             <Route key={AUTH_CONTINUE} path={AUTH_CONTINUE} element={isAuth === true && continueAuth ? <AuthContinuePage/> : <Navigate to={PEOPLE_AND_PROJECTS}/>}/>

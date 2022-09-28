@@ -1,0 +1,33 @@
+@import "src/styles/vars";
+
+.userSubBlock {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 16px;
+  border-radius: 4px;
+  background-color: $LightWhite;
+  cursor: pointer;
+}
+
+.avatar {
+  img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name {
+  color: $TextDark;
+}
+
+.lastActivity {
+  font-size: 12px;
+  color: $HelperGray;
+}
