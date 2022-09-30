@@ -29,8 +29,8 @@ export const ProjectSub = () => {
                 </div>
             </div>
             <div className={styles.progressIndicatorBlock}>
-                <IndicatorStatus/>
-                <Indicator maxCount={120} currentCount={20}/>
+                <IndicatorStatus type={'Sale Live'}/>
+                <Indicator maxCount={120} currentCount={20} type={'Sale Live'}/>
             </div>
         </div>
     );

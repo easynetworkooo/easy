@@ -4,9 +4,10 @@ import styles from './Indicator.module.scss'
 export interface IndicatorProps {
     currentCount: number
     maxCount: number
+    type: string
 }
 
-export const Indicator: FC<IndicatorProps> = ({maxCount, currentCount}) => {
+export const Indicator: FC<IndicatorProps> = ({maxCount, currentCount, type}) => {
 
     const calculatePercentages = () => {
         return +(currentCount * 100 / maxCount).toFixed(0)
@@ -17,18 +18,27 @@ export const Indicator: FC<IndicatorProps> = ({maxCount, currentCount}) => {
         if (width >= 10) {
             return width
         } else {
-            return 10
+            return 0
+        }
+    }
+
+    const checkTypeIndicator = () => {
+        if (type === 'Sale Live' || type === 'Sale Ended') {
+            return styles.indicator
+        } else {
+            return styles.indicatorNonActive
         }
     }
 
     return (
         <div className={styles.indicatorBlock}>
-            <div className={styles.indicator}>
+            <div className={checkTypeIndicator()}>
                 <div
                     className={calculatePercentages() === 100 ? `${styles.indicatorProgress} ${styles.indicatorProgressEnded}` : styles.indicatorProgress}
                     style={{width: `${setWidthIndicator()}%`}}>
-                    <span>{calculatePercentages()}%</span>
+                    <span className={styles.activeIndicator}>{calculatePercentages()}%</span>
                 </div>
+                <span className={styles.indicatorStart}>0%</span>
             </div>
             <div className={styles.coinBlock}>
                 <div className={styles.countCoins}>

@@ -12,10 +12,10 @@ export const ProjectDeposit = () => {
         <div className={styles.projectDepositBlock}>
             <div className={styles.indicatorBlock}>
                 <div className={styles.indicatorStatus}>
-                    <IndicatorStatus/>
+                    <IndicatorStatus type={'Sale Live'}/>
                     <span className={styles.indicatorTime}>Presale Start 02.02.22 / 12:12:00</span>
                 </div>
-                <Indicator currentCount={120} maxCount={200}/>
+                <Indicator currentCount={120} maxCount={200} type={'Sale Live'}/>
             </div>
             <div className={styles.depositAmountBlock}>
                 <span className={styles.amountText}>Amount</span>

@@ -38,8 +38,8 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                     <span className={styles.timePosted}>3 minutes ago</span>
                 </div>
                 <div className={styles.indicatorBlock}>
-                    <IndicatorStatus/>
-                    <Indicator currentCount={currentCount} maxCount={maxCount}/>
+                    <IndicatorStatus type={'Upcoming'}/>
+                    <Indicator currentCount={currentCount} maxCount={maxCount} type={'Sale Live'}/>
                 </div>
             </div>
             <div className={styles.textProjectPostBlock}>

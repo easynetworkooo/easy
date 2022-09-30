@@ -19,3 +19,17 @@
 .statusIndicatorEnded {
   background-color: $purple;
 }
+
+.statusIndicatorCanceled {
+  background-color: $Gray300;
+  span {
+    color: $HelperGray;
+  }
+}
+
+.statusIndicatorUpcoming {
+  background-color: $orange;
+  span {
+    color: $dark;
+  }
+}

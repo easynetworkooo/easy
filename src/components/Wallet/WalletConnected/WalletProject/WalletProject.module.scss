@@ -1,0 +1,75 @@
+@import "src/styles/vars";
+
+.walletProjectBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  gap: 16px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: $LightWhite;
+  cursor: pointer;
+}
+
+
+.walletProjectName {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.walletProjectAvatar {
+  img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project {
+  padding: 4px 8px;
+  border-radius: 2px;
+  background-color: $Gray200;
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: $gray;
+    line-height: 15px;
+  }
+}
+
+.lastActivity {
+  span {
+    color: $HelperGray;
+    font-size: 12px;
+  }
+}
+
+.progressIndicatorBlock {
+  display: flex;
+  width: 300px;
+}
+
+.coinsBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerSection {
+  font-size: 12px;
+  color: $gray;
+}
