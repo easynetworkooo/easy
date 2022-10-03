@@ -7,8 +7,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    user: {name: '', continueAuth: false},
-    isAuth: true
+    user: {name: '', continueAuth: true},
+    isAuth: false
 }
 
 export const userSlice = createSlice({

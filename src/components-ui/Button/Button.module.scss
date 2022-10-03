@@ -22,3 +22,12 @@
     color: $purple;
   }
 }
+
+.grayButton {
+  background: $white;
+  padding: 10px 16px;
+  border: 1px solid $gray;
+  span {
+    color: $gray;
+  }
+}

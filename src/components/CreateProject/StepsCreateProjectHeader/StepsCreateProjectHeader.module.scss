@@ -1,0 +1,63 @@
+@import "src/styles/vars";
+
+.stepsHeaderBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.stepProjectActive {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 23%;
+}
+
+.stepProjectDisabled {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 23%;
+  .stepInformation {
+    .stepInformationHeader {
+      color: $HelperGray;
+    }
+    .stepInformationAdditional {
+      color: $HelperGray;
+    }
+  }
+}
+
+.stepProjectReady {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 23%;
+  .stepInformation {
+    .stepInformationHeader {
+      color: $green;
+    }
+    .stepInformationAdditional {
+      color: $green;
+    }
+  }
+}
+
+.stepInformation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stepInformationHeader {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stepInformationAdditional {
+  line-height: 15px;
+  font-size: 12px;
+  color: $gray;
+}

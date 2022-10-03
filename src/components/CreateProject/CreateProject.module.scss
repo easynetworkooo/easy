@@ -1,0 +1,21 @@
+.createProjectContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectStepsHeader {
+  margin-top: 40px;
+}
+
+.stepBlock {
+  margin-top: 40px;
+}
+
+.modalContent {
+  width: 500px;
+  padding: 60px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
