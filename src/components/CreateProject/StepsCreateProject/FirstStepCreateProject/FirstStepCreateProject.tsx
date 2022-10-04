@@ -1,16 +1,20 @@
-import React from 'react';
-import styles from './FirstStepCreateToken.module.scss'
-import { Button, Input } from "../../../components-ui";
+import React, { FC } from 'react';
+import styles from './FirstStepCreateProject.module.scss'
+import { Button, Input } from "../../../../components-ui";
 
-export const FirstStepCreateToken = () => {
+export interface FirstStepCreateProjectProps {
+    setActiveStepNumber: (page: number) => void
+}
+
+export const FirstStepCreateProject:FC<FirstStepCreateProjectProps> = ({setActiveStepNumber}) => {
     return (
-        <div className={styles.firstStepCreateTokenBlock}>
-            <div className={styles.firstStepCreateToken}>
+        <div className={styles.firstStepCreateProjectBlock}>
+            <div className={styles.firstStepCreateProject}>
                 <div className={styles.selectTokenBlock}>
                     <span className={styles.helperText}>Token Address</span>
                     <div className={styles.placeholderSelect}>
                         <div className={styles.inputBlock}>
-                            <Input type={'text'} placeholder={'Placeholder'}/>
+                            <Input type={'text'} placeholder={'Token Address'}/>
                         </div>
                         <Button buttonColor={'grayButton'}>
                             <span>Select Token</span>
@@ -41,7 +45,7 @@ export const FirstStepCreateToken = () => {
                 </div>
             </div>
             <div className={styles.buttonsNext}>
-                <Button buttonColor={'clearButton'}>
+                <Button buttonColor={'clearButton'} onClick={() => setActiveStepNumber(1)}>
                     <span>Next Step</span>
                 </Button>
             </div>

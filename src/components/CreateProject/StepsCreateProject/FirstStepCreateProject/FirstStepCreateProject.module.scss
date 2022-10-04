@@ -1,13 +1,13 @@
-@import "src/styles/vars";
+@import "../../../../styles/vars";
 
-.firstStepCreateTokenBlock {
+.firstStepCreateProjectBlock {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.firstStepCreateToken {
+.firstStepCreateProject {
   width: 100%;
   display: flex;
   flex-direction: column;

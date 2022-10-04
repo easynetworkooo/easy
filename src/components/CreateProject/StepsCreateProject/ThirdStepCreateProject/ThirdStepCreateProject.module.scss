@@ -1,0 +1,91 @@
+@import "../../../../styles/vars";
+
+.thirdStepCreateProjectBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.thirdStepCreateProject {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  background-color: $LightWhite;
+  border-radius: 4px;
+
+  span {
+    color: $gray;
+    font-size: 12px;
+  }
+}
+
+.logoInputsBlock {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.linkInput {
+  width: 478px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  input {
+    background-color: $Gray200;
+  }
+}
+
+.inputLabel {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  img {
+    height: 14px;
+    width: 14px;
+  }
+}
+
+.socialMediaLinks {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.descriptionBlock {
+  margin-top: 30px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.textareaDescription {
+  resize: none;
+  background-color: $Gray200;
+  padding: 10px 16px 11px 16px;
+  textarea {
+    width: 100%;
+  }
+}
+
+.buttons {
+  margin-top: 20px;
+  gap: 20px;
+  display: flex;
+}
+
+.backButton {
+  width: 90px;
+}
+
+.nextButton {
+  width: 420px;
+}

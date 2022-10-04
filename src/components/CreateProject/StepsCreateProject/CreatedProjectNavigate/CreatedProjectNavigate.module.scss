@@ -1,0 +1,27 @@
+@import "src/styles/vars";
+
+.tokenCreatedBlock {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.createdImage {
+  height: 48px;
+  width: 48px;
+}
+
+.textCreated {
+  width: 450px;
+  line-height: 28px;
+  color: $green;
+}
+
+.buttonNavigateNewProject {
+  width: 140px;
+}

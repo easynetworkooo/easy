@@ -1,0 +1,88 @@
+@import "../../../../styles/vars";
+
+.secondStepCreateProjectBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.secondStepCreateProject {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  gap: 20px;
+  background-color: $LightWhite;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.chooseTypeBlock {
+  display: flex;
+  gap: 24px;
+}
+
+.chooseType {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 24px;
+  span {
+    padding-top: 2px;
+  }
+}
+
+.coreInformationProject {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.coreInformation {
+  width: 472px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  input {
+    background-color: $Gray200;
+  }
+}
+
+.timeInformation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.helperTextBlock {
+  width: 70%;
+  span {
+    font-size: 12px;
+    color: $gray;
+  }
+}
+
+.antiRugSystem {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+  gap: 20px;
+  display: flex;
+}
+
+.backButton {
+  width: 90px;
+}
+
+.nextButton {
+  width: 420px;
+}

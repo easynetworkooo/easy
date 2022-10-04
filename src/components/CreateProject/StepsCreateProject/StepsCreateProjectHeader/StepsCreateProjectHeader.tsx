@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import styles from './StepsCreateProjectHeader.module.scss'
-import firstActiveStep from '../../../assets/Steps/First-active-step.png'
-import secondActiveStep from '../../../assets/Steps/Second-active-step.png'
-import thirdActiveStep from '../../../assets/Steps/Third-active-step.png'
-import fourthActiveStep from '../../../assets/Steps/Fourth-active-step.svg'
-import secondUnreadyStep from '../../../assets/Steps/Second-unready-step.png'
-import thirdUnreadyStep from '../../../assets/Steps/Third-unready-step.png'
-import fourthUnreadyStep from '../../../assets/Steps/Fourth-unready-step.svg'
-import readyStep from '../../../assets/Steps/Ready-step.png'
+import firstActiveStep from '../../../../assets/Steps/First-active-step.png'
+import secondActiveStep from '../../../../assets/Steps/Second-active-step.png'
+import thirdActiveStep from '../../../../assets/Steps/Third-active-step.png'
+import fourthActiveStep from '../../../../assets/Steps/Fourth-active-step.svg'
+import secondUnreadyStep from '../../../../assets/Steps/Second-unready-step.png'
+import thirdUnreadyStep from '../../../../assets/Steps/Third-unready-step.png'
+import fourthUnreadyStep from '../../../../assets/Steps/Fourth-unready-step.svg'
+import readyStep from '../../../../assets/Steps/Ready-step.png'
 
 const activeSteps = [firstActiveStep, secondActiveStep, thirdActiveStep, fourthActiveStep]
 const unreadySteps = [secondUnreadyStep, thirdUnreadyStep, fourthUnreadyStep]
@@ -48,7 +48,7 @@ export const StepsCreateProjectHeader: FC<StepsCreateProjectHeaderProps> = ({isA
     return (
         <div className={styles.stepsHeaderBlock}>
             {steps.map((item, index) =>
-                <div className={checkStylesSteps(index)}>
+                <div className={checkStylesSteps(index)} key={index}>
                     <img src={checkImageSteps(index)} alt="step"/>
                     <div className={styles.stepInformation}>
                         <span className={styles.stepInformationHeader}>{item.name}</span>
