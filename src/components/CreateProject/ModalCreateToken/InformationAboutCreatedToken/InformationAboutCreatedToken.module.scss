@@ -1,0 +1,57 @@
+@import "src/styles/vars";
+
+.headerAboutCreateToken {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $Gray200;
+  img {
+    width: 48px;
+    height: 48px;
+  }
+  span {
+    color: $green;
+    line-height: 28px;
+  }
+}
+
+.informationBlock {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.header {
+  font-size: 12px;
+  color: $gray;
+}
+
+.value {
+  font-size: 12px;
+}
+
+.link {
+  color: $blue;
+  cursor: pointer;
+}
+
+.buttonsBlock {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonCreatedToken {
+  width: 49%;
+}

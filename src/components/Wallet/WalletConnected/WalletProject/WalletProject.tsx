@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import styles from "./WalletProject.module.scss";
 import projectAvatar from "../../../../assets/UI/AvatarProject.png";
 import { Indicator, IndicatorStatus } from "../../../../components-ui";
+import { useNavigate } from "react-router-dom";
+import { PROJECTS } from "../../../../constants/nameRoutesConsts";
 
 export interface WalletProjectProps {
     maxCount: number
@@ -10,8 +12,11 @@ export interface WalletProjectProps {
 }
 
 export const WalletProject:FC<WalletProjectProps> = ({maxCount, currentCount, typeIndicator}) => {
+
+    const navigate = useNavigate()
+
     return (
-        <div className={styles.walletProjectBlock}>
+        <div className={styles.walletProjectBlock} onClick={() => navigate(`${PROJECTS}/tingram`)}>
             <div className={styles.walletProjectName}>
                 <div className={styles.walletProjectAvatar}>
                     <img src={projectAvatar} alt="projectAvatar"/>

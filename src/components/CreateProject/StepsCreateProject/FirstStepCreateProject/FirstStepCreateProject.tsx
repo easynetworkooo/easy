@@ -4,9 +4,10 @@ import { Button, Input } from "../../../../components-ui";
 
 export interface FirstStepCreateProjectProps {
     setActiveStepNumber: (page: number) => void
+    setModalCreateToken: (visible: boolean) => void
 }
 
-export const FirstStepCreateProject:FC<FirstStepCreateProjectProps> = ({setActiveStepNumber}) => {
+export const FirstStepCreateProject:FC<FirstStepCreateProjectProps> = ({setActiveStepNumber, setModalCreateToken}) => {
     return (
         <div className={styles.firstStepCreateProjectBlock}>
             <div className={styles.firstStepCreateProject}>
@@ -19,7 +20,7 @@ export const FirstStepCreateProject:FC<FirstStepCreateProjectProps> = ({setActiv
                         <Button buttonColor={'grayButton'}>
                             <span>Select Token</span>
                         </Button>
-                        <Button buttonColor={'grayButton'}>
+                        <Button buttonColor={'grayButton'} onClick={() => setModalCreateToken(true)}>
                             <span>Create Token</span>
                         </Button>
                     </div>

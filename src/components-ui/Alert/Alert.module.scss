@@ -1,0 +1,29 @@
+@import "src/styles/vars";
+
+.alertBlock {
+  width: 100%;
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $Yellow100;
+  border: 1px solid $Yellow200;
+  border-radius: 8px;
+}
+
+.hide {
+  display: none;
+}
+
+.alertText {
+  display: flex;
+  span {
+    font-size: 12px;
+    color: $Yellow800;
+  }
+}
+
+.alertClose {
+  cursor: pointer;
+  display: flex;
+}

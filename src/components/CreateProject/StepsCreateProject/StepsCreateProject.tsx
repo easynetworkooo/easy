@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './StepsCreateProject.module.scss'
 import { StepsCreateProjectHeader } from "./StepsCreateProjectHeader/StepsCreateProjectHeader";
 import { FirstStepCreateProject } from "./FirstStepCreateProject/FirstStepCreateProject";
@@ -7,14 +7,18 @@ import { ThirdStepCreateProject } from "./ThirdStepCreateProject/ThirdStepCreate
 import { FourthStepCreateProject } from "./FourthStepCreateProject/FourthStepCreateProject";
 import { CreatedProjectNavigate } from "./CreatedProjectNavigate/CreatedProjectNavigate";
 
-const StepsCreateProject = () => {
+export interface StepsCreateProjectProps {
+    setModalCreateToken: (visible: boolean) => void
+}
+
+const StepsCreateProject:FC<StepsCreateProjectProps> = ({setModalCreateToken}) => {
 
     const [isActiveStepNumber, setActiveStepNumber] = useState(0)
     const [isSuccessfullyCreatedProject, setSuccessfullyCreatedProject] = useState(false)
 
     const checkStep = () => {
         if (isActiveStepNumber === 0) {
-            return <FirstStepCreateProject setActiveStepNumber={setActiveStepNumber}/>
+            return <FirstStepCreateProject setActiveStepNumber={setActiveStepNumber} setModalCreateToken={setModalCreateToken}/>
         } else if (isActiveStepNumber === 1) {
             return <SecondStepCreateProject setActiveStepNumber={setActiveStepNumber}/>
         } else if (isActiveStepNumber === 2) {

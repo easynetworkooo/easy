@@ -1,0 +1,19 @@
+@import "src/styles/vars";
+
+.modalContent {
+  width: 684px;
+  padding: 24px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerCreateToken {
+  margin-top: 10px;
+  padding-bottom: 24px;
+  span {
+    line-height: 28px;
+    letter-spacing: 0.01em;
+    color: $TextSecondary;
+  }
+}

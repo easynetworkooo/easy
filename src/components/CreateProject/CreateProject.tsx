@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import styles from './CreateProject.module.scss'
-import { Button, ButtonBack, Modal } from "../../components-ui";
+import { ButtonBack } from "../../components-ui";
 import StepsCreateProject from "./StepsCreateProject/StepsCreateProject";
+import ModalChooseCreate from "./ModalChooseCreate/ModalChooseCreate";
+import { ModalCreateToken } from "./ModalCreateToken/ModalCreateToken";
+import ModalCreateLockLiquidity from "./ModalCreateLockLiquidity/ModalCreateLockLiquidity";
 
 export const CreateProject = () => {
 
-    const [isModalVisible, setModalVisible] = useState(true)
+    const [isModalChooseVisible, setModalChooseVisible] = useState(true)
+    const [isModalCreateToken, setModalCreateToken] = useState(false)
+    const [isModalCreateLockLiquidity, setModalCreateLockLiquidity] = useState(false)
 
     return (
         <div className={styles.createProjectContainer}>
             <ButtonBack/>
-            <StepsCreateProject/>
-            <Modal active={isModalVisible} setActive={setModalVisible}>
-                <div className={styles.modalContent}>
-                    <Button buttonColor={'clearButton'} onClick={() => setModalVisible(false)}>
-                        <span>Create Launchpad</span>
-                    </Button>
-                    <Button buttonColor={'clearButton'} onClick={() => setModalVisible(false)}>
-                        <span>Create Token</span>
-                    </Button>
-                    <Button buttonColor={'clearButton'} onClick={() => setModalVisible(false)}>
-                        <span>Create Lock Liquidity</span>
-                    </Button>
-                </div>
-            </Modal>
+            <StepsCreateProject setModalCreateToken={setModalCreateToken}/>
+            <ModalChooseCreate isModalChooseVisible={isModalChooseVisible}
+                               setModalChooseVisible={setModalChooseVisible}
+                               setModalCreateToken={setModalCreateToken}
+                               setModalCreateLockLiquidity={setModalCreateLockLiquidity}
+            />
+            <ModalCreateToken isModalCreateToken={isModalCreateToken} setModalCreateToken={setModalCreateToken}/>
+            <ModalCreateLockLiquidity isModalCreateLockLiquidity={isModalCreateLockLiquidity}
+                                      setModalCreateLockLiquidity={setModalCreateLockLiquidity}/>
         </div>
     );
 };

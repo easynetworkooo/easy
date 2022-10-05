@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './FourthStepCreateProject.module.scss'
-import { Button } from "../../../../components-ui";
+import { Alert, Button } from "../../../../components-ui";
 
 export interface FourthStepCreateProjectProps {
     setActiveStepNumber: (page: number) => void
@@ -8,6 +8,9 @@ export interface FourthStepCreateProjectProps {
 }
 
 export const FourthStepCreateProject:FC<FourthStepCreateProjectProps> = ({setActiveStepNumber, setSuccessfullyCreatedProject}) => {
+
+    const [isAlert, setAlert] = useState(true)
+
     return (
         <div className={styles.fourthStepCreateProjectBlock}>
             <div className={styles.fourthStepCreateProject}>
@@ -90,6 +93,11 @@ export const FourthStepCreateProject:FC<FourthStepCreateProjectProps> = ({setAct
                 <div className={styles.headerInformation}>
                     <span className={styles.header}>Token Decimals</span>
                     <span className={styles.value}>18</span>
+                </div>
+                <div className={styles.alertBlock}>
+                    <Alert setShow={setAlert} isShow={isAlert}>
+                        <span>Holy guacamole! You should check in on some of those fields below.</span>
+                    </Alert>
                 </div>
             </div>
             <div className={styles.buttons}>

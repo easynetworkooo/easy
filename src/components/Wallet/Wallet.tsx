@@ -9,14 +9,12 @@ export const Wallet = () => {
 
     return (
         <div className={styles.walletContainer}>
-            {isWalletAuth ?
+            {isWalletAuth
+                ?
                 <WalletConnected/>
                 :
-                <div onClick={() => setWalletAuth(true)}>
-                    <WalletConnect/>
-                </div>
+                <WalletConnect setWalletAuth={setWalletAuth}/>
             }
-
         </div>
     );
 };
