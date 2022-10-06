@@ -12,7 +12,7 @@ export const ContentCreateToken:FC<ContentCreateTokenProps> = ({setCreatedToken}
             <div className={styles.inputsCreateTokenBlock}>
                 <div className={styles.inputCreateToken}>
                     <label>Token Type</label>
-                    <Select/>
+                    <Select options={['Default', 'Modern']} placeholder={'Choose token type'} moreGrayBackColor={true}/>
                 </div>
                 <div className={styles.inputCreateToken}>
                     <label>Name</label>

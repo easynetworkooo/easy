@@ -16,13 +16,16 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({changeSte
                 <Steps steps={['firstActiveStep', 'secondUnreadyStep']}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input type={'text'} placeholder={'Nickname'} value={isNickname} onChange={e => setNickname(e.target.value)}/>
+                <Input type={'text'} placeholder={'Nickname'} value={isNickname}
+                       onChange={e => setNickname(e.target.value)}/>
             </div>
             <div className={styles.inputBlock}>
-                <Select/>
+                <Select options={['Belarus', 'Italy', 'Germany', 'Norway', 'Poland', 'England']}
+                        placeholder={'Choose country'}/>
             </div>
             <div className={styles.inputBlock}>
-                <Select/>
+                <Select options={['Amsterdam', 'Minsk', 'Berlin', 'Rome', 'Moscow']} placeholder={'Choose city'}
+                />
             </div>
             <div className={styles.buttonBlock}>
                 <Button buttonColor={'clearButton'} onClick={() => changeStep(2)}>

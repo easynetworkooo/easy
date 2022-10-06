@@ -1,6 +1,7 @@
 .stepsBlock {
   width: 100%;
   display: flex;
+  gap: 30px;
   justify-content: center;
 }
 
@@ -11,7 +12,8 @@
 
 .line {
   position: relative;
-  bottom: 25px;
+  left: -30px;
+  top: 22px;
   width: 32px;
   border-bottom: solid 1px #E9ECEF;
 }
