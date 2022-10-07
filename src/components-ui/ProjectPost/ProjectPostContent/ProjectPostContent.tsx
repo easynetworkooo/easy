@@ -26,12 +26,12 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
 
     return (
         <div className={styles.projectPost}>
-            <div className={styles.informationProjectPostBlock}>
+            <div className={styles.informationProjectPostBlock} onClick={() => navigate(`${PROJECTS}/test` )}>
                 <div className={styles.avatarProjectPostCreator}>
                     <img src={icon} alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <div className={styles.name} onClick={() => navigate(`${PROJECTS}/tingram` )}>
+                    <div className={styles.name}>
                         <span>{name}</span>
                         <span className={styles.projectIndicator}>Project</span>
                     </div>

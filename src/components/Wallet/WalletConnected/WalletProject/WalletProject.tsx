@@ -16,14 +16,14 @@ export const WalletProject:FC<WalletProjectProps> = ({maxCount, currentCount, ty
     const navigate = useNavigate()
 
     return (
-        <div className={styles.walletProjectBlock} onClick={() => navigate(`${PROJECTS}/tingram`)}>
+        <div className={styles.walletProjectBlock} onClick={() => navigate(`${PROJECTS}/test`)}>
             <div className={styles.walletProjectName}>
                 <div className={styles.walletProjectAvatar}>
                     <img src={projectAvatar} alt="projectAvatar"/>
                 </div>
                 <div className={styles.nameBlock}>
                     <div className={styles.name}>
-                        <span>Tingram</span>
+                        <span>Test</span>
                         <div className={styles.project}>
                             <span>Project</span>
                         </div>

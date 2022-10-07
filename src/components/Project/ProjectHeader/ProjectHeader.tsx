@@ -26,7 +26,7 @@ export const ProjectHeader = () => {
             </div>
             <div className={styles.subsBlock}>
                 <div className={styles.nameBlock}>
-                    <span className={styles.name}>Tingram</span>
+                    <span className={styles.name}>Test</span>
                     <div className={styles.projectBlock}>
                         <span>Project</span>
                     </div>

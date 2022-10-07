@@ -21,12 +21,12 @@ export const UserPostContent:FC<UserPostContentProps> = ({icon, text, name, setA
 
     return (
         <div className={styles.post}>
-            <div className={styles.informationPostBlock}>
+            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/st.koryk`)}>
                 <div className={styles.avatarPostCreator}>
                     <img src={icon} alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <span className={styles.name} onClick={() => navigate(`${USERS}/st.koryk`)}>{name}</span>
+                    <span className={styles.name}>{name}</span>
                     <span className={styles.timePosted}>3 minutes ago</span>
                 </div>
             </div>

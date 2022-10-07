@@ -8,12 +8,12 @@ const usersPosts = [
     {
         icon: avatar,
         name: 'Darlene Robertson',
-        text: 'Всем привет',
+        text: 'Hello all',
     },
     {
         icon: avatar,
         name: 'Darlene Robertson',
-        text: 'Думаю что курс крипты сейчас будет колебаться на одном уровне. Возможно примерно 20к. Время халвинга ещё не пришло и не придёт в ближайшие годы… тестим функционал',
+        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
     },
 ]
 

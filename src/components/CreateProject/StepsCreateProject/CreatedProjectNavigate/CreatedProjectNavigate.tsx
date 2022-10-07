@@ -14,7 +14,7 @@ export const CreatedProjectNavigate = () => {
             <img src={successfullyCreated} className={styles.createdImage} alt="created"/>
             <span className={styles.textCreated}>Your project has been successfully created and now you can attract people to it. Go to the project to see it.</span>
             <div className={styles.buttonNavigateNewProject}>
-                <Button buttonColor={'clearButton'} onClick={() => navigate(`${PROJECTS}/tingram`)}>
+                <Button buttonColor={'clearButton'} onClick={() => navigate(`${PROJECTS}/test`)}>
                     <span>Go to project</span>
                 </Button>
             </div>

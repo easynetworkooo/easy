@@ -9,19 +9,18 @@ const usersPosts = [
     {
         type: 'project',
         icon: avatarProject,
-        name: 'Tingram',
+        name: 'Test',
         text: 'Project test',
     },
     {
         icon: avatar,
         name: 'Sub test',
-        text: 'Всем привет',
+        text: 'Hello All',
     },
     {
         icon: avatar,
         name: 'Teo Subert',
-        text: 'Думаю что курс крипты сейчас будет колебаться на одном уровне. Возможно примерно 20к. Время халвинга ещё не пришло и не придёт в ближайшие годы… тестим функционал' +
-            'Криптовалюты не будут падать я так считаю',
+        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
     },
 ]
 

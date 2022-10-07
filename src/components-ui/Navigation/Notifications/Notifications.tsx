@@ -11,49 +11,49 @@ export interface NotificationsProps {
 
 const notificationsArr = [
     {
-        date: '25 января',
+        date: '25 January',
         data: [
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Оставил вам комментарий'
+                action: 'Left you a comment'
             },
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Лайкнул вашу страницу'
+                action: 'Subscribed to you'
             },
         ]
 
     },
     {
-        date: '24 января',
+        date: '24 January',
         data: [
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Оставил вам комментарий'
+                action: 'Left you a comment'
             },
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Лайкнул вашу страницу'
+                action: 'Subscribed to you'
             },
         ]
 
     },
     {
-        date: '23 января',
+        date: '23 January',
         data: [
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Оставил вам комментарий'
+                action: 'Left you a comment'
             },
             {
                 avatar: avatar,
                 name: 'Jane Cooper',
-                action: 'Лайкнул вашу страницу'
+                action: 'Subscribed to you'
             },
         ]
 
