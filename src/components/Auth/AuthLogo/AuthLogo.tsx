@@ -8,9 +8,9 @@ export const AuthLogo = () => {
         <div className={styles.authLogoBlock}>
             <div className={styles.authLogoName}>
                 <img src={authLogoName} alt="auth logo name"/>
-            </div>
-            <div className={styles.authLogoDescription}>
-                <span>Social network for cryptocurrency investors</span>
+                <div className={styles.authLogoDescription}>
+                    <span>Social network for cryptocurrency investors</span>
+                </div>
             </div>
             <div className={styles.authLogoImage}>
                 <img src={authLogo} alt="auth logo"/>
