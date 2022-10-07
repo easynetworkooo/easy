@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './AuthContinueSecondStep.module.scss'
 import { Button, Steps } from "../../../components-ui";
 import { InterestItem } from "./InterestItem/IntrestItem";
@@ -8,6 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
 
 
+const interestItems = [
+    'Solidity Developer', 'Rust Developer', 'NFT Investor', 'Telegram Crypto Blogger', 'Crypto Enthusiast', 'Motoko Developer',
+    'JS Frontend Developer', 'React Frontend Developer', 'Youtube Crypto Blogger', 'NFT Gamer', 'Instagram Crypto Blogger',
+    'Tiktok Crypto Blogger', 'Twitch Crypto Blogger', 'Reddit Crypto Blogger', 'Miner', 'Discord Customizer', 'NFT Staker', 'Crypto Staker', 'IDO Enthusiast',
+]
+
 export const AuthContinueSecondStep: FC = () => {
 
     const {endAuth} = userSlice.actions
@@ -15,18 +21,13 @@ export const AuthContinueSecondStep: FC = () => {
 
     const navigate = useNavigate()
 
-    const interestItems = [
-        'Solidity Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer',
-        'NFT Investor', 'NFT Investor', 'Telegram Crypto Blogger', 'Telegram Crypto Blogger', 'Crypto Enthusiast',
-        'Solidity Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer',
-        'NFT Investor', 'NFT Investor', 'Telegram Crypto Blogger', 'Telegram Crypto Blogger', 'Crypto Enthusiast',
-        'Solidity Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer', 'Rust Developer',
-        'NFT Investor', 'NFT Investor', 'Telegram Crypto Blogger', 'Telegram Crypto Blogger', 'Crypto Enthusiast',
-    ]
+    const [isInterestItems, setInterestItems] = useState<string[]>([])
 
     const endAuthHandler = () => {
-        dispatch(endAuth())
-        navigate(PEOPLE_AND_PROJECTS)
+        if (isInterestItems.length >= 3) {
+            dispatch(endAuth())
+            navigate(PEOPLE_AND_PROJECTS)
+        }
     }
 
 
@@ -41,7 +42,8 @@ export const AuthContinueSecondStep: FC = () => {
             <div className={styles.interestsBlock}>
                 {interestItems.map((interest, key) =>
                     <div key={key}>
-                        <InterestItem interest={interest}/>
+                        <InterestItem interest={interest} setInterestItems={setInterestItems}
+                                      isInterestItems={isInterestItems}/>
                     </div>
                 )}
             </div>

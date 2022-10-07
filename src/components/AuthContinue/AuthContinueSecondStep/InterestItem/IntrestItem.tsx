@@ -3,13 +3,23 @@ import styles from "./InterestItem.module.scss";
 
 export interface InterestItemProps {
     interest: string
+    isInterestItems: string[]
+    setInterestItems: (arrayInterests: string[]) => void
 }
 
-export const InterestItem:FC<InterestItemProps> = ({interest}) => {
+export const InterestItem:FC<InterestItemProps> = ({interest, isInterestItems, setInterestItems}) => {
 
     const [isChosenInterest, setChosenInterest] = useState(false)
 
     const changeChosenInterest = () => {
+
+        if (isChosenInterest) {
+            const interests = isInterestItems.filter(item => item !== interest)
+            setInterestItems(interests)
+        } else {
+            setInterestItems([...isInterestItems, interest])
+        }
+
         setChosenInterest(!isChosenInterest)
     }
 

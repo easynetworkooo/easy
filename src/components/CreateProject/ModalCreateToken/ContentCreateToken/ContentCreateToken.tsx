@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './ContentCreateToken.module.scss'
 import { Button, Input, Select } from "../../../../components-ui";
 
@@ -6,13 +6,17 @@ export interface ContentCreateTokenProps {
     setCreatedToken: (created: boolean) => void
 }
 
-export const ContentCreateToken:FC<ContentCreateTokenProps> = ({setCreatedToken}) => {
+export const ContentCreateToken: FC<ContentCreateTokenProps> = ({setCreatedToken}) => {
+
+    const [isTypeToken, setTypeToken] = useState('')
+
     return (
         <>
             <div className={styles.inputsCreateTokenBlock}>
                 <div className={styles.inputCreateToken}>
                     <label>Token Type</label>
-                    <Select options={['Default', 'Modern']} placeholder={'Choose token type'} moreGrayBackColor={true}/>
+                    <Select options={['Default', 'Modern']} placeholder={'Choose token type'} moreGrayBackColor={true}
+                            isActiveSelect={isTypeToken} setActiveSelect={setTypeToken}/>
                 </div>
                 <div className={styles.inputCreateToken}>
                     <label>Name</label>
