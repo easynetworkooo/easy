@@ -20,7 +20,11 @@ export const FirstRecoveryStep: FC<FirstRecoveryStepProps> = ({changeStep, nextS
                 <span>Enter your current Email and we will send a recovery code</span>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Email'} type={'text'} value={isEmail} onChange={(e) => setEmail(e.target.value)}/>
+                <Input placeholder={'Email'} type={'text'} value={isEmail}
+                       onChange={(e) => setEmail(e.target.value)}
+                       onKeyPress={e => e.key === 'Enter' && changeStep(nextStep)}
+                       autoFocus={true}
+                />
             </div>
             <div className={styles.nextStepBlock}>
                 <Button onClick={() => changeStep(nextStep)}>

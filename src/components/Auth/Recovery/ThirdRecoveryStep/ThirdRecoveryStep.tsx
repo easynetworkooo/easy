@@ -27,10 +27,10 @@ export const ThirdRecoveryStep = () => {
                 <span>Enter a new password</span>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'New password'} type={'password'}/>
+                <Input placeholder={'New password'} type={'password'} autoFocus={true} onKeyPress={e => e.key === 'Enter' && saveAndLoginHandler()}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Repeat new password'} type={'password'}/>
+                <Input placeholder={'Repeat new password'} type={'password'} onKeyPress={e => e.key === 'Enter' && saveAndLoginHandler()}/>
             </div>
             <div className={styles.savePassword}>
                 <Button onClick={() => saveAndLoginHandler()}>

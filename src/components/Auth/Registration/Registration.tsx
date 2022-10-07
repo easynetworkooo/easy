@@ -3,6 +3,10 @@ import styles from './Registration.module.scss'
 import { AuthGoogleButton } from "../AuthGoogleButton/AuthGoogleButton";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
 import { Button, Input } from "../../../components-ui";
+import { AUTH_CONTINUE } from "../../../constants/nameRoutesConsts";
+import { userSlice } from "../../../store/reducers/UserSlice";
+import { useAppDispatch } from "../../../hooks/redux";
+import { useNavigate } from "react-router-dom";
 
 
 export interface RegistrationProps {
@@ -10,6 +14,16 @@ export interface RegistrationProps {
 }
 
 export const Registration: FC<RegistrationProps> = ({changeAuthStatus}) => {
+    const {login} = userSlice.actions
+    const dispatch = useAppDispatch()
+
+    const navigate = useNavigate()
+
+    const registrationHandler = () => {
+        dispatch(login({name: 'Stas', continueAuth: true}))
+        navigate(AUTH_CONTINUE)
+    }
+
     return (
         <div className={styles.registrationBlock}>
             <div className={styles.registrationHeader}>
@@ -22,13 +36,13 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus}) => {
                 <LinesWithCenterText/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Email'} type={'text'}/>
+                <Input placeholder={'Email'} type={'text'} autoFocus={true} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Password'} type={'password'}/>
+                <Input placeholder={'Password'} type={'password'} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Repeat password'} type={'password'}/>
+                <Input placeholder={'Repeat password'} type={'password'} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.registrationButtonBlock}>
                 <Button>

@@ -41,14 +41,17 @@ export const Login: FC<LoginProps> = ({changeAuthStatus}) => {
                 <LinesWithCenterText/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Email'} type={'text'} value={isEmail} onChange={e => {
-                    setEmail(e.target.value)
-                }}/>
+                <Input placeholder={'Email'} type={'text'} value={isEmail}
+                       onChange={e => setEmail(e.target.value)}
+                       onKeyPress={e => e.key === 'Enter' && loginHandler()}
+                       autoFocus={true}
+                />
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Password'} type={'password'} value={isPassword} onChange={e => {
-                    setPassword(e.target.value)
-                }}/>
+                <Input placeholder={'Password'} type={'password'} value={isPassword}
+                       onChange={e => setPassword(e.target.value)}
+                       onKeyPress={e => e.key === 'Enter' && loginHandler()}
+                />
             </div>
             <div className={styles.loginButtonBlock}>
                 <Button onClick={() => loginHandler()}>

@@ -13,7 +13,11 @@ export const SecondRecoveryStep: FC<SecondRecoveryStepProps> = ({changeStep, nex
 
     const [isCode, setCode] = useState('')
 
-    console.log(isCode)
+    const nextStepHandler = () => {
+        if (isCode === '7777') {
+            changeStep(nextStep)
+        }
+    }
 
     return (
         <>
@@ -23,7 +27,7 @@ export const SecondRecoveryStep: FC<SecondRecoveryStepProps> = ({changeStep, nex
             <div className={styles.textBlock}>
                 <span>Enter the code that was sent to your email</span>
             </div>
-            <div className={styles.codeBlock}>
+            <div className={styles.codeBlock} onKeyPress={e => e.key === 'Enter' && nextStepHandler()}>
                 <ReactCodeInput
                     type='number'
                     fields={4}
@@ -39,7 +43,7 @@ export const SecondRecoveryStep: FC<SecondRecoveryStepProps> = ({changeStep, nex
                 <span>Didn't receive a code? <span className={styles.sendAgain}>Send again</span> in 0:59</span>
             </div>
             <div className={styles.nextStepBlock}>
-                <Button onClick={() => changeStep(nextStep)}>
+                <Button onClick={() => nextStepHandler()}>
                     <span>Next</span>
                 </Button>
             </div>
