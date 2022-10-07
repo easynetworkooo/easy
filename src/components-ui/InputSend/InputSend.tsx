@@ -17,7 +17,7 @@ export const InputSend: FC<InputSendProps> = ({setSubtractTextarea}) => {
     return (
         <div className={styles.inputSendBlock}>
             <div className={styles.textareaSendBlock}>
-                <TextareaAutosize className={styles.textarea} maxRows={10} placeholder={'Write a message'}
+                <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={'Write a message'}
                                   onHeightChange={(height) => onHeightChangeHandler(height)}/>
             </div>
             <div className={styles.buttonSend}>

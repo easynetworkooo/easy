@@ -3,6 +3,7 @@ import { ProjectPostContent } from "./ProjectPostContent/ProjectPostContent";
 import { Modal } from "../Modal/Modal";
 import styles from "./ProjectPost.module.scss";
 import { CommentsPost } from "../CommentsPost/CommentsPost";
+import { InputSend } from "../InputSend/InputSend";
 
 export interface ProjectPostProps {
     icon: string
@@ -13,7 +14,7 @@ export interface ProjectPostProps {
 export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
 
     const [isActiveModal, setActiveModal] = useState(false)
-
+    const [isSubtractTextarea,setSubtractTextarea] = useState(0)
 
     return (
         <>
@@ -22,7 +23,10 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
                 <div className={styles.modalContent}>
                     <ProjectPostContent icon={icon} name={name} text={text} setActiveModal={setActiveModal} currentCount={120} maxCount={200}/>
                     <div className={styles.comments}>
-                        <CommentsPost/>
+                        <CommentsPost isSubtractTextarea={isSubtractTextarea}/>
+                    </div>
+                    <div className={styles.sendBlock}>
+                        <InputSend setSubtractTextarea={setSubtractTextarea}/>
                     </div>
                 </div>
             </Modal>

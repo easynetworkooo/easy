@@ -3,6 +3,7 @@ import styles from './UserPost.module.scss'
 import { UserPostContent } from "./UserPostContent/UserPostContent";
 import { Modal } from "../Modal/Modal";
 import { CommentsPost } from "../CommentsPost/CommentsPost";
+import { InputSend } from "../InputSend/InputSend";
 
 
 export interface UserPostProps {
@@ -14,6 +15,7 @@ export interface UserPostProps {
 export const UserPost: FC<UserPostProps> = ({icon, name, text}) => {
 
     const [isActiveModal, setActiveModal] = useState(false)
+    const [isSubtractTextarea, setSubtractTextarea] = useState(0)
 
     return (
       <>
@@ -22,7 +24,10 @@ export const UserPost: FC<UserPostProps> = ({icon, name, text}) => {
               <div className={styles.modalContent}>
                   <UserPostContent icon={icon} name={name} text={text} setActiveModal={setActiveModal}/>
                   <div className={styles.comments}>
-                      <CommentsPost/>
+                      <CommentsPost isSubtractTextarea={isSubtractTextarea}/>
+                  </div>
+                  <div className={styles.sendBlock}>
+                      <InputSend setSubtractTextarea={setSubtractTextarea}/>
                   </div>
               </div>
           </Modal>

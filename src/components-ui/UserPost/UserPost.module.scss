@@ -3,10 +3,21 @@
 .modalContent {
   width: 684px;
   max-height: 90vh;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .comments {
   border-top: 1px solid $Gray200;
   margin: 0 24px;
   padding: 24px 0;
+}
+
+.sendBlock {
+  padding: 0 24px;
+  textarea {
+    background-color: $Gray200;
+  }
 }
