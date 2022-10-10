@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Comment.module.scss'
 import avatar from '../../../assets/UI/AvatarProject.png'
-import likes from '../../../assets/UI/Likes.svg'
+import likeActive from "../../../assets/UI/LikesActive.svg";
+import like from "../../../assets/UI/Likes.svg";
 import { IconElement } from "../../IconElement/IconElement";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
-import likeActive from "../../../assets/UI/LikesActive.svg";
-import like from "../../../assets/UI/Likes.svg";
 
 export const Comment = () => {
 
