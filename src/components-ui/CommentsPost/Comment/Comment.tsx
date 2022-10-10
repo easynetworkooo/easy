@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Comment.module.scss'
 import avatar from '../../../assets/UI/AvatarProject.png'
 import likes from '../../../assets/UI/Likes.svg'
 import { IconElement } from "../../IconElement/IconElement";
+import { useNavigate } from "react-router-dom";
+import { USERS } from "../../../constants/nameRoutesConsts";
+import likeActive from "../../../assets/UI/LikesActive.svg";
+import like from "../../../assets/UI/Likes.svg";
 
 export const Comment = () => {
+
+    const navigate = useNavigate()
+
+    const [isLiked, setLiked] = useState(false)
+    const [isCountLikes, setCountLikes] = useState(2)
+
+    const setLikedHandle = () => {
+        if (isLiked) {
+            setCountLikes(isCountLikes - 1)
+        } else {
+            setCountLikes(isCountLikes + 1)
+        }
+        setLiked(!isLiked)
+    }
+
     return (
         <div className={styles.commentBlock}>
-            <div className={styles.headerInformation}>
+            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/st.koryk`)}>
                 <div className={styles.avatar}>
                     <img src={avatar} alt="commentImage"/>
                 </div>
@@ -20,7 +39,17 @@ export const Comment = () => {
                 <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
             </div>
             <div className={styles.actionComment}>
-                <IconElement image={likes} count={10}/>
+                {
+                    isLiked ?
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={likeActive} count={isCountLikes} type={'likes'}/>
+                        </div>
+                        :
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={like} count={isCountLikes}/>
+                        </div>
+
+                }
             </div>
         </div>
     );

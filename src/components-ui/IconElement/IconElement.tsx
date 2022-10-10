@@ -11,9 +11,30 @@ export interface IconElementProps {
 
 export const IconElement: FC<IconElementProps> = ({image, count, type, onClick}) => {
     return (
-        <div className={type ? styles.element : `${styles.element} ${styles.pointer}`} onClick={onClick}>
-            <img src={image} alt={`${image}`}/>
-            {count && <span className={type && styles.textLight}>{count}</span>}
-        </div>
+        <>
+            {
+                type === 'light' &&
+                <div className={type ? styles.element : `${styles.element} ${styles.pointer}`} onClick={onClick}>
+                    <img src={image} alt={`${image}`}/>
+                    {count && <span className={type && styles.textLight}>{count}</span>}
+                </div>
+            }
+            {
+                type === 'likes' &&
+                <div className={`${styles.element} ${styles.pointer}`} onClick={onClick}>
+                    <img src={image} alt={`${image}`}/>
+                    {count && <span className={styles.textPurple}>{count}</span>}
+                </div>
+            }
+            {
+                !type &&
+                <div className={type ? styles.element : `${styles.element} ${styles.pointer}`} onClick={onClick}>
+                    <img src={image} alt={`${image}`}/>
+                    {count && <span className={type && styles.textLight}>{count}</span>}
+                </div>
+            }
+
+        </>
+
     );
 };

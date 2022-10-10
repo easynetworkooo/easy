@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from "./UserPostContent.module.scss";
 import { IconElement } from "../../IconElement/IconElement";
 import like from "../../../assets/UI/Likes.svg";
+import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
@@ -19,6 +20,18 @@ export const UserPostContent:FC<UserPostContentProps> = ({icon, text, name, setA
 
     const navigate = useNavigate()
 
+    const [isLiked, setLiked] = useState(false)
+    const [isCountLikes, setCountLikes] = useState(20)
+
+    const setLikedHandle = () => {
+        if (isLiked) {
+            setCountLikes(isCountLikes - 1)
+        } else {
+            setCountLikes(isCountLikes + 1)
+        }
+        setLiked(!isLiked)
+    }
+
     return (
         <div className={styles.post}>
             <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/st.koryk`)}>
@@ -34,7 +47,17 @@ export const UserPostContent:FC<UserPostContentProps> = ({icon, text, name, setA
                 <p>{text}</p>
             </div>
             <div className={styles.iconsPostBlock}>
-                <IconElement image={like} count={20}/>
+                {
+                    isLiked ?
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={likeActive} count={isCountLikes} type={'likes'}/>
+                        </div>
+                        :
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={like} count={isCountLikes}/>
+                        </div>
+
+                }
                 <IconElement image={comments} count={10} onClick={() => setActiveModal(true)}/>
                 <IconElement image={reposts} count={2}/>
                 <IconElement image={share}/>

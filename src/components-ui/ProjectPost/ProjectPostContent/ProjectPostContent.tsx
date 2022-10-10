@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './ProjectPostContent.module.scss'
 import { Indicator } from "../../Indicator/Indicator";
 import { IconElement } from "../../IconElement/IconElement";
@@ -9,6 +9,7 @@ import share from "../../../assets/UI/Share.svg";
 import { useNavigate } from "react-router-dom";
 import { PROJECTS } from "../../../constants/nameRoutesConsts";
 import { IndicatorStatus } from "../../IndicatorStatus/IndicatorStatus";
+import likeActive from "../../../assets/UI/LikesActive.svg";
 
 
 export interface ProjectPostContentProps {
@@ -23,6 +24,18 @@ export interface ProjectPostContentProps {
 export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, text, setActiveModal, currentCount, maxCount}) => {
 
     const navigate = useNavigate()
+
+    const [isLiked, setLiked] = useState(false)
+    const [isCountLikes, setCountLikes] = useState(30)
+
+    const setLikedHandle = () => {
+        if (isLiked) {
+            setCountLikes(isCountLikes - 1)
+        } else {
+            setCountLikes(isCountLikes + 1)
+        }
+        setLiked(!isLiked)
+    }
 
     return (
         <div className={styles.projectPost}>
@@ -46,7 +59,17 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                 <p>{text}</p>
             </div>
             <div className={styles.iconsProjectPostBlock}>
-                <IconElement image={like} count={30}/>
+                {
+                    isLiked ?
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={likeActive} count={isCountLikes} type={'likes'}/>
+                        </div>
+                        :
+                        <div onClick={setLikedHandle}>
+                            <IconElement image={like} count={isCountLikes}/>
+                        </div>
+
+                }
                 <IconElement image={comments} count={20} onClick={() => setActiveModal(true)}/>
                 <IconElement image={reposts} count={10}/>
                 <IconElement image={share}/>
