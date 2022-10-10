@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/easy/static/css/main.f5471e98.css",
-    "main.js": "/easy/static/js/main.94488b6f.js",
+    "main.css": "/easy/static/css/main.b26fddc8.css",
+    "main.js": "/easy/static/js/main.f2e59825.js",
     "static/media/auth-logo.png": "/easy/static/media/auth-logo.40d6f639ac8fc5d88858.png",
     "static/media/Default-avatar.png": "/easy/static/media/Default-avatar.27ab966a31ca8c5b201f.png",
     "static/media/AvatarUser.png": "/easy/static/media/AvatarUser.1fae5062be8566e317b3.png",
@@ -20,7 +20,6 @@
     "static/media/LogoLink.svg": "/easy/static/media/LogoLink.e2bcec4bc5563c61e180a01ec81bfbd1.svg",
     "static/media/Community.svg": "/easy/static/media/Community.2bd3f0171254998eb9717444be4ab3c8.svg",
     "static/media/ActiveCommunity.svg": "/easy/static/media/ActiveCommunity.2211ff5bad96d55adec70d8b793f00a3.svg",
-    "static/media/authGmail.svg": "/easy/static/media/authGmail.3d3d3081d439f9660e364ac4f4b13cda.svg",
     "static/media/TelegramLink.svg": "/easy/static/media/TelegramLink.6879846423a30067f7530a5f871f875a.svg",
     "static/media/ActiveWallet.svg": "/easy/static/media/ActiveWallet.6da814be362c398600d6ea059f792414.svg",
     "static/media/Wallet.svg": "/easy/static/media/Wallet.c1d630e0018970207da3c775883134c0.svg",
@@ -32,6 +31,7 @@
     "static/media/Fourth-unready-step.svg": "/easy/static/media/Fourth-unready-step.28cdbef5ed30c1c6a3504771cd697967.svg",
     "static/media/Like.svg": "/easy/static/media/Like.6b8caf4e006fe08373dcf2ce00608848.svg",
     "static/media/Likes.svg": "/easy/static/media/Likes.db6a50f25b8d091e9354db5a149b7d95.svg",
+    "static/media/LikesActive.svg": "/easy/static/media/LikesActive.3dd3a8c2f307677f8b98e9c0136420d1.svg",
     "static/media/View.svg": "/easy/static/media/View.349e95b1bc417c5ac7d8db91a90bdac0.svg",
     "static/media/FacebookLink.svg": "/easy/static/media/FacebookLink.a847be1b5ea538a194fd981e0d1c16b1.svg",
     "static/media/SendHover.svg": "/easy/static/media/SendHover.b21d19c0a7264a2da17ea6ba9514653a.svg",
@@ -40,11 +40,11 @@
     "static/media/ActiveMessages.svg": "/easy/static/media/ActiveMessages.6caece098e1eeb326d22ca73cdc780dd.svg",
     "static/media/Messages.svg": "/easy/static/media/Messages.f89c710efbe8f976848e377948ebc043.svg",
     "static/media/arrowLeft.svg": "/easy/static/media/arrowLeft.f901680e073f3d173b119b338a311b1f.svg",
-    "main.f5471e98.css.map": "/easy/static/css/main.f5471e98.css.map",
-    "main.94488b6f.js.map": "/easy/static/js/main.94488b6f.js.map"
+    "main.b26fddc8.css.map": "/easy/static/css/main.b26fddc8.css.map",
+    "main.f2e59825.js.map": "/easy/static/js/main.f2e59825.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5471e98.css",
-    "static/js/main.94488b6f.js"
+    "static/css/main.b26fddc8.css",
+    "static/js/main.f2e59825.js"
   ]
 }
