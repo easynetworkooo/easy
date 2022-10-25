@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './Registration.module.scss'
 import { AuthGoogleButton } from "../AuthGoogleButton/AuthGoogleButton";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
 import { Button, Input } from "../../../components-ui";
 import { AUTH_CONTINUE } from "../../../constants/nameRoutesConsts";
-import { userSlice } from "../../../store/reducers/UserSlice";
+import { authSlice } from "../../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
+import { authAPI } from "../../../services/AuthService";
+import { IRegistrationCredentials } from "../../../models/IRegistration";
 
 
 export interface RegistrationProps {
@@ -14,14 +16,33 @@ export interface RegistrationProps {
 }
 
 export const Registration: FC<RegistrationProps> = ({changeAuthStatus}) => {
-    const {login} = userSlice.actions
+    const {loginReducer} = authSlice.actions
     const dispatch = useAppDispatch()
+
+    const [registration] = authAPI.useRegistrationMutation()
+
+    const [isEmail, setEmail] = useState('')
+    const [isPassword, setPassword] = useState('')
+    const [isRepeatPassword, setRepeatPassword] = useState('')
 
     const navigate = useNavigate()
 
-    const registrationHandler = () => {
-        dispatch(login({name: 'Stas', continueAuth: true}))
-        navigate(AUTH_CONTINUE)
+    const registrationHandler = async () => {
+        if (isEmail && isPassword && isRepeatPassword) {
+            if (isPassword === isRepeatPassword) {
+                const registrationResponse: any = await registration({username: isEmail, password: isPassword} as IRegistrationCredentials)
+                try {
+                    if (registrationResponse.data.status === 200) {
+                        dispatch(loginReducer({isAuth: true, continueAuth: true}))
+                        navigate(AUTH_CONTINUE)
+                    }
+                } catch (e) {
+                    console.log(registrationResponse.error)
+                }
+            } else {
+                console.log('Password dont match')
+            }
+        }
     }
 
     return (
@@ -36,22 +57,28 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus}) => {
                 <LinesWithCenterText/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Email'} type={'text'} autoFocus={true} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
+                <Input placeholder={'Email'} type={'text'} value={isEmail} onChange={(e) => setEmail(e.target.value)}
+                       autoFocus={true} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Password'} type={'password'} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
+                <Input placeholder={'Password'} type={'password'} value={isPassword}
+                       onChange={(e) => setPassword(e.target.value)}
+                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Repeat password'} type={'password'} onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
+                <Input placeholder={'Repeat password'} type={'password'} value={isRepeatPassword}
+                       onChange={(e) => setRepeatPassword(e.target.value)}
+                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
             </div>
             <div className={styles.registrationButtonBlock}>
-                <Button>
+                <Button onClick={() => registrationHandler()}>
                     <span>Sign Up</span>
                 </Button>
             </div>
             <div className={styles.loginBlock}>
                 <span>
-                    Already have an account?<span className={styles.login} onClick={() => changeAuthStatus('Login')}>Login</span>
+                    Already have an account?<span className={styles.login}
+                                                  onClick={() => changeAuthStatus('Login')}>Login</span>
                 </span>
             </div>
         </div>

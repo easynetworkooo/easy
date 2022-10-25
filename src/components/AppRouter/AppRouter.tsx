@@ -9,8 +9,8 @@ import { AuthContinuePage, AuthPage } from "../../pages";
 export const AppRouter = () => {
 
 
-    const {isAuth} = useAppSelector(state => state.userReducer)
-    const {continueAuth} = useAppSelector(state => state.userReducer.user)
+    const {isAuth} = useAppSelector(state => state.authReducer)
+    const {continueAuth} = useAppSelector(state => state.authReducer)
 
     return (
         <Routes>

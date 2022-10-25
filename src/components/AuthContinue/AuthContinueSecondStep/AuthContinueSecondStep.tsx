@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styles from './AuthContinueSecondStep.module.scss'
 import { Button, Steps } from "../../../components-ui";
 import { InterestItem } from "./InterestItem/IntrestItem";
-import { userSlice } from "../../../store/reducers/UserSlice";
+import { authSlice } from "../../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
 import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
@@ -16,7 +16,7 @@ const interestItems = [
 
 export const AuthContinueSecondStep: FC = () => {
 
-    const {endAuth} = userSlice.actions
+    const {loginReducer} = authSlice.actions
     const dispatch = useAppDispatch()
 
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ export const AuthContinueSecondStep: FC = () => {
 
     const endAuthHandler = () => {
         if (isInterestItems.length >= 3) {
-            dispatch(endAuth())
+            dispatch(loginReducer({isAuth: true, continueAuth: false}))
             navigate(PEOPLE_AND_PROJECTS)
         }
     }
