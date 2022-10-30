@@ -1,54 +1,60 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './AuthContinueFirstStep.module.scss'
 import { Button, Input, Select, Steps } from "../../../components-ui";
+import { appAPI } from "../../../services/AppService";
+import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
 
 export interface AuthContinueFirstStepProps {
-    changeStep: (nextStep: number) => void
-    nextStep: number
+    changeStep: (nextStep: number) => void,
+    nextStep: number,
+    isCredentialsFinishRegister: IFinishRegisterCredentials,
+    setCredentialsFinishRegister: (credentials: IFinishRegisterCredentials) => void
 }
 
-const country = [
 
-    {
-        country: 'Germany',
-        cities: ['Berlin', 'Bavaria', 'Baden-Württemberg', 'North Rhine-Westphalia', 'Hesse']
-    },
-    {
-        country: 'Italy',
-        cities: ['Rome', 'Milan']
-    },
-
-]
-
-export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({changeStep, nextStep}) => {
+export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
+                                                                          changeStep,
+                                                                          nextStep,
+                                                                          isCredentialsFinishRegister,
+                                                                          setCredentialsFinishRegister
+                                                                      }) => {
     const [isNickname, setNickname] = useState('')
     const [isCountry, setCountry] = useState('')
     const [isCity, setCity] = useState('')
+    const [isCodeCountry, setCodeCountry] = useState('')
 
-
-    useEffect(() => {
-        setCity('')
-    }, [isCountry])
+    const {data: countries} = appAPI.useFetchAllCountriesQuery('')
+    const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry)
 
     const setCountries = () => {
-        const countries: string[] = []
-        country.map((item) => countries.push(item.country))
-        return countries
+        const countriesNameList: string[] = []
+        if (countries) {
+            countries.value.countries.forEach(({name}) => countriesNameList.push(name))
+        }
+        return countriesNameList
     }
 
     const setCities = () => {
-        if (isCountry !== '') {
-            const foundCities: any = country.find(item => item.country === isCountry)
-            return foundCities.cities
+        const citiesNameList: string[] = []
+        if (cities) {
+            cities.value.forEach(({name}) => citiesNameList.push(name))
         }
-        return []
+        return citiesNameList
     }
 
     const changeStepHandler = () => {
         if (isNickname !== '' && isCountry !== '' && isCity !== '') {
+            setCredentialsFinishRegister({...isCredentialsFinishRegister, nickname: isNickname, city: isCity, country: isCountry})
             changeStep(nextStep)
         }
     }
+
+    useEffect(() => {
+        setCity('')
+        if (countries) {
+            countries.value.countries.find(({name, code}) => name === isCountry && setCodeCountry(code))
+        }
+    }, [countries, isCountry])
 
     return (
         <div className={styles.firstStepBlock}>
@@ -66,7 +72,7 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({changeSte
             </div>
             <div className={styles.inputBlock}>
                 <Select options={setCities()} placeholder={'Choose city'}
-                        isActiveSelect={isCity} setActiveSelect={setCity} disabled={isCountry === '' && true}
+                        isActiveSelect={isCity} setActiveSelect={setCity} disabled={isCountry === ''}
                 />
             </div>
             <div className={styles.buttonBlock}>

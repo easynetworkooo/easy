@@ -3,35 +3,27 @@ import styles from './Login.module.scss'
 import { AuthGoogleButton } from "../AuthGoogleButton/AuthGoogleButton";
 import { Button, Input } from "../../../components-ui";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
-import { useAppDispatch } from "../../../hooks/redux";
-import { authSlice } from "../../../store/reducers/AuthSlice";
-import { useNavigate } from "react-router-dom";
-import { AUTH_CONTINUE } from "../../../constants/nameRoutesConsts";
 import { authAPI } from "../../../services/AuthService";
 import { ILoginCredentials } from "../../../models/ILogin";
 
 export interface LoginProps {
     changeAuthStatus: (status: string) => void
+    navigateHandler: (continueAuth: boolean) => void
 }
 
 
-export const Login: FC<LoginProps> = ({changeAuthStatus}) => {
-    const {loginReducer} = authSlice.actions
-    const dispatch = useAppDispatch()
-
+export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
     const [login] = authAPI.useLoginMutation()
-
-    const navigate = useNavigate()
-
     const [isEmail, setEmail] = useState('')
     const [isPassword, setPassword] = useState('')
 
     const loginHandler = async () => {
-        const loginResponse: any = await login({username: isEmail, password: isPassword} as ILoginCredentials)
+        const loginResponse: any = await login({email: isEmail, password: isPassword} as ILoginCredentials)
+
         try {
             if (loginResponse.data.status === 200) {
-                dispatch(loginReducer({isAuth: true, continueAuth: true}))
-                navigate(AUTH_CONTINUE)
+                localStorage.setItem('auth', loginResponse.data.auth)
+                await navigateHandler(true)
             }
         } catch (e) {
             console.log(loginResponse.error)

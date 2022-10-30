@@ -1,5 +1,5 @@
 export interface IRegistrationCredentials {
-    username: string,
+    email: string,
     password: string
 }
 

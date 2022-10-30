@@ -4,27 +4,44 @@ import { AuthLogo } from "./AuthLogo/AuthLogo";
 import { Login } from "./Login/Login";
 import { Registration } from "./Registration/Registration";
 import { Recovery } from "./Recovery/Recovery";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ILocationFromState } from "../../models/ILocationFromState";
+import { PEOPLE_AND_PROJECTS } from "../../constants/nameRoutesConsts";
+import { authSlice } from "../../store/reducers/AuthSlice";
+import { useAppDispatch } from "../../hooks/redux";
 
 export const Auth: FC = () => {
+    const {loginReducer} = authSlice.actions
+    const dispatch = useAppDispatch()
 
     const [isAuthStatus, setAuthStatus] = useState('Login')
+
 
     const changeAuthStatus = (status: string) => {
         setAuthStatus(status)
     }
 
+    const navigate = useNavigate()
+    const location = useLocation();
+    const fromPathname = (location.state as ILocationFromState)?.from?.pathname || PEOPLE_AND_PROJECTS
+
+    const navigateHandler = async (continueAuth: boolean) => {
+        dispatch(loginReducer({isAuth: true, continueAuth: continueAuth}))
+        navigate(fromPathname, {replace: true})
+    }
+
     const checkStatusAuth = () => {
         if (isAuthStatus === 'Login') {
             return (
-                <Login changeAuthStatus={changeAuthStatus}/>
+                <Login changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler}/>
             )
         } else if (isAuthStatus === 'Registration') {
             return (
-                <Registration changeAuthStatus={changeAuthStatus}/>
+                <Registration changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler}/>
             )
         } else if (isAuthStatus === 'Recovery') {
             return (
-                <Recovery changeAuthStatus={changeAuthStatus}/>
+                <Recovery changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler}/>
             )
         }
     }

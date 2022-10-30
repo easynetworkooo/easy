@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import styles from './AuthContinue.module.scss'
 import { AuthContinueFirstStep } from "./AuthContinueFirstStep/AuthContinueFirstStep";
 import { AuthContinueSecondStep } from "./AuthContinueSecondStep/AuthContinueSecondStep";
+import { IFinishRegisterCredentials } from "../../models/IFinishRegister";
 
 export const AuthContinue = () => {
     const [isStep, setStep] = useState(1)
+    const [isCredentialsFinishRegister, setCredentialsFinishRegister] = useState<IFinishRegisterCredentials>({
+        nickname: '',
+        city: '',
+        country: '',
+        interests: ''
+    })
 
     const checkStep = (stepNumber: number) => {
         if (stepNumber === 1) {
             return (
-                <AuthContinueFirstStep changeStep={changeStep} nextStep={2}/>
+                <AuthContinueFirstStep changeStep={changeStep} nextStep={2}
+                                       isCredentialsFinishRegister={isCredentialsFinishRegister}
+                                       setCredentialsFinishRegister={setCredentialsFinishRegister}/>
             )
         } else if (stepNumber === 2) {
             return (
-                <AuthContinueSecondStep/>
+                <AuthContinueSecondStep isCredentialsFinishRegister={isCredentialsFinishRegister}/>
             )
         }
     }

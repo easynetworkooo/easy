@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './ProfileInformation.module.scss'
 import { Button, IconElement } from "../../components-ui";
+import { MenuItem } from "./MenuItem/MenuItem";
+import { AUTH, COMMUNITY, CREATE_PROJECT, MESSAGES, WALLET } from "../../constants/nameRoutesConsts";
+import { useNavigate } from "react-router-dom";
+import { authAPI } from "../../services/AuthService";
+import { authSlice } from "../../store/reducers/AuthSlice";
+import { useAppDispatch } from "../../hooks/redux";
 import defaultAvatar from '../../assets/Profile/Default-avatar.png'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
@@ -11,13 +17,25 @@ import community from '../../assets/Profile/Community.svg'
 import activeCommunity from '../../assets/Profile/ActiveCommunity.svg'
 import wallet from '../../assets/Profile/Wallet.svg'
 import activeWallet from '../../assets/Profile/ActiveWallet.svg'
-import { MenuItem } from "./MenuItem/MenuItem";
-import { COMMUNITY, CREATE_PROJECT, MESSAGES, WALLET } from "../../constants/nameRoutesConsts";
-import { useNavigate } from "react-router-dom";
 
 export const ProfileInformation = () => {
+    const {logoutReducer} = authSlice.actions
+    const dispatch = useAppDispatch()
 
     const navigate = useNavigate()
+
+    const [logout] = authAPI.useLogoutMutation()
+
+    const logoutHandler = async () => {
+        try {
+            await logout('')
+            dispatch(logoutReducer())
+            localStorage.removeItem('auth')
+            navigate(AUTH)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <div className={styles.profileBlock}>
@@ -48,6 +66,9 @@ export const ProfileInformation = () => {
             </div>
             <div className={styles.walletConnection}>
                 <span>Wallet not connected</span>
+            </div>
+            <div className={styles.logout} onClick={logoutHandler}>
+                <span>Logout</span>
             </div>
         </div>
     );

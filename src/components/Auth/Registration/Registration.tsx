@@ -3,38 +3,31 @@ import styles from './Registration.module.scss'
 import { AuthGoogleButton } from "../AuthGoogleButton/AuthGoogleButton";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
 import { Button, Input } from "../../../components-ui";
-import { AUTH_CONTINUE } from "../../../constants/nameRoutesConsts";
-import { authSlice } from "../../../store/reducers/AuthSlice";
-import { useAppDispatch } from "../../../hooks/redux";
-import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../../services/AuthService";
 import { IRegistrationCredentials } from "../../../models/IRegistration";
 
 
 export interface RegistrationProps {
     changeAuthStatus: (status: string) => void
+    navigateHandler: (continueAuth: boolean) => void
 }
 
-export const Registration: FC<RegistrationProps> = ({changeAuthStatus}) => {
-    const {loginReducer} = authSlice.actions
-    const dispatch = useAppDispatch()
-
+export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateHandler}) => {
     const [registration] = authAPI.useRegistrationMutation()
 
     const [isEmail, setEmail] = useState('')
     const [isPassword, setPassword] = useState('')
     const [isRepeatPassword, setRepeatPassword] = useState('')
 
-    const navigate = useNavigate()
 
     const registrationHandler = async () => {
         if (isEmail && isPassword && isRepeatPassword) {
             if (isPassword === isRepeatPassword) {
-                const registrationResponse: any = await registration({username: isEmail, password: isPassword} as IRegistrationCredentials)
+                const registrationResponse: any = await registration({email: isEmail, password: isPassword} as IRegistrationCredentials)
                 try {
                     if (registrationResponse.data.status === 200) {
-                        dispatch(loginReducer({isAuth: true, continueAuth: true}))
-                        navigate(AUTH_CONTINUE)
+                        localStorage.setItem('auth', registrationResponse.data.auth)
+                        navigateHandler(true)
                     }
                 } catch (e) {
                     console.log(registrationResponse.error)

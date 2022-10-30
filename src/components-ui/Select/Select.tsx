@@ -44,9 +44,8 @@ export const Select: FC<SelectProps> = ({
             </div>
             {isOpenDropDown &&
                 <div className={styles.listDropDownBlock} title={moreGrayBackColor ? 'gray200' : ''}>
-                    {options.map((item) =>
-                        <div className={styles.dropdownElement} onClick={() => chooseOptionSelectHandler(item)}
-                             key={item}>
+                    {options.map((item, index) =>
+                        <div className={styles.dropdownElement} onClick={() => chooseOptionSelectHandler(item)} key={index}>
                             <span>{item}</span>
                         </div>
                     )}

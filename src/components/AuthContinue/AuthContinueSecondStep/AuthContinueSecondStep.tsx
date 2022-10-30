@@ -6,15 +6,16 @@ import { authSlice } from "../../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
 import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
+import { appAPI } from "../../../services/AppService";
+import { authAPI } from "../../../services/AuthService";
+import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
 
 
-const interestItems = [
-    'Solidity Developer', 'Rust Developer', 'NFT Investor', 'Telegram Crypto Blogger', 'Crypto Enthusiast', 'Motoko Developer',
-    'JS Frontend Developer', 'React Frontend Developer', 'Youtube Crypto Blogger', 'NFT Gamer', 'Instagram Crypto Blogger',
-    'Tiktok Crypto Blogger', 'Twitch Crypto Blogger', 'Reddit Crypto Blogger', 'Miner', 'Discord Customizer', 'NFT Staker', 'Crypto Staker', 'IDO Enthusiast',
-]
+export interface AuthContinueSecondStepProps {
+    isCredentialsFinishRegister: IFinishRegisterCredentials,
+}
 
-export const AuthContinueSecondStep: FC = () => {
+export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCredentialsFinishRegister}) => {
 
     const {loginReducer} = authSlice.actions
     const dispatch = useAppDispatch()
@@ -23,13 +24,22 @@ export const AuthContinueSecondStep: FC = () => {
 
     const [isInterestItems, setInterestItems] = useState<string[]>([])
 
-    const endAuthHandler = () => {
+    const {data: interestItems} = appAPI.useFetchAllInterestQuery('')
+    const [finishRegister] = authAPI.useFinishRegisterMutation()
+
+    const endAuthHandler = async () => {
         if (isInterestItems.length >= 3) {
-            dispatch(loginReducer({isAuth: true, continueAuth: false}))
-            navigate(PEOPLE_AND_PROJECTS)
+            const finishDataRegister:any = await finishRegister({...isCredentialsFinishRegister, interests: JSON.stringify(isInterestItems)})
+            if (finishDataRegister.data.status === 200) {
+                dispatch(loginReducer({isAuth: true, continueAuth: false}))
+                navigate(PEOPLE_AND_PROJECTS)
+            } else {
+                console.log(finishDataRegister)
+            }
+        } else {
+            console.log('Choose minimum 3 interests')
         }
     }
-
 
     return (
         <div className={styles.secondStepBlock}>
@@ -40,9 +50,9 @@ export const AuthContinueSecondStep: FC = () => {
                 <span>Choose 3 of your crypto interests</span>
             </div>
             <div className={styles.interestsBlock}>
-                {interestItems.map((interest, key) =>
-                    <div key={key}>
-                        <InterestItem interest={interest} setInterestItems={setInterestItems}
+                {interestItems && interestItems.value.interests.map(({id, name}) =>
+                    <div key={id}>
+                        <InterestItem interest={name} setInterestItems={setInterestItems}
                                       isInterestItems={isInterestItems}/>
                     </div>
                 )}

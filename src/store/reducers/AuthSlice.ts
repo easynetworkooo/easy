@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IAuth = {
     isAuth: false,
-    continueAuth: true
+    continueAuth: false
 }
 
 export const authSlice = createSlice({
@@ -13,6 +13,10 @@ export const authSlice = createSlice({
     reducers: {
         loginReducer(state, action: PayloadAction<IAuth>) {
             state.isAuth = action.payload.isAuth
+            state.continueAuth = action.payload.continueAuth
+        },
+        logoutReducer(state) {
+            state.isAuth = false
         }
     }
 })

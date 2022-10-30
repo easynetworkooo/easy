@@ -1,17 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IRegistration } from "../models/IRegistration";
+import { IUserProfile } from "../models/IUserProfile";
 
 
 export const userAPI = createApi({
     reducerPath: 'userAPI',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://a0729026.xsph.ru'}),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'https://easy-micro.ru',
+        prepareHeaders: (headers) => {
+            if (localStorage.getItem('auth')) {
+                headers.set("Authorization", `${localStorage.getItem('auth')}`)
+            }
+            return headers
+        }
+    }),
+
     endpoints: (build) => ({
-        registration: build.mutation<IRegistration, IRegistration>({
-            query: (registrationCredentials) => ({
-                url: '/register',
-                method: 'POST',
-                body: registrationCredentials
+        fetchUserProfile: build.mutation<IUserProfile, string>({
+            query: () => ({
+                url: '/getProfile',
+                method: 'GET'
             })
-        })
+        }),
     })
 })

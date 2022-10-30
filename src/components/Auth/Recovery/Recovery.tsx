@@ -6,9 +6,10 @@ import { ThirdRecoveryStep } from "./ThirdRecoveryStep/ThirdRecoveryStep";
 
 export interface RecoveryProps {
     changeAuthStatus: (status: string) => void
+    navigateHandler: (continueAuth: boolean) => void
 }
 
-export const Recovery: FC<RecoveryProps> = ({changeAuthStatus}) => {
+export const Recovery: FC<RecoveryProps> = ({changeAuthStatus, navigateHandler}) => {
 
     const [isStep, setStep] = useState(1)
 
@@ -23,7 +24,7 @@ export const Recovery: FC<RecoveryProps> = ({changeAuthStatus}) => {
             )
         } else if (stepNumber === 3) {
             return (
-                <ThirdRecoveryStep/>
+                <ThirdRecoveryStep navigateHandler={navigateHandler}/>
             )
         }
     }

@@ -6,7 +6,7 @@ import { IInterests } from "../models/IInterests";
 
 export const appAPI = createApi({
     reducerPath: 'appAPI',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://a0729026.xsph.ru'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'https://easy-micro.ru'}),
     endpoints: (build) => ({
         fetchAllCountries: build.query<ICountries, string>({
             query: () => ({

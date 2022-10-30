@@ -14,9 +14,7 @@ export const SecondRecoveryStep: FC<SecondRecoveryStepProps> = ({changeStep, nex
     const [isCode, setCode] = useState('')
 
     const nextStepHandler = () => {
-        if (isCode === '7777') {
-            changeStep(nextStep)
-        }
+        changeStep(nextStep)
     }
 
     return (
