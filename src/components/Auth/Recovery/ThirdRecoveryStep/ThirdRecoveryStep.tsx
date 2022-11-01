@@ -1,15 +1,19 @@
 import React, { FC } from 'react';
 import styles from "./ThirdRecoveryStep.module.scss";
 import { Button, Input, Steps } from "../../../../components-ui";
+import { IUserProfile } from "../../../../models/IUserProfile";
+import { userAPI } from "../../../../services/UserService";
 
 export interface ThirdRecoveryStepProps {
-    navigateHandler: (continueAuth: boolean) => void
+    navigateHandler: (continueAuth: boolean, userData: IUserProfile) => void
 }
 
 export const ThirdRecoveryStep:FC<ThirdRecoveryStepProps> = ({navigateHandler}) => {
+    const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
 
-    const saveAndLoginHandler = () => {
-        navigateHandler(true)
+    const saveAndLoginHandler = async () => {
+        const dataProfile: any = await fetchUserProfile('')
+        navigateHandler(true, dataProfile.data.value)
     }
 
     return (

@@ -9,6 +9,7 @@ import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
 import { appAPI } from "../../../services/AppService";
 import { authAPI } from "../../../services/AuthService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
+import { userSlice } from "../../../store/reducers/UserSlice";
 
 
 export interface AuthContinueSecondStepProps {
@@ -16,7 +17,7 @@ export interface AuthContinueSecondStepProps {
 }
 
 export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCredentialsFinishRegister}) => {
-
+    const {setUserAfterAuthContinue} = userSlice.actions
     const {loginReducer} = authSlice.actions
     const dispatch = useAppDispatch()
 
@@ -29,9 +30,11 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
 
     const endAuthHandler = async () => {
         if (isInterestItems.length >= 3) {
+            const {nickname, country, city} = isCredentialsFinishRegister
             const finishDataRegister:any = await finishRegister({...isCredentialsFinishRegister, interests: JSON.stringify(isInterestItems)})
             if (finishDataRegister.data.status === 200) {
                 dispatch(loginReducer({isAuth: true, continueAuth: false}))
+                dispatch(setUserAfterAuthContinue({name: nickname, country, city, interests: isInterestItems}))
                 navigate(PEOPLE_AND_PROJECTS)
             } else {
                 console.log(finishDataRegister)

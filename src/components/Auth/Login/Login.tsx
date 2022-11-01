@@ -5,15 +5,18 @@ import { Button, Input } from "../../../components-ui";
 import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText";
 import { authAPI } from "../../../services/AuthService";
 import { ILoginCredentials } from "../../../models/ILogin";
+import { userAPI } from "../../../services/UserService";
+import { IUserProfile } from "../../../models/IUserProfile";
 
 export interface LoginProps {
     changeAuthStatus: (status: string) => void
-    navigateHandler: (continueAuth: boolean) => void
+    navigateHandler: (continueAuth: boolean, dataProfile: IUserProfile) => void
 }
 
 
 export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
     const [login] = authAPI.useLoginMutation()
+    const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
     const [isEmail, setEmail] = useState('')
     const [isPassword, setPassword] = useState('')
 
@@ -23,7 +26,8 @@ export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
         try {
             if (loginResponse.data.status === 200) {
                 localStorage.setItem('auth', loginResponse.data.auth)
-                await navigateHandler(true)
+                const dataProfile: any = await fetchUserProfile('')
+                await navigateHandler(dataProfile.data.value.interests === null, dataProfile.data.value)
             }
         } catch (e) {
             console.log(loginResponse.error)

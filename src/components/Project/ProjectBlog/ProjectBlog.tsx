@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ProjectBlog.module.scss'
 import { UserPost } from "../../../components-ui";
-import avatar from "../../../assets/Profile/Default-avatar.png";
+import avatar from "../../../assets/Profile/Default-avatar.svg";
 
 const usersPosts = [
     {

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styles from './Notifications.module.scss'
 import notifications from '../../../assets/UI/Notifications.svg'
 import notificationsActive from '../../../assets/UI/NotificationsActive.svg'
-import avatar from '../../../assets/Profile/Default-avatar.png'
+import avatar from '../../../assets/Profile/Default-avatar.svg'
 
 
 export interface NotificationsProps {

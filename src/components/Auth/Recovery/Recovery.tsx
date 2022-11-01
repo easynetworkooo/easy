@@ -3,10 +3,11 @@ import styles from './Recovery.module.scss'
 import { FirstRecoveryStep } from "./FirstRecoveryStep/FirstRecoveryStep";
 import { SecondRecoveryStep } from "./SecondRecoveryStep/SecondRecoveryStep";
 import { ThirdRecoveryStep } from "./ThirdRecoveryStep/ThirdRecoveryStep";
+import { IUserProfile } from "../../../models/IUserProfile";
 
 export interface RecoveryProps {
     changeAuthStatus: (status: string) => void
-    navigateHandler: (continueAuth: boolean) => void
+    navigateHandler: (continueAuth: boolean, userData: IUserProfile) => void
 }
 
 export const Recovery: FC<RecoveryProps> = ({changeAuthStatus, navigateHandler}) => {

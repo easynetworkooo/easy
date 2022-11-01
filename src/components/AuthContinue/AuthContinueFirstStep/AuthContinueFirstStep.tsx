@@ -18,7 +18,7 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                                                                           isCredentialsFinishRegister,
                                                                           setCredentialsFinishRegister
                                                                       }) => {
-    const [isNickname, setNickname] = useState('')
+    const [isName, setName] = useState('')
     const [isCountry, setCountry] = useState('')
     const [isCity, setCity] = useState('')
     const [isCodeCountry, setCodeCountry] = useState('')
@@ -43,8 +43,8 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
     }
 
     const changeStepHandler = () => {
-        if (isNickname !== '' && isCountry !== '' && isCity !== '') {
-            setCredentialsFinishRegister({...isCredentialsFinishRegister, nickname: isNickname, city: isCity, country: isCountry})
+        if (isName !== '' && isCountry !== '' && isCity !== '') {
+            setCredentialsFinishRegister({...isCredentialsFinishRegister, nickname: isName, city: isCity, country: isCountry})
             changeStep(nextStep)
         }
     }
@@ -62,8 +62,8 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                 <Steps steps={['firstActiveStep', 'secondUnreadyStep']}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input type={'text'} placeholder={'Nickname'} value={isNickname} autoFocus={true}
-                       onChange={e => setNickname(e.target.value)}/>
+                <Input type={'text'} placeholder={'Nickname'} value={isName} autoFocus={true}
+                       onChange={e => setName(e.target.value)}/>
             </div>
             <div className={styles.inputBlock}>
                 <Select options={setCountries()}

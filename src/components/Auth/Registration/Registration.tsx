@@ -5,15 +5,18 @@ import { LinesWithCenterText } from "../LinesWithCenterText/LinesWithCenterText"
 import { Button, Input } from "../../../components-ui";
 import { authAPI } from "../../../services/AuthService";
 import { IRegistrationCredentials } from "../../../models/IRegistration";
+import { IUserProfile } from "../../../models/IUserProfile";
+import { userAPI } from "../../../services/UserService";
 
 
 export interface RegistrationProps {
     changeAuthStatus: (status: string) => void
-    navigateHandler: (continueAuth: boolean) => void
+    navigateHandler: (continueAuth: boolean, dataProfile: IUserProfile) => void
 }
 
 export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateHandler}) => {
     const [registration] = authAPI.useRegistrationMutation()
+    const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
 
     const [isEmail, setEmail] = useState('')
     const [isPassword, setPassword] = useState('')
@@ -27,7 +30,8 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
                 try {
                     if (registrationResponse.data.status === 200) {
                         localStorage.setItem('auth', registrationResponse.data.auth)
-                        navigateHandler(true)
+                        const dataProfile: any = await fetchUserProfile('')
+                        navigateHandler(true, dataProfile.data.value)
                     }
                 } catch (e) {
                     console.log(registrationResponse.error)

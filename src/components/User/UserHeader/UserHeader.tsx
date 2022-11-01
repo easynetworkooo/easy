@@ -52,9 +52,9 @@ export const UserHeader = () => {
             </div>
             <div className={styles.userInformationBlock}>
                 <div className={styles.actionsList}>
-                    <IconElement image={likes} count={22} type={'textLight'}/>
-                    <IconElement image={reposts} count={22} type={'textLight'}/>
-                    <IconElement image={views} count={22} type={'textLight'}/>
+                    <IconElement image={likes} count={22} type={'light'}/>
+                    <IconElement image={reposts} count={22} type={'light'}/>
+                    <IconElement image={views} count={22} type={'light'}/>
                 </div>
                 <div className={styles.userCountryBlock}>
                     <span>Belarus</span>

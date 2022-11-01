@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './MyBlog.module.scss'
 import { InputSend, UserPost } from "../../components-ui";
-import avatar from "../../assets/Profile/Default-avatar.png";
+import avatar from "../../assets/Profile/Default-avatar.svg";
 
 
 const usersPosts = [

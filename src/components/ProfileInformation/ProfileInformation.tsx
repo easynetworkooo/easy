@@ -6,8 +6,8 @@ import { AUTH, COMMUNITY, CREATE_PROJECT, MESSAGES, WALLET } from "../../constan
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/AuthService";
 import { authSlice } from "../../store/reducers/AuthSlice";
-import { useAppDispatch } from "../../hooks/redux";
-import defaultAvatar from '../../assets/Profile/Default-avatar.png'
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import defaultAvatar from '../../assets/Profile/Default-avatar.svg'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
 import view from '../../assets/Profile/View.svg'
@@ -20,6 +20,7 @@ import activeWallet from '../../assets/Profile/ActiveWallet.svg'
 
 export const ProfileInformation = () => {
     const {logoutReducer} = authSlice.actions
+    const {name, img, likes, reposts, views} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
 
     const navigate = useNavigate()
@@ -28,9 +29,8 @@ export const ProfileInformation = () => {
 
     const logoutHandler = async () => {
         try {
-            await logout('')
+            await logout('').then(() => localStorage.removeItem('auth'))
             dispatch(logoutReducer())
-            localStorage.removeItem('auth')
             navigate(AUTH)
         } catch (e) {
             console.log(e)
@@ -41,15 +41,15 @@ export const ProfileInformation = () => {
         <div className={styles.profileBlock}>
             <div className={styles.profile}>
                 <div className={styles.profileAvatar}>
-                    <img src={defaultAvatar} alt="avatar"/>
+                    <img src={img ? img : defaultAvatar} alt="avatar"/>
                 </div>
                 <div className={styles.profileName}>
-                    <h2>Black Jack</h2>
+                    <h2>{name}</h2>
                 </div>
                 <div className={styles.profileElements}>
-                    <IconElement image={like} count={25} type={'light'}/>
-                    <IconElement image={repost} count={31} type={'light'}/>
-                    <IconElement image={view} count={12} type={'light'}/>
+                    <IconElement image={like} count={likes} type={'light'}/>
+                    <IconElement image={repost} count={reposts} type={'light'}/>
+                    <IconElement image={view} count={views} type={'light'}/>
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>

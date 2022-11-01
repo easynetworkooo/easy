@@ -8,10 +8,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ILocationFromState } from "../../models/ILocationFromState";
 import { PEOPLE_AND_PROJECTS } from "../../constants/nameRoutesConsts";
 import { authSlice } from "../../store/reducers/AuthSlice";
+import { userSlice } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/redux";
+import { IUserProfile } from "../../models/IUserProfile";
+
 
 export const Auth: FC = () => {
     const {loginReducer} = authSlice.actions
+    const {setUserReducer} = userSlice.actions
     const dispatch = useAppDispatch()
 
     const [isAuthStatus, setAuthStatus] = useState('Login')
@@ -25,7 +29,8 @@ export const Auth: FC = () => {
     const location = useLocation();
     const fromPathname = (location.state as ILocationFromState)?.from?.pathname || PEOPLE_AND_PROJECTS
 
-    const navigateHandler = async (continueAuth: boolean) => {
+    const navigateHandler = async (continueAuth: boolean, userData: IUserProfile) => {
+        dispatch(setUserReducer({...userData}))
         dispatch(loginReducer({isAuth: true, continueAuth: continueAuth}))
         navigate(fromPathname, {replace: true})
     }

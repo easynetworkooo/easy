@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Subscriptions.module.scss'
 import { ButtonsSorter, ProjectPost, UserPost } from "../../components-ui";
 import avatarProject from "../../assets/UI/AvatarProject.png";
-import avatar from "../../assets/Profile/Default-avatar.png";
+import avatar from "../../assets/Profile/Default-avatar.svg";
 
 
 const usersPosts = [
