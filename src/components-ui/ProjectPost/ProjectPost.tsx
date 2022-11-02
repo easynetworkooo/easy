@@ -13,8 +13,9 @@ export interface ProjectPostProps {
 
 export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
 
-    const [isActiveModal, setActiveModal] = useState(false)
-    const [isSubtractTextarea,setSubtractTextarea] = useState(0)
+    const [isActiveModal, setActiveModal] = useState<boolean>(false)
+    const [isSubtractTextarea,setSubtractTextarea] = useState<number>(0)
+    const [isValueSend, setValueSend] = useState<string>('')
 
     return (
         <>
@@ -26,7 +27,7 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
                         <CommentsPost isSubtractTextarea={isSubtractTextarea}/>
                     </div>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea}/>
+                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} onChange={e => setValueSend(e.target.value)}/>
                     </div>
                 </div>
             </Modal>

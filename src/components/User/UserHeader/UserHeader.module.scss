@@ -22,6 +22,7 @@
 .actionsBlock {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .name {
@@ -45,6 +46,7 @@
 }
 
 .actionsButtonBlock {
+  width: 250px;
   display: flex;
   gap: 8px;
   .btnText {
@@ -58,6 +60,7 @@
 .userInformationBlock {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-left: 40px;
 }
 

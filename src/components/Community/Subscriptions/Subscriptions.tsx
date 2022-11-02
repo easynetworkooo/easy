@@ -33,7 +33,7 @@ export const Subscriptions = () => {
     return (
         <div className={styles.subscriptionsBlock}>
             <div className={styles.subscriptionsSortAndFind}>
-                <ButtonsSorter usersItems={subs} setViewItems={setViewItems}/>
+                {/*<ButtonsSorter usersItems={subs} setViewItems={setViewItems}/>*/}
                 <InputFind/>
             </div>
             <div className={styles.subscriptions}>

@@ -6,16 +6,18 @@ import { IInterests } from "../models/IInterests";
 
 export const appAPI = createApi({
     reducerPath: 'appAPI',
-    baseQuery: fetchBaseQuery({baseUrl: 'https://easy-micro.ru'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'http://easy-micro.ru'}),
     endpoints: (build) => ({
         fetchAllCountries: build.query<ICountries, string>({
             query: () => ({
-                url: '/countries'
+                url: '/countries',
+                method: 'GET'
             })
         }),
         fetchAllCities: build.query<ICities, string>({
-            query: (code: string = 'BY') => ({
+            query: (code: string) => ({
                 url: '/cities',
+                method: 'GET',
                 params: {
                     code: code
                 }
@@ -24,6 +26,7 @@ export const appAPI = createApi({
         fetchAllInterest: build.query<IInterests, string>({
             query: () => ({
                 url: `/interests`,
+                method: 'GET'
             })
         }),
     })

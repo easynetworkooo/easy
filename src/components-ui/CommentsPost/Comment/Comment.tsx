@@ -41,11 +41,11 @@ export const Comment = () => {
                 {
                     isLiked ?
                         <div onClick={setLikedHandle}>
-                            <IconElement image={likeActive} count={isCountLikes} type={'likes'}/>
+                            <IconElement image={likeActive} count={isCountLikes} type="normal"/>
                         </div>
                         :
                         <div onClick={setLikedHandle}>
-                            <IconElement image={like} count={isCountLikes}/>
+                            <IconElement image={like} count={isCountLikes} type="normal"/>
                         </div>
 
                 }

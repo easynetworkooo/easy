@@ -62,16 +62,16 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                 {
                     isLiked ?
                         <div onClick={setLikedHandle}>
-                            <IconElement image={likeActive} count={isCountLikes} type={'likes'}/>
+                            <IconElement image={likeActive} count={isCountLikes} type="normal"/>
                         </div>
                         :
                         <div onClick={setLikedHandle}>
-                            <IconElement image={like} count={isCountLikes}/>
+                            <IconElement image={like} count={isCountLikes} type="normal"/>
                         </div>
 
                 }
-                <IconElement image={comments} count={20} onClick={() => setActiveModal(true)}/>
-                <IconElement image={reposts} count={10}/>
+                <IconElement image={comments} count={20} onClick={() => setActiveModal(true)} type="normal"/>
+                <IconElement image={reposts} count={10} type="normal"/>
                 <IconElement image={share}/>
             </div>
         </div>

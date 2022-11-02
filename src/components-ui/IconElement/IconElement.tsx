@@ -14,23 +14,22 @@ export const IconElement: FC<IconElementProps> = ({image, count, type, onClick})
         <>
             {
                 type === 'light' &&
-                <div className={type ? styles.element : `${styles.element} ${styles.pointer}`} onClick={onClick}>
+                <div className={styles.element} onClick={onClick}>
                     <img src={image} alt={`${image}`}/>
                     <span className={styles.textLight}>{count ? count : 0}</span>
                 </div>
             }
             {
-                type === 'likes' &&
+                type === 'normal' &&
                 <div className={`${styles.element} ${styles.pointer}`} onClick={onClick}>
                     <img src={image} alt={`${image}`}/>
-                    {count && <span className={styles.textPurple}>{count}</span>}
+                    <span>{count ? count : 0}</span>
                 </div>
             }
             {
                 !type &&
                 <div className={type ? styles.element : `${styles.element} ${styles.pointer}`} onClick={onClick}>
                     <img src={image} alt={`${image}`}/>
-                    {count && <span className={type && styles.textLight}>{count}</span>}
                 </div>
             }
 

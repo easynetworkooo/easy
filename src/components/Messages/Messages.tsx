@@ -56,6 +56,7 @@ export const Messages = () => {
 
     const [isMessageBlockHeight, setMessageBlockHeight] = useState(0)
     const [isOpenMessages, setOpenMessages] = useState(null)
+    const [isSendValueMessage, setSendValueMessage] = useState('')
 
 
     return (
@@ -79,7 +80,7 @@ export const Messages = () => {
                         </div>
                     )}
                 </div>
-                <InputSend setSubtractTextarea={setMessageBlockHeight}/>
+                <InputSend setSubtractTextarea={setMessageBlockHeight} value={isSendValueMessage} onChange={e => setSendValueMessage(e.target.value)}/>
             </div>
         </div>
     );

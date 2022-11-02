@@ -7,7 +7,7 @@ import { IFinishRegisterCredentials } from "../models/IFinishRegister";
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://easy-micro.ru',
+        baseUrl: 'http://easy-micro.ru',
         prepareHeaders: (headers) => {
             if (localStorage.getItem('auth')) {
                 headers.set("Authorization", `${localStorage.getItem('auth')}`)

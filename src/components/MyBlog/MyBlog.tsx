@@ -1,52 +1,43 @@
 import React, { useState } from 'react';
 import styles from './MyBlog.module.scss'
 import { InputSend, UserPost } from "../../components-ui";
-import avatar from "../../assets/Profile/Default-avatar.svg";
+import { postAPI } from "../../services/PostService";
+import { useAppSelector } from "../../hooks/redux";
 
 
-const usersPosts = [
-    {
-        icon: avatar,
-        name: 'Jane Cooper',
-        text: 'Hello there',
-    },
-    {
-        icon: avatar,
-        name: 'Jane Cooper',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-    {
-        icon: avatar,
-        name: 'Jane Cooper',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-    {
-        icon: avatar,
-        name: 'Jane Cooper',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-    {
-        icon: avatar,
-        name: 'Jane Cooper',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-]
 
 export const MyBlog = () => {
+    const {id} = useAppSelector(state => state.userReducer)
+    const [createBlogPost] = postAPI.useCreateBlogPostMutation()
+    const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery(id.toString())
 
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
+    const [isSendValue, setSendValue] = useState<string>('')
+
+    const sendHandler = async () => {
+        const dataCreatePost : any = await createBlogPost({text: isSendValue})
+        if (dataCreatePost.data.status === 200) {
+            setSendValue('')
+        } else {
+            console.log(dataCreatePost.error)
+        }
+    }
+
+    if (isLoadingUserPosts) {
+        return <div>Skeleton</div>
+    }
 
     return (
         <div className={styles.myBlogContainer}>
             <div className={styles.myPostsBlock} style={{height: `${712 - isSubtractTextarea}px`}}>
-                {usersPosts.map((item, index) =>
+                {userPosts && userPosts.value.data.map((item, index) =>
                     <div key={index}>
-                        <UserPost icon={item.icon} name={item.name} text={item.text}/>
+                        <UserPost userPost={item}/>
                     </div>
                 )}
             </div>
             <div className={styles.sendBlock}>
-                <InputSend setSubtractTextarea={setSubtractTextarea}/>
+                <InputSend setSubtractTextarea={setSubtractTextarea} sendHandler={sendHandler} value={isSendValue} onChange={e => setSendValue(e.target.value)}/>
             </div>
         </div>
     );

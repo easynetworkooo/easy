@@ -1,49 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Subscriptions.module.scss'
 import { ButtonsSorter, ProjectPost, UserPost } from "../../components-ui";
 import avatarProject from "../../assets/UI/AvatarProject.png";
-import avatar from "../../assets/Profile/Default-avatar.svg";
+import { postAPI } from "../../services/PostService";
+import { IPost } from "../../models/IPost";
 
-
-const usersPosts = [
-    {
-        type: 'project',
-        icon: avatarProject,
-        name: 'Test',
-        text: 'Project test',
-    },
-    {
-        type: 'user',
-        icon: avatar,
-        name: 'Sub test',
-        text: 'Hello All',
-    },
-    {
-        type: 'user',
-        icon: avatar,
-        name: 'Teo Subert',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-]
 
 export const Subscriptions = () => {
 
-    const [isViewItems, setViewItems] = useState(usersPosts)
+    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery('1')
+    const [isViewItems, setViewItems] = useState<IPost[]>([])
+
+    useEffect(() => {
+        if (usersPostLoading === false && usersPosts) {
+            setViewItems(usersPosts.value.data)
+        }
+    }, [usersPostLoading, usersPosts])
+
+
+    if (usersPostLoading) {
+        return <div>Skeleton</div>
+    }
 
     return (
         <div className={styles.subscriptionsContainer}>
-            <div className={styles.headBlock}>
-                <div className={styles.sortBlock}>
-                    <ButtonsSorter usersItems={usersPosts} setViewItems={setViewItems}/>
-                </div>
-            </div>
+            {/*<div className={styles.headBlock}>*/}
+            {/*    <div className={styles.sortBlock}>*/}
+            {/*        <ButtonsSorter usersItems={usersPosts} setViewItems={setViewItems}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className={styles.postsBlock}>
                 {isViewItems.map((item, index) =>
                     <div key={index}>
                         {item.type === 'project'
                             ?
-                            <ProjectPost icon={item.icon} name={item.name} text={item.text}/>
-                            : <UserPost icon={item.icon} name={item.name} text={item.text}/>
+                            <ProjectPost icon={avatarProject} name={'project'} text={item.text}/>
+                            : <UserPost userPost={item}/>
                         }
                     </div>
                 )}

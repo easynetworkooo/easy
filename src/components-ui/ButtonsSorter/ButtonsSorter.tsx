@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
 import styles from './ButtonSorter.module.scss'
+import { IPost } from "../../models/IPost";
 
 export interface ButtonsSorterProps {
-    usersItems: any[]
+    usersItems: IPost[]
     setViewItems: (arr: any) => void
 }
 
