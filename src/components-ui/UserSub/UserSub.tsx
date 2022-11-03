@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './UserSub.module.scss'
-import avatar from '../../assets/UI/AvatarUser.png'
+import defaultAvatar from '../../assets/Profile/Default-avatar.svg'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../constants/nameRoutesConsts";
+import { IUserValue } from "../../models/IUser";
 
-export const UserSub = () => {
+export interface UserSubProps {
+    dataSub: IUserValue
+}
+
+export const UserSub:FC<UserSubProps> = ({dataSub}) => {
 
     const navigate = useNavigate()
 
     return (
-        <div className={styles.userSubBlock} onClick={() => navigate(`${USERS}/st.koryk`)}>
+        <div className={styles.userSubBlock} onClick={() => navigate(`${USERS}/${dataSub.id}`)}>
             <div className={styles.avatar}>
-                <img src={avatar} alt="avatar"/>
+                <img src={dataSub.img ? dataSub.img : defaultAvatar} alt="avatar"/>
             </div>
             <div className={styles.nameBlock}>
-                <span className={styles.name}>Darlene Robertson</span>
-                <span className={styles.lastActivity}>3 minutes ago</span>
+                <span className={styles.name}>{dataSub.name}</span>
+                <span className={styles.lastActivity}>{dataSub.regdate}</span>
             </div>
         </div>
     );

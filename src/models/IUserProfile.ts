@@ -10,6 +10,8 @@ export interface IUserProfile {
     likes: number | null,
     views: number | null,
     reposts: number | null
+    subscribers: number
+    subscriptions: number
 }
 
 export interface IUserProfileContinueAuth {

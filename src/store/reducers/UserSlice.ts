@@ -13,7 +13,9 @@ const initialState: IUserProfile = {
     img: '',
     likes: null,
     views: null,
-    reposts: null
+    reposts: null,
+    subscribers: 0,
+    subscriptions: 0
 }
 
 export const userSlice = createSlice({
@@ -32,6 +34,8 @@ export const userSlice = createSlice({
             state.likes = action.payload.likes
             state.views = action.payload.views
             state.reposts = action.payload.reposts
+            state.subscribers = action.payload.subscribers
+            state.subscriptions = action.payload.subscriptions
         },
         setUserAfterAuthContinue(state, action: PayloadAction<IUserProfileContinueAuth>) {
             state.name = action.payload.name

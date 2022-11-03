@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IUserProfile } from "../models/IUserProfile";
-import { IUser } from "../models/IUser";
+import { IUser, IUserValue } from "../models/IUser";
 
 
 export const userAPI = createApi({
@@ -30,6 +30,28 @@ export const userAPI = createApi({
                 method: 'GET',
                 params: {
                     id: userId
+                }
+            }),
+            providesTags: ['user']
+        }),
+        fetchGetSubscribers: build.query<{status: number, value: IUserValue[]}, {id: number, page: number}>({
+            query: ({id, page}) => ({
+                url: '/getSubscribers',
+                method: 'GET',
+                params: {
+                    id: id,
+                    page: page
+                }
+            }),
+            providesTags: ['user']
+        }),
+        fetchGetSubscriptions: build.query<{status: number, value: IUserValue[]}, {id: number, page: number}>({
+            query: ({id, page}) => ({
+                url: '/getSubscriptions',
+                method: 'GET',
+                params: {
+                    id: id,
+                    page: page
                 }
             }),
             providesTags: ['user']

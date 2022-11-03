@@ -1,34 +1,14 @@
 import React, { useState } from 'react';
 import styles from './Subscriptions.module.scss'
-import { ButtonsSorter, InputFind, ProjectSub, UserSub } from "../../../components-ui";
-import avatarProject from "../../../assets/UI/AvatarProject.png";
-import avatar from "../../../assets/UI/AvatarUser.png";
+import { InputFind,  UserSub } from "../../../components-ui";
+import { userAPI } from "../../../services/UserService";
+import { useAppSelector } from "../../../hooks/redux";
 
-
-const subs = [
-    {
-        type: 'project',
-        icon: avatarProject,
-        name: 'Test',
-        text: 'Project test'
-    },
-    {
-        type: 'user',
-        icon: avatar,
-        name: 'Darlene Robertson',
-        text: 'Hello there',
-    },
-    {
-        type: 'user',
-        icon: avatar,
-        name: 'Darlene Robertson',
-        text: 'I think that the rate of the crypt will now fluctuate at the same level. Maybe around 20k. The time for halving has not yet come and will not come in the coming years…',
-    },
-]
 
 export const Subscriptions = () => {
-
-    const [isViewItems, setViewItems] = useState(subs)
+    const {id} = useAppSelector(state => state.userReducer)
+    const [isPage, setPage] = useState(1)
+    const {data: subscriptionsData} = userAPI.useFetchGetSubscriptionsQuery({id: id, page: isPage})
 
     return (
         <div className={styles.subscriptionsBlock}>
@@ -37,15 +17,8 @@ export const Subscriptions = () => {
                 <InputFind/>
             </div>
             <div className={styles.subscriptions}>
-                {isViewItems.map((item, index) =>
-                    <div key={index}>
-                        {item.type === 'project'
-                            ?
-                            <ProjectSub/>
-                            :
-                            <UserSub/>
-                        }
-                    </div>
+                {subscriptionsData && subscriptionsData.value.map((dataSub) =>
+                    <UserSub dataSub={dataSub} key={dataSub.id}/>
                 )}
             </div>
         </div>

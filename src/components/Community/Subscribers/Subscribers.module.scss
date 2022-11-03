@@ -1,6 +1,16 @@
+@import "src/styles/vars";
+
 .subscribersBlock {
   margin-top: 32px;
   width: 100%;
+}
+
+.subscriberFind {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $Gray200;
 }
 
 .subscribers {
