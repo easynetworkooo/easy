@@ -34,7 +34,7 @@
   overflow-y: scroll;
   display: flex;
   gap: 8px;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .message {

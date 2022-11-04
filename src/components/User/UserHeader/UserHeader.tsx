@@ -10,6 +10,7 @@ import { MESSAGES } from "../../../constants/nameRoutesConsts";
 import { userAPI } from "../../../services/UserService";
 import { IUserValue } from "../../../models/IUser";
 import { useAppSelector } from "../../../hooks/redux";
+import { serverURL } from "../../../constants/serverURL";
 
 
 const initialUserData: IUserValue = {
@@ -73,7 +74,7 @@ export const UserHeader = () => {
         <div className={styles.headerBlock}>
             <div className={styles.avatarBlock}>
                 <ButtonBack/>
-                <img src={isUserData.img ? isUserData.img : defaultAvatar} className={styles.avatar}
+                <img src={isUserData.img ? `${serverURL}${isUserData.img}` : defaultAvatar} className={styles.avatar}
                      alt="userProfile"/>
             </div>
             <div className={styles.actionsBlock}>

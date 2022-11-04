@@ -11,12 +11,10 @@ const store = setupStore()
 
 export const AppProvider: FC<AppProviderProps> = ({children}) => {
     return (
-        <React.StrictMode>
-            <Provider store={store}>
-                <BrowserRouter>
-                    {children}
-                </BrowserRouter>
-            </Provider>
-        </React.StrictMode>
+        <Provider store={store}>
+            <BrowserRouter>
+                {children}
+            </BrowserRouter>
+        </Provider>
     );
 };

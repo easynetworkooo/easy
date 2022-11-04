@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IUserProfile } from "../models/IUserProfile";
 import { IUser, IUserValue } from "../models/IUser";
+import { IDialog } from "../models/IDialog";
+import { serverURL } from "../constants/serverURL";
 
 
 export const userAPI = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://easy-micro.ru',
+        baseUrl: serverURL,
         prepareHeaders: (headers) => {
             if (localStorage.getItem('auth')) {
                 headers.set("Authorization", `${localStorage.getItem('auth')}`)
@@ -22,6 +24,13 @@ export const userAPI = createApi({
             query: () => ({
                 url: '/getProfile',
                 method: 'GET'
+            })
+        }),
+        setMainAvatar: build.mutation<any, any>({
+            query: (avatarImage) => ({
+                url: '/setMainPhoto',
+                method: 'POST',
+                body: avatarImage
             })
         }),
         fetchGetUser: build.query<IUser, string>({
@@ -71,6 +80,20 @@ export const userAPI = createApi({
                 body: subscribeToUserId
             }),
             invalidatesTags: ['user']
+        }),
+        fetchGetDialogs: build.query<IDialog, { page: number }>({
+            query: (dialogsCredentials) => ({
+                url: '/getDialogs',
+                method: 'POST',
+                body: dialogsCredentials
+            }),
+        }),
+        fetchGetMessages: build.mutation<any, {id: number, page: number}>({
+            query: (messagesCredentials) => ({
+                url: '/getMessages',
+                method: 'POST',
+                body: messagesCredentials
+            }),
         }),
     })
 })

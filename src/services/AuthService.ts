@@ -2,12 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IRegistration, IRegistrationCredentials } from "../models/IRegistration";
 import { ILogin, ILoginCredentials } from "../models/ILogin";
 import { IFinishRegisterCredentials } from "../models/IFinishRegister";
+import { serverURL } from "../constants/serverURL";
 
 
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://easy-micro.ru',
+        baseUrl: serverURL,
         prepareHeaders: (headers) => {
             if (localStorage.getItem('auth')) {
                 headers.set("Authorization", `${localStorage.getItem('auth')}`)

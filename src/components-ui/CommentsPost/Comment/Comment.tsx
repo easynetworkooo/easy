@@ -1,51 +1,61 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './Comment.module.scss'
-import avatar from '../../../assets/UI/AvatarProject.png'
+import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
 import likeActive from "../../../assets/UI/LikesActive.svg";
 import like from "../../../assets/UI/Likes.svg";
 import { IconElement } from "../../IconElement/IconElement";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
+import { IComment } from "../../../models/IComment";
+import { postAPI } from "../../../services/PostService";
+import { serverURL } from "../../../constants/serverURL";
 
-export const Comment = () => {
+export interface CommentProps {
+    comment: IComment
+    fetchPostCommentsHandler: () => void
+}
+
+export const Comment:FC<CommentProps> = ({comment, fetchPostCommentsHandler}) => {
 
     const navigate = useNavigate()
+    const [setLikeToComment] = postAPI.useSetLikeToCommentMutation()
+    const [removeLikeToComment] = postAPI.useRemoveLikeToCommentMutation()
+    const [isLiked, setLiked] = useState<boolean>(comment.liked)
 
-    const [isLiked, setLiked] = useState(false)
-    const [isCountLikes, setCountLikes] = useState(2)
-
-    const setLikedHandle = () => {
+    const setLikedHandle = async () => {
         if (isLiked) {
-            setCountLikes(isCountLikes - 1)
+            await removeLikeToComment({commentid: comment.id})
+            await fetchPostCommentsHandler()
         } else {
-            setCountLikes(isCountLikes + 1)
+            await setLikeToComment({commentid: comment.id})
+            await fetchPostCommentsHandler()
         }
         setLiked(!isLiked)
     }
 
     return (
         <div className={styles.commentBlock}>
-            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/st.koryk`)}>
+            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.id}`)}>
                 <div className={styles.avatar}>
-                    <img src={avatar} alt="commentImage"/>
+                    <img src={comment.owner.img ? `${serverURL}${comment.owner.img}` : defaultAvatar} alt="commentImage"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <span className={styles.name}>Robert Fox</span>
-                    <span className={styles.timeCreated}>3 minutes ago</span>
+                    <span className={styles.name}>{comment.owner.name}</span>
+                    <span className={styles.timeCreated}>{comment.date}</span>
                 </div>
             </div>
             <div className={styles.commentText}>
-                <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
+                <p>{comment.text}</p>
             </div>
             <div className={styles.actionComment}>
                 {
                     isLiked ?
                         <div onClick={setLikedHandle}>
-                            <IconElement image={likeActive} count={isCountLikes} type="normal"/>
+                            <IconElement image={likeActive} count={comment.likes} type="normal"/>
                         </div>
                         :
                         <div onClick={setLikedHandle}>
-                            <IconElement image={like} count={isCountLikes} type="normal"/>
+                            <IconElement image={like} count={comment.likes} type="normal"/>
                         </div>
 
                 }

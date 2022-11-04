@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Subscribers.module.scss'
 import { InputFind, UserSub } from "../../../components-ui";
 import { userAPI } from "../../../services/UserService";
@@ -6,8 +6,7 @@ import { useAppSelector } from "../../../hooks/redux";
 
 export const Subscribers = () => {
     const {id} = useAppSelector(state => state.userReducer)
-    const [isPage, setPage] = useState(1)
-    const {data: subscribersData} = userAPI.useFetchGetSubscribersQuery({id: id, page: isPage})
+    const {data: subscribersData} = userAPI.useFetchGetSubscribersQuery({id: id, page: 1})
 
 
 
@@ -18,9 +17,8 @@ export const Subscribers = () => {
             </div>
             <div className={styles.subscribers}>
                 {subscribersData && subscribersData.value.map((dataSub) =>
-                    <UserSub dataSub={dataSub}/>
-                )
-                }
+                    <UserSub dataSub={dataSub} key={dataSub.id}/>
+                )}
             </div>
         </div>
     );

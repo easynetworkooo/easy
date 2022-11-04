@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from "./UserPostContent.module.scss";
 import { IconElement } from "../../IconElement/IconElement";
 import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
@@ -11,17 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IPost } from "../../../models/IPost";
 import { postAPI } from "../../../services/PostService";
+import { serverURL } from "../../../constants/serverURL";
 
 export interface UserPostContentProps {
     userPost: IPost
-    setActiveModal: (boolean: boolean) => void
+    setActiveModalComments: (active: boolean) => void
     isLiked: boolean,
     setLiked: (liked: boolean) => void
     isCountLikes: number
     setCountLikes: (countLikes: number) => void
 }
 
-export const UserPostContent:FC<UserPostContentProps> = ({setActiveModal, userPost, isLiked, setLiked, isCountLikes, setCountLikes}) => {
+export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments, userPost, isLiked, setLiked, isCountLikes, setCountLikes}) => {
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
@@ -46,7 +47,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModal, userPo
         <div className={styles.post}>
             <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${userPost.owner.id}`)}>
                 <div className={styles.avatarPostCreator}>
-                    <img src={userPost.owner.img ? userPost.owner.img : defaultAvatar} alt="postCreator"/>
+                    <img src={userPost.owner.img ? `${serverURL}${userPost.owner.img}` : defaultAvatar} alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
                     <span className={styles.name}>{userPost.owner.name}</span>
@@ -68,7 +69,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModal, userPo
                         </div>
 
                 }
-                <IconElement image={comments} count={userPost.comments} type="normal" onClick={() => setActiveModal(true)}/>
+                <IconElement image={comments} count={userPost.comments} type="normal" onClick={() => setActiveModalComments(false)}/>
                 <IconElement image={reposts} count={userPost.reposts} type="normal"/>
                 <IconElement image={share}/>
             </div>
