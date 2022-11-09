@@ -1,57 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './PeopleAndProjects.module.scss'
-import { ButtonsSorter, InputFind, ProjectPost, UserPost } from "../../components-ui";
+import { PostLoadingSkeleton, ProjectPost, UserPost } from "../../components-ui";
 import avatarProject from '../../assets/UI/AvatarProject.png'
 import { postAPI } from "../../services/PostService";
 import { IPost } from "../../models/IPost";
 
-const usersPosts = [
-    {
-        type: 'project',
-        id: 27,
-        text: "ggfhgf",
-        owner: {
-            id: 14,
-            email: "test",
-            name: "342",
-            img: null
-        },
-        date: "2022-11-01 20:25:12",
-        likes: null,
-        comments: null,
-        reposts: null
-    },
-    {
-        id: 26,
-        type: 'user',
-        text: "ggfhgf",
-        owner: {
-            id: 14,
-            email: "test",
-            name: "342",
-            img: null
-        },
-        date: "2022-11-01 20:25:12",
-        likes: null,
-        comments: null,
-        reposts: null
-    },
-    {
-        id: 27,
-        type: 'user',
-        text: "ggfhgf",
-        owner: {
-            id: 14,
-            email: "test",
-            name: "342",
-            img: null
-        },
-        date: "2022-11-01 20:25:12",
-        likes: null,
-        comments: null,
-        reposts: null
-    },
-]
 
 export const PeopleAndProject = () => {
 
@@ -66,7 +19,12 @@ export const PeopleAndProject = () => {
 
 
     if (usersPostLoading) {
-        return <div>Skeleton</div>
+        return (
+            <>
+                <PostLoadingSkeleton/>
+                <PostLoadingSkeleton/>
+            </>
+        )
     }
 
     return (

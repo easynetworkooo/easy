@@ -5,6 +5,7 @@ import { InputSend } from "../../components-ui";
 import { io } from "socket.io-client";
 import { userAPI } from "../../services/UserService";
 import { useAppSelector } from "../../hooks/redux";
+import { serverURL } from "../../constants/serverURL";
 
 
 export const Messages = () => {
@@ -22,7 +23,7 @@ export const Messages = () => {
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
 
     useEffect(() => {
-        socket.current = io("http://easy-micro.ru", {
+        socket.current = io(serverURL, {
             extraHeaders: {
                 "Authorization": `${localStorage.getItem('auth')}`
             }
@@ -30,9 +31,7 @@ export const Messages = () => {
 
         socket.current.on('message', (data: any) => {
             console.log(data)
-            if (data?.message !== undefined) {
-                setMessagesData(prevState => [data.value, ...prevState])
-            }
+            setMessagesData(prevState => [data.value, ...prevState])
         })
     }, [])
 

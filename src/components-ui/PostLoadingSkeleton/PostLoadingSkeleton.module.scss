@@ -1,0 +1,58 @@
+@import "src/styles/vars";
+
+.postSkeleton {
+  width: 684px;
+  padding: 24px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  gap: 16px;
+}
+
+.informationPostBlockSkeleton {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $Gray200;
+}
+
+.avatarPostCreatorSkeleton {
+  width: 56px;
+  height: 56px;
+}
+
+.nameBlockSkeleton {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: column;
+  height: 50px;
+  width: 200px;
+  gap: 10px;
+}
+
+.nameSkeleton {
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.timePostedSkeleton {
+  font-size: 12px;
+  line-height: 15px;
+  color: $HelperGray;
+}
+
+.textPostBlockSkeleton {
+  p {
+    white-space: pre-line;
+    line-height: 17px;
+  }
+}
+
+.iconsPostBlockSkeleton {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 36px;
+}

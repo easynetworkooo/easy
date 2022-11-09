@@ -1,1 +1,1 @@
-export const serverURL = 'http://easy-micro.ru/'
+export const serverURL = 'https://easy-micro.ru/'

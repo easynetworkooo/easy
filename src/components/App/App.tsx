@@ -28,6 +28,7 @@ export const App: FC = () => {
                         dispatch(loginReducer({isAuth: true, continueAuth: isContinueAuth}))
                         dispatch(setUserReducer({...dataUser.data.value}))
                     } else {
+                        localStorage.removeItem('auth')
                         console.log(isAuthUser.error)
                     }
                 } catch (e) {
@@ -44,7 +45,7 @@ export const App: FC = () => {
         checkAuthorizationCallback().then(() => setLoadingAuth(false))
     }, [checkAuthorizationCallback])
 
-    if (isLoadingAuth) return <div></div>
+    if (isLoadingAuth) return <></>
 
     return (
         <AppContainer>

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styles from './MyBlog.module.scss'
-import { InputSend, UserPost } from "../../components-ui";
+import { InputSend, PostLoadingSkeleton, UserPost } from "../../components-ui";
 import { postAPI } from "../../services/PostService";
 import { useAppSelector } from "../../hooks/redux";
-
 
 
 export const MyBlog = () => {
@@ -15,7 +14,7 @@ export const MyBlog = () => {
     const [isSendValue, setSendValue] = useState<string>('')
 
     const sendHandler = async () => {
-        const dataCreatePost : any = await createBlogPost({text: isSendValue})
+        const dataCreatePost: any = await createBlogPost({text: isSendValue})
         if (dataCreatePost.data.status === 200) {
             setSendValue('')
         } else {
@@ -24,7 +23,12 @@ export const MyBlog = () => {
     }
 
     if (isLoadingUserPosts) {
-        return <div>Skeleton</div>
+        return (
+            <>
+                <PostLoadingSkeleton/>
+                <PostLoadingSkeleton/>
+            </>
+        )
     }
 
     return (
@@ -37,7 +41,8 @@ export const MyBlog = () => {
                 )}
             </div>
             <div className={styles.sendBlock}>
-                <InputSend setSubtractTextarea={setSubtractTextarea} sendHandler={sendHandler} value={isSendValue} onChange={e => setSendValue(e.target.value)}/>
+                <InputSend setSubtractTextarea={setSubtractTextarea} sendHandler={sendHandler} value={isSendValue}
+                           onChange={e => setSendValue(e.target.value)}/>
             </div>
         </div>
     );
