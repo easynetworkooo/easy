@@ -21,7 +21,7 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
     const [isName, setName] = useState('')
     const [isCountry, setCountry] = useState('')
     const [isCity, setCity] = useState('')
-    const [isCodeCountry, setCodeCountry] = useState('')
+    const [isCodeCountry, setCodeCountry] = useState('EN')
 
     const {data: countries} = appAPI.useFetchAllCountriesQuery('')
     const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry)

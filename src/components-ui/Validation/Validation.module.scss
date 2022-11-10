@@ -1,0 +1,17 @@
+@import "src/styles/vars";
+
+.validationsBlock {
+  margin-left: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.validationMessage {
+  font-size: 12px;
+  color: $Error;
+}
+
+.none {
+  display: none;
+}

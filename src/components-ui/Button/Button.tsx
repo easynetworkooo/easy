@@ -4,7 +4,7 @@ import styles from './Button.module.scss'
 export interface ButtonProps {
     children: React.ReactNode,
     onClick?: () => void
-    buttonColor?: string
+    buttonColor?: string,
 }
 
 export const Button: FC<ButtonProps> = ({children, onClick, buttonColor}) => {
