@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './UserHeader.module.scss'
 import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
 import { Button, ButtonBack, IconElement } from "../../../components-ui";
 import likes from "../../../assets/Profile/Like.svg";
 import reposts from "../../../assets/Profile/Repost.svg";
 import views from "../../../assets/Profile/View.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MESSAGES } from "../../../constants/nameRoutesConsts";
 import { userAPI } from "../../../services/UserService";
 import { IUserValue } from "../../../models/IUser";
@@ -13,42 +13,24 @@ import { useAppSelector } from "../../../hooks/redux";
 import { serverURL } from "../../../constants/serverURL";
 
 
-const initialUserData: IUserValue = {
-    name: '',
-    city: '',
-    country: '',
-    id: 1,
-    img: '',
-    interests: '',
-    email: '',
-    likes: null,
-    reposts: null,
-    regdate: '',
-    subscribeStatus: false,
-    subscriptions: 0,
-    subscribers: 0,
-    views: null
+export interface UserHeaderProps {
+    isUserData: IUserValue
 }
 
-export const UserHeader = () => {
+export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
 
     const navigate = useNavigate()
-    const {userId} = useParams()
     const {id} = useAppSelector(state => state.userReducer)
 
-    const {data: userData, isLoading: isUserDataLoading} = userAPI.useFetchGetUserQuery(`${userId}`)
     const [subscribeToUser] = userAPI.useSubscribeToUserMutation()
     const [unSubscribeToUser] = userAPI.useUnSubscribeToUserMutation()
 
     const [isSubscribe, setSubscribe] = useState<boolean>(false)
-    const [isUserData, setUserData] = useState<IUserValue>(initialUserData)
 
     useEffect(() => {
-        if (isUserDataLoading === false && userData) {
-            setSubscribe(userData.value.subscribeStatus)
-            setUserData(userData.value)
-        }
-    }, [isUserDataLoading, userData])
+        setSubscribe(isUserData.subscribeStatus)
+        // eslint-disable-next-line
+    }, [])
 
     const subscribeHandle = async () => {
         await subscribeToUser({id: isUserData.id}).then((data: any) => {
@@ -66,8 +48,16 @@ export const UserHeader = () => {
         })
     }
 
-    if (isUserDataLoading) {
-        return <div>Skeleton</div>
+    const navigateToSendMessages = () => {
+        navigate(`${MESSAGES}`, {
+            state: {
+                dialog: {
+                    opponentId: isUserData.id,
+                    name: isUserData.name,
+                    img: isUserData.img,
+                }
+            }
+        })
     }
 
     return (
@@ -86,7 +76,7 @@ export const UserHeader = () => {
                     <span>{isUserData.subscriptions} Subscriptions</span>
                 </div>
                 {
-                    userId !== id.toString() &&
+                    isUserData.id !== id &&
                     <div className={styles.actionsButtonBlock}>
                         <div className={styles.actionBlock}>
                             {isSubscribe
@@ -101,7 +91,7 @@ export const UserHeader = () => {
                             }
                         </div>
                         <div className={styles.actionBlock}>
-                            <Button buttonColor={'clearButton'} onClick={() => navigate(MESSAGES)}>
+                            <Button buttonColor={'clearButton'} onClick={navigateToSendMessages}>
                                 <span className={styles.btnText}>Message</span>
                             </Button>
                         </div>

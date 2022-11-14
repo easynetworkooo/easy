@@ -45,7 +45,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
 
     return (
         <div className={styles.post}>
-            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${userPost.owner.id}`)}>
+            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${userPost.owner.name}`)}>
                 <div className={styles.avatarPostCreator}>
                     <img src={userPost.owner.img ? `${serverURL}${userPost.owner.img}` : defaultAvatar} alt="postCreator"/>
                 </div>

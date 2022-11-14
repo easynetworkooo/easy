@@ -15,7 +15,7 @@ export const UserSub:FC<UserSubProps> = ({dataSub}) => {
     const navigate = useNavigate()
 
     return (
-        <div className={styles.userSubBlock} onClick={() => navigate(`${USERS}/${dataSub.id}`)}>
+        <div className={styles.userSubBlock} onClick={() => navigate(`${USERS}/${dataSub.name}`)}>
             <div className={styles.avatar}>
                 <img src={dataSub.img ? `${serverURL}${dataSub.img}` : defaultAvatar} alt="avatar"/>
             </div>

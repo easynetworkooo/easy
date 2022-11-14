@@ -27,7 +27,7 @@ export const routes = [
     {path: COMMUNITY, Element: CommunityPage},
     {path: WALLET, Element: WalletPage},
     {path: CREATE_PROJECT, Element: CreateProjectPage},
-    {path: USERS + '/:userId', Element: UserPage},
+    {path: USERS + '/:nickname', Element: UserPage},
     {path: PROJECTS + '/:projectId', Element: ProjectPage},
 ]
 

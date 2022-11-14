@@ -35,7 +35,7 @@ export const Comment:FC<CommentProps> = ({comment, fetchPostCommentsHandler}) =>
 
     return (
         <div className={styles.commentBlock}>
-            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.id}`)}>
+            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.name}`)}>
                 <div className={styles.avatar}>
                     <img src={comment.owner.img ? `${serverURL}${comment.owner.img}` : defaultAvatar} alt="commentImage"/>
                 </div>

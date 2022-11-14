@@ -6,7 +6,7 @@ import { postAPI } from "../../../services/PostService";
 
 export const ProjectBlog = () => {
 
-    const {data: userPosts} = postAPI.useFetchAllUserPostsQuery('1')
+    const {data: userPosts} = postAPI.useFetchAllUserPostsQuery({userId: 1, page: 1})
 
     return (
         <div className={styles.projectPosts}>

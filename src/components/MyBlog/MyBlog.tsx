@@ -8,7 +8,7 @@ import { useAppSelector } from "../../hooks/redux";
 export const MyBlog = () => {
     const {id} = useAppSelector(state => state.userReducer)
     const [createBlogPost] = postAPI.useCreateBlogPostMutation()
-    const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery(id.toString())
+    const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery({userId: id, page: 1})
 
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
     const [isSendValue, setSendValue] = useState<string>('')

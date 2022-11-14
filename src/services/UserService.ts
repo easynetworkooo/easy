@@ -43,6 +43,16 @@ export const userAPI = createApi({
             }),
             providesTags: ['user']
         }),
+        fetchGetUserByNickname: build.query<IUser, string>({
+            query: (nickname: string) => ({
+                url: '/getUserByNickname',
+                method: 'GET',
+                params: {
+                    nickname: nickname
+                }
+            }),
+            providesTags: ['user']
+        }),
         fetchGetSubscribers: build.query<{status: number, value: IUserValue[]}, {id: number, page: number}>({
             query: ({id, page}) => ({
                 url: '/getSubscribers',

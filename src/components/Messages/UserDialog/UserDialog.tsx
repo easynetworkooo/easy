@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import styles from './UserMessage.module.scss'
+import styles from './UserDialog.module.scss'
 import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IDialogValue } from "../../../models/IDialog";
+import { serverURL } from "../../../constants/serverURL";
 
 export interface UserMessageProps {
     dialogData: IDialogValue
@@ -12,7 +13,7 @@ export interface UserMessageProps {
     openDialogHandler: (index: number, id: number) => void
 }
 
-export const UserMessage: FC<UserMessageProps> = ({dialogData, index, isOpenMessages, openDialogHandler}) => {
+export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessages, openDialogHandler}) => {
 
     const navigate = useNavigate()
 
@@ -27,7 +28,7 @@ export const UserMessage: FC<UserMessageProps> = ({dialogData, index, isOpenMess
             className={index === isOpenMessages ? `${styles.userMessageBlock} ${styles.active}` : styles.userMessageBlock}
             onClick={() => openDialogHandler(index, dialogData.opponentId)}>
             <div className={styles.avatar}>
-                <img src={dialogData.img ? dialogData.img : defaultAvatar} alt="avatar"
+                <img src={dialogData.img ? `${serverURL}${dialogData.img}` : defaultAvatar} alt="avatar"
                      onClick={(e) => navigateToUser(e)}/>
             </div>
             <div className={styles.shortLastMessageBlock}>

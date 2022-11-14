@@ -1,19 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Messages.module.scss'
-import { UserMessage } from "./UserMessage/UserMessage";
+import { UserDialog } from "./UserDialog/UserDialog";
 import { InputSend } from "../../components-ui";
 import { io } from "socket.io-client";
 import { userAPI } from "../../services/UserService";
 import { useAppSelector } from "../../hooks/redux";
 import { serverURL } from "../../constants/serverURL";
+import { useLocation } from "react-router-dom";
 
 
 export const Messages = () => {
 
+    const location: any = useLocation()
+
     const [isMessageBlockHeight, setMessageBlockHeight] = useState(0)
     const [isOpenMessages, setOpenMessages] = useState<number | null>(null)
     const [isSendValueMessage, setSendValueMessage] = useState('')
-    const [isUserIdToSend, setUserIdToSend] = useState(0)
+    const [isUserIdToSend, setUserIdToSend] = useState(1)
+    const [isDialogData, setDialogsData] = useState<any>([])
     const [isMessagesData, setMessagesData] = useState<any[]>([])
 
     const socket = useRef<any>()
@@ -21,6 +25,30 @@ export const Messages = () => {
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
     const {data: dialogsData} = userAPI.useFetchGetDialogsQuery({page: 1})
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
+
+    useEffect(() => {
+        if (dialogsData) {
+            setDialogsData(dialogsData.value)
+        }
+    }, [dialogsData])
+
+    useEffect(() => {
+        if (dialogsData && location.state !== null) {
+            setUserIdToSend(location.state.dialog.opponentId)
+            if (dialogsData.value.find(data => data.opponentId === location.state.dialog.opponentId)) {
+                setOpenMessages(dialogsData.value.findIndex(data => data.opponentId === location.state.dialog.opponentId))
+            } else {
+                setOpenMessages(0)
+                setDialogsData((prevState: any) => [{
+                    opponentId: location.state.dialog.opponentId,
+                    name: location.state.dialog.name,
+                    lastMessage: '',
+                    img: location.state.dialog.img
+                }, ...prevState])
+            }
+        }
+        // eslint-disable-next-line
+    }, [dialogsData])
 
     useEffect(() => {
         socket.current = io(serverURL, {
@@ -57,9 +85,9 @@ export const Messages = () => {
         <div className={styles.messagesContainer}>
             <div className={styles.userMessagesBlock}>
                 <div className={styles.userMessages}>
-                    {dialogsData && dialogsData.value.map((item, index) =>
-                        <UserMessage key={index} dialogData={item} index={index}
-                                     isOpenMessages={isOpenMessages} openDialogHandler={openDialogHandle}/>
+                    {isDialogData && isDialogData.map((item: any, index: number) =>
+                        <UserDialog key={index} dialogData={item} index={index}
+                                    isOpenMessages={isOpenMessages} openDialogHandler={openDialogHandle}/>
                     )}
                 </div>
             </div>

@@ -8,7 +8,7 @@ import { IPost } from "../../models/IPost";
 
 export const Subscriptions = () => {
 
-    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery('1')
+    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({userId: 1, page: 1})
     const [isViewItems, setViewItems] = useState<IPost[]>([])
 
     useEffect(() => {

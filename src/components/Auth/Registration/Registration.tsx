@@ -20,27 +20,24 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
 
     const isEmail = useInput('', {isEmail: true})
     const isPassword = useInput('', {isEmpty: true, minLength: 6})
-    const isRepeatPassword = useInput('', {isMatch: isPassword.value})
+    const isRepeatPassword = useInput('', {isEmpty: true, isMatch: isPassword.value})
 
     const registrationHandler = async () => {
         if (isEmail.isInputErrorValidation || isPassword.isInputErrorValidation || isRepeatPassword.isInputErrorValidation) {
             isEmail.setDirty(true)
             isPassword.setDirty(true)
+            isRepeatPassword.setDirty(true)
             return
         }
-        if (isPassword.value === isRepeatPassword.value) {
-            const registrationResponse: any = await registration({email: isEmail.value, password: isPassword.value})
-            try {
-                if (registrationResponse.data.status === 200) {
-                    localStorage.setItem('auth', registrationResponse.data.auth)
-                    const dataProfile: any = await fetchUserProfile('')
-                    navigateHandler(true, dataProfile.data.value)
-                }
-            } catch (e) {
-                console.log(registrationResponse.error)
+        const registrationResponse: any = await registration({email: isEmail.value, password: isPassword.value})
+        try {
+            if (registrationResponse.data.status === 200) {
+                localStorage.setItem('auth', registrationResponse.data.auth)
+                const dataProfile: any = await fetchUserProfile('')
+                navigateHandler(true, dataProfile.data.value)
             }
-        } else {
-            console.log('Password dont match')
+        } catch (e) {
+            console.log(registrationResponse.error)
         }
 
     }

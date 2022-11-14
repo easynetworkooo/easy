@@ -21,10 +21,10 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
     const [isName, setName] = useState('')
     const [isCountry, setCountry] = useState('')
     const [isCity, setCity] = useState('')
-    const [isCodeCountry, setCodeCountry] = useState('EN')
+    const [isCodeCountry, setCodeCountry] = useState('')
 
     const {data: countries} = appAPI.useFetchAllCountriesQuery('')
-    const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry)
+    const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry, {skip: isCodeCountry === ''})
 
     const setCountries = () => {
         const countriesNameList: string[] = []
