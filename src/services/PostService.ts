@@ -72,6 +72,14 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['Post']
         }),
+        setRepostPost: build.mutation<any, {id: number}>({
+            query: (commentCredentials) => ({
+                url: '/repost',
+                method: 'POST',
+                body: commentCredentials
+            }),
+            invalidatesTags: ['Post']
+        }),
         fetchAllUserPosts: build.query<IAllUserPosts, {userId: number, page: number}>({
             query: ({userId, page}) => ({
                 url: '/getAllBlogPosts',

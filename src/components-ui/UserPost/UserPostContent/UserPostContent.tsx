@@ -26,6 +26,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
+    const [setRepostPost] = postAPI.useSetRepostPostMutation()
 
     const navigate = useNavigate()
 
@@ -41,6 +42,10 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
             })
         }
         setLiked(!isLiked)
+    }
+
+    const setRepostPostHandler = async () => {
+        await setRepostPost({id: userPost.id})
     }
 
     return (
@@ -70,7 +75,7 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
 
                 }
                 <IconElement image={comments} count={userPost.comments} type="normal" onClick={() => setActiveModalComments(false)}/>
-                <IconElement image={reposts} count={userPost.reposts} type="normal"/>
+                <IconElement image={reposts} count={userPost.reposts} type="normal" onClick={setRepostPostHandler}/>
                 <IconElement image={share}/>
             </div>
         </div>

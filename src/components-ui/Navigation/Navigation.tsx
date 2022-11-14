@@ -18,7 +18,7 @@ export const Navigation = () => {
     return (
         <nav className={styles.navigationBlock}>
             <div className={styles.logoNavigationBlock}>
-                <img src={navigationLogo} alt="logo"/>
+                <NavLink to={PEOPLE_AND_PROJECTS}><img src={navigationLogo} alt="logo"/></NavLink>
             </div>
             <div className={styles.itemsNavigationBlock}>
                 <div className={styles.itemNavigation}>

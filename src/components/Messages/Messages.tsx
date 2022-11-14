@@ -8,7 +8,6 @@ import { useAppSelector } from "../../hooks/redux";
 import { serverURL } from "../../constants/serverURL";
 import { useLocation } from "react-router-dom";
 
-
 export const Messages = () => {
 
     const location: any = useLocation()
@@ -16,7 +15,7 @@ export const Messages = () => {
     const [isMessageBlockHeight, setMessageBlockHeight] = useState(0)
     const [isOpenMessages, setOpenMessages] = useState<number | null>(null)
     const [isSendValueMessage, setSendValueMessage] = useState('')
-    const [isUserIdToSend, setUserIdToSend] = useState(1)
+    const [isUserIdToSend, setUserIdToSend] = useState(0)
     const [isDialogData, setDialogsData] = useState<any>([])
     const [isMessagesData, setMessagesData] = useState<any[]>([])
 
@@ -37,6 +36,9 @@ export const Messages = () => {
             setUserIdToSend(location.state.dialog.opponentId)
             if (dialogsData.value.find(data => data.opponentId === location.state.dialog.opponentId)) {
                 setOpenMessages(dialogsData.value.findIndex(data => data.opponentId === location.state.dialog.opponentId))
+                fetchGetMessages({id: location.state.dialog.opponentId, page: 1}).then((data: any) => {
+                    setMessagesData(data.data.value)
+                })
             } else {
                 setOpenMessages(0)
                 setDialogsData((prevState: any) => [{
@@ -60,12 +62,15 @@ export const Messages = () => {
         socket.current.on('message', (data: any) => {
             console.log(data)
             setMessagesData(prevState => [data.value, ...prevState])
+
         })
     }, [])
 
     const sendMessageHandler = () => {
-        socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
-        setSendValueMessage('')
+        if (isSendValueMessage !== '') {
+            socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
+            setSendValueMessage('')
+        }
     }
 
     const openDialogHandle = async (index: number, id: number) => {
@@ -74,7 +79,7 @@ export const Messages = () => {
             const messages: any = await fetchGetMessages({id: id, page: 1})
             if (messages.data.status === 200) {
                 setMessagesData(messages.data.value)
-                setUserIdToSend(messages.data.value[0].toid)
+                setUserIdToSend(id)
             }
         } catch (e) {
             console.log(e)

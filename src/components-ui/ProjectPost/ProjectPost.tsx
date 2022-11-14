@@ -27,7 +27,7 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
                         <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={[]} fetchPostCommentsHandler={() => console.log('test')}/>
                     </div>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} onChange={e => setValueSend(e.target.value)}/>
+                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} onChange={e => setValueSend(e.target.value)} sendHandler={() => console.log('t')}/>
                     </div>
                 </div>
             </Modal>

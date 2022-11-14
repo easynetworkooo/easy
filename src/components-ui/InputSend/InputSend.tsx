@@ -8,7 +8,7 @@ export interface InputSendProps {
     setSubtractTextarea: (currentHeight: number) => void
     value: string,
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    sendHandler?: () => void
+    sendHandler: () => void
 }
 
 export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, sendHandler, onChange}) => {
@@ -17,12 +17,18 @@ export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, sendH
         setSubtractTextarea(heightTextarea)
     }
 
+    const send = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        e.preventDefault()
+        sendHandler()
+    }
+
     return (
         <div className={styles.inputSendBlock}>
             <div className={styles.textareaSendBlock}>
                 <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={'Write a message'}
                                   onHeightChange={(height) => onHeightChangeHandler(height)} value={value}
                                   onChange={event => onChange(event)}
+                                  onKeyPress={e => e.key === 'Enter' && send(e)}
                 />
             </div>
             <div className={styles.buttonSend}>

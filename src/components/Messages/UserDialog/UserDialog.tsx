@@ -19,7 +19,7 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
 
     const navigateToUser = (e: React.MouseEvent<HTMLImageElement> | React.MouseEvent<HTMLSpanElement>) => {
         e.stopPropagation()
-        navigate(`${USERS}/${dialogData.opponentId}`)
+        navigate(`${USERS}/${dialogData.name}`)
     }
 
 
