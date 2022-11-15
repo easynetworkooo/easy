@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/easy/static/css/main.ae5fec55.css",
-    "main.js": "/easy/static/js/main.adc28ed0.js",
+    "main.css": "/easy/static/css/main.b181b07f.css",
+    "main.js": "/easy/static/js/main.bcd98125.js",
     "static/media/auth-logo.png": "/easy/static/media/auth-logo.40d6f639ac8fc5d88858.png",
     "static/media/AvatarUser.png": "/easy/static/media/AvatarUser.1fae5062be8566e317b3.png",
     "static/media/InstagramLink.svg": "/easy/static/media/InstagramLink.e2749116bea461a685bd3ab3fd278ea1.svg",
@@ -41,11 +41,11 @@
     "static/media/ActiveMessages.svg": "/easy/static/media/ActiveMessages.6caece098e1eeb326d22ca73cdc780dd.svg",
     "static/media/Messages.svg": "/easy/static/media/Messages.f89c710efbe8f976848e377948ebc043.svg",
     "static/media/arrowLeft.svg": "/easy/static/media/arrowLeft.f901680e073f3d173b119b338a311b1f.svg",
-    "main.ae5fec55.css.map": "/easy/static/css/main.ae5fec55.css.map",
-    "main.adc28ed0.js.map": "/easy/static/js/main.adc28ed0.js.map"
+    "main.b181b07f.css.map": "/easy/static/css/main.b181b07f.css.map",
+    "main.bcd98125.js.map": "/easy/static/js/main.bcd98125.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae5fec55.css",
-    "static/js/main.adc28ed0.js"
+    "static/css/main.b181b07f.css",
+    "static/js/main.bcd98125.js"
   ]
 }
