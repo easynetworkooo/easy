@@ -45,6 +45,10 @@
   gap: 8px;
   border-radius: 4px;
   background-color: $LightWhite;
+  p {
+    white-space: pre-line;
+    line-height: 17px;
+  }
 }
 
 .text {

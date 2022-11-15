@@ -60,17 +60,13 @@ export const Messages = () => {
         })
 
         socket.current.on('message', (data: any) => {
-            console.log(data)
             setMessagesData(prevState => [data.value, ...prevState])
 
         })
     }, [])
 
     const sendMessageHandler = () => {
-        if (isSendValueMessage !== '') {
-            socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
-            setSendValueMessage('')
-        }
+        socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
     }
 
     const openDialogHandle = async (index: number, id: number) => {
@@ -98,17 +94,20 @@ export const Messages = () => {
             </div>
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
                 <div className={styles.messages} style={{height: `${720 - isMessageBlockHeight}px`}}>
-                    {isOpenMessages !== null && isMessagesData.map((item: any, index) =>
-                        <div
-                            className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}
-                            key={index}>
-                            <p className={styles.text}>{item.text}</p>
-                            <span className={styles.timeSend}>{item.regdate}</span>
-                        </div>
+                    {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
+                        <React.Fragment key={index}>
+                            {(item.fromid === isUserIdToSend || item.fromid === activeUserId) &&
+                                <div
+                                    className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
+                                    <p className={styles.text}>{item.text}</p>
+                                    <span className={styles.timeSend}>{item.regdate}</span>
+                                </div>
+                            }
+                        </React.Fragment>
                     )}
                 </div>
                 <InputSend setSubtractTextarea={setMessageBlockHeight} value={isSendValueMessage}
-                           onChange={e => setSendValueMessage(e.target.value)} sendHandler={sendMessageHandler}/>
+                           setValue={setSendValueMessage} sendHandler={sendMessageHandler}/>
             </div>
         </div>
     );

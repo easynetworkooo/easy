@@ -38,7 +38,7 @@ export const PeopleAndProject = () => {
             {/*    </div>*/}
             {/*</div>*/}
             <div className={styles.postsBlock}>
-                <ProjectPost icon={avatarProject} name={'Project'} text={'project test'}/>
+                {/*<ProjectPost icon={avatarProject} name={'Project'} text={'project test'}/>*/}
                 {isViewItems && isViewItems.map((item, index) =>
                     <div key={index}>
                         {item.type === 'project'

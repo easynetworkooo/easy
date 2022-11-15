@@ -41,8 +41,7 @@ export const MyBlog = () => {
                 )}
             </div>
             <div className={styles.sendBlock}>
-                <InputSend setSubtractTextarea={setSubtractTextarea} sendHandler={sendHandler} value={isSendValue}
-                           onChange={e => setSendValue(e.target.value)}/>
+                <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue} sendHandler={sendHandler} value={isSendValue}/>
             </div>
         </div>
     );

@@ -35,7 +35,7 @@ export const UserPost: FC<UserPostProps> = ({userPost}) => {
 
     const fetchPostCommentsHandler = async () => {
         try {
-            const commentResponse:any =  await fetchPostComments({postid: userPost.id, page: 1})
+            const commentResponse: any = await fetchPostComments({postid: userPost.id, page: 1})
             if (commentResponse.data.status === 200) {
                 setActiveModal(true)
                 setCommentsData(commentResponse.data.value)
@@ -54,11 +54,12 @@ export const UserPost: FC<UserPostProps> = ({userPost}) => {
                     <UserPostContent setActiveModalComments={setActiveModal} userPost={userPost} isLiked={isLiked}
                                      setLiked={setLiked} isCountLikes={isCountLikes} setCountLikes={setCountLikes}/>
                     <div className={styles.comments}>
-                        <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={isCommentsData} fetchPostCommentsHandler={fetchPostCommentsHandler}/>
+                        <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={isCommentsData}
+                                      fetchPostCommentsHandler={fetchPostCommentsHandler}/>
                     </div>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend}
-                                   onChange={e => setValueSend(e.target.value)} sendHandler={setCommentHandler}/>
+                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setValue={setValueSend}
+                                   sendHandler={setCommentHandler}/>
                     </div>
                 </div>
             </Modal>
