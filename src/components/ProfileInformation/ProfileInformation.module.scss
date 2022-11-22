@@ -16,13 +16,11 @@
 .profileAvatarBlock {
   width: 250px;
   position: relative;
+  cursor: pointer;
   img {
     border-radius: 1000px;
     width: 250px;
     height: 250px;
-  }
-  label {
-    cursor: pointer;
   }
 }
 

@@ -1,0 +1,29 @@
+@import "src/styles/vars";
+
+.repostModalContent {
+  min-width: 684px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 70px 24px 40px 24px;
+  border-top: 1px solid $Gray200;
+  padding-top: 30px;
+}
+
+.repostQuestion {
+  display: flex;
+  justify-content: center;
+  span {
+    color: $TextSecondary;
+  }
+}
+
+.buttonsModal {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}

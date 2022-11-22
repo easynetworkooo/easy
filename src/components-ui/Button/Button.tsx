@@ -14,6 +14,8 @@ export const Button: FC<ButtonProps> = ({children, onClick, buttonColor}) => {
             return `${styles.button} ${styles.clearButton}`
         } else if (buttonColor === 'grayButton') {
             return `${styles.button} ${styles.grayButton}`
+        } else if (buttonColor === 'redClearButton') {
+            return `${styles.button} ${styles.redClearButton}`
         } else {
             return styles.button
         }

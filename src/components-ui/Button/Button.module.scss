@@ -36,3 +36,12 @@
     color: $gray;
   }
 }
+
+.redClearButton {
+  background: $white;
+  padding: 10px 16px;
+  border: 1px solid $RedDanger;
+  span {
+    color: $RedDanger;
+  }
+}

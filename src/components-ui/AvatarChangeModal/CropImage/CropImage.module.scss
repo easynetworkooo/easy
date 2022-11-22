@@ -1,0 +1,33 @@
+@import "src/styles/vars";
+
+
+.header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid $Gray200;
+  span {
+    color: $TextSecondary;
+  }
+}
+
+.cropImage {
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  img {
+    height: 300px;
+    width: auto;
+  }
+  span {
+    color: $TextSecondary;
+  }
+}
+
+.buttonsBlock {
+  border-top: 1px solid $Gray200;
+  padding: 24px 50px 0 50px;
+  display: flex;
+  gap: 20px;
+}

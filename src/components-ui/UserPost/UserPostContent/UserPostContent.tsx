@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from "./UserPostContent.module.scss";
 import { IconElement } from "../../IconElement/IconElement";
 import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
@@ -12,6 +12,7 @@ import { USERS } from "../../../constants/nameRoutesConsts";
 import { IPost } from "../../../models/IPost";
 import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
+import { RepostModal } from "../../RepostModal/RepostModal";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -24,9 +25,10 @@ export interface UserPostContentProps {
 
 export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments, userPost, isLiked, setLiked, isCountLikes, setCountLikes}) => {
 
+    const [isActiveRepostModal, setActiveRepostModal] = useState(false)
+
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
-    const [setRepostPost] = postAPI.useSetRepostPostMutation()
 
     const navigate = useNavigate()
 
@@ -42,10 +44,6 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
             })
         }
         setLiked(!isLiked)
-    }
-
-    const setRepostPostHandler = async () => {
-        await setRepostPost({id: userPost.id})
     }
 
     return (
@@ -75,9 +73,10 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
 
                 }
                 <IconElement image={comments} count={userPost.comments} type="normal" onClick={() => setActiveModalComments(false)}/>
-                <IconElement image={reposts} count={userPost.reposts} type="normal" onClick={setRepostPostHandler}/>
+                <IconElement image={reposts} count={userPost.reposts} type="normal" onClick={() => setActiveRepostModal(prevState => !prevState)}/>
                 <IconElement image={share}/>
             </div>
+            <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal} postId={userPost.id}/>
         </div>
     );
 };
