@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './ProfileInformation.module.scss'
 import { AvatarChangeModal, Button, IconElement } from "../../components-ui";
 import { MenuItem } from "./MenuItem/MenuItem";
-import { AUTH, COMMUNITY, CREATE_PROJECT, MESSAGES, WALLET } from "../../constants/nameRoutesConsts";
+import { AUTH, COMMUNITY, CREATE_PROJECT, MESSAGES, MY_PROJECTS, WALLET } from "../../constants/nameRoutesConsts";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/AuthService";
 import { authSlice } from "../../store/reducers/AuthSlice";
@@ -18,6 +18,8 @@ import community from '../../assets/Profile/Community.svg'
 import activeCommunity from '../../assets/Profile/ActiveCommunity.svg'
 import wallet from '../../assets/Profile/Wallet.svg'
 import activeWallet from '../../assets/Profile/ActiveWallet.svg'
+import myProject from '../../assets/Profile/MyProjects.svg'
+import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
 import { serverURL } from "../../constants/serverURL";
 
 export const ProfileInformation = () => {
@@ -66,6 +68,7 @@ export const ProfileInformation = () => {
                 <MenuItem image={community} countNotification={2} menuText={'My Community'} to={COMMUNITY}
                           activeImage={activeCommunity}/>
                 <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
+                <MenuItem image={myProject} menuText={'My Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
             </div>
             <div className={styles.buttonCreateProject}>
                 <Button onClick={() => navigate(CREATE_PROJECT)}>

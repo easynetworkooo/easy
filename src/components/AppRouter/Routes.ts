@@ -5,7 +5,7 @@ import {
     PEOPLE_AND_PROJECTS,
     SUBSCRIPTIONS,
     WALLET,
-    PROJECTS, USERS
+    PROJECTS, USERS, MY_PROJECTS
 } from "../../constants/nameRoutesConsts";
 import {
     CommunityPage, CreateProjectPage,
@@ -15,7 +15,8 @@ import {
     SubscriptionPage,
     WalletPage,
     UserPage,
-    ProjectPage
+    ProjectPage,
+    MyProjectsPage
 } from "../../pages";
 
 
@@ -29,5 +30,6 @@ export const routes = [
     {path: CREATE_PROJECT, Element: CreateProjectPage},
     {path: USERS + '/:nickname', Element: UserPage},
     {path: PROJECTS + '/:projectId', Element: ProjectPage},
+    {path: MY_PROJECTS, Element: MyProjectsPage},
 ]
 

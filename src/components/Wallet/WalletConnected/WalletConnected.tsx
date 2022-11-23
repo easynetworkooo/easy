@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './WalletConnected.module.scss'
-import { WalletProject } from "./WalletProject/WalletProject";
+import { WalletProject } from "../../../components-ui";
 
 export const WalletConnected = () => {
 

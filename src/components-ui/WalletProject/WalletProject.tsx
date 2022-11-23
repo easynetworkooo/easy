@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styles from "./WalletProject.module.scss";
-import projectAvatar from "../../../../assets/UI/AvatarProject.png";
-import { Indicator, IndicatorStatus } from "../../../../components-ui";
+import projectAvatar from "../../assets/UI/AvatarProject.png";
+import { Indicator, IndicatorStatus } from "../../components-ui";
 import { useNavigate } from "react-router-dom";
-import { PROJECTS } from "../../../../constants/nameRoutesConsts";
+import { PROJECTS } from "../../constants/nameRoutesConsts";
 
 export interface WalletProjectProps {
     maxCount: number

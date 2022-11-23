@@ -1,0 +1,27 @@
+@import "src/styles/vars";
+
+.myProjectsBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectDontHave {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 450px;
+}
+
+.textQues {
+  color: $gray;
+}
+
+.projectsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
