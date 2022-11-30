@@ -4,8 +4,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 9px 0 9px 16px;
+  padding: 6px 10px;
   background-color: $LightWhite;
+  border: 2px solid $LightWhite;
+  &:focus-within {
+    border: 2px solid $purple;
+  }
 }
 
 .inputFindIcon {

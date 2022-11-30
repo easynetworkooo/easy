@@ -3,6 +3,8 @@ import styles from './AuthContinueFirstStep.module.scss'
 import { Button, Input, Select, Steps } from "../../../components-ui";
 import { appAPI } from "../../../services/AppService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
+import { setCities } from "../../../helpers/setCities";
+import { setCountries } from "../../../helpers/setCountries";
 
 export interface AuthContinueFirstStepProps {
     changeStep: (nextStep: number) => void,
@@ -25,22 +27,6 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
 
     const {data: countries} = appAPI.useFetchAllCountriesQuery('')
     const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry, {skip: isCodeCountry === ''})
-
-    const setCountries = () => {
-        const countriesNameList: string[] = []
-        if (countries) {
-            countries.value.countries.forEach(({name}) => countriesNameList.push(name))
-        }
-        return countriesNameList
-    }
-
-    const setCities = () => {
-        const citiesNameList: string[] = []
-        if (cities) {
-            cities.value.forEach(({name}) => citiesNameList.push(name))
-        }
-        return citiesNameList
-    }
 
     const changeStepHandler = () => {
         if (isName !== '' && isCountry !== '' && isCity !== '') {
@@ -66,12 +52,12 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                        onChange={e => setName(e.target.value)}/>
             </div>
             <div className={styles.inputBlock}>
-                <Select options={setCountries()}
+                <Select options={countries ? setCountries(countries.value.countries) : []}
                         isActiveSelect={isCountry} setActiveSelect={setCountry}
                         placeholder={'Choose country'}/>
             </div>
             <div className={styles.inputBlock}>
-                <Select options={setCities()} placeholder={'Choose city'}
+                <Select options={cities ? setCities(cities.value) : []} placeholder={'Choose city'}
                         isActiveSelect={isCity} setActiveSelect={setCity} disabled={isCountry === ''}
                 />
             </div>
