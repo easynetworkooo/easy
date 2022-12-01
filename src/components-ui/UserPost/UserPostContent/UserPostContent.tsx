@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from "./UserPostContent.module.scss";
 import { IconElement } from "../../IconElement/IconElement";
 import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
@@ -9,10 +9,11 @@ import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
-import { IPost } from "../../../models/IPost";
+import { IOwner, IPost } from "../../../models/IPost";
 import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
 import { RepostModal } from "../../RepostModal/RepostModal";
+import { useAppSelector } from "../../../hooks/redux";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -23,9 +24,26 @@ export interface UserPostContentProps {
     setCountLikes: (countLikes: number) => void
 }
 
-export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments, userPost, isLiked, setLiked, isCountLikes, setCountLikes}) => {
+const initialOwner: IOwner = {
+    id: 0,
+    email: "",
+    name: "",
+    img: null
+}
+
+export const UserPostContent: FC<UserPostContentProps> = ({
+                                                              setActiveModalComments,
+                                                              userPost,
+                                                              isLiked,
+                                                              setLiked,
+                                                              isCountLikes,
+                                                              setCountLikes
+                                                          }) => {
+
+    const activeUserId = useAppSelector(state => state.userReducer.id)
 
     const [isActiveRepostModal, setActiveRepostModal] = useState(false)
+    const [isOwner, setOwner] = useState<IOwner>(initialOwner)
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
@@ -46,14 +64,24 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
         setLiked(!isLiked)
     }
 
+    useEffect(() => {
+        if (userPost.originalowner === 0) {
+            setOwner(userPost.owner)
+        } else {
+            if (typeof userPost.originalowner !== 'number')  setOwner(userPost.originalowner)
+        }
+    }, [userPost.originalowner, userPost.owner])
+
+
     return (
         <div className={styles.post}>
-            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${userPost.owner.name}`)}>
+            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
                 <div className={styles.avatarPostCreator}>
-                    <img src={userPost.owner.img ? `${serverURL}${userPost.owner.img}` : defaultAvatar} alt="postCreator"/>
+                    <img src={isOwner.img ? `${serverURL}${isOwner.img}` : defaultAvatar}
+                         alt="postCreator"/>
                 </div>
                 <div className={styles.nameBlock}>
-                    <span className={styles.name}>{userPost.owner.name}</span>
+                    <span className={styles.name}>{isOwner.name}</span>
                     <span className={styles.timePosted}>{userPost.date}</span>
                 </div>
             </div>
@@ -72,11 +100,16 @@ export const UserPostContent:FC<UserPostContentProps> = ({setActiveModalComments
                         </div>
 
                 }
-                <IconElement image={comments} count={userPost.comments} type="normal" onClick={() => setActiveModalComments(false)}/>
-                <IconElement image={reposts} count={userPost.reposts} type="normal" onClick={() => setActiveRepostModal(prevState => !prevState)}/>
+                <IconElement image={comments} count={userPost.comments} type="normal"
+                             onClick={() => setActiveModalComments(false)}/>
+                <IconElement image={reposts} count={userPost.reposts} type="normal"
+                             onClick={() => {
+                                 if (activeUserId !== userPost.owner.id) setActiveRepostModal(prevState => !prevState)
+                             }}/>
                 <IconElement image={share}/>
             </div>
-            <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal} postId={userPost.id}/>
+            <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal}
+                         postId={userPost.id}/>
         </div>
     );
 };

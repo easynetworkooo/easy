@@ -45,6 +45,8 @@ export const UserPost: FC<UserPostProps> = ({userPost}) => {
         }
     }
 
+    console.log(userPost)
+
     return (
         <>
             <UserPostContent setActiveModalComments={fetchPostCommentsHandler} userPost={userPost} isLiked={isLiked}
