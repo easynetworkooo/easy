@@ -9,10 +9,11 @@ const defaultStateValidator: IValidator = {
 
 export const useValidation = (value: string, validations: IValidations) => {
     const [isEmpty, setEmpty] = useState<IValidator>(defaultStateValidator)
-    const [isEmailError, setEmailError] = useState(defaultStateValidator)
-    const [isMatchError, setMatchError] = useState(defaultStateValidator)
+    const [isEmailError, setEmailError] = useState<IValidator>(defaultStateValidator)
+    const [isMatchError, setMatchError] = useState<IValidator>(defaultStateValidator)
     const [minLengthError, setMinLengthError] = useState<IValidator>(defaultStateValidator)
     const [maxLengthError, setMaxLengthError] = useState<IValidator>(defaultStateValidator)
+    const [isCheckNicknameError, setCheckNicknameError] = useState<IValidator>(defaultStateValidator)
 
 
     useEffect(() => {
@@ -41,11 +42,13 @@ export const useValidation = (value: string, validations: IValidations) => {
                 filter.test(value) ? setEmailError(defaultStateValidator) : setEmailError({show: true, validatorErrorMessage: 'Invalid email'})
             } else if (validation === 'isMatch') {
                 validations.isMatch === value ? setMatchError(defaultStateValidator) : setMatchError({show: true, validatorErrorMessage: 'Passwords dont match'})
+            } else if (validation === 'isCheckNickname') {
+                validations.isCheckNickname ? setCheckNicknameError(defaultStateValidator) : setCheckNicknameError({show: true, validatorErrorMessage: 'Nickname already exists'})
             }
         }
 // eslint-disable-next-line
-    }, [value])
+    }, [value, validations.isCheckNickname])
 
 
-    return [isEmpty, minLengthError, maxLengthError, isEmailError, isMatchError]
+    return [isEmpty, minLengthError, maxLengthError, isEmailError, isMatchError, isCheckNicknameError]
 }

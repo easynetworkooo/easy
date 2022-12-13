@@ -5,6 +5,8 @@ import { appAPI } from "../../../services/AppService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
 import { setCities } from "../../../helpers/setCities";
 import { setCountries } from "../../../helpers/setCountries";
+import { useInput } from "../../../hooks/useInput";
+import { authAPI } from "../../../services/AuthService";
 
 export interface AuthContinueFirstStepProps {
     changeStep: (nextStep: number) => void,
@@ -20,20 +22,40 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                                                                           isCredentialsFinishRegister,
                                                                           setCredentialsFinishRegister
                                                                       }) => {
-    const [isName, setName] = useState('')
+    const [isValidNickname, setValidNickname] = useState(true)
+    const isName = useInput('', {isEmpty: true, isCheckNickname: isValidNickname})
     const [isCountry, setCountry] = useState('')
     const [isCity, setCity] = useState('')
     const [isCodeCountry, setCodeCountry] = useState('')
 
+    const [checkNickname] = authAPI.useCheckNicknameMutation()
     const {data: countries} = appAPI.useFetchAllCountriesQuery('')
     const {data: cities} = appAPI.useFetchAllCitiesQuery(isCodeCountry, {skip: isCodeCountry === ''})
 
     const changeStepHandler = () => {
-        if (isName !== '' && isCountry !== '' && isCity !== '') {
-            setCredentialsFinishRegister({...isCredentialsFinishRegister, nickname: isName, city: isCity, country: isCountry})
+        if (isName.value !== '' && isCountry !== '' && isCity !== '') {
+            setCredentialsFinishRegister({
+                ...isCredentialsFinishRegister,
+                nickname: isName.value,
+                city: isCity,
+                country: isCountry
+            })
             changeStep(nextStep)
         }
     }
+
+    useEffect(() => {
+        if (isName.value !== '') {
+            checkNickname(isName.value).then((data: any) => {
+                if (data.data) {
+                    setValidNickname(data.data.value)
+                } else {
+                    console.log(data)
+                    setValidNickname(false)
+                }
+            })
+        }
+    }, [checkNickname, isName.value])
 
     useEffect(() => {
         setCity('')
@@ -48,8 +70,14 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                 <Steps steps={['firstActiveStep', 'secondUnreadyStep']}/>
             </div>
             <div className={styles.inputBlock}>
-                <Input type={'text'} placeholder={'Nickname'} value={isName} autoFocus={true}
-                       onChange={e => setName(e.target.value)}/>
+                <Input type={'text'} placeholder={'Nickname'} value={isName.value}
+                       onChange={e => isName.onChange(e)}
+                       onBlur={e => isName.onBlur(e)}
+                       validations={isName.validators}
+                       isDirty={isName.isDirty}
+                       isInputErrorValidation={isName.isInputErrorValidation}
+                       onKeyPress={e => e.key === 'Enter' && changeStepHandler()}
+                       autoFocus={true}/>
             </div>
             <div className={styles.inputBlock}>
                 <Select options={countries ? setCountries(countries.value.countries) : []}

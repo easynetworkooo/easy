@@ -19,7 +19,7 @@ export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
     const [login] = authAPI.useLoginMutation()
     const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
     const isEmail = useInput('', {isEmail: true})
-    const isPassword = useInput('', {isEmpty: true, minLength: 6})
+    const isPassword = useInput('', {isEmpty: true})
 
     const loginHandler = async () => {
         if (isEmail.isInputErrorValidation || isPassword.isInputErrorValidation) {

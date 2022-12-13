@@ -61,7 +61,6 @@ export const Messages = () => {
 
         socket.current.on('message', (data: any) => {
             setMessagesData(prevState => [data.value, ...prevState])
-
         })
     }, [])
 

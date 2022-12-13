@@ -4,4 +4,5 @@ export interface IValidations {
     maxLength?: number
     isEmail?: boolean
     isMatch?: string
+    isCheckNickname?: boolean
 }

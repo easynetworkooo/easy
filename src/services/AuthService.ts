@@ -44,6 +44,15 @@ export const authAPI = createApi({
                 method: 'POST',
             })
         }),
+        checkNickname: build.mutation<any, string>({
+            query: (nickname: string) => ({
+                url: '/checkNickname',
+                method: 'GET',
+                params: {
+                    nickname: nickname
+                }
+            }),
+        }),
         finishRegister: build.mutation<any, IFinishRegisterCredentials>({
             query: (finishRegisterCredentials) => ({
                 url: '/finishRegister',
