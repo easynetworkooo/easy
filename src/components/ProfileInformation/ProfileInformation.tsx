@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './ProfileInformation.module.scss'
 import { AvatarChangeModal, Button, IconElement } from "../../components-ui";
 import { MenuItem } from "./MenuItem/MenuItem";
@@ -21,6 +21,7 @@ import activeWallet from '../../assets/Profile/ActiveWallet.svg'
 import myProject from '../../assets/Profile/MyProjects.svg'
 import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
 import { serverURL } from "../../constants/serverURL";
+import { io } from "socket.io-client";
 
 export const ProfileInformation = () => {
 
@@ -28,8 +29,12 @@ export const ProfileInformation = () => {
 
     const {logoutReducer} = authSlice.actions
     const {name, img, likes, reposts, views} = useAppSelector(state => state.userReducer)
+    const [isLikes, setLikes] = useState(likes)
+    const [isReposts, setReposts] = useState(reposts)
+    const [isViews, setViews] = useState(views)
     const dispatch = useAppDispatch()
 
+    const socket = useRef<any>()
     const navigate = useNavigate()
 
     const [logout] = authAPI.useLogoutMutation()
@@ -44,6 +49,32 @@ export const ProfileInformation = () => {
         }
     }
 
+    console.log(likes)
+
+    useEffect(() => {
+        socket.current = io(serverURL, {
+            extraHeaders: {
+                "Authorization": `${localStorage.getItem('auth')}`
+            }
+        })
+
+        socket.current.on('mainNotification', (data: any) => {
+            console.log(data.type)
+            if (data.type === 'addMainLike') {
+                setLikes(prev => prev ? prev + 1 : 1)
+            }
+            if (data.type === 'removeMainLike') {
+                setLikes(prev => prev ? prev - 1 : null)
+            }
+            if (data.type === 'addView') {
+                setViews(prev => prev ? prev + 1 : 1)
+            }
+            if (data.type === 'addRepost') {
+                setReposts(prev => prev ? prev + 1 : 1)
+            }
+        })
+    }, [])
+
     return (
         <div className={styles.profileBlock}>
             <div className={styles.profile}>
@@ -57,9 +88,9 @@ export const ProfileInformation = () => {
                     <h2>{name}</h2>
                 </div>
                 <div className={styles.profileElements}>
-                    <IconElement image={like} count={likes} type={'light'}/>
-                    <IconElement image={repost} count={reposts} type={'light'}/>
-                    <IconElement image={view} count={views} type={'light'}/>
+                    <IconElement image={like} count={isLikes} type={'light'}/>
+                    <IconElement image={repost} count={isReposts} type={'light'}/>
+                    <IconElement image={view} count={isViews} type={'light'}/>
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>

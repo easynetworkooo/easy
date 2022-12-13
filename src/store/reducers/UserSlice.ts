@@ -43,9 +43,9 @@ export const userSlice = createSlice({
             state.city = action.payload.city
             state.interests = action.payload.interests
         },
-        setAvatarReducer(state, action: PayloadAction<{img: string}>) {
+        setAvatarReducer(state, action: PayloadAction<{ img: string }>) {
             state.img = action.payload.img
-        }
+        },
     }
 })
 
