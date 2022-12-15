@@ -7,6 +7,7 @@ import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import share from "../../../assets/UI/Share.svg";
+import deleteBasket from '../../../assets/UI/DeletePostBasket.png'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IOwner, IPost } from "../../../models/IPost";
@@ -14,6 +15,7 @@ import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
 import { RepostModal } from "../../RepostModal/RepostModal";
 import { useAppSelector } from "../../../hooks/redux";
+import { DeletePostModal } from "../../DeletePostModal/DeletePostModal";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -43,6 +45,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     const activeUserId = useAppSelector(state => state.userReducer.id)
 
     const [isActiveRepostModal, setActiveRepostModal] = useState(false)
+    const [isActiveDeleteModal, setActiveDeleteModal] = useState(false)
     const [isOwner, setOwner] = useState<IOwner>(initialOwner)
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
@@ -64,14 +67,18 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         setLiked(!isLiked)
     }
 
+    const openModalDeleteHandler = (e: React.MouseEvent<HTMLImageElement>) => {
+        e.stopPropagation()
+        setActiveDeleteModal(true)
+    }
+
     useEffect(() => {
         if (userPost.originalowner === 0) {
             setOwner(userPost.owner)
         } else {
-            if (typeof userPost.originalowner !== 'number')  setOwner(userPost.originalowner)
+            if (typeof userPost.originalowner !== 'number') setOwner(userPost.originalowner)
         }
     }, [userPost.originalowner, userPost.owner])
-
 
     return (
         <div className={styles.post}>
@@ -84,6 +91,11 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                     <span className={styles.name}>{isOwner.name}</span>
                     <span className={styles.timePosted}>{userPost.date}</span>
                 </div>
+                {activeUserId === userPost.owner.id &&
+                    <div className={styles.deleteBasketBlock}>
+                        <img src={deleteBasket} alt="basket" onClick={(e) => openModalDeleteHandler(e)}/>
+                    </div>
+                }
             </div>
             <div className={styles.textPostBlock}>
                 <p>{userPost.text}</p>
@@ -110,6 +122,8 @@ export const UserPostContent: FC<UserPostContentProps> = ({
             </div>
             <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal}
                          postId={userPost.id}/>
+            <DeletePostModal isActiveDeleteModal={isActiveDeleteModal} setActiveDeleteModal={setActiveDeleteModal}
+                             postId={userPost.id}/>
         </div>
     );
 };

@@ -91,5 +91,13 @@ export const postAPI = createApi({
             }),
             providesTags: ['Post']
         }),
+        removePost: build.mutation<any, {id: number}>({
+            query: (postCredentials) => ({
+                url: '/removePost',
+                method: 'POST',
+                body: postCredentials
+            }),
+            invalidatesTags: ['Post']
+        }),
     })
 })
