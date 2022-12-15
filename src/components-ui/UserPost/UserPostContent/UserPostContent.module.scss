@@ -26,9 +26,16 @@
 }
 
 .nameBlock {
-  width: 78%;
+  width: 79%;
   display: flex;
   flex-direction: column;
+}
+
+.deleteBasketBlock {
+  img {
+    opacity: 0.8;
+    width: 24px;
+  }
 }
 
 .name {

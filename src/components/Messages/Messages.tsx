@@ -22,8 +22,12 @@ export const Messages = () => {
     const socket = useRef<any>()
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
-    const {data: dialogsData} = userAPI.useFetchGetDialogsQuery({page: 1})
+    const {data: dialogsData, refetch: dialogsDataRefetch} = userAPI.useFetchGetDialogsQuery({page: 1})
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
+
+    useEffect(() => {
+        dialogsDataRefetch()
+    }, [dialogsDataRefetch])
 
     useEffect(() => {
         if (dialogsData) {
@@ -61,7 +65,9 @@ export const Messages = () => {
 
         socket.current.on('message', (data: any) => {
             setMessagesData(prevState => [data.value, ...prevState])
+            dialogsDataRefetch()
         })
+        // eslint-disable-next-line
     }, [])
 
     const sendMessageHandler = () => {
