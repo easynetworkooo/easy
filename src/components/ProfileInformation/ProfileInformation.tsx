@@ -12,7 +12,7 @@ import changeAvatarImage from '../../assets/Profile/ChangeAvatar.svg'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
 import view from '../../assets/Profile/View.svg'
-import messages from '../../assets/Profile/Messages.svg'
+import messagesImg from '../../assets/Profile/Messages.svg'
 import activeMessages from '../../assets/Profile/ActiveMessages.svg'
 import community from '../../assets/Profile/Community.svg'
 import activeCommunity from '../../assets/Profile/ActiveCommunity.svg'
@@ -28,7 +28,9 @@ export const ProfileInformation = () => {
     const [isActiveModalChangeAvatar, setActiveModalChangeAvatar] = useState(false)
 
     const {logoutReducer} = authSlice.actions
-    const {name, img, likes, reposts, views} = useAppSelector(state => state.userReducer)
+    const {name, img} = useAppSelector(state => state.userReducer)
+    const {likes, reposts, views} = useAppSelector(state => state.notificationsReducer.main)
+    const {messages, subscribers} = useAppSelector(state => state.notificationsReducer.buttons)
     const [isLikes, setLikes] = useState(likes)
     const [isReposts, setReposts] = useState(reposts)
     const [isViews, setViews] = useState(views)
@@ -48,8 +50,6 @@ export const ProfileInformation = () => {
             console.log(e)
         }
     }
-
-    console.log(likes)
 
     useEffect(() => {
         socket.current = io(serverURL, {
@@ -94,9 +94,9 @@ export const ProfileInformation = () => {
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>
-                <MenuItem image={messages} countNotification={100} menuText={'Messages'} to={MESSAGES}
+                <MenuItem image={messagesImg} countNotification={messages} menuText={'Messages'} to={MESSAGES}
                           activeImage={activeMessages}/>
-                <MenuItem image={community} countNotification={2} menuText={'My Community'} to={COMMUNITY}
+                <MenuItem image={community} countNotification={subscribers} menuText={'My Community'} to={COMMUNITY}
                           activeImage={activeCommunity}/>
                 <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
                 <MenuItem image={myProject} menuText={'My Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>

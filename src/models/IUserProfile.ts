@@ -7,9 +7,6 @@ export interface IUserProfile {
     city: string | null,
     interests: string[] | null,
     img: string,
-    likes: number | null,
-    views: number | null,
-    reposts: number | null
     subscribers: number
     subscriptions: number
 }

@@ -11,12 +11,17 @@ import { authSlice } from "../../store/reducers/AuthSlice";
 import { userSlice } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/redux";
 import { IUserProfile } from "../../models/IUserProfile";
+import { notificationSlice } from "../../store/reducers/NotificationReducer";
+import { userAPI } from "../../services/UserService";
 
 
 export const Auth: FC = () => {
     const {loginReducer} = authSlice.actions
     const {setUserReducer} = userSlice.actions
+    const {setNotificationsReducer} = notificationSlice.actions
     const dispatch = useAppDispatch()
+
+    const [fetchUserNotifications] = userAPI.useFetchUserNotificationMutation()
 
     const [isAuthStatus, setAuthStatus] = useState('Login')
 
@@ -30,6 +35,12 @@ export const Auth: FC = () => {
     const fromPathname = (location.state as ILocationFromState)?.from?.pathname || PEOPLE_AND_PROJECTS
 
     const navigateHandler = async (continueAuth: boolean, userData: IUserProfile) => {
+        const dataNotifications: any = await fetchUserNotifications('')
+        dispatch(setNotificationsReducer({
+            main: dataNotifications.data.value.main,
+            buttons: dataNotifications.data.value.buttons,
+            bell: dataNotifications.data.value.bell
+        }))
         dispatch(setUserReducer({...userData}))
         dispatch(loginReducer({isAuth: true, continueAuth: continueAuth}))
         navigate(fromPathname, {replace: true})

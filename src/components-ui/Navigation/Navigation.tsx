@@ -39,7 +39,7 @@ export const Navigation = () => {
                      }}/>
             </div>
             <Modal active={isModalNotifications} setActive={setModalNotifications}>
-                <Notifications activeNotifications={isActiveNotifications}/>
+                <Notifications activeNotifications={isActiveNotifications} setActiveModalNotification={setModalNotifications}/>
             </Modal>
         </nav>
     );

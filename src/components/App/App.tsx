@@ -6,14 +6,18 @@ import { userAPI } from "../../services/UserService";
 import { authSlice } from "../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../hooks/redux";
 import { userSlice } from "../../store/reducers/UserSlice";
+import { notificationSlice } from "../../store/reducers/NotificationReducer";
+import { INotifications } from "../../models/INotifications";
 
 export const App: FC = () => {
     const {loginReducer} = authSlice.actions
     const {setUserReducer} = userSlice.actions
+    const {setNotificationsReducer} = notificationSlice.actions
     const dispatch = useAppDispatch()
 
     const [checkAuthorization] = authAPI.useCheckAuthorizationMutation()
     const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
+    const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
 
     const [isLoadingAuth, setLoadingAuth] = useState(true)
 
@@ -24,9 +28,15 @@ export const App: FC = () => {
                 try {
                     if (isAuthUser?.data?.value) {
                         const dataUser: any = await fetchUserProfile('')
+                        const dataNotifications: any = await fetchUserNotification('')
                         const isContinueAuth = dataUser.data.value.interests === null
                         dispatch(loginReducer({isAuth: true, continueAuth: isContinueAuth}))
                         dispatch(setUserReducer({...dataUser.data.value}))
+                        dispatch(setNotificationsReducer({
+                            main: dataNotifications.data.value.main,
+                            buttons: dataNotifications.data.value.buttons,
+                            bell: dataNotifications.data.value.bell
+                        }))
                     } else {
                         localStorage.removeItem('auth')
                         console.log(isAuthUser.error)

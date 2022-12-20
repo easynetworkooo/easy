@@ -3,6 +3,7 @@ import { IUserProfile } from "../models/IUserProfile";
 import { IUser, IUserValue } from "../models/IUser";
 import { IDialog } from "../models/IDialog";
 import { serverURL } from "../constants/serverURL";
+import { INotifications } from "../models/INotifications";
 
 
 export const userAPI = createApi({
@@ -23,6 +24,12 @@ export const userAPI = createApi({
         fetchUserProfile: build.mutation<IUserProfile, string>({
             query: () => ({
                 url: '/getProfile',
+                method: 'GET'
+            })
+        }),
+        fetchUserNotification: build.mutation<INotifications, string>({
+            query: () => ({
+                url: '/getNotifications',
                 method: 'GET'
             })
         }),

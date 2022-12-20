@@ -3,10 +3,16 @@ import styles from './Notifications.module.scss'
 import notifications from '../../../assets/UI/Notifications.svg'
 import notificationsActive from '../../../assets/UI/NotificationsActive.svg'
 import avatar from '../../../assets/Profile/Default-avatar.svg'
+import { useAppSelector } from "../../../hooks/redux";
+import { IBellItem } from "../../../models/INotifications";
+import { serverURL } from "../../../constants/serverURL";
+import { useNavigate } from "react-router-dom";
+import { USERS } from "../../../constants/nameRoutesConsts";
 
 
 export interface NotificationsProps {
-    activeNotifications : boolean
+    activeNotifications: boolean
+    setActiveModalNotification: (active: boolean) => void
 }
 
 const notificationsArr = [
@@ -60,7 +66,17 @@ const notificationsArr = [
     },
 ]
 
-export const Notifications: FC<NotificationsProps> = ({activeNotifications}) => {
+export const Notifications: FC<NotificationsProps> = ({activeNotifications, setActiveModalNotification}) => {
+
+    const navigate = useNavigate()
+
+    const notificationsData = useAppSelector(state => state.notificationsReducer.bell)
+
+    const navigateToUserProfileHandler = (name: string) => {
+        setActiveModalNotification(false)
+        navigate(`${USERS}/${name}`)
+    }
+
     return (
         <div className={styles.notificationContainer}>
             <div className={styles.headerNotifications}>
@@ -68,25 +84,23 @@ export const Notifications: FC<NotificationsProps> = ({activeNotifications}) => 
                 <span>Notifications</span>
             </div>
             <div className={styles.allNotificationsBlock}>
-                {notificationsArr.map((item, key) =>
+                {notificationsData.map((notificationsData: IBellItem, key) =>
                     <div className={styles.notificationsBlock} key={key}>
                         <div className={styles.notificationsDate}>
-                            <span>{item.date}</span>
+                            <span>20 December</span>
                         </div>
                         <div className={styles.notifications}>
-                            {item.data.map((data, key) =>
-                                <div className={styles.notification} key={key}>
-                                    <div className={styles.notificationAvatar}>
-                                        <img src={data.avatar} alt="avatar"/>
-                                    </div>
-                                    <div className={styles.name}>
-                                        <span>{data.name}</span>
-                                    </div>
-                                    <div className={styles.action}>
-                                        <span>{data.action}</span>
-                                    </div>
+                            <div className={styles.notification} key={key}>
+                                <div className={styles.notificationAvatar}>
+                                    <img src={notificationsData.userData.img ? `${serverURL}${notificationsData.userData.img}` : avatar} alt="avatar"/>
                                 </div>
-                            )}
+                                <div className={styles.name}>
+                                    <span onClick={() => navigateToUserProfileHandler(notificationsData.userData.name)}>{notificationsData.userData.name}</span>
+                                </div>
+                                <div className={styles.action}>
+                                    <span>{notificationsData.type}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
