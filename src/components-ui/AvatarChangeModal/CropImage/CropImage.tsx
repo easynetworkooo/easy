@@ -8,10 +8,11 @@ import { userSlice } from "../../../store/reducers/UserSlice";
 
 export interface CropImageProps {
     isImgSrc: string,
-    setImgSrc: (img: string) => void
+    setImgSrc: (img: string) => void,
+    setActiveModalChange: (active: boolean) => void
 }
 
-export const CropImage: FC<CropImageProps> = ({isImgSrc, setImgSrc}) => {
+export const CropImage: FC<CropImageProps> = ({isImgSrc, setImgSrc, setActiveModalChange}) => {
     const dispatch = useAppDispatch()
     const {setAvatarReducer} = userSlice.actions
     const [setMainAvatar] = userAPI.useSetMainAvatarMutation()
@@ -22,14 +23,14 @@ export const CropImage: FC<CropImageProps> = ({isImgSrc, setImgSrc}) => {
 
 
     const canvasCheck = async () => {
-        let imageBlob:any = await new Promise(resolve => imageRef.current.getImageScaledToCanvas().toBlob(resolve, 'image/png'));
+        let imageBlob: any = await new Promise(resolve => imageRef.current.getImageScaledToCanvas().toBlob(resolve, 'image/png'));
         let formData = new FormData();
         formData.append("img", imageBlob, "image.png");
-        await setMainAvatar(formData).then(() => {
-            setImgSrc('')
-        })
+        await setMainAvatar(formData)
         await getProfile('').then((user: any) => {
             dispatch(setAvatarReducer({img: user.data.value.img}))
+            setActiveModalChange(false)
+            setTimeout(() => setImgSrc(''), 300)
         })
     }
 

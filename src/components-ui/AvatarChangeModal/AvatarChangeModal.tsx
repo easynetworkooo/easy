@@ -16,7 +16,7 @@ export const AvatarChangeModal: FC<AvatarChangeModalProps> = ({isActiveModalChan
     return (
         <Modal active={isActiveModalChange} setActive={setActiveModalChange}>
             <div className={styles.modalChangeAvatarContent}>
-                {isUrlSrc ? <CropImage setImgSrc={setUrlSrc} isImgSrc={isUrlSrc}/> : <ChooseImage setImgSrc={setUrlSrc}/>}
+                {isUrlSrc ? <CropImage setImgSrc={setUrlSrc} isImgSrc={isUrlSrc} setActiveModalChange={setActiveModalChange}/> : <ChooseImage setImgSrc={setUrlSrc}/>}
             </div>
         </Modal>
     );
