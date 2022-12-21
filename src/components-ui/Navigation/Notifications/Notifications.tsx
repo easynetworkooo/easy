@@ -15,56 +15,6 @@ export interface NotificationsProps {
     setActiveModalNotification: (active: boolean) => void
 }
 
-const notificationsArr = [
-    {
-        date: '25 January',
-        data: [
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Left you a comment'
-            },
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Subscribed to you'
-            },
-        ]
-
-    },
-    {
-        date: '24 January',
-        data: [
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Left you a comment'
-            },
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Subscribed to you'
-            },
-        ]
-
-    },
-    {
-        date: '23 January',
-        data: [
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Left you a comment'
-            },
-            {
-                avatar: avatar,
-                name: 'Jane Cooper',
-                action: 'Subscribed to you'
-            },
-        ]
-
-    },
-]
 
 export const Notifications: FC<NotificationsProps> = ({activeNotifications, setActiveModalNotification}) => {
 

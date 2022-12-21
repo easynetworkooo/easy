@@ -1,11 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from './reducers/AuthSlice'
 import userReducer from './reducers/UserSlice'
-import notificationsReducer from './reducers/NotificationReducer'
+import notificationsReducer from './reducers/NotificationSlice'
 import { userAPI } from "../services/UserService";
 import { appAPI } from "../services/AppService";
 import { authAPI } from "../services/AuthService";
 import { postAPI } from "../services/PostService";
+
 
 const rootReducer = combineReducers({
     authReducer,

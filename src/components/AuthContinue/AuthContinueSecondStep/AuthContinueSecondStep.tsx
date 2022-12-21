@@ -10,6 +10,7 @@ import { appAPI } from "../../../services/AppService";
 import { authAPI } from "../../../services/AuthService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
 import { userSlice } from "../../../store/reducers/UserSlice";
+import { customErrorNotify } from "../../../helpers/customErrorNotify";
 
 
 export interface AuthContinueSecondStepProps {
@@ -36,11 +37,12 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
                 dispatch(loginReducer({isAuth: true, continueAuth: false}))
                 dispatch(setUserAfterAuthContinue({name: nickname, country, city, interests: isInterestItems}))
                 navigate(PEOPLE_AND_PROJECTS)
+                customErrorNotify('Good luck!', 'Success')
             } else {
-                console.log(finishDataRegister)
+                customErrorNotify(finishDataRegister.error.data.value, 'Error')
             }
         } else {
-            console.log('Choose minimum 3 interests')
+            customErrorNotify('Choose minimum 3 interests', 'Error')
         }
     }
 

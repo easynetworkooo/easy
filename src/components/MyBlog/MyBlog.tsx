@@ -3,6 +3,7 @@ import styles from './MyBlog.module.scss'
 import { InputSend, PostLoadingSkeleton, UserPost } from "../../components-ui";
 import { postAPI } from "../../services/PostService";
 import { useAppSelector } from "../../hooks/redux";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 
 export const MyBlog = () => {
@@ -17,8 +18,9 @@ export const MyBlog = () => {
         const dataCreatePost: any = await createBlogPost({text: isSendValue})
         if (dataCreatePost.data.status === 200) {
             setSendValue('')
+            customErrorNotify('Post successfully created', 'Success')
         } else {
-            console.log(dataCreatePost.error)
+            customErrorNotify(dataCreatePost.error.data.value, 'Error')
         }
     }
 

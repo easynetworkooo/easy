@@ -8,6 +8,7 @@ import { ILoginCredentials } from "../../../models/ILogin";
 import { userAPI } from "../../../services/UserService";
 import { IUserProfile } from "../../../models/IUserProfile";
 import { useInput } from "../../../hooks/useInput";
+import { customErrorNotify } from "../../../helpers/customErrorNotify";
 
 export interface LoginProps {
     changeAuthStatus: (status: string) => void
@@ -36,7 +37,7 @@ export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
                 await navigateHandler(dataProfile.data.value.interests === null, dataProfile.data.value)
             }
         } catch (e) {
-            console.log(loginResponse.error)
+            customErrorNotify(loginResponse.error.data.value, 'Error')
         }
 
     }

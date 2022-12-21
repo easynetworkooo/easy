@@ -7,6 +7,7 @@ import { userAPI } from "../../services/UserService";
 import { useAppSelector } from "../../hooks/redux";
 import { serverURL } from "../../constants/serverURL";
 import { useLocation } from "react-router-dom";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 export const Messages = () => {
 
@@ -82,8 +83,8 @@ export const Messages = () => {
                 setMessagesData(messages.data.value)
                 setUserIdToSend(id)
             }
-        } catch (e) {
-            console.log(e)
+        } catch (e: any) {
+            customErrorNotify(e, 'Error')
         }
     }
 

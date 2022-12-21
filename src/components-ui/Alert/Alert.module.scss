@@ -6,8 +6,8 @@
   padding: 10px 20px;
   align-items: center;
   justify-content: space-between;
-  background-color: $Yellow100;
-  border: 1px solid $Yellow200;
+  background-color: $ErrorAlert;
+  border: 1px solid $ErrorAlert;
   border-radius: 8px;
 }
 
@@ -18,8 +18,8 @@
 .alertText {
   display: flex;
   span {
-    font-size: 12px;
-    color: $Yellow800;
+    font-size: 16px;
+    color: $ErrorAlertText;
   }
 }
 

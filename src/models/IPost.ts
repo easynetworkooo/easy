@@ -7,6 +7,7 @@ export interface IPost {
     type: string
     text: string,
     liked: boolean
+    itsrepost: boolean
     originaldate: string
     originalid: number
     originalowner: IOwner | number

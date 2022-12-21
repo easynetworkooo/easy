@@ -3,6 +3,7 @@ import styles from './RepostModal.module.scss'
 import { Modal } from "../Modal/Modal";
 import { postAPI } from "../../services/PostService";
 import { Button } from "../Button/Button";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 export interface RepostModalProps {
     isActiveRepostModal: boolean
@@ -15,7 +16,15 @@ export const RepostModal: FC<RepostModalProps> = ({isActiveRepostModal, setActiv
     const [setRepostPost] = postAPI.useSetRepostPostMutation()
 
     const setRepostPostHandler = async () => {
-        await setRepostPost({id: postId}).then(() => setActiveRepostModal(false))
+        try {
+            await setRepostPost({id: postId}).then((data:any) => {
+                customErrorNotify(data.data.value, 'Success')
+                setActiveRepostModal(false)
+            })
+        } catch (e:any) {
+            customErrorNotify(e, 'Error')
+        }
+
     }
 
     return (

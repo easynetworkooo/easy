@@ -22,6 +22,7 @@ import myProject from '../../assets/Profile/MyProjects.svg'
 import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
 import { serverURL } from "../../constants/serverURL";
 import { io } from "socket.io-client";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 export const ProfileInformation = () => {
 
@@ -43,11 +44,14 @@ export const ProfileInformation = () => {
 
     const logoutHandler = async () => {
         try {
-            await logout('').then(() => localStorage.removeItem('auth'))
-            dispatch(logoutReducer())
-            navigate(AUTH)
-        } catch (e) {
-            console.log(e)
+            await logout('').then(() => {
+                localStorage.removeItem('auth')
+                dispatch(logoutReducer())
+                navigate(AUTH)
+                customErrorNotify('You have logged out of your account', 'Success')
+            })
+        } catch (e:any) {
+            customErrorNotify(e, 'Error')
         }
     }
 
@@ -59,7 +63,6 @@ export const ProfileInformation = () => {
         })
 
         socket.current.on('mainNotification', (data: any) => {
-            console.log(data.type)
             if (data.type === 'addMainLike') {
                 setLikes(prev => prev ? prev + 1 : 1)
             }
@@ -79,7 +82,8 @@ export const ProfileInformation = () => {
         <div className={styles.profileBlock}>
             <div className={styles.profile}>
                 <div className={styles.profileAvatarBlock} onClick={() => setActiveModalChangeAvatar(true)}>
-                    <div className={styles.profileAvatarHoverToUpload} style={isActiveModalChangeAvatar ? {opacity: '0.7'} : undefined}>
+                    <div className={styles.profileAvatarHoverToUpload}
+                         style={isActiveModalChangeAvatar ? {opacity: '0.7'} : undefined}>
                         <img src={changeAvatarImage} alt="avatarChange"/>
                     </div>
                     <img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>

@@ -3,6 +3,7 @@ import styles from './DeletePostModal.module.scss'
 import { Modal } from "../Modal/Modal";
 import { Button } from "../Button/Button";
 import { postAPI } from "../../services/PostService";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 
 export interface DeletePostModalProps {
@@ -17,7 +18,10 @@ export const DeletePostModal:FC<DeletePostModalProps> = ({isActiveDeleteModal, s
     const [removePost] = postAPI.useRemovePostMutation()
 
     const deletePostHandler = async () => {
-        await removePost({id: postId}).then(() => setActiveDeleteModal(false))
+        await removePost({id: postId}).then((data: any) => {
+            setActiveDeleteModal(false)
+            customErrorNotify(data.data.value, 'Success')
+        })
     }
 
     return (

@@ -7,6 +7,7 @@ import { authAPI } from "../../../services/AuthService";
 import { IUserProfile } from "../../../models/IUserProfile";
 import { userAPI } from "../../../services/UserService";
 import { useInput } from "../../../hooks/useInput";
+import { customErrorNotify } from "../../../helpers/customErrorNotify";
 
 
 export interface RegistrationProps {
@@ -37,7 +38,7 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
                 navigateHandler(true, dataProfile.data.value)
             }
         } catch (e) {
-            console.log(registrationResponse.error)
+            customErrorNotify(registrationResponse.error.data.value, 'Error')
         }
 
     }

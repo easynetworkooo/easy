@@ -6,8 +6,8 @@ import { userAPI } from "../../services/UserService";
 import { authSlice } from "../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../hooks/redux";
 import { userSlice } from "../../store/reducers/UserSlice";
-import { notificationSlice } from "../../store/reducers/NotificationReducer";
-import { INotifications } from "../../models/INotifications";
+import { notificationSlice } from "../../store/reducers/NotificationSlice";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 export const App: FC = () => {
     const {loginReducer} = authSlice.actions
@@ -39,16 +39,16 @@ export const App: FC = () => {
                         }))
                     } else {
                         localStorage.removeItem('auth')
-                        console.log(isAuthUser.error)
+                        customErrorNotify(isAuthUser.error.data.value, 'Error')
                     }
-                } catch (e) {
-                    console.log(e)
+                } catch (e:any) {
+                    customErrorNotify(e, 'Error')
                 }
             }
 
 
         },
-        [checkAuthorization, dispatch, fetchUserProfile, loginReducer, setUserReducer]
+        [checkAuthorization, dispatch, fetchUserNotification, fetchUserProfile, loginReducer, setNotificationsReducer, setUserReducer]
     )
 
     useEffect(() => {

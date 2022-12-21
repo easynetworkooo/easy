@@ -6,6 +6,7 @@ import { CommentsPost } from "../CommentsPost/CommentsPost";
 import { InputSend } from "../InputSend/InputSend";
 import { IPost } from "../../models/IPost";
 import { postAPI } from "../../services/PostService";
+import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 
 export interface UserPostProps {
@@ -40,8 +41,8 @@ export const UserPost: FC<UserPostProps> = ({userPost}) => {
                 setActiveModal(true)
                 setCommentsData(commentResponse.data.value)
             }
-        } catch (e) {
-            console.log(e)
+        } catch (e: any) {
+            customErrorNotify(e, 'Error')
         }
     }
 

@@ -5,6 +5,7 @@ import { Button } from "../../Button/Button";
 import { userAPI } from "../../../services/UserService";
 import { useAppDispatch } from "../../../hooks/redux";
 import { userSlice } from "../../../store/reducers/UserSlice";
+import { customErrorNotify } from "../../../helpers/customErrorNotify";
 
 export interface CropImageProps {
     isImgSrc: string,
@@ -26,7 +27,7 @@ export const CropImage: FC<CropImageProps> = ({isImgSrc, setImgSrc, setActiveMod
         let imageBlob: any = await new Promise(resolve => imageRef.current.getImageScaledToCanvas().toBlob(resolve, 'image/png'));
         let formData = new FormData();
         formData.append("img", imageBlob, "image.png");
-        await setMainAvatar(formData)
+        await setMainAvatar(formData).then(() => customErrorNotify('Avatar successfully changed', 'Success'))
         await getProfile('').then((user: any) => {
             dispatch(setAvatarReducer({img: user.data.value.img}))
             setActiveModalChange(false)

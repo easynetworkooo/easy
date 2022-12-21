@@ -50,7 +50,6 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                 if (data.data) {
                     setValidNickname(data.data.value)
                 } else {
-                    console.log(data)
                     setValidNickname(false)
                 }
             })

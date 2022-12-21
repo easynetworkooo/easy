@@ -11,7 +11,7 @@ import { authSlice } from "../../store/reducers/AuthSlice";
 import { userSlice } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/redux";
 import { IUserProfile } from "../../models/IUserProfile";
-import { notificationSlice } from "../../store/reducers/NotificationReducer";
+import { notificationSlice } from "../../store/reducers/NotificationSlice";
 import { userAPI } from "../../services/UserService";
 
 

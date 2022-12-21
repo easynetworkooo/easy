@@ -73,12 +73,13 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     }
 
     useEffect(() => {
-        if (userPost.originalowner === 0) {
-            setOwner(userPost.owner)
-        } else {
+        if (userPost.itsrepost) {
             if (typeof userPost.originalowner !== 'number') setOwner(userPost.originalowner)
+        } else {
+           setOwner(userPost.owner)
         }
-    }, [userPost.originalowner, userPost.owner])
+    }, [userPost.itsrepost, userPost.originalowner, userPost.owner])
+
 
     return (
         <div className={styles.post}>
@@ -101,6 +102,12 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                 <p>{userPost.text}</p>
             </div>
             <div className={styles.iconsPostBlock}>
+                {userPost.itsrepost &&
+                    <div className={styles.repostInformation}>
+                        <img src={reposts} alt=""/>
+                        <span>You retweeted the post {isOwner.name}</span>
+                    </div>
+                }
                 {
                     isLiked ?
                         <div onClick={setLikedHandle}>
