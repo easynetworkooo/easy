@@ -36,6 +36,7 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
                 localStorage.setItem('auth', registrationResponse.data.auth)
                 const dataProfile: any = await fetchUserProfile('')
                 navigateHandler(true, dataProfile.data.value)
+                customErrorNotify(registrationResponse.data.value, 'Success')
             }
         } catch (e) {
             customErrorNotify(registrationResponse.error.data.value, 'Error')
