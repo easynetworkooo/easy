@@ -30,6 +30,10 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
             isRepeatPassword.setDirty(true)
             return
         }
+        if (isPassword.value !== isRepeatPassword.value) {
+            customErrorNotify('Passwords dont match', 'Error')
+            return
+        }
         const registrationResponse: any = await registration({email: isEmail.value, password: isPassword.value})
         try {
             if (registrationResponse.data.status === 200) {
