@@ -27,11 +27,13 @@ export const Messages = () => {
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
 
     useEffect(() => {
-        dialogsDataRefetch()
-    }, [dialogsDataRefetch])
-
-    useEffect(() => {
         if (dialogsData) {
+            if (isDialogData.length > 0) {
+                if ((isDialogData.find((item: any) => item.opponentId === isUserIdToSend).opponentId) === dialogsData.value[0].opponentId) {
+                    openDialogHandle(0, dialogsData.value[0].opponentId)
+                }
+            }
+
             setDialogsData(dialogsData.value)
         }
     }, [dialogsData])
@@ -73,6 +75,7 @@ export const Messages = () => {
 
     const sendMessageHandler = () => {
         socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
+        setOpenMessages(0)
     }
 
     const openDialogHandle = async (index: number, id: number) => {
