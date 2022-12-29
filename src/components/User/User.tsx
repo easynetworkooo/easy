@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './User.module.scss'
-import { UserPost } from "../../components-ui";
+import { PostLoadingSkeleton, UserPost, UserSkeletonHeader } from "../../components-ui";
 import { UserHeader } from "./UserHeader/UserHeader";
 import { postAPI } from "../../services/PostService";
 import { useParams } from "react-router-dom";
@@ -21,13 +21,22 @@ export const User = () => {
 
     return (
         <div className={styles.userContainer}>
-            {userInformation && <UserHeader isUserData={userInformation.value}/>}
+            {userInformation
+                ?
+                <UserHeader isUserData={userInformation.value}/>
+                :
+                <UserSkeletonHeader/>
+            }
             <div className={styles.postsBlock}>
-                {userPosts && userPosts.value.data.map((item, index) =>
-                    <div key={index}>
-                        <UserPost userPost={item}/>
-                    </div>
-                )}
+                {userPosts
+                    ? userPosts.value.data.map((item, index) =>
+                        <div key={index}>
+                            <UserPost userPost={item}/>
+                        </div>
+                    )
+                    :
+                    <PostLoadingSkeleton/>
+                }
             </div>
         </div>
     );

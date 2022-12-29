@@ -1,0 +1,40 @@
+@import "src/styles/vars";
+
+.subsBlockSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.userSubBlockSkeleton {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 16px;
+  border-radius: 4px;
+  background-color: $LightWhite;
+  cursor: pointer;
+}
+
+.avatarSkeleton {
+  img {
+    border-radius: 1000px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.nameBlockSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nameSkeleton {
+  color: $TextDark;
+}
+
+.lastActivitySkeleton {
+  font-size: 12px;
+  color: $HelperGray;
+}

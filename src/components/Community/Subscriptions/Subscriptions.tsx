@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Subscriptions.module.scss'
-import { FilterItems, UserSub } from "../../../components-ui";
+import { FilterItems, SubsLoading, UserSub } from "../../../components-ui";
 import { userAPI } from "../../../services/UserService";
 import { useAppSelector } from "../../../hooks/redux";
 
@@ -12,12 +12,13 @@ export const Subscriptions = () => {
     return (
         <div className={styles.subscriptionsBlock}>
             <div className={styles.subscriptionsSortAndFind}>
-               <FilterItems/>
+                <FilterItems/>
             </div>
             <div className={styles.subscriptions}>
-                {subscriptionsData && subscriptionsData.value.map((dataSub) =>
-                    <UserSub dataSub={dataSub} key={dataSub.id}/>
-                )}
+                {subscriptionsData
+                    ? subscriptionsData.value.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
+                    : <SubsLoading/>
+                }
             </div>
         </div>
     );
