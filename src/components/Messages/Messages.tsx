@@ -36,6 +36,7 @@ export const Messages = () => {
 
             setDialogsData(dialogsData.value)
         }
+        // eslint-disable-next-line
     }, [dialogsData])
 
     useEffect(() => {

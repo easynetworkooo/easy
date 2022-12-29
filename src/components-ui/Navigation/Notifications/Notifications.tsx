@@ -27,6 +27,18 @@ export const Notifications: FC<NotificationsProps> = ({activeNotifications, setA
         navigate(`${USERS}/${name}`)
     }
 
+    const setTypeNotification = (typeNotification: string) => {
+        if (typeNotification === 'postLike') {
+            return 'put a like'
+        } else if (typeNotification === 'commentLike') {
+            return 'put a like on your comment'
+        } else if (typeNotification === 'message') {
+            return 'sent you a message'
+        } else if (typeNotification === 'subscribe') {
+            return 'subscribed to you'
+        }
+    }
+
     return (
         <div className={styles.notificationContainer}>
             <div className={styles.headerNotifications}>
@@ -42,13 +54,16 @@ export const Notifications: FC<NotificationsProps> = ({activeNotifications, setA
                         <div className={styles.notifications}>
                             <div className={styles.notification} key={key}>
                                 <div className={styles.notificationAvatar}>
-                                    <img src={notificationsData.userData.img ? `${serverURL}${notificationsData.userData.img}` : avatar} alt="avatar"/>
+                                    <img
+                                        src={notificationsData.userData.img ? `${serverURL}${notificationsData.userData.img}` : avatar}
+                                        alt="avatar"/>
                                 </div>
                                 <div className={styles.name}>
-                                    <span onClick={() => navigateToUserProfileHandler(notificationsData.userData.name)}>{notificationsData.userData.name}</span>
+                                    <span
+                                        onClick={() => navigateToUserProfileHandler(notificationsData.userData.name)}>{notificationsData.userData.name}</span>
                                 </div>
                                 <div className={styles.action}>
-                                    <span>{notificationsData.type}</span>
+                                    <span>{setTypeNotification(notificationsData.type)}</span>
                                 </div>
                             </div>
                         </div>
