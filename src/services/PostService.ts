@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IAllUserPosts, IPost, IPostCredentials } from "../models/IPost";
 import { serverURL } from "../constants/serverURL";
+import { ICommentResponse } from "../models/IComment";
 
 
 export const postAPI = createApi({
@@ -49,12 +50,13 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['Post']
         }),
-        fetchPostComments: build.mutation<any, {postid: number, page: number}>({
+        fetchPostComments: build.query<ICommentResponse, {postid: number, page: number}>({
             query: (commentCredentials) => ({
                 url: '/getPostComments',
                 method: 'POST',
                 body: commentCredentials
             }),
+            providesTags: ['Post']
         }),
         setLikeToComment: build.mutation<any, {commentid: number}>({
             query: (commentCredentials) => ({

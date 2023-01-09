@@ -19,7 +19,7 @@ import { DeletePostModal } from "../../DeletePostModal/DeletePostModal";
 
 export interface UserPostContentProps {
     userPost: IPost
-    setActiveModalComments: (active: boolean) => void
+    setActiveModalComments: any
     isLiked: boolean,
     setLiked: (liked: boolean) => void
     isCountLikes: number
@@ -120,7 +120,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
 
                 }
                 <IconElement image={comments} count={userPost.comments} type="normal"
-                             onClick={() => setActiveModalComments(false)}/>
+                             onClick={() => setActiveModalComments((prevState: any) => !prevState)}/>
                 <IconElement image={reposts} count={userPost.reposts} type="normal"
                              onClick={() => {
                                  if (activeUserId !== userPost.owner.id) setActiveRepostModal(prevState => !prevState)

@@ -1,19 +1,20 @@
 import React, { FC } from 'react';
 import styles from './CommentsPost.module.scss'
 import { Comment } from "./Comment/Comment";
+import { IComment } from "../../models/IComment";
 
 export interface CommentsPostProps {
     isSubtractTextarea: number
-    comments: []
-    fetchPostCommentsHandler: () => void
+    comments: IComment[]
+    onScrollHandler: (e: React.UIEvent<HTMLDivElement>) => void
 }
 
-export const CommentsPost: FC<CommentsPostProps> = ({isSubtractTextarea, comments, fetchPostCommentsHandler}) => {
+export const CommentsPost: FC<CommentsPostProps> = ({isSubtractTextarea, comments, onScrollHandler}) => {
 
     return (
-        <div className={styles.commentsBlock} style={{height: `${340 - isSubtractTextarea}px`}}>
-            {comments && comments.map((comment: any) =>
-                <Comment comment={comment} key={comment.id} fetchPostCommentsHandler={fetchPostCommentsHandler}/>
+        <div className={styles.commentsBlock} style={{height: `${340 - isSubtractTextarea}px`}} onScroll={onScrollHandler}>
+            {comments && comments.map((comment: any, key: number) =>
+                <Comment comment={comment} key={key}/>
             )}
         </div>
     );

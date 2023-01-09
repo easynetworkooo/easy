@@ -1,3 +1,8 @@
+export interface ICommentResponse {
+    status: number
+    value: IComment[]
+}
+
 export interface IComment {
     id: number
     date: string

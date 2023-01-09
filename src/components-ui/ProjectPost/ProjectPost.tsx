@@ -17,6 +17,11 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
     const [isSubtractTextarea,setSubtractTextarea] = useState<number>(0)
     const [isValueSend, setValueSend] = useState<string>('')
 
+
+    const onScrollHandler = () => {
+        console.log('test')
+    }
+
     return (
         <>
             <ProjectPostContent text={text} name={name} icon={icon} setActiveModal={setActiveModal} currentCount={120} maxCount={200}/>
@@ -24,7 +29,7 @@ export const ProjectPost:FC<ProjectPostProps> = ({icon, name, text}) => {
                 <div className={styles.modalContent}>
                     <ProjectPostContent icon={icon} name={name} text={text} setActiveModal={setActiveModal} currentCount={120} maxCount={200}/>
                     <div className={styles.comments}>
-                        <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={[]} fetchPostCommentsHandler={() => console.log('test')}/>
+                        <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={[]} onScrollHandler={onScrollHandler}/>
                     </div>
                     <div className={styles.sendBlock}>
                         <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setValue={setValueSend} sendHandler={() => console.log('t')}/>

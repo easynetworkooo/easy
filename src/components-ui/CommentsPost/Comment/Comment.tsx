@@ -12,10 +12,9 @@ import { serverURL } from "../../../constants/serverURL";
 
 export interface CommentProps {
     comment: IComment
-    fetchPostCommentsHandler: () => void
 }
 
-export const Comment:FC<CommentProps> = ({comment, fetchPostCommentsHandler}) => {
+export const Comment:FC<CommentProps> = ({comment}) => {
 
     const navigate = useNavigate()
     const [setLikeToComment] = postAPI.useSetLikeToCommentMutation()
@@ -25,10 +24,8 @@ export const Comment:FC<CommentProps> = ({comment, fetchPostCommentsHandler}) =>
     const setLikedHandle = async () => {
         if (isLiked) {
             await removeLikeToComment({commentid: comment.id})
-            await fetchPostCommentsHandler()
         } else {
             await setLikeToComment({commentid: comment.id})
-            await fetchPostCommentsHandler()
         }
         setLiked(!isLiked)
     }
