@@ -21,6 +21,7 @@ export interface IBellItem {
     type: string
     fromid: number
     toid: number
+    regdate: string
     userData: {
         id: number
         name: string

@@ -15,12 +15,33 @@ export interface NotificationsProps {
     setActiveModalNotification: (active: boolean) => void
 }
 
+interface groupsNotifications {
+    date: string
+    items: IBellItem[]
+}
 
 export const Notifications: FC<NotificationsProps> = ({activeNotifications, setActiveModalNotification}) => {
 
     const navigate = useNavigate()
 
     const notificationsData = useAppSelector(state => state.notificationsReducer.bell)
+
+    const groups = notificationsData.reduce((groups: any, item: IBellItem) => {
+        const date = item.regdate.split(' ')[0];
+        if (!groups[date]) {
+            groups[date] = [];
+        }
+        groups[date].push(item);
+        return groups;
+    }, {});
+
+    const groupsNotifications:groupsNotifications[] = Object.keys(groups).map((date) => {
+        return {
+            date,
+            items: groups[date]
+        };
+    });
+
 
     const navigateToUserProfileHandler = (name: string) => {
         setActiveModalNotification(false)
@@ -46,27 +67,29 @@ export const Notifications: FC<NotificationsProps> = ({activeNotifications, setA
                 <span>Notifications</span>
             </div>
             <div className={styles.allNotificationsBlock}>
-                {notificationsData.map((notificationsData: IBellItem, key) =>
+                {groupsNotifications.map((notifications, key) =>
                     <div className={styles.notificationsBlock} key={key}>
                         <div className={styles.notificationsDate}>
-                            <span>20 December</span>
+                            <span>{notifications.date}</span>
                         </div>
-                        <div className={styles.notifications}>
-                            <div className={styles.notification} key={key}>
-                                <div className={styles.notificationAvatar}>
-                                    <img
-                                        src={notificationsData.userData.img ? `${serverURL}${notificationsData.userData.img}` : avatar}
-                                        alt="avatar"/>
-                                </div>
-                                <div className={styles.name}>
+                        {notifications.items.map((notificationItem, key) =>
+                            <div className={styles.notifications} key={key}>
+                                <div className={styles.notification}>
+                                    <div className={styles.notificationAvatar}>
+                                        <img
+                                            src={notificationItem.userData.img ? `${serverURL}${notificationItem.userData.img}` : avatar}
+                                            alt="avatar"/>
+                                    </div>
+                                    <div className={styles.name}>
                                     <span
-                                        onClick={() => navigateToUserProfileHandler(notificationsData.userData.name)}>{notificationsData.userData.name}</span>
-                                </div>
-                                <div className={styles.action}>
-                                    <span>{setTypeNotification(notificationsData.type)}</span>
+                                        onClick={() => navigateToUserProfileHandler(notificationItem.userData.name)}>{notificationItem.userData.name}</span>
+                                    </div>
+                                    <div className={styles.action}>
+                                        <span>{setTypeNotification(notificationItem.type)}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 )}
             </div>
