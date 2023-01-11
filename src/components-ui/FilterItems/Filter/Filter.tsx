@@ -7,13 +7,25 @@ import { setCities } from "../../../helpers/setCities";
 
 export interface FilterProps {
     isSorterName: string
+    isSelectCountry: string
+    isSelectCity: string
+    isSelectCryptoInterests: string
+    setSelectCountry: (value: string) => void
+    setSelectCity: (value: string) => void
+    setSelectCryptoInterests: (value: string) => void
 }
 
-export const Filter:FC<FilterProps> = ({isSorterName}) => {
+export const Filter: FC<FilterProps> = ({
+                                            isSorterName,
+                                            isSelectCountry,
+                                            setSelectCountry,
+                                            setSelectCity,
+                                            isSelectCity,
+                                            isSelectCryptoInterests,
+                                            setSelectCryptoInterests
+                                        }) => {
 
-    const [isSelectCountry, setSelectCountry] = useState('')
-    const [isSelectCity, setSelectCity] = useState('')
-    const [isSelectCryptoInterests, setSelectCryptoInterests] = useState('')
+
     const [isSelectProjectOption, setSelectProjectOption] = useState('')
     const [isCodeCountry, setCodeCountry] = useState('')
 
@@ -39,7 +51,7 @@ export const Filter:FC<FilterProps> = ({isSorterName}) => {
 
     return (
         <div className={styles.filterBlock}>
-            {isSorterName === 'People' &&
+            {isSorterName === 'users' &&
                 <>
                     <Select isActiveSelect={isSelectCountry} setActiveSelect={setSelectCountry} placeholder="Country"
                             options={countries ? setCountries(countries.value.countries) : []}/>
@@ -49,9 +61,10 @@ export const Filter:FC<FilterProps> = ({isSorterName}) => {
                             placeholder="Crypto Interest" options={setCryptoInterests()}/>
                 </>
             }
-            {isSorterName === 'Project' &&
+            {isSorterName === 'project' &&
                 <>
-                    <Select isActiveSelect={isSelectProjectOption} setActiveSelect={setSelectProjectOption} options={['DEF', 'PRO']} placeholder='Waiting for launch'/>
+                    <Select isActiveSelect={isSelectProjectOption} setActiveSelect={setSelectProjectOption}
+                            options={['DEF', 'PRO']} placeholder='Waiting for launch'/>
                 </>
             }
 

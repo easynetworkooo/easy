@@ -25,15 +25,15 @@ export const ButtonsSorter: FC<ButtonsSorterProps> = ({isSorterName, isShowFilte
     return (
         <div className={styles.buttonSorterBlock}>
             {!isShowFilter &&
-                <div className={checkSorterStyles('All')}>
-                    <button onClick={() => setSorter('All')}><span>All</span></button>
+                <div className={checkSorterStyles('all')}>
+                    <button onClick={() => setSorter('all')}><span>All</span></button>
                 </div>
             }
-            <div className={checkSorterStyles('People')}>
-                <button onClick={() => setSorter('People')}><span>People</span></button>
+            <div className={checkSorterStyles('users')}>
+                <button onClick={() => setSorter('users')}><span>People</span></button>
             </div>
-            <div className={checkSorterStyles('Project')}>
-                <button onClick={() => setSorter('Project')}><span>Project</span></button>
+            <div className={checkSorterStyles('project')}>
+                <button onClick={() => setSorter('project')}><span>Project</span></button>
             </div>
         </div>
     );

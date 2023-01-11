@@ -5,9 +5,11 @@ import searchActive from '../../assets/UI/SearchActive.svg'
 
 export interface InputFindProps {
     setShowFilter: (show: boolean) => void
+    value: string
+    onChangeValue: (value: string) => void
 }
 
-export const InputFind: FC<InputFindProps> = ({setShowFilter}) => {
+export const InputFind: FC<InputFindProps> = ({setShowFilter, onChangeValue, value}) => {
 
     const [isFocus, setFocus] = useState(false)
 
@@ -18,7 +20,7 @@ export const InputFind: FC<InputFindProps> = ({setShowFilter}) => {
             </div>
             <div className={styles.inputFind}>
                 <input type="text" placeholder={'Search people or project'} onClick={() => setShowFilter(true)} onFocus={() => setFocus(true)}
-                       onBlur={() => setFocus(false)}/>
+                       onBlur={() => setFocus(false)} value={value} onChange={e => onChangeValue(e.target.value)}/>
             </div>
         </div>
     );

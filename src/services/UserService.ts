@@ -60,7 +60,7 @@ export const userAPI = createApi({
             }),
             providesTags: ['user']
         }),
-        fetchGetSubscribers: build.query<{status: number, value: IUserValue[]}, {id: number, page: number}>({
+        fetchGetSubscribers: build.query<{ status: number, value: IUserValue[] }, { id: number, page: number }>({
             query: ({id, page}) => ({
                 url: '/getSubscribers',
                 method: 'GET',
@@ -71,7 +71,7 @@ export const userAPI = createApi({
             }),
             providesTags: ['user']
         }),
-        fetchGetSubscriptions: build.query<{status: number, value: IUserValue[]}, {id: number, page: number}>({
+        fetchGetSubscriptions: build.query<{ status: number, value: IUserValue[] }, { id: number, page: number }>({
             query: ({id, page}) => ({
                 url: '/getSubscriptions',
                 method: 'GET',
@@ -82,7 +82,7 @@ export const userAPI = createApi({
             }),
             providesTags: ['user']
         }),
-        subscribeToUser: build.mutation<any, {id: number}>({
+        subscribeToUser: build.mutation<any, { id: number }>({
             query: (subscribeToUserId) => ({
                 url: '/subscribe',
                 method: 'POST',
@@ -90,7 +90,7 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ['user']
         }),
-        unSubscribeToUser: build.mutation<any, {id: number}>({
+        unSubscribeToUser: build.mutation<any, { id: number }>({
             query: (subscribeToUserId) => ({
                 url: '/unsubscribe',
                 method: 'POST',
@@ -105,11 +105,20 @@ export const userAPI = createApi({
                 body: dialogsCredentials
             }),
         }),
-        fetchGetMessages: build.mutation<any, {id: number, page: number}>({
+        fetchGetMessages: build.mutation<any, { id: number, page: number }>({
             query: (messagesCredentials) => ({
                 url: '/getMessages',
                 method: 'POST',
                 body: messagesCredentials
+            }),
+        }),
+        searchUsers: build.mutation<any, { page: number, type: string, text?: string, interest?: string, country?: string, city?: string }>({
+            query: (searchCredentials) => ({
+                url: '/search',
+                method: 'GET',
+                params: {
+                    ...searchCredentials
+                }
             }),
         }),
     })
