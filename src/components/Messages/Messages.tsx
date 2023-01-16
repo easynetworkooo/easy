@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Messages.module.scss'
-import { UserDialog } from "./UserDialog/UserDialog";
 import { InputSend } from "../../components-ui";
 import { io } from "socket.io-client";
 import { userAPI } from "../../services/UserService";
@@ -8,6 +7,8 @@ import { useAppSelector } from "../../hooks/redux";
 import { serverURL } from "../../constants/serverURL";
 import { useLocation } from "react-router-dom";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
+import { paginationCount } from "../../constants/pagintaionCount";
+import UserDialogs from "./UserDialogs/UserDialogs";
 
 export const Messages = () => {
 
@@ -18,21 +19,26 @@ export const Messages = () => {
     const [isSendValueMessage, setSendValueMessage] = useState('')
     const [isUserIdToSend, setUserIdToSend] = useState(0)
     const [isDialogData, setDialogsData] = useState<any>([])
+    const [currentCountDialogs, setCurrentCountDialogs] = useState(paginationCount)
+    const [currentCountMessages, setCurrentCountMessages] = useState(10)
     const [isMessagesData, setMessagesData] = useState<any[]>([])
 
     const socket = useRef<any>()
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
-    const {data: dialogsData, refetch: dialogsDataRefetch} = userAPI.useFetchGetDialogsQuery({page: 1})
+    const {
+        data: dialogsData,
+        refetch: dialogsDataRefetch
+    } = userAPI.useFetchGetDialogsQuery({count: currentCountDialogs})
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
 
     useEffect(() => {
         if (dialogsData) {
-            if (isDialogData.length > 0) {
-                if ((isDialogData.find((item: any) => item.opponentId === isUserIdToSend).opponentId) === dialogsData.value[0].opponentId) {
-                    openDialogHandle(0, dialogsData.value[0].opponentId)
-                }
-            }
+            // if (isDialogData.length > 0) {
+            //     if ((isDialogData.find((item: any) => item.opponentId === isUserIdToSend).opponentId) === dialogsData.value[0].opponentId) {
+            //         openDialogHandle(0, dialogsData.value[0].opponentId)
+            //     }
+            // }
 
             setDialogsData(dialogsData.value)
         }
@@ -44,7 +50,10 @@ export const Messages = () => {
             setUserIdToSend(location.state.dialog.opponentId)
             if (dialogsData.value.find(data => data.opponentId === location.state.dialog.opponentId)) {
                 setOpenMessages(dialogsData.value.findIndex(data => data.opponentId === location.state.dialog.opponentId))
-                fetchGetMessages({id: location.state.dialog.opponentId, page: 1}).then((data: any) => {
+                fetchGetMessages({
+                    id: location.state.dialog.opponentId,
+                    count: currentCountMessages
+                }).then((data: any) => {
                     setMessagesData(data.data.value)
                 })
             } else {
@@ -82,7 +91,7 @@ export const Messages = () => {
     const openDialogHandle = async (index: number, id: number) => {
         setOpenMessages(index)
         try {
-            const messages: any = await fetchGetMessages({id: id, page: 1})
+            const messages: any = await fetchGetMessages({id: id, count: 10})
             if (messages.data.status === 200) {
                 setMessagesData(messages.data.value)
                 setUserIdToSend(id)
@@ -92,18 +101,24 @@ export const Messages = () => {
         }
     }
 
+    const onScrollMessageHandler = async (e: React.UIEvent<HTMLDivElement>) => {
+        if (e.currentTarget.scrollHeight - e.currentTarget.clientHeight - (Math.abs(e.currentTarget.scrollTop)) === 0 && dialogsData) {
+            await fetchGetMessages({id: isUserIdToSend, count: currentCountMessages + 10}).then((data: any) => {
+                setCurrentCountMessages(prevState => prevState + 10)
+                setMessagesData(data.data.value)
+            })
+        }
+    }
+
     return (
         <div className={styles.messagesContainer}>
             <div className={styles.userMessagesBlock}>
-                <div className={styles.userMessages}>
-                    {isDialogData && isDialogData.map((item: any, index: number) =>
-                        <UserDialog key={index} dialogData={item} index={index}
-                                    isOpenMessages={isOpenMessages} openDialogHandler={openDialogHandle}/>
-                    )}
-                </div>
+                <UserDialogs isDialogData={isDialogData} isOpenMessages={isOpenMessages}
+                             openDialogHandle={openDialogHandle} setCurrentCountDialogs={setCurrentCountDialogs}/>
             </div>
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
-                <div className={styles.messages} style={{height: `${720 - isMessageBlockHeight}px`}}>
+                <div className={styles.messages} style={{height: `${720 - isMessageBlockHeight}px`}}
+                     onScroll={onScrollMessageHandler}>
                     {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
                         <React.Fragment key={index}>
                             {(item.fromid === isUserIdToSend || item.fromid === activeUserId) &&

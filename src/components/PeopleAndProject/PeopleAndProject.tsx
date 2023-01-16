@@ -4,29 +4,37 @@ import { FilterItems, PostLoadingSkeleton, ProjectPost, UserPost } from "../../c
 import avatarProject from '../../assets/UI/AvatarProject.png'
 import { postAPI } from "../../services/PostService";
 import { IPost } from "../../models/IPost";
+import { paginationCount } from "../../constants/pagintaionCount";
+
 
 
 export const PeopleAndProject = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
-    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({userId: 1, page: currentPage})
+    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({
+        userId: 1,
+        count: currentCount
+    })
 
 
     useEffect(() => {
-        if (currentPage === 1 && usersPosts) {
+        if (usersPosts) {
             setPosts(usersPosts.value.data)
         }
-        if (usersPosts && isFetching && usersPosts.value.data.length > 0) {
-            setPosts((prevState) => [...prevState, ...usersPosts.value.data])
-            setCurrentPage(prevState => prevState + 1)
+    }, [usersPosts])
+
+    useEffect(() => {
+        if (isFetching && usersPosts && currentCount <= usersPosts.value.data.length) {
+            setCurrentCount(prevState => prevState + paginationCount)
         }
         // eslint-disable-next-line
-    }, [isFetching, usersPosts])
+    }, [isFetching, posts])
+
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 100) {
+        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) === 1) {
             setFetching(true)
         } else {
             setFetching(false)

@@ -60,24 +60,26 @@ export const userAPI = createApi({
             }),
             providesTags: ['user']
         }),
-        fetchGetSubscribers: build.query<{ status: number, value: IUserValue[] }, { id: number, page: number }>({
-            query: ({id, page}) => ({
+        fetchGetSubscribers: build.query<{ status: number, value: IUserValue[] }, { id: number, page?: number, count?: number }>({
+            query: ({id, page, count}) => ({
                 url: '/getSubscribers',
                 method: 'GET',
                 params: {
                     id: id,
-                    page: page
+                    page: page,
+                    count: count
                 }
             }),
             providesTags: ['user']
         }),
-        fetchGetSubscriptions: build.query<{ status: number, value: IUserValue[] }, { id: number, page: number }>({
-            query: ({id, page}) => ({
+        fetchGetSubscriptions: build.query<{ status: number, value: IUserValue[] }, { id: number, page?: number, count?: number }>({
+            query: ({id, page, count}) => ({
                 url: '/getSubscriptions',
                 method: 'GET',
                 params: {
                     id: id,
-                    page: page
+                    page: page,
+                    count: count
                 }
             }),
             providesTags: ['user']
@@ -98,14 +100,14 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ['user']
         }),
-        fetchGetDialogs: build.query<IDialog, { page: number }>({
+        fetchGetDialogs: build.query<IDialog, { page?: number, count: number }>({
             query: (dialogsCredentials) => ({
                 url: '/getDialogs',
                 method: 'POST',
                 body: dialogsCredentials
             }),
         }),
-        fetchGetMessages: build.mutation<any, { id: number, page: number }>({
+        fetchGetMessages: build.mutation<any, { id: number, page?: number, count: number }>({
             query: (messagesCredentials) => ({
                 url: '/getMessages',
                 method: 'POST',

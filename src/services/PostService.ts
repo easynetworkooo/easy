@@ -50,7 +50,7 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['Post']
         }),
-        fetchPostComments: build.query<ICommentResponse, {postid: number, page: number}>({
+        fetchPostComments: build.query<ICommentResponse, {postid: number, page?: number, count?: number}>({
             query: (commentCredentials) => ({
                 url: '/getPostComments',
                 method: 'POST',
@@ -82,13 +82,14 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['Post']
         }),
-        fetchAllUserPosts: build.query<IAllUserPosts, {userId: number, page: number}>({
-            query: ({userId, page}) => ({
+        fetchAllUserPosts: build.query<IAllUserPosts, {userId: number, page?: number, count?: number}>({
+            query: ({userId, page, count}) => ({
                 url: '/getAllBlogPosts',
                 method: 'GET',
                 params: {
                     id: userId,
-                    page: page
+                    page: page,
+                    count: count
                 }
             }),
             providesTags: ['Post']

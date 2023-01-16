@@ -5,17 +5,18 @@ import { postAPI } from "../../services/PostService";
 import { useAppSelector } from "../../hooks/redux";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { IPost } from "../../models/IPost";
+import { paginationCount } from "../../constants/pagintaionCount";
 
 
 export const MyBlog = () => {
     const {id} = useAppSelector(state => state.userReducer)
     const [createBlogPost] = postAPI.useCreateBlogPostMutation()
     const [posts, setPosts] = useState<IPost[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
     const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery({
         userId: id,
-        page: currentPage
+        count: currentCount
     })
 
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
@@ -32,18 +33,20 @@ export const MyBlog = () => {
     }
 
     useEffect(() => {
-        if (currentPage === 1 && userPosts) {
+        if (userPosts) {
             setPosts(userPosts.value.data)
         }
-        if (userPosts && isFetching && userPosts.value.data.length > 0) {
-            setPosts((prevState) => [...prevState, ...userPosts.value.data])
-            setCurrentPage(prevState => prevState + 1)
+    }, [userPosts])
+
+    useEffect(() => {
+        if (isFetching && userPosts && currentCount <= userPosts.value.data.length) {
+            setCurrentCount(prevState => prevState + paginationCount)
         }
         // eslint-disable-next-line
-    }, [isFetching, userPosts])
+    }, [isFetching, posts])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 100) {
+        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) === 1) {
             setFetching(true)
         } else {
             setFetching(false)
