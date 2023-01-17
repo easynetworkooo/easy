@@ -28,7 +28,7 @@ export const UserDialogs: FC<UserDialogsProps> = ({
     }, [isFetching])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) === 0) {
+        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {
             setFetching(true)
         } else {
             setFetching(false)

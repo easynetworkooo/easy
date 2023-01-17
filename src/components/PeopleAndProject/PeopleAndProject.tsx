@@ -34,7 +34,7 @@ export const PeopleAndProject = () => {
 
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) === 1) {
+        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {
             setFetching(true)
         } else {
             setFetching(false)

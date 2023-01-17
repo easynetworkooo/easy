@@ -102,7 +102,7 @@ export const Messages = () => {
     }
 
     const onScrollMessageHandler = async (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - e.currentTarget.clientHeight - (Math.abs(e.currentTarget.scrollTop)) === 0 && dialogsData) {
+        if (e.currentTarget.scrollHeight - e.currentTarget.clientHeight - (Math.abs(e.currentTarget.scrollTop)) < 1 && dialogsData) {
             await fetchGetMessages({id: isUserIdToSend, count: currentCountMessages + 10}).then((data: any) => {
                 setCurrentCountMessages(prevState => prevState + 10)
                 setMessagesData(data.data.value)
