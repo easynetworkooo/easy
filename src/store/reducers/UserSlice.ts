@@ -12,7 +12,8 @@ const initialState: IUserProfile = {
     interests: [],
     img: '',
     subscribers: 0,
-    subscriptions: 0
+    subscriptions: 0,
+    bellstatus: 0
 }
 
 export const userSlice = createSlice({
@@ -30,6 +31,7 @@ export const userSlice = createSlice({
             state.img = action.payload.img
             state.subscribers = action.payload.subscribers
             state.subscriptions = action.payload.subscriptions
+            state.bellstatus = action.payload.bellstatus
         },
         setUserAfterAuthContinue(state, action: PayloadAction<IUserProfileContinueAuth>) {
             state.name = action.payload.name
@@ -39,6 +41,9 @@ export const userSlice = createSlice({
         },
         setAvatarReducer(state, action: PayloadAction<{ img: string }>) {
             state.img = action.payload.img
+        },
+        setViewBellReducer(state, action: PayloadAction<number>) {
+            state.bellstatus = action.payload
         },
     }
 })

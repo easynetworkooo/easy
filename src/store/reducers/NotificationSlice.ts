@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INotificationsValue } from "../../models/INotifications";
+import { IBellItem, INotificationsValue } from "../../models/INotifications";
 
 
 const initialState: INotificationsValue = {
@@ -23,7 +23,7 @@ export const notificationSlice = createSlice({
             state.main = action.payload.main
             state.buttons = action.payload.buttons
             state.bell = action.payload.bell
-        }
+        },
     }
 })
 

@@ -3,16 +3,19 @@ import styles from './Messages.module.scss'
 import { InputSend } from "../../components-ui";
 import { io } from "socket.io-client";
 import { userAPI } from "../../services/UserService";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { serverURL } from "../../constants/serverURL";
 import { useLocation } from "react-router-dom";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { paginationCount } from "../../constants/pagintaionCount";
 import UserDialogs from "./UserDialogs/UserDialogs";
+import { notificationSlice } from "../../store/reducers/NotificationSlice";
 
 export const Messages = () => {
 
     const location: any = useLocation()
+
+    const dispatch = useAppDispatch()
 
     const [isMessageBlockHeight, setMessageBlockHeight] = useState(0)
     const [isOpenMessages, setOpenMessages] = useState<number | null>(null)
@@ -26,10 +29,14 @@ export const Messages = () => {
     const socket = useRef<any>()
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
+    const {setNotificationsReducer} = notificationSlice.actions
+
     const {
         data: dialogsData,
         refetch: dialogsDataRefetch
     } = userAPI.useFetchGetDialogsQuery({count: currentCountDialogs})
+
+    const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
 
     useEffect(() => {
@@ -96,6 +103,9 @@ export const Messages = () => {
                 setMessagesData(messages.data.value)
                 setUserIdToSend(id)
             }
+            await fetchUserNotification('').then((data: any) => {
+                dispatch(setNotificationsReducer(data.data.value))
+            })
         } catch (e: any) {
             customErrorNotify(e, 'Error')
         }

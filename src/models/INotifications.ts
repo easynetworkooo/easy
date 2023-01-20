@@ -17,7 +17,7 @@ export interface INotificationsValue {
 }
 
 export interface IBellItem {
-    id: number
+    id: number | string
     type: string
     fromid: number
     toid: number

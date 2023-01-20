@@ -33,6 +33,12 @@ export const userAPI = createApi({
                 method: 'GET'
             })
         }),
+        setViewBell: build.mutation<any, string>({
+            query: () => ({
+                url: '/viewbell',
+                method: 'POST'
+            })
+        }),
         setMainAvatar: build.mutation<any, any>({
             query: (avatarImage) => ({
                 url: '/setMainPhoto',

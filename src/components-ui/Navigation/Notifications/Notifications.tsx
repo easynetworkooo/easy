@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './Notifications.module.scss'
 import notifications from '../../../assets/UI/Notifications.svg'
 import notificationsActive from '../../../assets/UI/NotificationsActive.svg'
@@ -11,7 +11,7 @@ import { USERS } from "../../../constants/nameRoutesConsts";
 
 
 export interface NotificationsProps {
-    activeNotifications: boolean
+    bellNotification: number
     setActiveModalNotification: (active: boolean) => void
 }
 
@@ -20,28 +20,33 @@ interface groupsNotifications {
     items: IBellItem[]
 }
 
-export const Notifications: FC<NotificationsProps> = ({activeNotifications, setActiveModalNotification}) => {
+export const Notifications: FC<NotificationsProps> = ({bellNotification, setActiveModalNotification}) => {
 
     const navigate = useNavigate()
 
     const notificationsData = useAppSelector(state => state.notificationsReducer.bell)
+    
+    const [isGroupsNotifications, setIsGroupsNotifications] = useState<groupsNotifications[] | []>([])
 
-    const groups = notificationsData.reduce((groups: any, item: IBellItem) => {
-        const date = item.regdate.split(' ')[0];
-        if (!groups[date]) {
-            groups[date] = [];
-        }
-        groups[date].push(item);
-        return groups;
-    }, {});
+    useEffect(() => {
+        const groups = notificationsData.reduce((groups: any, item: IBellItem) => {
+            const date = item.regdate.split(' ')[0];
+            if (!groups[date]) {
+                groups[date] = [];
+            }
+            groups[date].push(item);
+            return groups;
+        }, {});
 
-    const groupsNotifications:groupsNotifications[] = Object.keys(groups).map((date) => {
-        return {
-            date,
-            items: groups[date]
-        };
-    });
+        const groupsNotifications: groupsNotifications[] = Object.keys(groups).map((date) => {
+            return {
+                date,
+                items: groups[date]
+            };
+        });
 
+        setIsGroupsNotifications(groupsNotifications)
+    }, [notificationsData])
 
     const navigateToUserProfileHandler = (name: string) => {
         setActiveModalNotification(false)
@@ -63,11 +68,11 @@ export const Notifications: FC<NotificationsProps> = ({activeNotifications, setA
     return (
         <div className={styles.notificationContainer}>
             <div className={styles.headerNotifications}>
-                <img src={activeNotifications ? notificationsActive : notifications} alt="notifications"/>
+                <img src={bellNotification ? notificationsActive : notifications} alt="notifications"/>
                 <span>Notifications</span>
             </div>
             <div className={styles.allNotificationsBlock}>
-                {groupsNotifications.map((notifications, key) =>
+                {isGroupsNotifications.map((notifications, key) =>
                     <div className={styles.notificationsBlock} key={key}>
                         <div className={styles.notificationsDate}>
                             <span>{notifications.date}</span>

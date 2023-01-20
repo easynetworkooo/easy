@@ -9,6 +9,7 @@ export interface IUserProfile {
     img: string,
     subscribers: number
     subscriptions: number
+    bellstatus: number
 }
 
 export interface IUserProfileContinueAuth {

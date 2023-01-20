@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import styles from './Navigation.module.scss'
 import navigationLogo from '../../assets/Navigation/NavigationLogo.svg'
@@ -7,13 +7,50 @@ import notificationsActive from '../../assets/UI/NotificationsActive.svg'
 import { MY_BLOG, PEOPLE_AND_PROJECTS, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
 import { Modal } from "../Modal/Modal";
 import { Notifications } from "./Notifications/Notifications";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { userAPI } from "../../services/UserService";
+import { userSlice } from "../../store/reducers/UserSlice";
+import { io, Socket } from "socket.io-client";
+import { serverURL } from "../../constants/serverURL";
+import { notificationSlice } from "../../store/reducers/NotificationSlice";
 
 export const Navigation = () => {
 
     const checkActiveLink = ({isActive}: any) => isActive ? styles.linkActive : styles.link
+    const bellNotification = useAppSelector(state => state.userReducer.bellstatus)
 
-    const [isActiveNotifications, setActiveNotifications] = useState(true)
     const [isModalNotifications, setModalNotifications] = useState(false)
+
+    const {setViewBellReducer} = userSlice.actions
+    const {setNotificationsReducer} = notificationSlice.actions
+    const dispatch = useAppDispatch()
+    const [setViewBell] = userAPI.useSetViewBellMutation()
+    const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
+
+    const socket = useRef<Socket>()
+
+    useEffect(() => {
+        socket.current = io(serverURL, {
+            extraHeaders: {
+                "Authorization": `${localStorage.getItem('auth')}`
+            }
+        })
+
+        socket.current.on('bellSocket', async () => {
+            dispatch(setViewBellReducer(1))
+            await fetchUserNotification('').then((data: any) => {
+                dispatch(setNotificationsReducer(data.data.value))
+            })
+        })
+        // eslint-disable-next-line
+    }, [])
+
+    const setViewBellHandler = () => {
+        if (bellNotification === 1) {
+            setViewBell('').then(() => dispatch(setViewBellReducer(0)))
+        }
+        setModalNotifications(true)
+    }
 
     return (
         <nav className={styles.navigationBlock}>
@@ -32,14 +69,11 @@ export const Navigation = () => {
                 </div>
             </div>
             <div className={styles.notificationsBlock}>
-                <img src={isActiveNotifications ? notificationsActive : notifications} alt="notifications"
-                     onClick={() => {
-                         setActiveNotifications(false)
-                         setModalNotifications(true)
-                     }}/>
+                <img src={bellNotification ? notificationsActive : notifications} alt="notifications"
+                     onClick={setViewBellHandler}/>
             </div>
             <Modal active={isModalNotifications} setActive={setModalNotifications}>
-                <Notifications activeNotifications={isActiveNotifications} setActiveModalNotification={setModalNotifications}/>
+                <Notifications bellNotification={bellNotification} setActiveModalNotification={setModalNotifications}/>
             </Modal>
         </nav>
     );
