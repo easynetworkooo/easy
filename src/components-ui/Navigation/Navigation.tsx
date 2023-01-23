@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import styles from './Navigation.module.scss'
 import navigationLogo from '../../assets/Navigation/NavigationLogo.svg'
@@ -10,14 +10,13 @@ import { Notifications } from "./Notifications/Notifications";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { userAPI } from "../../services/UserService";
 import { userSlice } from "../../store/reducers/UserSlice";
-import { io, Socket } from "socket.io-client";
-import { serverURL } from "../../constants/serverURL";
 import { notificationSlice } from "../../store/reducers/NotificationSlice";
 
 export const Navigation = () => {
 
     const checkActiveLink = ({isActive}: any) => isActive ? styles.linkActive : styles.link
     const bellNotification = useAppSelector(state => state.userReducer.bellstatus)
+    const socket = useAppSelector(state => state.socketReducer.socket)
 
     const [isModalNotifications, setModalNotifications] = useState(false)
 
@@ -27,16 +26,8 @@ export const Navigation = () => {
     const [setViewBell] = userAPI.useSetViewBellMutation()
     const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
 
-    const socket = useRef<Socket>()
-
     useEffect(() => {
-        socket.current = io(serverURL, {
-            extraHeaders: {
-                "Authorization": `${localStorage.getItem('auth')}`
-            }
-        })
-
-        socket.current.on('bellSocket', async () => {
+        socket.on('bellSocket', async () => {
             dispatch(setViewBellReducer(1))
             await fetchUserNotification('').then((data: any) => {
                 dispatch(setNotificationsReducer(data.data.value))

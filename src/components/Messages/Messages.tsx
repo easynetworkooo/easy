@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Messages.module.scss'
 import { InputSend } from "../../components-ui";
-import { io } from "socket.io-client";
 import { userAPI } from "../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { serverURL } from "../../constants/serverURL";
 import { useLocation } from "react-router-dom";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { paginationCount } from "../../constants/pagintaionCount";
@@ -26,9 +24,9 @@ export const Messages = () => {
     const [currentCountMessages, setCurrentCountMessages] = useState(10)
     const [isMessagesData, setMessagesData] = useState<any[]>([])
 
-    const socket = useRef<any>()
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
+    const socket = useAppSelector(state => state.socketReducer.socket)
     const {setNotificationsReducer} = notificationSlice.actions
 
     const {
@@ -77,13 +75,7 @@ export const Messages = () => {
     }, [dialogsData])
 
     useEffect(() => {
-        socket.current = io(serverURL, {
-            extraHeaders: {
-                "Authorization": `${localStorage.getItem('auth')}`
-            }
-        })
-
-        socket.current.on('message', (data: any) => {
+        socket.on('message', (data: any) => {
             setMessagesData(prevState => [data.value, ...prevState])
             dialogsDataRefetch()
         })
@@ -91,7 +83,7 @@ export const Messages = () => {
     }, [])
 
     const sendMessageHandler = () => {
-        socket.current.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
+        socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
         setOpenMessages(0)
     }
 

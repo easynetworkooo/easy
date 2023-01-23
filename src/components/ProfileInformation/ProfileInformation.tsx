@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ProfileInformation.module.scss'
 import { AvatarChangeModal, Button, IconElement } from "../../components-ui";
 import { MenuItem } from "./MenuItem/MenuItem";
@@ -21,7 +21,6 @@ import activeWallet from '../../assets/Profile/ActiveWallet.svg'
 import myProject from '../../assets/Profile/MyProjects.svg'
 import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
 import { serverURL } from "../../constants/serverURL";
-import { io } from "socket.io-client";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 
 export const ProfileInformation = () => {
@@ -29,15 +28,17 @@ export const ProfileInformation = () => {
     const [isActiveModalChangeAvatar, setActiveModalChangeAvatar] = useState(false)
 
     const {logoutReducer} = authSlice.actions
+
     const {name, img} = useAppSelector(state => state.userReducer)
     const {likes, reposts, views} = useAppSelector(state => state.notificationsReducer.main)
     const {messages, subscribers} = useAppSelector(state => state.notificationsReducer.buttons)
+    const socket = useAppSelector(state => state.socketReducer.socket)
+
     const [isLikes, setLikes] = useState(likes)
     const [isReposts, setReposts] = useState(reposts)
     const [isViews, setViews] = useState(views)
     const dispatch = useAppDispatch()
 
-    const socket = useRef<any>()
     const navigate = useNavigate()
 
     const [logout] = authAPI.useLogoutMutation()
@@ -56,13 +57,7 @@ export const ProfileInformation = () => {
     }
 
     useEffect(() => {
-        socket.current = io(serverURL, {
-            extraHeaders: {
-                "Authorization": `${localStorage.getItem('auth')}`
-            }
-        })
-
-        socket.current.on('mainNotification', (data: any) => {
+        socket.on('mainNotification', (data: any) => {
             if (data.type === 'addMainLike') {
                 setLikes(prev => prev ? prev + 1 : 1)
             }
@@ -76,6 +71,8 @@ export const ProfileInformation = () => {
                 setReposts(prev => prev ? prev + 1 : 1)
             }
         })
+
+        // eslint-disable-next-line
     }, [])
 
     return (

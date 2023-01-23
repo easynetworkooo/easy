@@ -25,7 +25,7 @@ export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(appAPI.middleware).concat(authAPI.middleware).concat(userAPI.middleware).concat(postAPI.middleware)
+            getDefaultMiddleware({serializableCheck: false}).concat(appAPI.middleware).concat(authAPI.middleware).concat(userAPI.middleware).concat(postAPI.middleware)
 
     })
 }
