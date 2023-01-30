@@ -14,7 +14,7 @@ export const PeopleAndProject = () => {
     const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
     const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({
-        userId: 1,
+        userId: 59,
         count: currentCount
     })
 

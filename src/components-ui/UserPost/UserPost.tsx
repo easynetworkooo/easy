@@ -1,12 +1,6 @@
 import React, { FC, useState } from 'react';
-import styles from './UserPost.module.scss'
 import { UserPostContent } from "./UserPostContent/UserPostContent";
-import { Modal } from "../Modal/Modal";
-import { CommentsPost } from "../CommentsPost/CommentsPost";
-import { InputSend } from "../InputSend/InputSend";
 import { IPost } from "../../models/IPost";
-import { postAPI } from "../../services/PostService";
-import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { CommentsModal } from "./CommentsModal/CommentsModal";
 
 

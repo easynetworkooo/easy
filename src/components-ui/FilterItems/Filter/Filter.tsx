@@ -47,6 +47,7 @@ export const Filter: FC<FilterProps> = ({
         if (countries) {
             countries.value.countries.find(({name, code}) => name === isSelectCountry && setCodeCountry(code))
         }
+        // eslint-disable-next-line
     }, [countries, isSelectCountry])
 
     return (
