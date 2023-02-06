@@ -99,7 +99,7 @@ export const ProfileInformation = () => {
             <div className={styles.menuLinksProfile}>
                 <MenuItem image={messagesImg} countNotification={messages} menuText={'Messages'} to={MESSAGES}
                           activeImage={activeMessages}/>
-                <MenuItem image={community} countNotification={subscribers} menuText={'My Community'} to={COMMUNITY}
+                <MenuItem image={community} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}
                           activeImage={activeCommunity}/>
                 <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
                 <MenuItem image={myProject} menuText={'My Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
