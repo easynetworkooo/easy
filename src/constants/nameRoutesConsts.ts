@@ -1,5 +1,5 @@
 export const AUTH = '/auth'
-export const PEOPLE_AND_PROJECTS = '/people-and-projects'
+export const PEOPLE_AND_PROJECTS = '/'
 export const AUTH_CONTINUE = '/auth-continue'
 export const MY_BLOG = '/blog'
 export const SUBSCRIPTIONS = '/subscriptions'

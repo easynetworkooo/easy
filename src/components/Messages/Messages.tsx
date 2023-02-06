@@ -75,12 +75,14 @@ export const Messages = () => {
     }, [dialogsData])
 
     useEffect(() => {
-        socket.on('message', (data: any) => {
-            setMessagesData(prevState => [data.value, ...prevState])
-            dialogsDataRefetch()
-        })
+        if (Object.keys(socket).length !== 0) {
+            socket.on('message', (data: any) => {
+                setMessagesData(prevState => [data.value, ...prevState])
+                dialogsDataRefetch()
+            })
+        }
         // eslint-disable-next-line
-    }, [])
+    }, [socket])
 
     const sendMessageHandler = () => {
         socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))

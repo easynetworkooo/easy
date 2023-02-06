@@ -27,14 +27,16 @@ export const Navigation = () => {
     const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
 
     useEffect(() => {
-        socket.on('bellSocket', async () => {
-            dispatch(setViewBellReducer(1))
-            await fetchUserNotification('').then((data: any) => {
-                dispatch(setNotificationsReducer(data.data.value))
+        if (Object.keys(socket).length !== 0) {
+            socket.on('bellSocket', async () => {
+                dispatch(setViewBellReducer(1))
+                await fetchUserNotification('').then((data: any) => {
+                    dispatch(setNotificationsReducer(data.data.value))
+                })
             })
-        })
+        }
         // eslint-disable-next-line
-    }, [])
+    }, [socket])
 
     const setViewBellHandler = () => {
         if (bellNotification === 1) {

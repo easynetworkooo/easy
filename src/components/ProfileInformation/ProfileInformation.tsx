@@ -57,23 +57,25 @@ export const ProfileInformation = () => {
     }
 
     useEffect(() => {
-        socket.on('mainNotification', (data: any) => {
-            if (data.type === 'addMainLike') {
-                setLikes(prev => prev ? prev + 1 : 1)
-            }
-            if (data.type === 'removeMainLike') {
-                setLikes(prev => prev ? prev - 1 : null)
-            }
-            if (data.type === 'addView') {
-                setViews(prev => prev ? prev + 1 : 1)
-            }
-            if (data.type === 'addRepost') {
-                setReposts(prev => prev ? prev + 1 : 1)
-            }
-        })
+        if (Object.keys(socket).length !== 0) {
+            socket.on('mainNotification', (data: any) => {
+                if (data.type === 'addMainLike') {
+                    setLikes(prev => prev ? prev + 1 : 1)
+                }
+                if (data.type === 'removeMainLike') {
+                    setLikes(prev => prev ? prev - 1 : null)
+                }
+                if (data.type === 'addView') {
+                    setViews(prev => prev ? prev + 1 : 1)
+                }
+                if (data.type === 'addRepost') {
+                    setReposts(prev => prev ? prev + 1 : 1)
+                }
+            })
+        }
 
         // eslint-disable-next-line
-    }, [])
+    }, [socket])
 
     return (
         <div className={styles.profileBlock}>
