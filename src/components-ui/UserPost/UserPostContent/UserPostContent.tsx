@@ -6,7 +6,6 @@ import like from "../../../assets/UI/Likes.svg";
 import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
-import share from "../../../assets/UI/Share.svg";
 import deleteBasket from '../../../assets/UI/DeletePostBasket.png'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
@@ -125,7 +124,6 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                              onClick={() => {
                                  if (activeUserId !== userPost.owner.id) setActiveRepostModal(prevState => !prevState)
                              }}/>
-                <IconElement image={share}/>
             </div>
             <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal}
                          postId={userPost.id}/>

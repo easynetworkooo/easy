@@ -5,7 +5,6 @@ import { IconElement } from "../../IconElement/IconElement";
 import like from "../../../assets/UI/Likes.svg";
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
-import share from "../../../assets/UI/Share.svg";
 import { useNavigate } from "react-router-dom";
 import { PROJECTS } from "../../../constants/nameRoutesConsts";
 import { IndicatorStatus } from "../../IndicatorStatus/IndicatorStatus";
@@ -72,7 +71,6 @@ export const ProjectPostContent: FC<ProjectPostContentProps> = ({icon, name, tex
                 }
                 <IconElement image={comments} count={20} onClick={() => setActiveModal(true)} type="normal"/>
                 <IconElement image={reposts} count={10} type="normal"/>
-                <IconElement image={share}/>
             </div>
         </div>
     );
