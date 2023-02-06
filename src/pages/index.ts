@@ -1,6 +1,6 @@
 export { AuthPage } from './Auth-page/AuthPage'
 export { AuthContinuePage } from './Auth-continue-page/AuthContinuePage'
-export { PeopleAndProjectsPage } from './People-and-projects-page/PeopleAndProjectsPage'
+export { ContentPage } from './Content-page/ContentPage'
 export { MyBlogPage } from './My-blog-page/MyBlogPage'
 export { SubscriptionPage } from './Subscriptions-page/SubscriptionPage'
 export { MessagesPage } from './Messages-page/MessagesPage'

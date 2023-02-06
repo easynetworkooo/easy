@@ -4,7 +4,7 @@ import styles from './Navigation.module.scss'
 import navigationLogo from '../../assets/Navigation/NavigationLogo.svg'
 import notifications from '../../assets/UI/Notifications.svg'
 import notificationsActive from '../../assets/UI/NotificationsActive.svg'
-import { MY_BLOG, PEOPLE_AND_PROJECTS, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
+import { CONTENT, MY_BLOG, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
 import { Modal } from "../Modal/Modal";
 import { Notifications } from "./Notifications/Notifications";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -48,14 +48,14 @@ export const Navigation = () => {
     return (
         <nav className={styles.navigationBlock}>
             <div className={styles.logoNavigationBlock}>
-                <NavLink to={PEOPLE_AND_PROJECTS}><img src={navigationLogo} alt="logo"/></NavLink>
+                <NavLink to={CONTENT}><img src={navigationLogo} alt="logo"/></NavLink>
             </div>
             <div className={styles.itemsNavigationBlock}>
                 <div className={styles.itemNavigation}>
-                    <NavLink to={PEOPLE_AND_PROJECTS} className={checkActiveLink}>People and Projects</NavLink>
+                    <NavLink to={CONTENT} className={checkActiveLink}>New content</NavLink>
                 </div>
                 <div className={styles.itemNavigation}>
-                    <NavLink to={SUBSCRIPTIONS} className={checkActiveLink}>Subscriptions</NavLink>
+                    <NavLink to={SUBSCRIPTIONS} className={checkActiveLink}>Subscription content</NavLink>
                 </div>
                 <div className={styles.itemNavigation}>
                     <NavLink to={MY_BLOG} className={checkActiveLink}>My Blog</NavLink>

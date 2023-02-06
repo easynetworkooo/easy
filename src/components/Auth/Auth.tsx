@@ -6,7 +6,7 @@ import { Registration } from "./Registration/Registration";
 import { Recovery } from "./Recovery/Recovery";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ILocationFromState } from "../../models/ILocationFromState";
-import { PEOPLE_AND_PROJECTS } from "../../constants/nameRoutesConsts";
+import { CONTENT } from "../../constants/nameRoutesConsts";
 import { authSlice } from "../../store/reducers/AuthSlice";
 import { userSlice } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/redux";
@@ -32,7 +32,7 @@ export const Auth: FC = () => {
 
     const navigate = useNavigate()
     const location = useLocation();
-    const fromPathname = (location.state as ILocationFromState)?.from?.pathname || PEOPLE_AND_PROJECTS
+    const fromPathname = (location.state as ILocationFromState)?.from?.pathname || CONTENT
 
     const navigateHandler = async (continueAuth: boolean, userData: IUserProfile) => {
         const dataNotifications: any = await fetchUserNotifications('')

@@ -5,7 +5,7 @@ import { InterestItem } from "./InterestItem/IntrestItem";
 import { authSlice } from "../../../store/reducers/AuthSlice";
 import { useAppDispatch } from "../../../hooks/redux";
 import { useNavigate } from "react-router-dom";
-import { PEOPLE_AND_PROJECTS } from "../../../constants/nameRoutesConsts";
+import { CONTENT } from "../../../constants/nameRoutesConsts";
 import { appAPI } from "../../../services/AppService";
 import { authAPI } from "../../../services/AuthService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
@@ -36,7 +36,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
             if (finishDataRegister.data.status === 200) {
                 dispatch(loginReducer({isAuth: true, continueAuth: false}))
                 dispatch(setUserAfterAuthContinue({name: nickname, country, city, interests: isInterestItems}))
-                navigate(PEOPLE_AND_PROJECTS)
+                navigate(CONTENT)
                 customErrorNotify('Good luck!', 'Success')
             } else {
                 customErrorNotify(finishDataRegister.error.data.value, 'Error')

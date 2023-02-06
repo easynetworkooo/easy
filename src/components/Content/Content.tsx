@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './PeopleAndProjects.module.scss'
+import styles from './Content.module.scss'
 import { FilterItems, PostLoadingSkeleton, ProjectPost, UserPost } from "../../components-ui";
 import avatarProject from '../../assets/UI/AvatarProject.png'
 import { postAPI } from "../../services/PostService";
@@ -8,7 +8,7 @@ import { paginationCount } from "../../constants/pagintaionCount";
 
 
 
-export const PeopleAndProject = () => {
+export const Content = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)

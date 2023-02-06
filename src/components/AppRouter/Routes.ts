@@ -2,7 +2,7 @@ import {
     COMMUNITY, CREATE_PROJECT,
     MESSAGES,
     MY_BLOG,
-    PEOPLE_AND_PROJECTS,
+    CONTENT,
     SUBSCRIPTIONS,
     WALLET,
     PROJECTS, USERS, MY_PROJECTS
@@ -11,7 +11,7 @@ import {
     CommunityPage, CreateProjectPage,
     MessagesPage,
     MyBlogPage,
-    PeopleAndProjectsPage,
+    ContentPage,
     SubscriptionPage,
     WalletPage,
     UserPage,
@@ -21,7 +21,7 @@ import {
 
 
 export const routes = [
-    {path: PEOPLE_AND_PROJECTS, Element: PeopleAndProjectsPage},
+    {path: CONTENT, Element: ContentPage},
     {path: MY_BLOG, Element: MyBlogPage},
     {path: SUBSCRIPTIONS, Element: SubscriptionPage},
     {path: MESSAGES, Element: MessagesPage},
