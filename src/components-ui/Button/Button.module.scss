@@ -8,9 +8,14 @@
   align-items: center;
   width: 100%;
   cursor: pointer;
+
   span {
     font-weight: 600;
     color: $white;
+  }
+
+  &:hover {
+    background: $purpleHover;
   }
 }
 
@@ -23,8 +28,16 @@
 .clearButton {
   background: $white;
   border: 1px solid $purple;
-  span{
+
+  span {
     color: $purple;
+  }
+
+  &:hover {
+    background: $purple;
+    span {
+      color: $white;
+    }
   }
 }
 
@@ -32,16 +45,32 @@
   background: $white;
   padding: 10px 16px;
   border: 1px solid $gray;
+
   span {
     color: $gray;
+  }
+
+  &:hover {
+    background: $SecondaryDark;
+    span {
+      color: $white;
+    }
   }
 }
 
 .redClearButton {
   background: $white;
   padding: 10px 16px;
-  border: 1px solid $RedDanger;
+  border: 1px solid $Error;
+
   span {
-    color: $RedDanger;
+    color: $Error;
+  }
+
+  &:hover {
+    background: $Error;
+    span {
+      color: $white;
+    }
   }
 }

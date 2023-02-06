@@ -85,17 +85,5 @@
 }
 
 .logout {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  padding: 15px 16px;
   margin-top: 24px;
-  border-radius: 4px;
-  border: 1px solid #F8F9FA;
-  cursor: pointer;
-
-  span {
-    color: $gray;
-  }
 }

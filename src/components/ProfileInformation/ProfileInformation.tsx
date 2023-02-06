@@ -112,8 +112,10 @@ export const ProfileInformation = () => {
             <div className={styles.walletConnection}>
                 <span>Wallet not connected</span>
             </div>
-            <div className={styles.logout} onClick={logoutHandler}>
-                <span>Logout</span>
+            <div className={styles.logout}>
+                <Button buttonColor='redClearButton' onClick={logoutHandler}>
+                    <span>Logout</span>
+                </Button>
             </div>
             <AvatarChangeModal isActiveModalChange={isActiveModalChangeAvatar}
                                setActiveModalChange={setActiveModalChangeAvatar}/>
