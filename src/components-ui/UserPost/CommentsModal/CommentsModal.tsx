@@ -61,7 +61,7 @@ export const CommentsModal: FC<CommentsModalProps> = ({isActiveModal, setActiveM
                 </div>
                 <div className={styles.sendBlock}>
                     <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setValue={setValueSend}
-                               sendHandler={setCommentHandler}/>
+                               sendHandler={setCommentHandler} placeholder='Write a comment'/>
                 </div>
             </div>
         </Modal>

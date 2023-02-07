@@ -15,7 +15,10 @@ export const User = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [isFetching, setFetching] = useState(false)
     const {data: userInformation} = userAPI.useFetchGetUserByNicknameQuery(`${nickname}`)
-    const {data: userPosts} = postAPI.useFetchAllUserPostsQuery({userId: isUserId, page: currentPage}, {skip: isUserId === 0})
+    const {data: userPosts} = postAPI.useFetchAllUserPostsQuery({
+        userId: isUserId,
+        page: currentPage
+    }, {skip: isUserId === 0})
 
     useEffect(() => {
         if (userInformation) {
@@ -53,11 +56,12 @@ export const User = () => {
             }
             <div className={styles.postsBlock} onScroll={onScrollHandler}>
                 {userPosts
-                    ? posts.map((item, index) =>
-                        <div key={index}>
-                            <UserPost userPost={item}/>
-                        </div>
-                    )
+                    ? posts.length > 0
+                        ? posts.map((item, index) =>
+                            <div key={index}>
+                                <UserPost userPost={item}/>
+                            </div>)
+                        : <span className={styles.emptyPosts}>The user has not yet written posts</span>
                     :
                     <PostLoadingSkeleton/>
                 }

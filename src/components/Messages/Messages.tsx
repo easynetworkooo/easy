@@ -136,7 +136,7 @@ export const Messages = () => {
                     )}
                 </div>
                 <InputSend setSubtractTextarea={setMessageBlockHeight} value={isSendValueMessage}
-                           setValue={setSendValueMessage} sendHandler={sendMessageHandler}/>
+                           setValue={setSendValueMessage} sendHandler={sendMessageHandler} placeholder='Write a message'/>
             </div>
         </div>
     );

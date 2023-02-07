@@ -9,9 +9,10 @@ export interface InputSendProps {
     value: string,
     setValue: (str: string) => void
     sendHandler: () => void
+    placeholder: string
 }
 
-export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setValue, sendHandler}) => {
+export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setValue, sendHandler, placeholder}) => {
 
     const onHeightChangeHandler = (heightTextarea: number) => {
         setSubtractTextarea(heightTextarea)
@@ -34,7 +35,7 @@ export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setVa
     return (
         <div className={styles.inputSendBlock}>
             <div className={styles.textareaSendBlock}>
-                <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={'Write a message'}
+                <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={placeholder}
                                   onHeightChange={(height) => onHeightChangeHandler(height)} value={value}
                                   onChange={event => setValue(event.target.value)}
                                   onKeyPress={event => sendPressHandler(event)}

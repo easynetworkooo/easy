@@ -18,7 +18,6 @@ export const MyBlog = () => {
         userId: id,
         count: currentCount
     })
-
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
     const [isSendValue, setSendValue] = useState<string>('')
 
@@ -64,18 +63,37 @@ export const MyBlog = () => {
 
     return (
         <div className={styles.myBlogContainer}>
-            <div className={styles.myPostsBlock} style={{height: `${712 - isSubtractTextarea}px`}}
-                 onScroll={onScrollHandler}>
-                {posts.map((item, index) =>
-                    <div key={index}>
-                        <UserPost userPost={item}/>
+            {posts.length > 0 &&
+                <>
+                    <div className={styles.myPostsBlock} style={{height: `70vh`}}
+                         onScroll={onScrollHandler}>
+                        {posts.map((item, index) =>
+                            <div key={index}>
+                                <UserPost userPost={item}/>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-            <div className={styles.sendBlock}>
-                <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue} sendHandler={sendHandler}
-                           value={isSendValue}/>
-            </div>
+                    <div className={styles.sendBlock}>
+                        <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
+                                   sendHandler={sendHandler}
+                                   value={isSendValue}
+                                   placeholder='Write a new post'
+                        />
+                    </div>
+                </>
+            }
+            {
+                !isLoadingUserPosts && posts.length === 0 &&
+                <div className={styles.emptyPostsBlock}>
+                    <span>Write your first post</span>
+                    <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
+                               sendHandler={sendHandler}
+                               value={isSendValue}
+                               placeholder="Write a your first post"
+                    />
+                </div>
+            }
+
         </div>
     );
 };
