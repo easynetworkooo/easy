@@ -31,7 +31,8 @@ export const userAPI = createApi({
             query: () => ({
                 url: '/getNotifications',
                 method: 'GET'
-            })
+            }),
+            invalidatesTags: ['user']
         }),
         setViewBell: build.mutation<any, string>({
             query: () => ({
