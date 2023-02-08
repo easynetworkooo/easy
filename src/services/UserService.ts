@@ -113,6 +113,7 @@ export const userAPI = createApi({
                 method: 'POST',
                 body: dialogsCredentials
             }),
+            providesTags: ['user']
         }),
         fetchGetMessages: build.mutation<any, { id: number, page?: number, count: number }>({
             query: (messagesCredentials) => ({

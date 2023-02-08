@@ -9,4 +9,5 @@ export interface IDialogValue {
     name: string
     lastMessage: string
     img: string | null
+    notification: number
 }

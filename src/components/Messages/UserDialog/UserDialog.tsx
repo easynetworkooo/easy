@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './UserDialog.module.scss'
 import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
 import { useNavigate } from "react-router-dom";
@@ -22,11 +22,21 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
         navigate(`${USERS}/${dialogData.name}`)
     }
 
+    const [countNotification, setCountNotification] = useState(0)
+
+    const openDialog = () => {
+        openDialogHandler(index, dialogData.opponentId)
+        setCountNotification(0)
+    }
+
+    useEffect(() => {
+        setCountNotification(dialogData.notification)
+    }, [dialogData.notification])
 
     return (
         <div
             className={index === isOpenMessages ? `${styles.userMessageBlock} ${styles.active}` : styles.userMessageBlock}
-            onClick={() => openDialogHandler(index, dialogData.opponentId)}>
+            onClick={openDialog}>
             <div className={styles.avatar}>
                 <img src={dialogData.img ? `${serverURL}${dialogData.img}` : defaultAvatar} alt="avatar"
                      onClick={(e) => navigateToUser(e)}/>
@@ -38,6 +48,11 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
                 </div>
                 <div className={styles.shortLastMessage}>
                     <p>{dialogData.lastMessage}</p>
+                    {countNotification > 0 &&
+                        <div className={styles.countNotifications}>
+                            <span>{countNotification}</span>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
