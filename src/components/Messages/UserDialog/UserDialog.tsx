@@ -34,7 +34,7 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
             <div className={styles.shortLastMessageBlock}>
                 <div className={styles.timeLastMessageBlock}>
                     <span className={styles.name} onClick={(e) => navigateToUser(e)}>{dialogData.name}</span>
-                    <span className={styles.timeLastMessage}>3 minutes ago</span>
+                    <span className={styles.timeLastMessage}>{dialogData.dateLastMessage}</span>
                 </div>
                 <div className={styles.shortLastMessage}>
                     <p>{dialogData.lastMessage}</p>

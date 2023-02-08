@@ -4,6 +4,7 @@ export interface IDialog {
 }
 
 export interface IDialogValue {
+    dateLastMessage: string
     opponentId: number
     name: string
     lastMessage: string

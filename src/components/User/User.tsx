@@ -31,7 +31,7 @@ export const User = () => {
             setPosts(userPosts.value.data)
         }
         if (userPosts && isFetching && userPosts.value.data.length > 0) {
-            setPosts((prevState) => [...prevState, ...userPosts.value.data])
+            setPosts(userPosts.value.data)
             setCurrentPage(prevState => prevState + 1)
         }
         // eslint-disable-next-line
