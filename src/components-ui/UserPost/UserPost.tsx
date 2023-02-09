@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { UserPostContent } from "./UserPostContent/UserPostContent";
 import { IPost } from "../../models/IPost";
 import { CommentsModal } from "./CommentsModal/CommentsModal";
@@ -11,8 +11,13 @@ export interface UserPostProps {
 export const UserPost: FC<UserPostProps> = ({userPost}) => {
 
     const [isActiveModal, setActiveModal] = useState(false)
-    const [isLiked, setLiked] = useState(userPost.liked)
-    const [isCountLikes, setCountLikes] = useState<any>(userPost.likes)
+    const [isLiked, setLiked] = useState(false)
+    const [isCountLikes, setCountLikes] = useState<any>(0)
+    
+    useEffect(() => {
+        setLiked(userPost.liked)
+        setCountLikes(userPost.likes)
+    }, [userPost.liked, userPost.likes])
 
     return (
         <>
