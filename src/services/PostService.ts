@@ -94,6 +94,16 @@ export const postAPI = createApi({
             }),
             providesTags: ['Post']
         }),
+        fetchAllFreshPosts: build.query<IAllUserPosts, {count?: number}>({
+            query: ({count}) => ({
+                url: '/allFreshPosts',
+                method: 'GET',
+                params: {
+                    count: count
+                }
+            }),
+            providesTags: ['Post']
+        }),
         removePost: build.mutation<any, {id: number}>({
             query: (postCredentials) => ({
                 url: '/removePost',

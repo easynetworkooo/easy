@@ -13,8 +13,7 @@ export const Content = () => {
     const [posts, setPosts] = useState<IPost[]>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
-    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({
-        userId: 59,
+    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllFreshPostsQuery({
         count: currentCount
     })
 
