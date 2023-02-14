@@ -13,19 +13,20 @@ export interface RecoveryProps {
 export const Recovery: FC<RecoveryProps> = ({changeAuthStatus, navigateHandler}) => {
 
     const [isStep, setStep] = useState(1)
+    const [isRecoveryMail, setRecoveryMail] = useState('')
 
     const checkStep = (stepNumber: number) => {
         if (stepNumber === 1) {
             return (
-                <FirstRecoveryStep changeStep={changeStep} nextStep={2}/>
+                <FirstRecoveryStep changeStep={changeStep} nextStep={2} setRecoveryMail={setRecoveryMail}/>
             )
         } else if (stepNumber === 2) {
             return (
-                <SecondRecoveryStep changeStep={changeStep} nextStep={3}/>
+                <SecondRecoveryStep changeStep={changeStep} nextStep={3} isRecoveryMail={isRecoveryMail}/>
             )
         } else if (stepNumber === 3) {
             return (
-                <ThirdRecoveryStep navigateHandler={navigateHandler}/>
+                <ThirdRecoveryStep navigateHandler={navigateHandler} isRecoveryMail={isRecoveryMail}/>
             )
         }
     }

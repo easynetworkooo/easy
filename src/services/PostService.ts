@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IAllUserPosts, IPost, IPostCredentials } from "../models/IPost";
+import { IAllUserPosts, IFreshPosts, IPost, IPostCredentials } from "../models/IPost";
 import { serverURL } from "../constants/serverURL";
 import { ICommentResponse } from "../models/IComment";
 
@@ -94,7 +94,7 @@ export const postAPI = createApi({
             }),
             providesTags: ['Post']
         }),
-        fetchAllFreshPosts: build.query<IAllUserPosts, {count?: number}>({
+        fetchAllFreshPosts: build.query<IFreshPosts, {count?: number}>({
             query: ({count}) => ({
                 url: '/allFreshPosts',
                 method: 'GET',

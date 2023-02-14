@@ -38,6 +38,34 @@ export const authAPI = createApi({
                 method: 'POST',
             })
         }),
+        sendMail: build.mutation<any, {email: string}>({
+            query: (email) => ({
+                url: '/sendmail',
+                method: 'POST',
+                body: email
+            })
+        }),
+        checkCode: build.mutation<any, {code: string, email: string}>({
+            query: (code) => ({
+                url: '/checkcode',
+                method: 'POST',
+                body: code
+            })
+        }),
+        cancelCodes: build.mutation<any, {email: string}>({
+            query: (email) => ({
+                url: '/cancelcodes',
+                method: 'POST',
+                body: email
+            })
+        }),
+        updatePassword: build.mutation<any, {email: string, password: string}>({
+            query: (updateCredentials) => ({
+                url: '/updatepass',
+                method: 'POST',
+                body: updateCredentials
+            })
+        }),
         checkAuthorization: build.mutation({
             query: () => ({
                 url: '/checkAuthorization',

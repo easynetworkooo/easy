@@ -1,15 +1,36 @@
 import React, { FC, useState } from 'react';
 import styles from './FirstRecoveryStep.module.scss'
 import { Button, Input, Steps } from "../../../../components-ui";
+import { authAPI } from "../../../../services/AuthService";
+import { useInput } from "../../../../hooks/useInput";
+import { customErrorNotify } from "../../../../helpers/customErrorNotify";
 
 export interface FirstRecoveryStepProps {
     changeStep: (nextStep: number) => void
     nextStep: number
+    setRecoveryMail: (mail: string) => void
 }
 
-export const FirstRecoveryStep: FC<FirstRecoveryStepProps> = ({changeStep, nextStep}) => {
+export const FirstRecoveryStep: FC<FirstRecoveryStepProps> = ({changeStep, nextStep, setRecoveryMail}) => {
 
-    const [isEmail, setEmail] = useState('')
+    const isEmail = useInput('', {isEmail: true})
+
+    const [sendMail] = authAPI.useSendMailMutation()
+
+    const sendMailHandler = async () => {
+        if (!isEmail.isInputErrorValidation) {
+            const status: any = await sendMail({email: isEmail.value})
+            try {
+                if (status.data.status === 200) {
+                    customErrorNotify(status.data.value, 'Success')
+                    changeStep(nextStep)
+                    setRecoveryMail(isEmail.value)
+                }
+            } catch (e) {
+                customErrorNotify(status.error.data.value, 'Error')
+            }
+        }
+    }
 
     return (
         <>
@@ -20,14 +41,18 @@ export const FirstRecoveryStep: FC<FirstRecoveryStepProps> = ({changeStep, nextS
                 <span>Enter your current Email and we will send a recovery code</span>
             </div>
             <div className={styles.inputBlock}>
-                <Input placeholder={'Email'} type={'text'} value={isEmail}
-                       onChange={(e) => setEmail(e.target.value)}
-                       onKeyPress={e => e.key === 'Enter' && changeStep(nextStep)}
+                <Input placeholder={'Email'} type={'text'} value={isEmail.value}
+                       onChange={e => isEmail.onChange(e)}
+                       onBlur={e => isEmail.onBlur(e)}
+                       validations={isEmail.validators}
+                       isDirty={isEmail.isDirty}
+                       isInputErrorValidation={isEmail.isInputErrorValidation}
+                       onKeyPress={e => e.key === 'Enter' && sendMailHandler()}
                        autoFocus={true}
                 />
             </div>
             <div className={styles.nextStepBlock}>
-                <Button onClick={() => changeStep(nextStep)}>
+                <Button onClick={sendMailHandler}>
                     <span>Next</span>
                 </Button>
             </div>

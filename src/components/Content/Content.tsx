@@ -20,12 +20,12 @@ export const Content = () => {
 
     useEffect(() => {
         if (usersPosts) {
-            setPosts(usersPosts.value.data)
+            setPosts(usersPosts.value)
         }
     }, [usersPosts])
 
     useEffect(() => {
-        if (isFetching && usersPosts && currentCount <= usersPosts.value.data.length) {
+        if (isFetching && usersPosts && currentCount <= usersPosts.value.length) {
             setCurrentCount(prevState => prevState + paginationCount)
         }
         // eslint-disable-next-line

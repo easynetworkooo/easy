@@ -33,5 +33,10 @@ export interface IAllUserPosts {
     }
 }
 
+export interface IFreshPosts {
+    status: number,
+    value: IPost[]
+}
+
 
 
