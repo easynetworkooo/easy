@@ -10,36 +10,41 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 0 40px 32px 40px;
+  margin-bottom: 16px;
 }
 
 .profileAvatarBlock {
-  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  cursor: pointer;
+
   img {
     border-radius: 1000px;
-    width: 250px;
-    height: 250px;
+    width: 120px;
+    height: 120px;
   }
 }
 
 .profileAvatarHoverToUpload {
   opacity: 0;
+  cursor: pointer;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 1000px;
-  background: black;
+  background: rgba(0, 0, 0, .2);
+
   img {
     width: 24px;
     height: 24px;
   }
+
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
   }
 }
 
@@ -50,37 +55,38 @@
   h2 {
     line-height: 36px;
     font-size: 21px;
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
 .profileElements {
   display: flex;
+  gap: 36px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $Gray200;
 }
 
 .menuLinksProfile {
   display: flex;
   flex-direction: column;
-  margin-bottom: 45px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $Gray200;
 }
 
 .buttonCreateProject {
   width: 100%;
+  margin-top: 16px;
   margin-bottom: 24px;
+  button {
+    padding: 16px;
+  }
 }
 
 .walletConnection {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  padding: 30px 0;
-  background-color: $LightWhite;
-
-  span {
-    color: $HelperGray;
+  button {
+    border-radius: 100px;
   }
 }
 

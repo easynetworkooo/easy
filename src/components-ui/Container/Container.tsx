@@ -10,7 +10,7 @@ export interface ContainerProps {
 export const Container: FC<ContainerProps> = ({children, width}) => {
 
     const checkWidth = () => {
-        if (width === '1440px') {
+        if (width === '1920px') {
             return styles.container1440px
         } else {
             return styles.container

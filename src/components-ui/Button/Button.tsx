@@ -22,7 +22,7 @@ export const Button: FC<ButtonProps> = ({children, onClick, buttonColor}) => {
     }
 
     return (
-        <button className={chooseStyleButton()} onClick={onClick}>
+        <button className={chooseStyleButton()} onClick={onClick} type={'button'}>
             {children}
         </button>
     );

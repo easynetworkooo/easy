@@ -2,18 +2,18 @@
 
 .menuItem {
   display: flex;
+  width: 302px;
   align-items: center;
-  padding: 15px 16px;
-  margin-bottom: 8px;
+  padding: 10px 16px;
   gap: 16px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid $LightWhite;
   position: relative;
   cursor: pointer;
 }
 
 .menuItemActive {
-  background-color: $LightWhite;
+  background-color: $Gray200;
 }
 
 .menuImage {
@@ -27,12 +27,14 @@
 
 .menuText {
   span {
-    color: $gray;
+    font-size: 14px;
   }
+
 }
 
 .menuTextActive {
   span {
+    font-size: 14px;
     color: $purple;
   }
 }
@@ -45,13 +47,13 @@
   padding: 3px 8px;
   position: absolute;
   right: 14px;
-  background: $lightPurple;
+  background: $purple;
   border-radius: 16px;
   span {
     letter-spacing: .5px;
     padding-top: 2px;
     font-weight: 600;
     font-size: 10px;
-    color: $purple;
+    color: $white;
   }
 }

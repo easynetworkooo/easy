@@ -11,7 +11,7 @@ export interface AppMainProps {
 export const AppMain: FC<AppMainProps> = ({children}) => {
 
     return (
-        <Container width={'1440px'}>
+        <Container>
             <div className={styles.appMain}>
                 <Navigation/>
                 <div className={styles.appContainer}>

@@ -3,30 +3,35 @@
 .navigationBlock {
   display: flex;
   align-items: center;
-  padding: 18px 0;
-  border-bottom: 1px solid $Gray200;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.07);
 }
 
 .logoNavigationBlock {
-  padding: 0 140px;
+  width: 334px;
+  padding-left: 16px;
+  margin-right: 40px;
 }
 
 .itemsNavigationBlock {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
 .itemNavigation {
-  margin-right: 32px;
+  padding: 16px 0;
+  cursor: pointer;
 }
 
 .link {
-  color: $HelperGray;
+  color: $gray;
   cursor: pointer;
   font-weight: 400;
 }
 
 .link:hover {
-  color: $HelperGray;
+  color: $gray;
   cursor: pointer;
   font-weight: 400;
 }
@@ -36,13 +41,6 @@
   text-shadow: 0 0 .65px $TextDark, 0 0 .65px $TextDark;
   color: $TextDark;
   cursor: pointer;
-}
-
-.notificationsBlock {
-  margin-left: 19.5%;
-  img{
-    cursor: pointer ;
-  }
 }
 
 

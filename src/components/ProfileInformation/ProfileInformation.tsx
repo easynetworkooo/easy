@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styles from './ProfileInformation.module.scss'
 import { AvatarChangeModal, Button, IconElement } from "../../components-ui";
 import { MenuItem } from "./MenuItem/MenuItem";
-import { AUTH, COMMUNITY, CREATE_PROJECT, MESSAGES, MY_PROJECTS, WALLET } from "../../constants/nameRoutesConsts";
+import {
+    AUTH,
+    COMMUNITY,
+    CREATE_PROJECT,
+    MESSAGES,
+    MY_BLOG,
+    MY_PROJECTS,
+    WALLET
+} from "../../constants/nameRoutesConsts";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/AuthService";
 import { authSlice } from "../../store/reducers/AuthSlice";
@@ -20,6 +28,8 @@ import wallet from '../../assets/Profile/Wallet.svg'
 import activeWallet from '../../assets/Profile/ActiveWallet.svg'
 import myProject from '../../assets/Profile/MyProjects.svg'
 import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
+import blog from '../../assets/Profile/Blog.svg'
+import activeBlog from '../../assets/Profile/ActiveBlog.svg'
 import { serverURL } from "../../constants/serverURL";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 
@@ -51,7 +61,7 @@ export const ProfileInformation = () => {
                 navigate(AUTH)
                 customErrorNotify('You have logged out of your account', 'Success')
             })
-        } catch (e:any) {
+        } catch (e: any) {
             customErrorNotify(e, 'Error')
         }
     }
@@ -80,9 +90,10 @@ export const ProfileInformation = () => {
     return (
         <div className={styles.profileBlock}>
             <div className={styles.profile}>
-                <div className={styles.profileAvatarBlock} onClick={() => setActiveModalChangeAvatar(true)}>
+                <div className={styles.profileAvatarBlock}>
                     <div className={styles.profileAvatarHoverToUpload}
-                         style={isActiveModalChangeAvatar ? {opacity: '0.7'} : undefined}>
+                         onClick={() => setActiveModalChangeAvatar(true)}
+                         style={isActiveModalChangeAvatar ? {opacity: '1'} : undefined}>
                         <img src={changeAvatarImage} alt="avatarChange"/>
                     </div>
                     <img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>
@@ -102,7 +113,8 @@ export const ProfileInformation = () => {
                 <MenuItem image={community} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}
                           activeImage={activeCommunity}/>
                 <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
-                <MenuItem image={myProject} menuText={'My Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
+                <MenuItem image={myProject} menuText={'Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
+                <MenuItem image={blog} menuText={'Blog'} to={MY_BLOG} activeImage={activeBlog}/>
             </div>
             <div className={styles.buttonCreateProject}>
                 <Button onClick={() => navigate(CREATE_PROJECT)}>
@@ -110,7 +122,9 @@ export const ProfileInformation = () => {
                 </Button>
             </div>
             <div className={styles.walletConnection}>
-                <span>Wallet not connected</span>
+                <Button onClick={() => navigate(CREATE_PROJECT)} buttonColor="clearButton">
+                    <span>Connect wallet</span>
+                </Button>
             </div>
             <div className={styles.logout}>
                 <Button buttonColor='redClearButton' onClick={logoutHandler}>

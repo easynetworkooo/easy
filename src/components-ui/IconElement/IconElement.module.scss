@@ -9,6 +9,9 @@
     height: 24px;
     margin-right: 8px;
   }
+  span {
+    font-size: 14px;
+  }
 }
 
 .pointer {
@@ -20,7 +23,7 @@
 }
 
 .textLight {
-  color: $gray;
+  color: $TextDark;
 }
 
 .textPurple {

@@ -4,7 +4,7 @@ import styles from './Navigation.module.scss'
 import navigationLogo from '../../assets/Navigation/NavigationLogo.svg'
 import notifications from '../../assets/UI/Notifications.svg'
 import notificationsActive from '../../assets/UI/NotificationsActive.svg'
-import { CONTENT, MY_BLOG, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
+import { CONTENT, SUBSCRIPTIONS } from "../../constants/nameRoutesConsts";
 import { Modal } from "../Modal/Modal";
 import { Notifications } from "./Notifications/Notifications";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -58,12 +58,9 @@ export const Navigation = () => {
                     <NavLink to={SUBSCRIPTIONS} className={checkActiveLink}>Subscription content</NavLink>
                 </div>
                 <div className={styles.itemNavigation}>
-                    <NavLink to={MY_BLOG} className={checkActiveLink}>My Blog</NavLink>
+                    <img src={bellNotification ? notificationsActive : notifications} alt="notifications"
+                         onClick={setViewBellHandler}/>
                 </div>
-            </div>
-            <div className={styles.notificationsBlock}>
-                <img src={bellNotification ? notificationsActive : notifications} alt="notifications"
-                     onClick={setViewBellHandler}/>
             </div>
             <Modal active={isModalNotifications} setActive={setModalNotifications}>
                 <Notifications bellNotification={bellNotification} setActiveModalNotification={setModalNotifications}/>
