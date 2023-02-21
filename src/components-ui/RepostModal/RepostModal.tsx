@@ -34,7 +34,7 @@ export const RepostModal: FC<RepostModalProps> = ({isActiveRepostModal, setActiv
                     <span>Are you sure you want to repost the post?</span>
                 </div>
                 <div className={styles.buttonsModal}>
-                    <Button buttonColor="redClearButton" onClick={() => setActiveRepostModal(false)}>
+                    <Button buttonColor="grayButton" onClick={() => setActiveRepostModal(false)}>
                         <span>Cancel</span>
                     </Button>
                     <Button onClick={setRepostPostHandler}>

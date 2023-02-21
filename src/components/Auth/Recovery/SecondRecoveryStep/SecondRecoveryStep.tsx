@@ -37,8 +37,6 @@ export const SecondRecoveryStep: FC<SecondRecoveryStepProps> = ({changeStep, nex
         }
     }
 
-    console.log(isCode)
-
     const repeatSendMailHandler = async () => {
         if (isChancesEnter > 0) {
             await cancelCodes({email: isRecoveryMail})

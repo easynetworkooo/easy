@@ -45,7 +45,7 @@ export const Recovery: FC<RecoveryProps> = ({changeAuthStatus, navigateHandler})
             </div>
             <div className={styles.withoutAccountBlock}>
                 <span>
-                    Ho have an account?
+                    No have an account?
                     <span className={styles.signUp} onClick={() => changeAuthStatus('Registration')}>Sign Up</span>
                 </span>
             </div>

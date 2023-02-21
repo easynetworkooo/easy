@@ -5,6 +5,7 @@ import avatarProject from '../../assets/UI/AvatarProject.png'
 import { postAPI } from "../../services/PostService";
 import { IPost } from "../../models/IPost";
 import { paginationCount } from "../../constants/pagintaionCount";
+import { convertTime } from "../../helpers/convertTime";
 
 
 

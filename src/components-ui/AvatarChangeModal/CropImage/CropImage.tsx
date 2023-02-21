@@ -46,16 +46,16 @@ export const CropImage: FC<CropImageProps> = ({isImgSrc, setImgSrc, setActiveMod
                               ref={imageRef}
                               width={300}
                               height={300}
-                              border={50}
-                              color={[0, 0, 0, 0.6]} // RGBA
-                              scale={1.2}
+                              border={60}
+                              color={[0, 0, 0, 0.5]} // RGBA
+                              scale={1.1}
                               rotate={0}
                               disableHiDPIScaling
                               borderRadius={1000}
                 />
             </div>
             <div className={styles.buttonsBlock}>
-                <Button buttonColor="clearButton" onClick={() => setImgSrc('')}>
+                <Button buttonColor="grayButton" onClick={() => setImgSrc('')}>
                     <span>Back</span>
                 </Button>
                 <Button onClick={canvasCheck}>

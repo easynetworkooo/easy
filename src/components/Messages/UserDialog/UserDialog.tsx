@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IDialogValue } from "../../../models/IDialog";
 import { serverURL } from "../../../constants/serverURL";
+import { convertTime } from "../../../helpers/convertTime";
 
 export interface UserMessageProps {
     dialogData: IDialogValue
@@ -44,7 +45,7 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
             <div className={styles.shortLastMessageBlock}>
                 <div className={styles.timeLastMessageBlock}>
                     <span className={styles.name} onClick={(e) => navigateToUser(e)}>{dialogData.name}</span>
-                    <span className={styles.timeLastMessage}>{dialogData.dateLastMessage}</span>
+                    <span className={styles.timeLastMessage}>{convertTime(dialogData.dateLastMessage)}</span>
                 </div>
                 <div className={styles.shortLastMessage}>
                     <p>{dialogData.lastMessage}</p>

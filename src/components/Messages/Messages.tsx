@@ -8,6 +8,7 @@ import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { paginationCount } from "../../constants/pagintaionCount";
 import UserDialogs from "./UserDialogs/UserDialogs";
 import { notificationSlice } from "../../store/reducers/NotificationSlice";
+import { convertTime } from "../../helpers/convertTime";
 
 export const Messages = () => {
 
@@ -129,7 +130,7 @@ export const Messages = () => {
                                 <div
                                     className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
                                     <p className={styles.text}>{item.text}</p>
-                                    <span className={styles.timeSend}>{item.regdate}</span>
+                                    <span className={styles.timeSend}>{convertTime(item.regdate)}</span>
                                 </div>
                             }
                         </React.Fragment>

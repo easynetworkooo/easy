@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './AuthGoogleButton.module.scss'
-import authGoogle from '../../../assets/Auth/authGoogle.png'
+import authGoogle from '../../../assets/Auth/authGoogle.svg'
 import { serverURL } from "../../../constants/serverURL";
 
 export const AuthGoogleButton = () => {

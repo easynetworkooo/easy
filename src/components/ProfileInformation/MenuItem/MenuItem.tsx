@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './MenuItem.module.scss'
 import { Link, useMatch } from "react-router-dom";
 
@@ -13,12 +13,18 @@ export interface MenuItemProps {
 export const MenuItem: FC<MenuItemProps> = ({image, activeImage, to, menuText, countNotification = 0}) => {
     const match = useMatch(to)
 
+    const [isHoverImage, setHoverImage] = useState(false)
+
+    const onActiveImageHover = () => {
+        setHoverImage(state => !state)
+    }
+
 
     return (
         <Link to={to}>
-            <div className={`${styles.menuItem} ${match && styles.menuItemActive}`}>
+            <div className={`${styles.menuItem} ${match && styles.menuItemActive}`} onMouseEnter={onActiveImageHover} onMouseLeave={onActiveImageHover}>
                 <div className={styles.menuImage}>
-                    <img src={match ? activeImage : image} alt={`${image}`}/>
+                    <img src={match || isHoverImage ? activeImage : image} alt={`${image}`}/>
                 </div>
                 <div className={match ? styles.menuTextActive : styles.menuText}>
                     <span>{menuText}</span>

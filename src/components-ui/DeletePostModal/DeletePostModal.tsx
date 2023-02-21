@@ -31,7 +31,7 @@ export const DeletePostModal:FC<DeletePostModalProps> = ({isActiveDeleteModal, s
                     <span>Are you sure you want to delete the post?</span>
                 </div>
                 <div className={styles.buttonsModal}>
-                    <Button buttonColor="redClearButton" onClick={() => setActiveDeleteModal(false)}>
+                    <Button buttonColor="grayButton" onClick={() => setActiveDeleteModal(false)}>
                         <span>Cancel</span>
                     </Button>
                     <Button onClick={deletePostHandler}>

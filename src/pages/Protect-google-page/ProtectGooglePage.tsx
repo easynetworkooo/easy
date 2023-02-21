@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useCheckAuthorization } from "../../hooks/useCheckAuthorization";
 
 import styles from './ProtectGooglePage.module.scss'
-import AuthGoogle from '../../assets/Auth/authGoogle.png'
+import AuthGoogle from '../../assets/Auth/authGoogle.svg'
 
 export const ProtectGooglePage = () => {
     const {search} = useLocation()

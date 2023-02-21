@@ -6,7 +6,7 @@ import like from "../../../assets/UI/Likes.svg";
 import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
-import deleteBasket from '../../../assets/UI/DeletePostBasket.png'
+import deleteBasket from '../../../assets/UI/DeletePostBasket.svg'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IOwner, IPost } from "../../../models/IPost";
@@ -15,6 +15,7 @@ import { serverURL } from "../../../constants/serverURL";
 import { RepostModal } from "../../RepostModal/RepostModal";
 import { useAppSelector } from "../../../hooks/redux";
 import { DeletePostModal } from "../../DeletePostModal/DeletePostModal";
+import { convertTime } from "../../../helpers/convertTime";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -46,11 +47,17 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     const [isActiveRepostModal, setActiveRepostModal] = useState(false)
     const [isActiveDeleteModal, setActiveDeleteModal] = useState(false)
     const [isOwner, setOwner] = useState<IOwner>(initialOwner)
+    const [isShowBasket, setShowBasket] = useState(false)
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
 
     const navigate = useNavigate()
+
+    const setShowBasketHandler = () => {
+        setShowBasket(state => !state)
+    }
+
 
     const setLikedHandle = async () => {
         const isLikesNull = isCountLikes ? isCountLikes : 0
@@ -75,56 +82,58 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         if (userPost.itsrepost) {
             if (typeof userPost.originalowner !== 'number') setOwner(userPost.originalowner)
         } else {
-           setOwner(userPost.owner)
+            setOwner(userPost.owner)
         }
     }, [userPost.itsrepost, userPost.originalowner, userPost.owner])
 
 
     return (
-        <div className={styles.post}>
-            <div className={styles.informationPostBlock} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
-                <div className={styles.avatarPostCreator}>
-                    <img src={isOwner.img ? `${serverURL}${isOwner.img}` : defaultAvatar}
-                         alt="postCreator"/>
-                </div>
-                <div className={styles.nameBlock}>
+        <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
+            <div className={styles.avatarPostCreator} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
+                <img src={isOwner.img ? `${serverURL}${isOwner.img}` : defaultAvatar}
+                     alt="postCreator"/>
+            </div>
+            <div className={styles.mainPostInformation}>
+                <div className={styles.userInformation} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
                     <span className={styles.name}>{isOwner.name}</span>
-                    <span className={styles.timePosted}>{userPost.date}</span>
+                    <span className={styles.dot}>&#183;</span>
+                    <span className={styles.date}>{convertTime(userPost.date)}</span>
                 </div>
-                {activeUserId === userPost.owner.id &&
+                <div className={styles.postText}>
+                    <p>{userPost.text}</p>
+                </div>
+                <div className={styles.actionIcons}>
+                    {
+                        isLiked ?
+                            <div onClick={setLikedHandle}>
+                                <IconElement image={likeActive} count={isCountLikes} type={'normal'}/>
+                            </div>
+                            :
+                            <div onClick={setLikedHandle}>
+                                <IconElement image={like} count={isCountLikes} type={'normal'}/>
+                            </div>
+
+                    }
+                    <IconElement image={comments} count={userPost.comments} type="normal"
+                                 onClick={() => setActiveModalComments((prevState: any) => !prevState)}/>
+                    <IconElement image={reposts} count={userPost.reposts} type="normal"
+                                 onClick={() => {
+                                     if (activeUserId !== userPost.owner.id) setActiveRepostModal(prevState => !prevState)
+                                 }}/>
+                    {userPost.itsrepost &&
+                        <div className={styles.repostInformation}>
+                            <img src={reposts} alt=""/>
+                            <span>You retweeted the post {isOwner.name}</span>
+                        </div>
+                    }
+                </div>
+                {isShowBasket && activeUserId === userPost.owner.id &&
                     <div className={styles.deleteBasketBlock}>
                         <img src={deleteBasket} alt="basket" onClick={(e) => openModalDeleteHandler(e)}/>
                     </div>
                 }
             </div>
-            <div className={styles.textPostBlock}>
-                <p>{userPost.text}</p>
-            </div>
-            <div className={styles.iconsPostBlock}>
-                {userPost.itsrepost &&
-                    <div className={styles.repostInformation}>
-                        <img src={reposts} alt=""/>
-                        <span>You retweeted the post {isOwner.name}</span>
-                    </div>
-                }
-                {
-                    isLiked ?
-                        <div onClick={setLikedHandle}>
-                            <IconElement image={likeActive} count={isCountLikes} type={'normal'}/>
-                        </div>
-                        :
-                        <div onClick={setLikedHandle}>
-                            <IconElement image={like} count={isCountLikes} type={'normal'}/>
-                        </div>
 
-                }
-                <IconElement image={comments} count={userPost.comments} type="normal"
-                             onClick={() => setActiveModalComments((prevState: any) => !prevState)}/>
-                <IconElement image={reposts} count={userPost.reposts} type="normal"
-                             onClick={() => {
-                                 if (activeUserId !== userPost.owner.id) setActiveRepostModal(prevState => !prevState)
-                             }}/>
-            </div>
             <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal}
                          postId={userPost.id}/>
             <DeletePostModal isActiveDeleteModal={isActiveDeleteModal} setActiveDeleteModal={setActiveDeleteModal}

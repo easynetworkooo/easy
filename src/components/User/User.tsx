@@ -6,18 +6,20 @@ import { postAPI } from "../../services/PostService";
 import { useParams } from "react-router-dom";
 import { userAPI } from "../../services/UserService";
 import { IPost } from "../../models/IPost";
+import { paginationCount } from "../../constants/pagintaionCount";
 
 
 export const User = () => {
     const {nickname} = useParams()
     const [isUserId, setUserId] = useState(0)
     const [posts, setPosts] = useState<IPost[]>([])
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
     const {data: userInformation} = userAPI.useFetchGetUserByNicknameQuery(`${nickname}`)
     const {data: userPosts} = postAPI.useFetchAllUserPostsQuery({
         userId: isUserId,
-        page: currentPage
+        count: currentCount
+
     }, {skip: isUserId === 0})
 
     useEffect(() => {
@@ -26,19 +28,22 @@ export const User = () => {
         }
     }, [userInformation])
 
+
     useEffect(() => {
-        if (currentPage === 1 && userPosts) {
+        if (userPosts) {
             setPosts(userPosts.value.data)
         }
-        if (userPosts && isFetching && userPosts.value.data.length > 0) {
-            setPosts(userPosts.value.data)
-            setCurrentPage(prevState => prevState + 1)
+    }, [userPosts])
+
+    useEffect(() => {
+        if (isFetching && userPosts && currentCount <= userPosts.value.data.length) {
+            setCurrentCount(prevState => prevState + paginationCount)
         }
         // eslint-disable-next-line
-    }, [isFetching, userPosts])
+    }, [isFetching, posts])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 100) {
+        if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {
             setFetching(true)
         } else {
             setFetching(false)

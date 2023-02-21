@@ -82,13 +82,12 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['Post']
         }),
-        fetchAllUserPosts: build.query<IAllUserPosts, {userId: number, page?: number, count?: number}>({
-            query: ({userId, page, count}) => ({
+        fetchAllUserPosts: build.query<IAllUserPosts, {userId: number, count?: number}>({
+            query: ({userId, count}) => ({
                 url: '/getAllBlogPosts',
                 method: 'GET',
                 params: {
                     id: userId,
-                    page: page,
                     count: count
                 }
             }),

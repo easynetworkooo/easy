@@ -2,19 +2,22 @@
 
 .commentBlock {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   background-color: $Gray200;
-  border-radius: 4px;
-  gap: 8px;
-  padding: 16px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  gap: 16px;
+}
+
+.mainCommentsInformation {
+  display: flex;
+  flex-direction: column;
 }
 
 .headerInformation {
   display: flex;
-  gap: 8px;
   align-items: center;
-  margin-bottom: 18px;
+  gap: 6px;
+  margin-bottom: 8px;
   cursor: pointer;
 }
 
@@ -32,25 +35,33 @@
 }
 
 .name {
-  font-size: 14px;
-  line-height: 28px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-right: 8px;
 }
 
-.timeCreated {
+.dot {
+  font-size: 20px;
+  font-weight: 600;
+  color: $gray;
+}
+
+.date {
   font-size: 12px;
-  line-height: 15px;
-  color: $HelperGray;
+  font-weight: 500;
+  color: $gray;
 }
 
 .commentText {
+  margin-bottom: 20px;
   p {
     font-size: 14px;
-    line-height: 120%;
+    line-height: 130%;
   }
 }
 
 .actionComment {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
 }

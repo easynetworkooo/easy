@@ -1,9 +1,16 @@
 @import "src/styles/vars";
 
 .modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 684px;
   max-height: 95vh;
+  padding: 12px;
   overflow-y: scroll;
+  > div {
+    background-color: $white;
+  }
   &::-webkit-scrollbar {
     display: none;
   }

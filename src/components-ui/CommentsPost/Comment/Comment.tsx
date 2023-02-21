@@ -9,6 +9,7 @@ import { USERS } from "../../../constants/nameRoutesConsts";
 import { IComment } from "../../../models/IComment";
 import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
+import { convertTime } from "../../../helpers/convertTime";
 
 export interface CommentProps {
     comment: IComment
@@ -32,30 +33,31 @@ export const Comment:FC<CommentProps> = ({comment}) => {
 
     return (
         <div className={styles.commentBlock}>
-            <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.name}`)}>
-                <div className={styles.avatar}>
-                    <img src={comment.owner.img ? `${serverURL}${comment.owner.img}` : defaultAvatar} alt="commentImage"/>
-                </div>
-                <div className={styles.nameBlock}>
+            <div className={styles.avatar}>
+                <img src={comment.owner.img ? `${serverURL}${comment.owner.img}` : defaultAvatar} alt="commentImage"/>
+            </div>
+            <div className={styles.mainCommentsInformation}>
+                <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.name}`)}>
                     <span className={styles.name}>{comment.owner.name}</span>
-                    <span className={styles.timeCreated}>{comment.date}</span>
+                    <span className={styles.dot}>&#183;</span>
+                    <span className={styles.date}>{convertTime(comment.date)}</span>
                 </div>
-            </div>
-            <div className={styles.commentText}>
-                <p>{comment.text}</p>
-            </div>
-            <div className={styles.actionComment}>
-                {
-                    isLiked ?
-                        <div onClick={setLikedHandle}>
-                            <IconElement image={likeActive} count={comment.likes} type="normal"/>
-                        </div>
-                        :
-                        <div onClick={setLikedHandle}>
-                            <IconElement image={like} count={comment.likes} type="normal"/>
-                        </div>
+                <div className={styles.commentText}>
+                    <p>{comment.text}</p>
+                </div>
+                <div className={styles.actionComment}>
+                    {
+                        isLiked ?
+                            <div onClick={setLikedHandle}>
+                                <IconElement image={likeActive} count={comment.likes} type="normal"/>
+                            </div>
+                            :
+                            <div onClick={setLikedHandle}>
+                                <IconElement image={like} count={comment.likes} type="normal"/>
+                            </div>
 
-                }
+                    }
+                </div>
             </div>
         </div>
     );
