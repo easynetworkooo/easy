@@ -3,15 +3,13 @@
 .myBlogContainer {
   display: flex;
   flex-direction: column;
-  width: 684px;
 }
 
 .myPostsBlock {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 670px;
-  margin-bottom: 13px;
+  //height: calc(100vh - 95px - 92px);
   overflow-y: scroll;
   -ms-overflow-style: none;
 }

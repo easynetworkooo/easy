@@ -21,6 +21,7 @@ export const MyBlog = () => {
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
     const [isSendValue, setSendValue] = useState<string>('')
 
+    console.log(isSubtractTextarea)
     const sendHandler = async () => {
         const dataCreatePost: any = await createBlogPost({text: isSendValue})
         if (dataCreatePost.data.status === 200) {
@@ -65,8 +66,7 @@ export const MyBlog = () => {
         <div className={styles.myBlogContainer}>
             {posts.length > 0 &&
                 <>
-                    <div className={styles.myPostsBlock} style={{height: `70vh`}}
-                         onScroll={onScrollHandler}>
+                    <div className={styles.myPostsBlock} onScroll={onScrollHandler} style={{ height: `calc(100vh - 94px - 45px - ${isSubtractTextarea}px)`}}>
                         {posts.map((item, index) =>
                             <div key={index}>
                                 <UserPost userPost={item}/>

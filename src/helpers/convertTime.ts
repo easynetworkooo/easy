@@ -1,5 +1,5 @@
 import moment from 'moment'
 
 export const convertTime = (date: string) => {
-    return  moment(date).fromNow();
+    return moment(date).fromNow();
 }

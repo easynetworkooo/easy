@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './InputSend.module.scss'
+import paperClip from '../../assets/UI/Paperclip.svg'
 import sendIcon from '../../assets/UI/Send.svg'
 import sendHover from '../../assets/UI/SendHover.svg'
 
@@ -13,6 +14,8 @@ export interface InputSendProps {
 }
 
 export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setValue, sendHandler, placeholder}) => {
+
+    const [isHoverMouse, setHoverMouse] = useState(false)
 
     const onHeightChangeHandler = (heightTextarea: number) => {
         setSubtractTextarea(heightTextarea)
@@ -35,15 +38,18 @@ export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setVa
     return (
         <div className={styles.inputSendBlock}>
             <div className={styles.textareaSendBlock}>
+                <div className={styles.addPhotoBlock}>
+                    <img src={paperClip} alt="paperclip"/>
+                </div>
                 <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={placeholder}
                                   onHeightChange={(height) => onHeightChangeHandler(height)} value={value}
                                   onChange={event => setValue(event.target.value)}
                                   onKeyPress={event => sendPressHandler(event)}
                 />
             </div>
-            <div className={styles.buttonSend}>
-                <img src={sendIcon} alt="send" onClick={sendValue} onMouseMove={e => e.currentTarget.src = sendHover}
-                     onMouseLeave={e => e.currentTarget.src = sendIcon}/>
+            <div className={styles.buttonSend} onMouseMove={() => setHoverMouse(true)}
+                 onMouseLeave={() => setHoverMouse(false)} onClick={sendValue}>
+                <img src={isHoverMouse ? sendHover : sendIcon} alt="send"/>
             </div>
         </div>
     );

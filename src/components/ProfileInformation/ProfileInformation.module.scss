@@ -3,7 +3,10 @@
 .profileBlock {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .profile {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from './FirstRecoveryStep.module.scss'
 import { Button, Input, Steps } from "../../../../components-ui";
 import { authAPI } from "../../../../services/AuthService";

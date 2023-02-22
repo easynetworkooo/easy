@@ -8,6 +8,7 @@ import { IBellItem } from "../../../models/INotifications";
 import { serverURL } from "../../../constants/serverURL";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
+import { convertTime } from "../../../helpers/convertTime";
 
 
 export interface NotificationsProps {
@@ -75,7 +76,7 @@ export const Notifications: FC<NotificationsProps> = ({bellNotification, setActi
                 {isGroupsNotifications.map((notifications, key) =>
                     <div className={styles.notificationsBlock} key={key}>
                         <div className={styles.notificationsDate}>
-                            <span>{notifications.date}</span>
+                            <span>{convertTime(notifications.date)}</span>
                         </div>
                         {notifications.items.map((notificationItem, key) =>
                             <div className={styles.notifications} key={key}>

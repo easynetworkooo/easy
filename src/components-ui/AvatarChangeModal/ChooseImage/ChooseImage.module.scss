@@ -5,6 +5,7 @@
   padding-top: 10px;
   padding-bottom: 24px;
   border-bottom: 1px solid $Gray200;
+
   span {
     color: $TextSecondary;
   }
@@ -16,21 +17,26 @@
   cursor: pointer;
   padding: 60px;
   gap: 20px;
-  border-radius: 4px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  span {
-    font-size: 12px;
-    color: $gray;
-  }
 
   &:hover {
     border: 2px dashed $blue;
   }
 }
 
+.textStyle {
+  line-height: 15px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: $gray;
+}
+
 .selectText {
+  font-size: 16px;
   color: $blue !important;
 }

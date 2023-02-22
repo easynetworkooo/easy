@@ -4,11 +4,22 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 6px 10px;
-  background-color: $LightWhite;
-  border: 2px solid $LightWhite;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: 1px solid $Gray300;
+  &:hover {
+    background-color: $Gray200;
+    border: 1px solid $Gray300;
+    input {
+      background-color: $Gray200;
+    }
+  }
   &:focus-within {
-    border: 2px solid $purple;
+    background-color: $Gray200;
+    border: 1px solid $gray;
+    input {
+      background-color: $Gray200;
+    }
   }
 }
 
@@ -27,10 +38,9 @@
     width: 100%;
     border: none;
     font-size: 16px;
-    background-color: $LightWhite;
   }
   input::placeholder {
-    color: $HelperGray;
+    color: $gray;
   }
   input:focus {
     outline: 0;
