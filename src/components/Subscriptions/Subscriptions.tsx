@@ -13,7 +13,7 @@ export const Subscriptions = () => {
     const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
     const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({
-        userId: 59,
+        userId: 63,
         count: currentCount
     })
 

@@ -62,51 +62,62 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
 
     return (
         <div className={styles.headerBlock}>
-            <div className={styles.avatarBlock}>
+            <div>
                 <ButtonBack/>
+            </div>
+            <div className={styles.avatarBlock}>
                 <img src={isUserData.img ? `${serverURL}${isUserData.img}` : defaultAvatar} className={styles.avatar}
                      alt="userProfile"/>
             </div>
-            <div className={styles.actionsBlock}>
-                <div className={styles.name}>
-                    <span>{isUserData.name}</span>
-                </div>
-                <div className={styles.subsBlock}>
-                    <span>{isUserData.subscribers} Subscribers</span>
-                    <span>{isUserData.subscriptions} Subscriptions</span>
-                </div>
-                {
-                    isUserData.id !== id &&
-                    <div className={styles.actionsButtonBlock}>
-                        <div className={styles.actionBlock}>
-                            {isSubscribe
-                                ?
-                                <Button onClick={unSubscribeHandle}>
-                                    <span>Subscribed</span>
-                                </Button>
-                                :
-                                <Button buttonColor={'clearButton'} onClick={subscribeHandle}>
-                                    <span className={styles.btnText}>Subscribe</span>
-                                </Button>
-                            }
+            <div className={styles.header}>
+                <div className={styles.headerInformation}>
+                    <div className={styles.actionsBlock}>
+                        <div className={styles.name}>
+                            <span>{isUserData.name}</span>
                         </div>
-                        <div className={styles.actionBlock}>
-                            <Button buttonColor={'clearButton'} onClick={navigateToSendMessages}>
-                                <span className={styles.btnText}>Message</span>
-                            </Button>
+                        <div className={styles.userCountryBlock}>
+                            <span>{isUserData.country}, {isUserData.city}</span>
+                        </div>
+                        <div className={styles.subsBlock}>
+                              <span>
+                                <span className={styles.count}>{isUserData.subscribers}</span>
+                                Subscribers
+                            </span>
+                            <span>
+                                <span className={styles.count}>{isUserData.subscriptions}</span>
+                                Subscriptions
+                            </span>
                         </div>
                     </div>
-                }
-            </div>
-            <div className={styles.userInformationBlock}>
-                <div className={styles.actionsList}>
-                    <IconElement image={likes} count={isUserData.likes} type={'light'}/>
-                    <IconElement image={reposts} count={isUserData.reposts} type={'light'}/>
-                    <IconElement image={views} count={isUserData.views} type={'light'}/>
-                </div>
-                <div className={styles.userCountryBlock}>
-                    <span>{isUserData.country}</span>
-                    <span>{isUserData.city}</span>
+                    <div className={styles.userInformationBlock}>
+                        {
+                            isUserData.id !== id &&
+                            <div className={styles.actionsButtonBlock}>
+                                <div className={styles.actionBlock}>
+                                    {isSubscribe
+                                        ?
+                                        <Button onClick={unSubscribeHandle}>
+                                            <span>Subscribed</span>
+                                        </Button>
+                                        :
+                                        <Button buttonColor={'clearButton'} onClick={subscribeHandle}>
+                                            <span className={styles.btnText}>Subscribe</span>
+                                        </Button>
+                                    }
+                                </div>
+                                <div className={styles.actionBlock}>
+                                    <Button buttonColor={'clearButton'} onClick={navigateToSendMessages}>
+                                        <span className={styles.btnText}>Send message</span>
+                                    </Button>
+                                </div>
+                            </div>
+                        }
+                        <div className={styles.actionsList}>
+                            <IconElement image={likes} count={isUserData.likes} type={'light'}/>
+                            <IconElement image={reposts} count={isUserData.reposts} type={'light'}/>
+                            <IconElement image={views} count={isUserData.views} type={'light'}/>
+                        </div>
+                    </div>
                 </div>
                 <div className={styles.interestBlock}>
                     {isUserData.interests && JSON.parse(isUserData.interests.toString()).map((item: string, index: number) =>
@@ -116,6 +127,7 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
                     )}
                 </div>
             </div>
+
         </div>
     );
 };

@@ -7,6 +7,7 @@ import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import deleteBasket from '../../../assets/UI/DeletePostBasket.svg'
+import deleteBasketHover from '../../../assets/UI/DeleteBasketHover.svg'
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IOwner, IPost } from "../../../models/IPost";
@@ -48,6 +49,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     const [isActiveDeleteModal, setActiveDeleteModal] = useState(false)
     const [isOwner, setOwner] = useState<IOwner>(initialOwner)
     const [isShowBasket, setShowBasket] = useState(false)
+    const [isHoverBasket, setHoverBasket] = useState(false)
 
     const [setLikeToPost] = postAPI.useSetLikeToPostMutation()
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
@@ -128,8 +130,8 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                     }
                 </div>
                 {isShowBasket && activeUserId === userPost.owner.id &&
-                    <div className={styles.deleteBasketBlock}>
-                        <img src={deleteBasket} alt="basket" onClick={(e) => openModalDeleteHandler(e)}/>
+                    <div className={styles.deleteBasketBlock} onMouseMove={() => setHoverBasket(true)} onMouseLeave={() => setHoverBasket(false)}>
+                        <img src={isHoverBasket ? deleteBasketHover : deleteBasket} alt="basket" onClick={(e) => openModalDeleteHandler(e)}/>
                     </div>
                 }
             </div>

@@ -3,6 +3,7 @@
 .peopleAndProjectContainer {
   display: flex;
   flex-direction: column;
+  margin-right: 16px;
 }
 
 .sortBlock {
@@ -17,7 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 70vh;
+  height: calc(100vh - 184px);
   margin-bottom: 13px;
   overflow-y: scroll;
   -ms-overflow-style: none;

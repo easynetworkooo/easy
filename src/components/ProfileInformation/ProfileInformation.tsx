@@ -8,7 +8,7 @@ import {
     CREATE_PROJECT,
     MESSAGES,
     MY_BLOG,
-    MY_PROJECTS,
+    MY_PROJECTS, USERS,
     WALLET
 } from "../../constants/nameRoutesConsts";
 import { useNavigate } from "react-router-dom";
@@ -99,7 +99,7 @@ export const ProfileInformation = () => {
                     <img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>
                 </div>
                 <div className={styles.profileName}>
-                    <h2>{name}</h2>
+                    <h2 onClick={() => navigate(`${USERS}/${name}`)}>{name}</h2>
                 </div>
                 <div className={styles.profileElements}>
                     <IconElement image={like} count={isLikes} type={'light'}/>
