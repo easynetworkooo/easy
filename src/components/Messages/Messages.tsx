@@ -156,7 +156,7 @@ export const Messages = () => {
                          alt="avatarMessage"/>
                     <span>{isOpenDialogData.name}</span>
                 </div>
-                <div className={styles.messages} style={{ height: `calc(100vh - 250px - ${isMessageBlockHeight}px)`}}
+                <div className={styles.messages} style={{ height: `calc(100vh - 220px - ${isMessageBlockHeight}px)`}}
                      onScroll={(e) => isPaginationWork && onScrollMessageHandler(e)}>
                     {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
                         <React.Fragment key={index}>

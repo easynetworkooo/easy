@@ -8,14 +8,14 @@
   background-color: $LightWhite;
   cursor: pointer;
   border-radius: 0;
-  &:nth-child(1) {
-    border-radius: 20px 20px 0 0;
-  }
   &:nth-last-child(1) {
     .border {
       border: none;
     }
     border-radius: 0 0 20px 20px;
+  }
+  &:nth-child(1) {
+    border-radius: 20px 20px 0 0;
   }
 }
 

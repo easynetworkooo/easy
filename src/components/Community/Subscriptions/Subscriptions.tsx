@@ -39,10 +39,15 @@ export const Subscriptions = () => {
 
     return (
         <div className={styles.subscriptionsBlock}>
-            <div className={styles.subscriptionsSortAndFind}>
-                <FilterItems/>
-            </div>
             <div className={styles.subscriptions} onScroll={onScrollHandler}>
+                {subscriptionsData
+                    ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
+                    : <SubsLoading/>
+                }
+                {subscriptionsData
+                    ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
+                    : <SubsLoading/>
+                }
                 {subscriptionsData
                     ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
                     : <SubsLoading/>

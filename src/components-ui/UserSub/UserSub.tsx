@@ -10,7 +10,7 @@ export interface UserSubProps {
     dataSub: IUserValue
 }
 
-export const UserSub:FC<UserSubProps> = ({dataSub}) => {
+export const UserSub: FC<UserSubProps> = ({dataSub}) => {
 
 
     return (
@@ -20,6 +20,10 @@ export const UserSub:FC<UserSubProps> = ({dataSub}) => {
             </div>
             <div className={styles.nameBlock}>
                 <span className={styles.name}>{dataSub.name}</span>
+                <span className={styles.country}>{dataSub.country}, {dataSub.city}</span>
+            </div>
+            <div className={styles.skillsBlock}>
+                {JSON.parse(dataSub.interests).map((item: string) => <span className={styles.skill}>{item}</span>)}
             </div>
         </Link>
     );

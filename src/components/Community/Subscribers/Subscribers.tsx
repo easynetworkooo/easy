@@ -53,9 +53,6 @@ export const Subscribers = () => {
 
     return (
         <div className={styles.subscribersBlock}>
-            <div className={styles.subscriberFind}>
-                <FilterItems/>
-            </div>
             <div className={styles.subscribers} onScroll={onScrollHandler}>
                 {subscribersData
                     ?

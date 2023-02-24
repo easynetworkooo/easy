@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Community.module.scss'
 import { Subscribers } from "./Subscribers/Subscribers";
 import { Subscriptions } from "./Subscriptions/Subscriptions";
+import { FilterItems } from "../../components-ui";
 
 export const Community = () => {
 
@@ -17,6 +18,7 @@ export const Community = () => {
 
     return (
         <div className={styles.communityContainer}>
+            <FilterItems/>
             <div className={styles.tabsBlock}>
                 <span className={isTab === 'Subscribers' ? `${styles.tab} ${styles.active}` : styles.tab}
                       onClick={() => setTab('Subscribers')}>Subscribers</span>
