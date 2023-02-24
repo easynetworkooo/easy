@@ -3,16 +3,22 @@ import styles from './Messages.module.scss'
 import { InputSend } from "../../components-ui";
 import { userAPI } from "../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
-import { paginationCount } from "../../constants/pagintaionCount";
 import UserDialogs from "./UserDialogs/UserDialogs";
 import { notificationSlice } from "../../store/reducers/NotificationSlice";
-import { convertTime } from "../../helpers/convertTime";
+import { IDialogValue } from "../../models/IDialog";
+import { serverURL } from "../../constants/serverURL";
+import defaultAvatar from '../../assets/Profile/Default-avatar.svg'
+import { USERS } from "../../constants/nameRoutesConsts";
+
+const paginationCount = 30
 
 export const Messages = () => {
 
     const location: any = useLocation()
+
+    const navigate = useNavigate()
 
     const dispatch = useAppDispatch()
 
@@ -20,10 +26,19 @@ export const Messages = () => {
     const [isOpenMessages, setOpenMessages] = useState<number | null>(null)
     const [isSendValueMessage, setSendValueMessage] = useState('')
     const [isUserIdToSend, setUserIdToSend] = useState(0)
-    const [isDialogData, setDialogsData] = useState<any>([])
+    const [isDialogsData, setDialogsData] = useState<any>([])
+    const [isOpenDialogData, setOpenDialogData] = useState<IDialogValue>({
+        dateLastMessage: '',
+        opponentId: 0,
+        name: '',
+        lastMessage: '',
+        img: null,
+        notification: 0
+    })
     const [currentCountDialogs, setCurrentCountDialogs] = useState(paginationCount)
-    const [currentCountMessages, setCurrentCountMessages] = useState(10)
+    const [currentCountMessages, setCurrentCountMessages] = useState(paginationCount)
     const [isMessagesData, setMessagesData] = useState<any[]>([])
+    const [isPaginationWork, setPaginationWork] = useState(true)
 
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
@@ -91,26 +106,40 @@ export const Messages = () => {
     }
 
     const openDialogHandle = async (index: number, id: number) => {
-        setOpenMessages(index)
-        try {
-            const messages: any = await fetchGetMessages({id: id, count: 10})
-            if (messages.data.status === 200) {
-                setMessagesData(messages.data.value)
-                setUserIdToSend(id)
+        if (dialogsData) {
+            setPaginationWork(true)
+            setCurrentCountMessages(paginationCount)
+            setOpenMessages(index)
+            setOpenDialogData(dialogsData.value[index])
+            try {
+                const messages: any = await fetchGetMessages({id: id, count: paginationCount})
+                if (messages.data.status === 200) {
+                    setMessagesData(messages.data.value)
+                    setUserIdToSend(id)
+                }
+                await fetchUserNotification('').then((data: any) => {
+                    dispatch(setNotificationsReducer(data.data.value))
+                })
+            } catch (e: any) {
+                customErrorNotify(e, 'Error')
             }
-            await fetchUserNotification('').then((data: any) => {
-                dispatch(setNotificationsReducer(data.data.value))
-            })
-        } catch (e: any) {
-            customErrorNotify(e, 'Error')
         }
     }
 
     const onScrollMessageHandler = async (e: React.UIEvent<HTMLDivElement>) => {
-        if (e.currentTarget.scrollHeight - e.currentTarget.clientHeight - (Math.abs(e.currentTarget.scrollTop)) < 1 && dialogsData) {
+        if (e.currentTarget.scrollHeight - e.currentTarget.clientHeight - (Math.abs(Math.round(e.currentTarget.scrollTop))) <= 1 && dialogsData && isPaginationWork) {
+            setPaginationWork(false)
             await fetchGetMessages({id: isUserIdToSend, count: currentCountMessages + 10}).then((data: any) => {
-                setCurrentCountMessages(prevState => prevState + 10)
-                setMessagesData(data.data.value)
+                if (isMessagesData.length === data.data.value.length) {
+                    setPaginationWork(false)
+                } else {
+                    setTimeout(() => {
+                        setPaginationWork(true)
+                        setCurrentCountMessages(prevState => prevState + 10)
+                        setMessagesData(data.data.value)
+                    }, 200)
+                }
+
             })
         }
     }
@@ -118,26 +147,42 @@ export const Messages = () => {
     return (
         <div className={styles.messagesContainer}>
             <div className={styles.userMessagesBlock}>
-                <UserDialogs isDialogData={isDialogData} isOpenMessages={isOpenMessages}
+                <UserDialogs isDialogData={isDialogsData} isOpenMessages={isOpenMessages}
                              openDialogHandle={openDialogHandle} setCurrentCountDialogs={setCurrentCountDialogs}/>
             </div>
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
-                <div className={styles.messages} style={{height: `${720 - isMessageBlockHeight}px`}}
-                     onScroll={onScrollMessageHandler}>
+                <div className={styles.messageUser} onClick={() => navigate(`${USERS}/${isOpenDialogData.name}`)}>
+                    <img src={isOpenDialogData.img !== null ? `${serverURL}/${isOpenDialogData.img}` : defaultAvatar}
+                         alt="avatarMessage"/>
+                    <span>{isOpenDialogData.name}</span>
+                </div>
+                <div className={styles.messages} style={{ height: `calc(100vh - 250px - ${isMessageBlockHeight}px)`}}
+                     onScroll={(e) => isPaginationWork && onScrollMessageHandler(e)}>
                     {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
                         <React.Fragment key={index}>
-                            {(item.fromid === isUserIdToSend || item.fromid === activeUserId) &&
-                                <div
-                                    className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
-                                    <p className={styles.text}>{item.text}</p>
-                                    <span className={styles.timeSend}>{convertTime(item.regdate)}</span>
+                            {item.fromid !== activeUserId ?
+                                <div className={styles.messageBlock}>
+                                    <div className={styles.borderMessage}/>
+                                    <div className={styles.message}>
+                                        <img src={isOpenDialogData.img !== null ? `${serverURL}/${isOpenDialogData.img}` : defaultAvatar} alt="avatarMessage"/>
+                                        <p className={styles.text}>{item.text}</p>
+                                    </div>
+                                </div>
+
+                                :
+                                <div className={styles.messageBlock}>
+                                    <div className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
+                                        <p className={styles.text}>{item.text}</p>
+                                    </div>
+                                    <div className={styles.borderYourMessage}/>
                                 </div>
                             }
                         </React.Fragment>
                     )}
                 </div>
                 <InputSend setSubtractTextarea={setMessageBlockHeight} value={isSendValueMessage}
-                           setValue={setSendValueMessage} sendHandler={sendMessageHandler} placeholder='Write a message'/>
+                           setValue={setSendValueMessage} sendHandler={sendMessageHandler}
+                           placeholder='Write a message'/>
             </div>
         </div>
     );

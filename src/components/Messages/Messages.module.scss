@@ -5,24 +5,44 @@
 }
 
 .userMessagesBlock {
-  padding-right: 12px;
-  border-right: 1px solid $Gray200;
+  padding-right: 8px;
 }
 
 .userMessages {
+  padding-right: 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: 420px;
-  height: 750px;
-  //height: 300px;
-  padding-right: 12px;
+  height: calc(100vh - 116px);
   overflow-y: scroll;
 }
 
+
 .messagesBlock {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: 10px 12px 10px 24px;
+  //padding: 10px 12px 10px 24px;
+  border-left: 1px solid $Gray200;
+}
+
+.messageUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid $Gray200;
+  cursor: pointer;
+  padding: 16px 0;
+  span {
+    font-weight: 500;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 1000px;
+  }
 }
 
 .messagesBlockNone {
@@ -30,6 +50,7 @@
 }
 
 .messages {
+  margin-right: 12px;
   padding-right: 10px;
   margin-bottom: 20px;
   overflow-y: scroll;
@@ -38,38 +59,44 @@
   flex-direction: column-reverse;
 }
 
-.message {
+.messageBlock {
   display: flex;
-  flex-direction: column;
-  margin-right: 100px;
-  padding: 24px;
-  gap: 8px;
-  border-radius: 4px;
+  align-items: center;
+}
+
+.borderMessage {
+  width: 24px;
+  border-bottom: 2px solid $Gray200;
+}
+
+.borderYourMessage {
+  width: 24px;
+  border-bottom: 2px solid $Gray300;
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  padding: 8px 16px;
+  margin-right: 20px;
+  gap: 16px;
+  border-radius: 20px;
   background-color: $LightWhite;
-  p {
-    white-space: pre-line;
-    line-height: 17px;
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 1000px;
   }
 }
 
 .text {
-  line-height: 17px;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 130%;
 }
 
-.timeSend {
-  text-align: right;
-  font-size: 12px;
-  line-height: 15px;
-  color: $HelperGray;
-}
 
 .yourMessage {
-  background-color: $Purple100;
-  margin-left: 100px;
+  background-color: $Gray300;
+  margin-left: 90px;
   margin-right: 0;
-
-  .timeSend {
-    color: $Purple300;
-  }
 }

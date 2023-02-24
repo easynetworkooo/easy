@@ -41,7 +41,7 @@ export const InputSend: FC<InputSendProps> = ({setSubtractTextarea, value, setVa
                 <div className={styles.addPhotoBlock}>
                     <img src={paperClip} alt="paperclip"/>
                 </div>
-                <TextareaAutosize className={styles.textarea} maxRows={6} placeholder={placeholder}
+                <TextareaAutosize className={styles.textarea} maxRows={10} placeholder={placeholder}
                                   onHeightChange={(height) => onHeightChangeHandler(height)} value={value}
                                   onChange={event => setValue(event.target.value)}
                                   onKeyPress={event => sendPressHandler(event)}

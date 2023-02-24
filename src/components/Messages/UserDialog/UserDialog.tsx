@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './UserDialog.module.scss'
 import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
-import { useNavigate } from "react-router-dom";
-import { USERS } from "../../../constants/nameRoutesConsts";
 import { IDialogValue } from "../../../models/IDialog";
 import { serverURL } from "../../../constants/serverURL";
 import { convertTime } from "../../../helpers/convertTime";
@@ -15,13 +13,6 @@ export interface UserMessageProps {
 }
 
 export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessages, openDialogHandler}) => {
-
-    const navigate = useNavigate()
-
-    const navigateToUser = (e: React.MouseEvent<HTMLImageElement> | React.MouseEvent<HTMLSpanElement>) => {
-        e.stopPropagation()
-        navigate(`${USERS}/${dialogData.name}`)
-    }
 
     const [countNotification, setCountNotification] = useState(0)
 
@@ -39,12 +30,12 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
             className={index === isOpenMessages ? `${styles.userMessageBlock} ${styles.active}` : styles.userMessageBlock}
             onClick={openDialog}>
             <div className={styles.avatar}>
-                <img src={dialogData.img ? `${serverURL}${dialogData.img}` : defaultAvatar} alt="avatar"
-                     onClick={(e) => navigateToUser(e)}/>
+                <img src={dialogData.img ? `${serverURL}${dialogData.img}` : defaultAvatar} alt="avatar"/>
             </div>
             <div className={styles.shortLastMessageBlock}>
                 <div className={styles.timeLastMessageBlock}>
-                    <span className={styles.name} onClick={(e) => navigateToUser(e)}>{dialogData.name}</span>
+                    <span className={styles.name}>{dialogData.name}</span>
+                    <span className={styles.dot}>&#183;</span>
                     <span className={styles.timeLastMessage}>{convertTime(dialogData.dateLastMessage)}</span>
                 </div>
                 <div className={styles.shortLastMessage}>
@@ -56,6 +47,7 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
                     }
                 </div>
             </div>
+            <div className={styles.border}/>
         </div>
     );
 };
