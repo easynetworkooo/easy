@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import styles from './WalletConnect.module.scss'
-import metaMask from '../../../assets/Wallet/MetaMask.png'
+import metaMask from '../../../assets/Wallet/Metamask.svg'
+import ethereum from '../../../assets/Wallet/Ethereum.svg'
+import solana from '../../../assets/Wallet/Solana.svg'
+import trust from '../../../assets/Wallet/Trust.svg'
 
 export interface WalletConnectProps {
     setWalletAuth: (auth: boolean) => void
@@ -18,18 +21,18 @@ export const WalletConnect:FC<WalletConnectProps> = ({setWalletAuth}) => {
                         <span>MetaMask</span>
                     </div>
                     <div className={styles.selection} onClick={() => setWalletAuth(true)}>
-                        <img src={metaMask} alt="wallet"/>
+                        <img src={trust} alt="wallet"/>
                         <span>Trust Wallet</span>
                     </div>
                 </div>
                 <div className={styles.blockchainSelection}>
                     <span>Blockchain Selection</span>
                     <div className={styles.selection} onClick={() => setWalletAuth(true)}>
-                        <img src={metaMask} alt="wallet"/>
+                        <img src={ethereum} alt="wallet"/>
                         <span>Etherium</span>
                     </div>
                     <div className={`${styles.selection} ${styles.unActiveSelection}`}>
-                        <img src={metaMask} alt="wallet"/>
+                        <img src={solana} alt="wallet"/>
                         <span>Solana</span>
                         <span className={styles.progressDeveloping}>In developing</span>
                     </div>

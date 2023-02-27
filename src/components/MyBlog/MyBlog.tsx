@@ -85,12 +85,14 @@ export const MyBlog = () => {
             {
                 !isLoadingUserPosts && posts.length === 0 &&
                 <div className={styles.emptyPostsBlock}>
-                    <span>Write your first post</span>
-                    <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
-                               sendHandler={sendHandler}
-                               value={isSendValue}
-                               placeholder="Write a your first post"
-                    />
+                    <span style={{ height: `calc(100vh - 114px - 45px - ${isSubtractTextarea}px)`}}>Write a your first post</span>
+                    <div className={styles.sendBlock}>
+                        <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
+                                   sendHandler={sendHandler}
+                                   value={isSendValue}
+                                   placeholder='Write a new post'
+                        />
+                    </div>
                 </div>
             }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Subscribers.module.scss'
-import { FilterItems, SubsLoading, UserSub } from "../../../components-ui";
+import { SubsLoading, UserSub } from "../../../components-ui";
 import { userAPI } from "../../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { paginationCount } from "../../../constants/pagintaionCount";

@@ -7,7 +7,6 @@
 }
 
 .postsBlock {
-  width: 684px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -24,7 +23,11 @@
 }
 
 .emptyPosts {
+  height: 100%;
   display: flex;
-  color: $HeaderDark;
+  align-items: center;
+  justify-content: center;
+  color: $gray;
+  font-weight: 500;
   font-size: 24px;
 }

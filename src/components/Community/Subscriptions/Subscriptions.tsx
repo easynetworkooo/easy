@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Subscriptions.module.scss'
-import { FilterItems, SubsLoading, UserSub } from "../../../components-ui";
+import { SubsLoading, UserSub } from "../../../components-ui";
 import { userAPI } from "../../../services/UserService";
 import { useAppSelector } from "../../../hooks/redux";
 import { IUserValue } from "../../../models/IUser";
@@ -40,14 +40,6 @@ export const Subscriptions = () => {
     return (
         <div className={styles.subscriptionsBlock}>
             <div className={styles.subscriptions} onScroll={onScrollHandler}>
-                {subscriptionsData
-                    ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
-                    : <SubsLoading/>
-                }
-                {subscriptionsData
-                    ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
-                    : <SubsLoading/>
-                }
                 {subscriptionsData
                     ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
                     : <SubsLoading/>
