@@ -1,74 +1,108 @@
 @import "src/styles/vars";
 
+
 .selectBlock {
-  position: relative;
   display: flex;
-  gap: 10px;
   flex-direction: column;
-  width: 100%;
+  position: relative;
 }
+
 
 .select {
+  position: relative;
+  display: flex;
+  border-radius: 10px;
   background-color: $LightWhite;
-  border: 1px solid $LightWhite;
-  border-radius: 4px;
-  padding: 10px 0 11px 15px;
-  width: 100%;
-  cursor: pointer;
 
-  &[title = 'gray200'] {
-    background-color: $Gray200;
+
+  input {
+    background-color: $LightWhite;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px 16px 11px 16px;
+    outline: 0;
+    border: 1px solid $LightWhite;
+
+    &::placeholder {
+      color: $HelperGray;
+    }
+  }
+
+  input:focus {
+    outline: 0;
+    border: 1px solid $HelperGray;
   }
 }
 
-.active {
-  border: 1px solid $purple;
+.selectActive {
+  border-radius: 10px 10px 0 0;
+
+  input {
+    border-radius: 10px 10px 0 0;
+  }
 }
 
-.placeholder {
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  color: $HelperGray;
-}
-
-.selected {
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  color: $dark;
-}
-
-.dropdownImage {
+.dropdown {
+  cursor: pointer;
   position: absolute;
   top: 12px;
-  right: 10px;
+  right: 12px;
 }
 
-.listDropDownBlock {
-  background: $LightWhite;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
+.dropdownUnActive {
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  transform: rotate(180deg);
+}
+
+.dropdownBlock {
+  max-height: 300px;
   overflow-y: scroll;
-  max-height: 200px;
+  width: 100%;
+  display: flex;
+  z-index: 2;
+  position: absolute;
+  padding-bottom: 20px;
+  top: 42px;
+  flex-direction: column;
+  background-color: $SecondWhite;
+  border: 1px solid $Gray200;
+  border-radius: 0 0 10px 10px;
+}
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &[title = 'gray200'] {
-    background-color: $Gray200;
+.resultsSearchingText {
+  padding-top: 16px;
+  padding-left: 16px;
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    color: $HelperGray;
+    text-transform: uppercase;
   }
 }
 
 .dropdownElement {
-  cursor: pointer;
-  padding: 15px;
+  padding: 14px 16px;
 
-  &:hover {
-    background-color: $purple;
-
+  span {
+    font-size: 16px;
+    color: $gray;
+    font-weight: 500;
     span {
-      color: $white;
+      color: $TextDark;
     }
   }
+  &:hover {
+    cursor: pointer;
+    background-color: $LightWhite;
+  }
 }
+
+.dropdownElementHighlight {
+  color: $TextDark;
+}
+

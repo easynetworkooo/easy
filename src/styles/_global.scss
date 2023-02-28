@@ -105,6 +105,10 @@ textarea:focus {
   border: 1px solid $Gray200;
 }
 
+input {
+  font-family: 'Inter', sans-serif;
+}
+
 input[type="radio"] {
   width: 16px;
   height: 16px;

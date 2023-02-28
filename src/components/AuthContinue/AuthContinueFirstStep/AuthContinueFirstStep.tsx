@@ -7,6 +7,7 @@ import { setCities } from "../../../helpers/setCities";
 import { setCountries } from "../../../helpers/setCountries";
 import { useInput } from "../../../hooks/useInput";
 import { authAPI } from "../../../services/AuthService";
+import { customErrorNotify } from "../../../helpers/customErrorNotify";
 
 export interface AuthContinueFirstStepProps {
     changeStep: (nextStep: number) => void,
@@ -41,6 +42,8 @@ export const AuthContinueFirstStep: FC<AuthContinueFirstStepProps> = ({
                 country: isCountry
             })
             changeStep(nextStep)
+        } else {
+            customErrorNotify('Complete all fields', 'Error')
         }
     }
 
