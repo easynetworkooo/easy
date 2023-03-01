@@ -2,13 +2,13 @@ import React, { FC, useEffect, useState } from 'react';
 import styles from './Notifications.module.scss'
 import notifications from '../../../assets/UI/Notifications.svg'
 import notificationsActive from '../../../assets/UI/NotificationsActive.svg'
-import avatar from '../../../assets/Profile/Default-avatar.svg'
 import { useAppSelector } from "../../../hooks/redux";
 import { IBellItem } from "../../../models/INotifications";
 import { serverURL } from "../../../constants/serverURL";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { convertTime } from "../../../helpers/convertTime";
+import { Avatar } from "../../Avatar/Avatar";
 
 
 export interface NotificationsProps {
@@ -26,7 +26,7 @@ export const Notifications: FC<NotificationsProps> = ({bellNotification, setActi
     const navigate = useNavigate()
 
     const notificationsData = useAppSelector(state => state.notificationsReducer.bell)
-    
+
     const [isGroupsNotifications, setIsGroupsNotifications] = useState<groupsNotifications[] | []>([])
 
     useEffect(() => {
@@ -82,9 +82,9 @@ export const Notifications: FC<NotificationsProps> = ({bellNotification, setActi
                             <div className={styles.notifications} key={key}>
                                 <div className={styles.notification}>
                                     <div className={styles.notificationAvatar}>
-                                        <img
-                                            src={notificationItem.userData.img ? `${serverURL}${notificationItem.userData.img}` : avatar}
-                                            alt="avatar"/>
+                                        <Avatar
+                                            img={notificationItem.userData.img ? `${serverURL}${notificationItem.userData.img}` : null}
+                                            name={notificationItem.userData.name} color={notificationItem.userData.color} fontSize={18}/>
                                     </div>
                                     <div className={styles.name}>
                                     <span

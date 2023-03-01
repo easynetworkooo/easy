@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './UserHeader.module.scss'
-import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
-import { Button, ButtonBack, IconElement } from "../../../components-ui";
+import { Avatar, Button, ButtonBack, IconElement } from "../../../components-ui";
 import likes from "../../../assets/Profile/Like.svg";
 import reposts from "../../../assets/Profile/Repost.svg";
 import views from "../../../assets/Profile/View.svg";
@@ -66,8 +65,7 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
                 <ButtonBack/>
             </div>
             <div className={styles.avatarBlock}>
-                <img src={isUserData.img ? `${serverURL}${isUserData.img}` : defaultAvatar} className={styles.avatar}
-                     alt="userProfile"/>
+                <Avatar img={isUserData.img ? `${serverURL}${isUserData.img}` : null} name={isUserData.name} color={isUserData.color} fontSize={48}/>
             </div>
             <div className={styles.header}>
                 <div className={styles.headerInformation}>

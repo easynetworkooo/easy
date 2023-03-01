@@ -1,0 +1,20 @@
+@import "src/styles/vars";
+
+.avatar {
+  height: 100%;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1000px;
+  span {
+    font-weight: 700;
+    color: $white;
+    text-transform: uppercase;
+  }
+  img {
+    border-radius: 1000px;
+    width: 100%;
+  }
+}

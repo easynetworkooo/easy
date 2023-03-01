@@ -7,4 +7,5 @@ export interface IFinishRegisterCredentials {
     country: string,
     city: string
     interests: string
+    color: string
 }

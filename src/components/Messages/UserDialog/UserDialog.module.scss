@@ -8,12 +8,15 @@
   background-color: $LightWhite;
   cursor: pointer;
   border-radius: 0;
+
   &:nth-last-child(1) {
     .border {
       border: none;
     }
+
     border-radius: 0 0 20px 20px;
   }
+
   &:nth-child(1) {
     border-radius: 20px 20px 0 0;
   }
@@ -24,11 +27,9 @@
 }
 
 .avatar {
-  img {
-    border-radius: 1000px;
-    height: 56px;
-    width: 56px;
-  }
+  height: 56px;
+  min-width: 56px;
+  width: 56px;
 }
 
 .shortLastMessageBlock {
@@ -66,6 +67,7 @@
   height: 40px;
   overflow: hidden;
   justify-content: space-between;
+
   p {
     line-height: 130%;
     color: $gray;
@@ -81,6 +83,7 @@
   height: 20px;
   background: $purple;
   border-radius: 16px;
+
   span {
     letter-spacing: .5px;
     font-weight: 600;

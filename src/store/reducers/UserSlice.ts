@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserProfile, IUserProfileContinueAuth } from "../../models/IUserProfile";
+import { IUserProfile } from "../../models/IUserProfile";
+import { defaultColor } from "../../constants/colors";
 
 
 const initialState: IUserProfile = {
@@ -13,7 +14,8 @@ const initialState: IUserProfile = {
     img: '',
     subscribers: 0,
     subscriptions: 0,
-    bellstatus: 0
+    bellstatus: 0,
+    color: defaultColor
 }
 
 export const userSlice = createSlice({
@@ -29,15 +31,10 @@ export const userSlice = createSlice({
             state.city = action.payload.city
             state.interests = action.payload.interests
             state.img = action.payload.img
+            state.color = action.payload.color
             state.subscribers = action.payload.subscribers
             state.subscriptions = action.payload.subscriptions
             state.bellstatus = action.payload.bellstatus
-        },
-        setUserAfterAuthContinue(state, action: PayloadAction<IUserProfileContinueAuth>) {
-            state.name = action.payload.name
-            state.country = action.payload.country
-            state.city = action.payload.city
-            state.interests = action.payload.interests
         },
         setAvatarReducer(state, action: PayloadAction<{ img: string }>) {
             state.img = action.payload.img

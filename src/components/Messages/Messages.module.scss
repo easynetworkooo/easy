@@ -39,11 +39,12 @@
   span {
     font-weight: 500;
   }
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 1000px;
-  }
+}
+
+.avatarBlock {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
 }
 
 .messagesBlockNone {
@@ -83,9 +84,10 @@
   gap: 16px;
   border-radius: 20px;
   background-color: $LightWhite;
-  img {
+  div {
     height: 40px;
-    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
     border-radius: 1000px;
   }
 }

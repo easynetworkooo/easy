@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Messages.module.scss'
-import { InputSend } from "../../components-ui";
+import { Avatar, InputSend } from "../../components-ui";
 import { userAPI } from "../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,8 +9,8 @@ import UserDialogs from "./UserDialogs/UserDialogs";
 import { notificationSlice } from "../../store/reducers/NotificationSlice";
 import { IDialogValue } from "../../models/IDialog";
 import { serverURL } from "../../constants/serverURL";
-import defaultAvatar from '../../assets/Profile/Default-avatar.svg'
 import { USERS } from "../../constants/nameRoutesConsts";
+import { defaultColor } from "../../constants/colors";
 
 const paginationCount = 30
 
@@ -33,7 +33,8 @@ export const Messages = () => {
         name: '',
         lastMessage: '',
         img: null,
-        notification: 0
+        notification: 0,
+        color: defaultColor
     })
     const [currentCountDialogs, setCurrentCountDialogs] = useState(paginationCount)
     const [currentCountMessages, setCurrentCountMessages] = useState(paginationCount)
@@ -152,8 +153,9 @@ export const Messages = () => {
             </div>
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
                 <div className={styles.messageUser} onClick={() => navigate(`${USERS}/${isOpenDialogData.name}`)}>
-                    <img src={isOpenDialogData.img !== null ? `${serverURL}/${isOpenDialogData.img}` : defaultAvatar}
-                         alt="avatarMessage"/>
+                    <div className={styles.avatarBlock}>
+                        <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null} name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
+                    </div>
                     <span>{isOpenDialogData.name}</span>
                 </div>
                 <div className={styles.messages} style={{ height: `calc(100vh - 220px - ${isMessageBlockHeight}px)`}}
@@ -164,7 +166,7 @@ export const Messages = () => {
                                 <div className={styles.messageBlock}>
                                     <div className={styles.borderMessage}/>
                                     <div className={styles.message}>
-                                        <img src={isOpenDialogData.img !== null ? `${serverURL}/${isOpenDialogData.img}` : defaultAvatar} alt="avatarMessage"/>
+                                        <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null} name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
                                         <p className={styles.text}>{item.text}</p>
                                     </div>
                                 </div>

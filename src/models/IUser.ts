@@ -13,6 +13,7 @@ export interface IUserValue {
     subscribers: number
     subscriptions: number
     subscribeStatus: boolean
+    color: string
 }
 
 export interface IUser {

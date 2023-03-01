@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import styles from './Comment.module.scss'
-import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
 import likeActive from "../../../assets/UI/LikesActive.svg";
 import like from "../../../assets/UI/Likes.svg";
 import { IconElement } from "../../IconElement/IconElement";
@@ -10,6 +9,7 @@ import { IComment } from "../../../models/IComment";
 import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
 import { convertTime } from "../../../helpers/convertTime";
+import { Avatar } from "../../Avatar/Avatar";
 
 export interface CommentProps {
     comment: IComment
@@ -34,7 +34,7 @@ export const Comment:FC<CommentProps> = ({comment}) => {
     return (
         <div className={styles.commentBlock}>
             <div className={styles.avatar}>
-                <img src={comment.owner.img ? `${serverURL}${comment.owner.img}` : defaultAvatar} alt="commentImage"/>
+                <Avatar img={comment.owner.img ? `${serverURL}${comment.owner.img}` : null} name={comment.owner.name} color={comment.owner.color} fontSize={18}/>
             </div>
             <div className={styles.mainCommentsInformation}>
                 <div className={styles.headerInformation} onClick={() => navigate(`${USERS}/${comment.owner.name}`)}>

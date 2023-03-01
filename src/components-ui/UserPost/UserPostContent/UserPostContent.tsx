@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from "./UserPostContent.module.scss";
 import { IconElement } from "../../IconElement/IconElement";
-import defaultAvatar from "../../../assets/Profile/Default-avatar.svg";
 import like from "../../../assets/UI/Likes.svg";
 import likeActive from '../../../assets/UI/LikesActive.svg'
 import comments from "../../../assets/UI/Comments.svg";
@@ -17,6 +16,8 @@ import { RepostModal } from "../../RepostModal/RepostModal";
 import { useAppSelector } from "../../../hooks/redux";
 import { DeletePostModal } from "../../DeletePostModal/DeletePostModal";
 import { convertTime } from "../../../helpers/convertTime";
+import { Avatar } from "../../Avatar/Avatar";
+import { defaultColor } from "../../../constants/colors";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -31,7 +32,8 @@ const initialOwner: IOwner = {
     id: 0,
     email: "",
     name: "",
-    img: null
+    img: null,
+    color: defaultColor
 }
 
 export const UserPostContent: FC<UserPostContentProps> = ({
@@ -92,8 +94,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     return (
         <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
             <div className={styles.avatarPostCreator} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
-                <img src={isOwner.img ? `${serverURL}${isOwner.img}` : defaultAvatar}
-                     alt="postCreator"/>
+                <Avatar img={isOwner.img ? `${serverURL}${isOwner.img}` : null} name={isOwner.name} color={isOwner.color} fontSize={24}/>
             </div>
             <div className={styles.mainPostInformation}>
                 <div className={styles.userInformation} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>

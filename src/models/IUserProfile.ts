@@ -10,6 +10,7 @@ export interface IUserProfile {
     subscribers: number
     subscriptions: number
     bellstatus: number
+    color: string
 }
 
 export interface IUserProfileContinueAuth {
@@ -17,4 +18,5 @@ export interface IUserProfileContinueAuth {
     country: string,
     city: string,
     interests: string[],
+    color: string
 }

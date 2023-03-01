@@ -3,6 +3,7 @@ import styles from './AuthContinue.module.scss'
 import { AuthContinueFirstStep } from "./AuthContinueFirstStep/AuthContinueFirstStep";
 import { AuthContinueSecondStep } from "./AuthContinueSecondStep/AuthContinueSecondStep";
 import { IFinishRegisterCredentials } from "../../models/IFinishRegister";
+import { createRandomColor } from "../../constants/colors";
 
 export const AuthContinue = () => {
     const [isStep, setStep] = useState(1)
@@ -10,7 +11,8 @@ export const AuthContinue = () => {
         nickname: '',
         city: '',
         country: '',
-        interests: ''
+        interests: '',
+        color: createRandomColor()
     })
 
     const checkStep = (stepNumber: number) => {

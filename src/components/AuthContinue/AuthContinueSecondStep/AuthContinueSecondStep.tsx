@@ -8,7 +8,6 @@ import { CONTENT } from "../../../constants/nameRoutesConsts";
 import { appAPI } from "../../../services/AppService";
 import { authAPI } from "../../../services/AuthService";
 import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
-import { userSlice } from "../../../store/reducers/UserSlice";
 import { customErrorNotify } from "../../../helpers/customErrorNotify";
 import deleteInterest from '../../../assets/Select/DeleteInterest.svg'
 import { useDebounce } from "use-debounce";
@@ -20,7 +19,6 @@ export interface AuthContinueSecondStepProps {
 }
 
 export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCredentialsFinishRegister}) => {
-    const {setUserAfterAuthContinue} = userSlice.actions
     const {loginReducer} = authSlice.actions
     const dispatch = useAppDispatch()
 
@@ -60,14 +58,12 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
 
     const endAuthHandler = async () => {
         if (isInterestItems.length >= 3 && isInterestItems.length <= 10) {
-            const {nickname, country, city} = isCredentialsFinishRegister
             const finishDataRegister: any = await finishRegister({
                 ...isCredentialsFinishRegister,
                 interests: JSON.stringify(isInterestItems)
             })
             if (finishDataRegister.data.status === 200) {
                 dispatch(loginReducer({isAuth: true, continueAuth: false}))
-                dispatch(setUserAfterAuthContinue({name: nickname, country, city, interests: isInterestItems}))
                 navigate(CONTENT)
                 customErrorNotify('Good luck!', 'Success')
             } else {
@@ -89,7 +85,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
             }
         }
 
-
+        // eslint-disable-next-line
     }, [debounceFindText])
 
     useEffect(() => {

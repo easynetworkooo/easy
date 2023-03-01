@@ -26,5 +26,6 @@ export interface IBellItem {
         id: number
         name: string
         img: string | null
+        color: string
     }
 }

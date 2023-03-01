@@ -12,6 +12,7 @@ export interface IComment {
         id: number,
         name: string,
         img: string | null
+        color: string
     }
     postid: number,
     text: string

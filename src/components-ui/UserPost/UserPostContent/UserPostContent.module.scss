@@ -12,11 +12,9 @@
 
 .avatarPostCreator {
   cursor: pointer;
-  img {
-    width: 56px;
-    height: 56px;
-    border-radius: 1000px;
-  }
+  min-width: 56px;
+  max-width: 56px;
+  height: 56px;
 }
 
 .mainPostInformation {

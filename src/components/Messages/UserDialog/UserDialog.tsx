@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './UserDialog.module.scss'
-import defaultAvatar from '../../../assets/Profile/Default-avatar.svg'
 import { IDialogValue } from "../../../models/IDialog";
 import { serverURL } from "../../../constants/serverURL";
 import { convertTime } from "../../../helpers/convertTime";
+import { Avatar } from "../../../components-ui";
 
 export interface UserMessageProps {
     dialogData: IDialogValue
@@ -30,7 +30,7 @@ export const UserDialog: FC<UserMessageProps> = ({dialogData, index, isOpenMessa
             className={index === isOpenMessages ? `${styles.userMessageBlock} ${styles.active}` : styles.userMessageBlock}
             onClick={openDialog}>
             <div className={styles.avatar}>
-                <img src={dialogData.img ? `${serverURL}${dialogData.img}` : defaultAvatar} alt="avatar"/>
+                <Avatar img={dialogData.img ? `${serverURL}${dialogData.img}` : null} name={dialogData.name} color={dialogData.color} fontSize={24}/>
             </div>
             <div className={styles.shortLastMessageBlock}>
                 <div className={styles.timeLastMessageBlock}>

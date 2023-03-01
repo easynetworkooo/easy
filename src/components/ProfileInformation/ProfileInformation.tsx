@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProfileInformation.module.scss'
-import { AvatarChangeModal, Button, IconElement } from "../../components-ui";
+import { Avatar, AvatarChangeModal, Button, IconElement } from "../../components-ui";
 import { MenuItem } from "./MenuItem/MenuItem";
 import {
     AUTH,
@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../services/AuthService";
 import { authSlice } from "../../store/reducers/AuthSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import defaultAvatar from '../../assets/Profile/Default-avatar.svg'
 import changeAvatarImage from '../../assets/Profile/ChangeAvatar.svg'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
@@ -39,7 +38,7 @@ export const ProfileInformation = () => {
 
     const {logoutReducer} = authSlice.actions
 
-    const {name, img} = useAppSelector(state => state.userReducer)
+    const {name, img, color} = useAppSelector(state => state.userReducer)
     const {likes, reposts, views} = useAppSelector(state => state.notificationsReducer.main)
     const {messages, subscribers} = useAppSelector(state => state.notificationsReducer.buttons)
     const socket = useAppSelector(state => state.socketReducer.socket)
@@ -96,7 +95,10 @@ export const ProfileInformation = () => {
                          style={isActiveModalChangeAvatar ? {opacity: '1'} : undefined}>
                         <img src={changeAvatarImage} alt="avatarChange"/>
                     </div>
-                    <img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>
+                    <div className={styles.avatarBlock}>
+                        <Avatar img={img ? `${serverURL}${img}` : null} name={name} color={color} fontSize={48}/>
+                    </div>
+                    {/*<img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>*/}
                 </div>
                 <div className={styles.profileName}>
                     <h2 onClick={() => navigate(`${USERS}/${name}`)}>{name}</h2>

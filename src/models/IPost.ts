@@ -23,6 +23,7 @@ export interface IOwner {
     email: string,
     name: string,
     img: string | null
+    color: string
 }
 
 export interface IAllUserPosts {
