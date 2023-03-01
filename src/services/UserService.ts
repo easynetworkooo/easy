@@ -4,6 +4,7 @@ import { IUser, IUserValue } from "../models/IUser";
 import { IDialog } from "../models/IDialog";
 import { serverURL } from "../constants/serverURL";
 import { INotifications } from "../models/INotifications";
+import { IInterestsFound } from "../models/IInterests";
 
 
 export const userAPI = createApi({
@@ -130,5 +131,14 @@ export const userAPI = createApi({
                 }
             }),
         }),
+        searchInterests: build.query<IInterestsFound, string>({
+            query: (search) => ({
+                url: `/searchInterests`,
+                method: 'GET',
+                params: {
+                    text: search
+                }
+            })
+        })
     })
 })

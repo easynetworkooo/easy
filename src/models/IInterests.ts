@@ -8,5 +8,9 @@ export interface IInterests {
             }
         ]
     }
+}
 
+export interface IInterestsFound {
+    status: number
+    value: { id: number, name: string }[]
 }

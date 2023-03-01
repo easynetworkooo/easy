@@ -11,6 +11,8 @@ import { IFinishRegisterCredentials } from "../../../models/IFinishRegister";
 import { userSlice } from "../../../store/reducers/UserSlice";
 import { customErrorNotify } from "../../../helpers/customErrorNotify";
 import deleteInterest from '../../../assets/Select/DeleteInterest.svg'
+import { useDebounce } from "use-debounce";
+import { userAPI } from "../../../services/UserService";
 
 
 export interface AuthContinueSecondStepProps {
@@ -26,6 +28,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
 
     const [isOpenDropdown, setOpenDropdown] = useState(true)
     const [inputFind, setInputFind] = useState('')
+    const [debounceFindText] = useDebounce(inputFind, 500)
     const [findItems, setFindItems] = useState<string[]>([])
     const inputRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
@@ -33,6 +36,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
     const [isInterestItems, setInterestItems] = useState<string[]>([])
 
     const {data: interestItems} = appAPI.useFetchAllInterestQuery('')
+    const {data: interestsFound} = userAPI.useSearchInterestsQuery(debounceFindText)
     const [finishRegister] = authAPI.useFinishRegisterMutation()
 
     const addInterestItemHandler = (interest: string) => {
@@ -75,16 +79,18 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
     }
 
     useEffect(() => {
-        if (interestItems) {
-            if (inputFind === '') {
-                setFindItems([...interestItems.value.interests.map(item => item.name)])
+        if (interestsFound) {
+            if (debounceFindText === '') {
+                setFindItems([...interestsFound.value.map(item => item.name)])
             } else {
-                const items = [...interestItems.value.interests.map(item => item.name)]
-                setFindItems(items.filter(item => item.toLowerCase().includes(inputFind.toLowerCase())))
+                const items = [...interestsFound.value.map(item => item.name)]
+                setFindItems(items.filter(item => item.toLowerCase().includes(debounceFindText.toLowerCase())))
 
             }
         }
-    }, [inputFind, interestItems])
+
+
+    }, [debounceFindText])
 
     useEffect(() => {
         const handleOutsideClick = (event: any) => {
