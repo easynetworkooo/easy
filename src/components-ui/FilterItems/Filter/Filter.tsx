@@ -10,6 +10,7 @@ export interface FilterProps {
     isSelectCountry: string
     isSelectCity: string
     isSelectCryptoInterests: string
+    setSorterName: (value: string) => void
     setSelectCountry: (value: string) => void
     setSelectCity: (value: string) => void
     setSelectCryptoInterests: (value: string) => void
@@ -17,6 +18,7 @@ export interface FilterProps {
 
 export const Filter: FC<FilterProps> = ({
                                             isSorterName,
+                                            setSorterName,
                                             isSelectCountry,
                                             setSelectCountry,
                                             setSelectCity,
@@ -24,9 +26,6 @@ export const Filter: FC<FilterProps> = ({
                                             isSelectCryptoInterests,
                                             setSelectCryptoInterests
                                         }) => {
-
-
-    const [isSelectProjectOption, setSelectProjectOption] = useState('')
     const [isCodeCountry, setCodeCountry] = useState('')
 
     const {data: countries} = appAPI.useFetchAllCountriesQuery('')
@@ -52,23 +51,16 @@ export const Filter: FC<FilterProps> = ({
 
     return (
         <div className={styles.filterBlock}>
-            {isSorterName === 'users' &&
-                <>
-                    <Select isActiveSelect={isSelectCountry} setActiveSelect={setSelectCountry} placeholder="Country"
-                            options={countries ? setCountries(countries.value.countries) : []}/>
-                    <Select isActiveSelect={isSelectCity} setActiveSelect={setSelectCity} placeholder="City"
-                            options={cities ? setCities(cities.value) : []} disabled={isSelectCountry === ''}/>
-                    <Select isActiveSelect={isSelectCryptoInterests} setActiveSelect={setSelectCryptoInterests}
-                            placeholder="Crypto Interest" options={setCryptoInterests()}/>
-                </>
-            }
-            {isSorterName === 'project' &&
-                <>
-                    <Select isActiveSelect={isSelectProjectOption} setActiveSelect={setSelectProjectOption}
-                            options={['DEF', 'PRO']} placeholder='Waiting for launch'/>
-                </>
-            }
-
+            <>
+                <Select isActiveSelect={isSorterName} setActiveSelect={setSorterName} placeholder="Type"
+                        options={['all', 'users', 'project']}/>
+                <Select isActiveSelect={isSelectCountry} setActiveSelect={setSelectCountry} placeholder="Country"
+                        options={countries ? setCountries(countries.value.countries) : []}/>
+                <Select isActiveSelect={isSelectCity} setActiveSelect={setSelectCity} placeholder="City"
+                        options={cities ? setCities(cities.value) : []} disabled={isSelectCountry === ''}/>
+                <Select isActiveSelect={isSelectCryptoInterests} setActiveSelect={setSelectCryptoInterests}
+                        placeholder="Crypto Interest" options={setCryptoInterests()}/>
+            </>
         </div>
     );
 };

@@ -122,7 +122,7 @@ export const userAPI = createApi({
                 body: messagesCredentials
             }),
         }),
-        searchUsers: build.mutation<any, { page: number, type: string, text?: string, interest?: string, country?: string, city?: string }>({
+        searchUsers: build.mutation<any, { page: number, type?: string, text?: string, interest?: string, country?: string, city?: string }>({
             query: (searchCredentials) => ({
                 url: '/search',
                 method: 'GET',

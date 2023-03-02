@@ -38,9 +38,12 @@ export const Select: FC<SelectProps> = ({
     }
 
     const chooseOptionSelectHandler = (e: React.MouseEvent<HTMLDivElement>, option: string) => {
-        setOpenDropdown(false)
-        setFindValue(option)
-        setActiveSelect(option)
+        setTimeout(() => {
+            setOpenDropdown(false)
+            setFindValue(option)
+            setActiveSelect(option)
+        }, 0)
+
     }
 
     useEffect(() => {

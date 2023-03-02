@@ -2,8 +2,10 @@
 
 .filterBlock {
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 24px;
+  padding-bottom: 30px;
   width: 100%;
 }
 
@@ -14,17 +16,49 @@
   gap: 16px;
 }
 
-.buttonsFilter {
+.filters {
+  cursor: pointer;
   display: flex;
-  width: 100%;
-  gap: 24px;
-  justify-content: center;
   align-items: center;
-  img {
-    cursor: pointer;
-    width: 48px;
-    height: 48px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid $Gray300;
+  padding: 10.5px 16px;
+  span {
+    color: $gray;
+    font-size: 14px;
+    font-weight: 500;
   }
+
+  &:hover {
+    background: $Gray300;
+    span {
+      color: $TextDark;
+    }
+  }
+}
+
+.filtersActive {
+  background: $Gray300;
+  span {
+    color: $TextDark;
+  }
+}
+
+.itemsFoundBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  top: 47px;
+  width: 100%;
+  margin-top: 16px;
+  z-index: 5;
+  background-color: $white;
+  position: absolute;
+}
+
+.activeItemsFoundBlock {
+  height: calc(100vh - 170px);
 }
 
 .finderItemsBlock {
@@ -32,8 +66,6 @@
   overflow-y: scroll;
   flex-direction: column;
   gap: 10px;
-  width: 684px;
-  max-height: 400px;
   &::-webkit-scrollbar {
     display: none;
   }

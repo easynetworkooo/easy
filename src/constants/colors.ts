@@ -1,4 +1,3 @@
-
 const randomColors = [
     'to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%',
     '120deg, #f6d365 0%, #fda085 100%',
@@ -28,4 +27,4 @@ export const createRandomColor = () => {
     return randomColors[Math.floor(Math.random() * randomColors.length)]
 }
 
-export const defaultColor = createRandomColor()
+export const defaultColor: string = 'to right, rgb(67, 67, 67) 0%, black 100%'
