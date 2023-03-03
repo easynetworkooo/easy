@@ -27,9 +27,30 @@
   font-weight: 500;
 }
 
+.nameHighlight {
+  font-weight: 500;
+  color: $gray;
+  span {
+    font-weight: 500;
+    color: $TextDark;
+  }
+}
+
+
+
 .country {
+  font-weight: 500;
   font-size: 12px;
   color: $gray;
+}
+
+.countryHighlight {
+  span {
+    color: $TextDark;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
 }
 
 .lastActivity {
@@ -54,4 +75,14 @@
   font-weight: 500;
   font-size: 12px;
   color: $SecondaryDark;
+}
+
+.highlightSkill {
+  background-color: $purple;
+  span {
+    color: $white;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
 }

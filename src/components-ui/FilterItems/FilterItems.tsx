@@ -115,7 +115,7 @@ export const FilterItems = () => {
                 }
                 <div className={styles.finderItemsBlock}>
                     {itemsSearch.map(item =>
-                        <UserSub dataSub={item} key={item.id}/>
+                        <UserSub dataSub={item} key={item.id} searchParams={isSearchParams}/>
                     )}
                 </div>
             </div>
