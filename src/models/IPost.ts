@@ -1,5 +1,6 @@
 export interface IPostCredentials {
     text: string
+    images?: any
 }
 
 export interface IPost {
@@ -7,6 +8,7 @@ export interface IPost {
     type: string
     text: string,
     liked: boolean
+    imgs: string
     itsrepost: boolean
     originaldate: string
     originalid: number

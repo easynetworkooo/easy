@@ -22,6 +22,7 @@ export const CommentsModal: FC<CommentsModalProps> = ({isActiveModal, setActiveM
     const [isFetching, setFetching] = useState(false)
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
     const [isValueSend, setValueSend] = useState<string>('')
+    const [postImages, setPostImages] = useState<any>([])
 
     const {data: commentsData} = postAPI.useFetchPostCommentsQuery({
         count: currentCount,
@@ -60,7 +61,7 @@ export const CommentsModal: FC<CommentsModalProps> = ({isActiveModal, setActiveM
                     <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={comments} setFetching={setFetching}/>
                 </div>
                 <div className={styles.sendBlock}>
-                    <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setValue={setValueSend}
+                    <InputSend setSubtractTextarea={setSubtractTextarea} setPostImages={setPostImages} postImages={postImages} value={isValueSend} setValue={setValueSend}
                                sendHandler={setCommentHandler} placeholder='Write a comment'/>
                 </div>
             </div>

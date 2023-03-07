@@ -90,7 +90,6 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         }
     }, [userPost.itsrepost, userPost.originalowner, userPost.owner])
 
-
     return (
         <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
             <div className={styles.avatarPostCreator} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
@@ -104,6 +103,13 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                 </div>
                 <div className={styles.postText}>
                     <p>{userPost.text}</p>
+                </div>
+                <div className={styles.gallery}>
+                    {userPost.imgs.length > 10 && JSON.parse(userPost.imgs).map((item: string) =>
+                        <div className={styles.item} key={item}>
+                            <img src={`${serverURL}${item}`} alt="postImage" className={styles.image}/>
+                        </div>
+                    )}
                 </div>
                 <div className={styles.actionIcons}>
                     {

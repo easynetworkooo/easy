@@ -57,6 +57,7 @@
   }
 }
 
+
 .actionIcons {
   display: flex;
   align-items: center;
@@ -83,4 +84,21 @@
   position: absolute;
   right: 24px;
   bottom: 8px;
+}
+
+.gallery {
+  column-count: 3;
+  column-gap: 10px;
+  grid-gap: 10px;
+  margin-bottom: 10px;
+}
+
+.item {
+  display: inline-block;
+  width: 100%;
+}
+
+.image {
+  border-radius: 20px;
+  width: 100%;
 }

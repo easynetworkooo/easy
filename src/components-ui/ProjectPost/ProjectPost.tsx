@@ -17,6 +17,7 @@ export const ProjectPost: FC<ProjectPostProps> = ({icon, name, text}) => {
     const [isSubtractTextarea, setSubtractTextarea] = useState<number>(0)
     const [isValueSend, setValueSend] = useState<string>('')
     const [isFetching, setFetching] = useState(false)
+    const [postImages, setPostImages] = useState<any>([])
 
 
     console.log(isFetching)
@@ -34,7 +35,7 @@ export const ProjectPost: FC<ProjectPostProps> = ({icon, name, text}) => {
                         <CommentsPost isSubtractTextarea={isSubtractTextarea} comments={[]} setFetching={setFetching}/>
                     </div>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setValue={setValueSend}
+                        <InputSend setSubtractTextarea={setSubtractTextarea} value={isValueSend} setPostImages={setPostImages} postImages={postImages} setValue={setValueSend}
                                    sendHandler={() => console.log('t')} placeholder='Write a new project'/>
                     </div>
                 </div>

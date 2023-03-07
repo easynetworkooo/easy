@@ -12,6 +12,7 @@ export const MyBlog = () => {
     const {id} = useAppSelector(state => state.userReducer)
     const [createBlogPost] = postAPI.useCreateBlogPostMutation()
     const [posts, setPosts] = useState<IPost[]>([])
+    const [postImages, setPostImages] = useState<any>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
     const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery({
@@ -21,15 +22,20 @@ export const MyBlog = () => {
     const [isSubtractTextarea, setSubtractTextarea] = useState(0)
     const [isSendValue, setSendValue] = useState<string>('')
 
-    console.log(isSubtractTextarea)
     const sendHandler = async () => {
-        const dataCreatePost: any = await createBlogPost({text: isSendValue})
+        const formData = new FormData()
+        formData.append('text', isSendValue)
+        for (const postImage of postImages) {
+            formData.append('images', postImage, 'image.png')
+        }
+        const dataCreatePost: any = await createBlogPost(formData)
         if (dataCreatePost.data.status === 200) {
             setSendValue('')
             customErrorNotify('Post successfully created', 'Success')
         } else {
             customErrorNotify(dataCreatePost.error.data.value, 'Error')
         }
+        setPostImages([])
     }
 
     useEffect(() => {
@@ -74,7 +80,7 @@ export const MyBlog = () => {
                         )}
                     </div>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
+                        <InputSend setSubtractTextarea={setSubtractTextarea} setPostImages={setPostImages} postImages={postImages} setValue={setSendValue}
                                    sendHandler={sendHandler}
                                    value={isSendValue}
                                    placeholder='Write a new post'
@@ -87,7 +93,7 @@ export const MyBlog = () => {
                 <div className={styles.emptyPostsBlock}>
                     <span style={{ height: `calc(100vh - 114px - 45px - ${isSubtractTextarea}px)`}}>Write a your first post</span>
                     <div className={styles.sendBlock}>
-                        <InputSend setSubtractTextarea={setSubtractTextarea} setValue={setSendValue}
+                        <InputSend setSubtractTextarea={setSubtractTextarea} setPostImages={setPostImages} postImages={postImages} setValue={setSendValue}
                                    sendHandler={sendHandler}
                                    value={isSendValue}
                                    placeholder='Write a new post'

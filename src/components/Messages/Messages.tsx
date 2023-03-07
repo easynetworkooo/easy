@@ -41,6 +41,8 @@ export const Messages = () => {
     const [isMessagesData, setMessagesData] = useState<any[]>([])
     const [isPaginationWork, setPaginationWork] = useState(true)
 
+    const [postImages, setPostImages] = useState<any>([])
+
 
     const {id: activeUserId} = useAppSelector(state => state.userReducer)
     const socket = useAppSelector(state => state.socketReducer.socket)
@@ -182,7 +184,7 @@ export const Messages = () => {
                         </React.Fragment>
                     )}
                 </div>
-                <InputSend setSubtractTextarea={setMessageBlockHeight} value={isSendValueMessage}
+                <InputSend setSubtractTextarea={setMessageBlockHeight} setPostImages={setPostImages} postImages={postImages} value={isSendValueMessage}
                            setValue={setSendValueMessage} sendHandler={sendMessageHandler}
                            placeholder='Write a message'/>
             </div>

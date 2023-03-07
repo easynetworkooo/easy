@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IAllUserPosts, IFreshPosts, IPost, IPostCredentials } from "../models/IPost";
+import { IAllUserPosts, IFreshPosts, IPost } from "../models/IPost";
 import { serverURL } from "../constants/serverURL";
 import { ICommentResponse } from "../models/IComment";
 
@@ -18,7 +18,7 @@ export const postAPI = createApi({
     tagTypes: ['Post'],
 
     endpoints: (build) => ({
-        createBlogPost: build.mutation<IPost, IPostCredentials>({
+        createBlogPost: build.mutation<IPost, any>({
             query: (postCredentials) => ({
                 url: '/setBlogPost',
                 method: 'POST',
