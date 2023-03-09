@@ -1,0 +1,32 @@
+.photosModal {
+  height: 90vh;
+  min-width: 600px;
+  padding: 80px 10px 10px 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.mainPhoto {
+  display: flex;
+  justify-content: center;
+  height: 80%;
+
+  img {
+    border-radius: 20px;
+    height: 100%;
+  }
+}
+
+.otherPhotos {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  gap: 10px;
+
+  img {
+    cursor: pointer;
+    border-radius: 20px;
+    height: 16%;
+  }
+}

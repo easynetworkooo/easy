@@ -18,6 +18,7 @@ import { DeletePostModal } from "../../DeletePostModal/DeletePostModal";
 import { convertTime } from "../../../helpers/convertTime";
 import { Avatar } from "../../Avatar/Avatar";
 import { defaultColor } from "../../../constants/colors";
+import { ViewPhotosModal } from "../../ViewPhotosModal/ViewPhotosModal";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -49,6 +50,8 @@ export const UserPostContent: FC<UserPostContentProps> = ({
 
     const [isActiveRepostModal, setActiveRepostModal] = useState(false)
     const [isActiveDeleteModal, setActiveDeleteModal] = useState(false)
+    const [isActivePhotosModal, setActivePhotosModal] = useState(false)
+    const [chosenMainPhoto, setChosenMainPhoto] = useState('')
     const [isOwner, setOwner] = useState<IOwner>(initialOwner)
     const [isShowBasket, setShowBasket] = useState(false)
     const [isHoverBasket, setHoverBasket] = useState(false)
@@ -82,6 +85,11 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         setActiveDeleteModal(true)
     }
 
+    const openModalViewPhotos = (mainPhoto: string) => {
+        setChosenMainPhoto(mainPhoto)
+        setActivePhotosModal(true)
+    }
+
     useEffect(() => {
         if (userPost.itsrepost) {
             if (typeof userPost.originalowner !== 'number') setOwner(userPost.originalowner)
@@ -93,7 +101,8 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     return (
         <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
             <div className={styles.avatarPostCreator} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
-                <Avatar img={isOwner.img ? `${serverURL}${isOwner.img}` : null} name={isOwner.name} color={isOwner.color} fontSize={24}/>
+                <Avatar img={isOwner.img ? `${serverURL}${isOwner.img}` : null} name={isOwner.name}
+                        color={isOwner.color} fontSize={24}/>
             </div>
             <div className={styles.mainPostInformation}>
                 <div className={styles.userInformation} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
@@ -107,7 +116,8 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                 <div className={styles.gallery}>
                     {userPost.imgs.length > 10 && JSON.parse(userPost.imgs).map((item: string) =>
                         <div className={styles.item} key={item}>
-                            <img src={`${serverURL}${item}`} alt="postImage" className={styles.image}/>
+                            <img src={`${serverURL}${item}`} alt="postImage" className={styles.image}
+                                 onClick={() => openModalViewPhotos(item)}/>
                         </div>
                     )}
                 </div>
@@ -137,12 +147,17 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                     }
                 </div>
                 {isShowBasket && activeUserId === userPost.owner.id &&
-                    <div className={styles.deleteBasketBlock} onMouseMove={() => setHoverBasket(true)} onMouseLeave={() => setHoverBasket(false)}>
-                        <img src={isHoverBasket ? deleteBasketHover : deleteBasket} alt="basket" onClick={(e) => openModalDeleteHandler(e)}/>
+                    <div className={styles.deleteBasketBlock} onMouseMove={() => setHoverBasket(true)}
+                         onMouseLeave={() => setHoverBasket(false)}>
+                        <img src={isHoverBasket ? deleteBasketHover : deleteBasket} alt="basket"
+                             onClick={(e) => openModalDeleteHandler(e)}/>
                     </div>
                 }
             </div>
 
+            <ViewPhotosModal isActivePhotosModal={isActivePhotosModal} setMainPhoto={setChosenMainPhoto}
+                             setActivePhotosModal={setActivePhotosModal} mainPhoto={chosenMainPhoto}
+                             photos={userPost.imgs ? JSON.parse(userPost.imgs) : null}/>
             <RepostModal isActiveRepostModal={isActiveRepostModal} setActiveRepostModal={setActiveRepostModal}
                          postId={userPost.id}/>
             <DeletePostModal isActiveDeleteModal={isActiveDeleteModal} setActiveDeleteModal={setActiveDeleteModal}

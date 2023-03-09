@@ -50,7 +50,7 @@
 }
 
 .postText {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   p {
     font-size: 14px;
     font-weight: 400;
@@ -99,6 +99,7 @@
 }
 
 .image {
+  cursor: pointer;
   border-radius: 20px;
   width: 100%;
 }
