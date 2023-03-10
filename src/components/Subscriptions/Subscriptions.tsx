@@ -12,20 +12,19 @@ export const Subscriptions = () => {
     const [posts, setPosts] = useState<IPost[]>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)
     const [isFetching, setFetching] = useState(false)
-    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchAllUserPostsQuery({
-        userId: 63,
+    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchSubsPostsQuery({
         count: currentCount
     })
 
 
     useEffect(() => {
         if (usersPosts) {
-            setPosts(usersPosts.value.data)
+            setPosts(usersPosts.value)
         }
     }, [usersPosts])
 
     useEffect(() => {
-        if (isFetching && usersPosts && currentCount <= usersPosts.value.data.length) {
+        if (isFetching && usersPosts && currentCount <= usersPosts.value.length) {
             setCurrentCount(prevState => prevState + paginationCount)
         }
         // eslint-disable-next-line
