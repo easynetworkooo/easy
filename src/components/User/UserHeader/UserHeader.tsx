@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './UserHeader.module.scss'
-import { Avatar, Button, ButtonBack, IconElement } from "../../../components-ui";
+import { Avatar, Button, ButtonBack, IconElement, ViewPhotosModal } from "../../../components-ui";
 import likes from "../../../assets/Profile/Like.svg";
 import reposts from "../../../assets/Profile/Repost.svg";
 import views from "../../../assets/Profile/View.svg";
@@ -21,6 +21,9 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
     const navigate = useNavigate()
     const {id} = useAppSelector(state => state.userReducer)
 
+    const [isActivePhotoModal, setActivePhotoModal] = useState(false)
+    const [mainPhoto, setMainPhoto] = useState('')
+
     const [subscribeToUser] = userAPI.useSubscribeToUserMutation()
     const [unSubscribeToUser] = userAPI.useUnSubscribeToUserMutation()
 
@@ -37,6 +40,13 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
                 setSubscribe(true)
             }
         })
+    }
+
+    const viewAvatarHandler = (photo: string) => {
+        if (photo) {
+            setMainPhoto(photo)
+            setActivePhotoModal(true)
+        }
     }
 
     const unSubscribeHandle = async () => {
@@ -64,7 +74,7 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
             <div>
                 <ButtonBack/>
             </div>
-            <div className={styles.avatarBlock}>
+            <div className={styles.avatarBlock} onClick={() => viewAvatarHandler(isUserData.img)}>
                 <Avatar img={isUserData.img ? `${serverURL}${isUserData.img}` : null} name={isUserData.name} color={isUserData.color} fontSize={48}/>
             </div>
             <div className={styles.header}>
@@ -125,7 +135,7 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
                     )}
                 </div>
             </div>
-
+            <ViewPhotosModal isActivePhotosModal={isActivePhotoModal} setActivePhotosModal={setActivePhotoModal} photos={null} mainPhoto={mainPhoto} setMainPhoto={setMainPhoto}/>
         </div>
     );
 };

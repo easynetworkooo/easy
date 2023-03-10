@@ -38,8 +38,8 @@
 
 
 .linkActive, .linkActive:hover {
-  text-shadow: 0 0 .65px $TextDark, 0 0 .65px $TextDark;
   color: $TextDark;
+  font-weight: 600;
   cursor: pointer;
 }
 

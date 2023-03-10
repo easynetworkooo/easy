@@ -26,11 +26,13 @@ export const ViewPhotosModal: FC<ViewPhotosModalProps> = ({
                 <div className={styles.mainPhoto}>
                     <img src={`${serverURL}${mainPhoto}`} alt="postPhoto"/>
                 </div>
-                <div className={styles.otherPhotos}>
-                    {photos && photos.map((item) =>
-                        <img src={`${serverURL}${item}`} key={item} alt="postPhoto" onClick={() => setMainPhoto(item)}/>
-                    )}
-                </div>
+                {photos &&
+                    <div className={styles.otherPhotos}>
+                        {photos.map((item) =>
+                            <img src={`${serverURL}${item}`} key={item} alt="postPhoto" onClick={() => setMainPhoto(item)}/>
+                        )}
+                    </div>
+                }
             </div>
         </Modal>
     );
