@@ -2,22 +2,48 @@
 
 .authGoogleButton {
   width: 100%;
-  background: $white;
-  border: 1px solid $purple;
-  border-radius: 10px;
-  padding: 12px 24px;
-  gap: 16px;
-  cursor: pointer;
   display: flex;
+  cursor: pointer;
   align-items: center;
-  justify-content: center;
+  height: 40px;
+  border-width: 0;
+  background: white;
+  color: #737373;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding: 0;
+
+  &:focus,
+  &:hover {
+    box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    background-color: #e5e5e5;
+    box-shadow: none;
+    transition-duration: 10ms;
+  }
 
   img {
-    width: 26px;
-    height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 8px 0 8px 8px;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
   }
 
   span {
-    color: $purple;
+    display: inline-block;
+    vertical-align: middle;
+    color: rgba(0,0,0, .54);
+    font-weight: bold;
+    padding: 0 24px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
   }
 }

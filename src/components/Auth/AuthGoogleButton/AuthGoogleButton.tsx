@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './AuthGoogleButton.module.scss'
-import authGoogle from '../../../assets/Auth/authGoogle.svg'
+import authGoogle from '../../../assets/Auth/btn_google_light_normal_ios.svg'
 import { serverURL } from "../../../constants/serverURL";
 
 export const AuthGoogleButton = () => {
@@ -13,7 +13,7 @@ export const AuthGoogleButton = () => {
     return (
         <button className={styles.authGoogleButton} onClick={loginWithGoogleHandler}>
             <img src={authGoogle} alt="gmail"/>
-            <span>With Google</span>
+            <span>Sign in with Google</span>
         </button>
     );
 };
