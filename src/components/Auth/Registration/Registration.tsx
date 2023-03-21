@@ -24,7 +24,8 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
     const isRepeatPassword = useInput('', {isEmpty: true, isMatch: isPassword.value})
 
     const registrationHandler = async () => {
-        if (isEmail.isInputErrorValidation || isPassword.isInputErrorValidation || isRepeatPassword.isInputErrorValidation) {
+        const checkValid = isEmail.value.length === 0 || isPassword.value.length === 0 || isRepeatPassword.value.length === 0 || isEmail.isInputErrorValidation || isPassword.isInputErrorValidation || isRepeatPassword.isInputErrorValidation
+        if (checkValid) {
             isEmail.setDirty(true)
             isPassword.setDirty(true)
             isRepeatPassword.setDirty(true)
@@ -69,7 +70,7 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
                        onChange={(e) => isEmail.onChange(e)}
                        onBlur={(e) => isEmail.onBlur(e)}
                        onKeyPress={e => e.key === 'Enter' && registrationHandler()}
-                       autoFocus={true}/>
+                />
             </div>
             <div className={styles.inputBlock}>
                 <Input placeholder={'Password'}
@@ -80,7 +81,8 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
                        isDirty={isPassword.isDirty}
                        onChange={(e) => isPassword.onChange(e)}
                        onBlur={(e) => isPassword.onBlur(e)}
-                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
+                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}
+                />
             </div>
             <div className={styles.inputBlock}>
                 <Input placeholder={'Repeat password'} type={'password'} value={isRepeatPassword.value}

@@ -6,7 +6,7 @@ import { FilterItems } from "../../components-ui";
 
 export const Community = () => {
 
-    const [isTab, setTab] = useState('Subscribers')
+    const [isTab, setTab] = useState('Subscriptions')
 
     const checkTabs = () => {
         if (isTab === 'Subscribers') {
@@ -20,10 +20,10 @@ export const Community = () => {
         <div className={styles.communityContainer}>
             <FilterItems/>
             <div className={styles.tabsBlock}>
-                <span className={isTab === 'Subscribers' ? `${styles.tab} ${styles.active}` : styles.tab}
-                      onClick={() => setTab('Subscribers')}>Subscribers</span>
                 <span className={isTab === 'Subscriptions' ? `${styles.tab} ${styles.active}` : styles.tab}
                       onClick={() => setTab('Subscriptions')}>Subscriptions</span>
+                <span className={isTab === 'Subscribers' ? `${styles.tab} ${styles.active}` : styles.tab}
+                      onClick={() => setTab('Subscribers')}>Subscribers</span>
             </div>
             {checkTabs()}
         </div>

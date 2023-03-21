@@ -7,7 +7,7 @@ import comments from "../../../assets/UI/Comments.svg";
 import reposts from "../../../assets/UI/Repost.svg";
 import deleteBasket from '../../../assets/UI/DeletePostBasket.svg'
 import deleteBasketHover from '../../../assets/UI/DeleteBasketHover.svg'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { IOwner, IPost } from "../../../models/IPost";
 import { postAPI } from "../../../services/PostService";
@@ -60,6 +60,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
     const [removeLikeToPost] = postAPI.useRemoveLikeToPostMutation()
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const setShowBasketHandler = () => {
         setShowBasket(state => !state)
@@ -90,6 +91,10 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         setActivePhotosModal(true)
     }
 
+    const openUserProfile = () => {
+        if (location.pathname !== `${USERS}/${isOwner.name}`) navigate(`${USERS}/${isOwner.name}`)
+    }
+
     useEffect(() => {
         if (userPost.itsrepost) {
             if (typeof userPost.originalowner !== 'number') setOwner(userPost.originalowner)
@@ -98,14 +103,15 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         }
     }, [userPost.itsrepost, userPost.originalowner, userPost.owner])
 
+
     return (
         <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
-            <div className={styles.avatarPostCreator} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
+            <div className={styles.avatarPostCreator} onClick={openUserProfile}>
                 <Avatar img={isOwner.img ? `${serverURL}${isOwner.img}` : null} name={isOwner.name}
                         color={isOwner.color} fontSize={24}/>
             </div>
             <div className={styles.mainPostInformation}>
-                <div className={styles.userInformation} onClick={() => navigate(`${USERS}/${isOwner.name}`)}>
+                <div className={styles.userInformation} onClick={openUserProfile}>
                     <span className={styles.name}>{isOwner.name}</span>
                     <span className={styles.dot}>&#183;</span>
                     <span className={styles.date}>{convertTime(userPost.date)}</span>

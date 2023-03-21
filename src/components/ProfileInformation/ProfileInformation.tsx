@@ -4,7 +4,7 @@ import { Avatar, AvatarChangeModal, Button, IconElement } from "../../components
 import { MenuItem } from "./MenuItem/MenuItem";
 import {
     AUTH,
-    COMMUNITY,
+    COMMUNITY, CONTENT,
     CREATE_PROJECT,
     MESSAGES,
     MY_BLOG,
@@ -110,26 +110,27 @@ export const ProfileInformation = () => {
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>
+                <MenuItem image={blog} menuText={'Main'} to={CONTENT} activeImage={activeBlog}/>
+                <MenuItem image={blog} menuText={'Blog'} to={MY_BLOG} activeImage={activeBlog}/>
                 <MenuItem image={messagesImg} countNotification={messages} menuText={'Messages'} to={MESSAGES}
                           activeImage={activeMessages}/>
                 <MenuItem image={community} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}
                           activeImage={activeCommunity}/>
                 <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
                 <MenuItem image={myProject} menuText={'Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
-                <MenuItem image={blog} menuText={'Blog'} to={MY_BLOG} activeImage={activeBlog}/>
             </div>
             <div className={styles.buttonCreateProject}>
                 <Button onClick={() => navigate(CREATE_PROJECT)}>
                     <span>Create Project</span>
                 </Button>
             </div>
-            <div className={styles.walletConnection}>
-                <Button onClick={() => navigate(CREATE_PROJECT)} buttonColor="clearButton">
+            <div className={styles.buttonCreateProject}>
+                <Button onClick={() => navigate(WALLET)}>
                     <span>Connect wallet</span>
                 </Button>
             </div>
             <div className={styles.logout}>
-                <Button buttonColor='redClearButton' onClick={logoutHandler}>
+                <Button buttonColor='clearButton' onClick={logoutHandler}>
                     <span>Logout</span>
                 </Button>
             </div>

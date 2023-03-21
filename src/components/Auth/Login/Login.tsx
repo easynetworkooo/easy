@@ -19,11 +19,12 @@ export interface LoginProps {
 export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
     const [login] = authAPI.useLoginMutation()
     const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
-    const isEmail = useInput('', {isEmail: true})
+    const isEmail = useInput('', {isEmail: true, isEmpty: true})
     const isPassword = useInput('', {isEmpty: true})
 
     const loginHandler = async () => {
-        if (isEmail.isInputErrorValidation || isPassword.isInputErrorValidation) {
+        const checkValid = isEmail.value.length === 0 || isPassword.value.length === 0 || isEmail.isInputErrorValidation || isPassword.isInputErrorValidation
+        if (checkValid) {
             isEmail.setDirty(true)
             isPassword.setDirty(true)
             return
@@ -61,7 +62,6 @@ export const Login: FC<LoginProps> = ({changeAuthStatus, navigateHandler}) => {
                        isDirty={isEmail.isDirty}
                        isInputErrorValidation={isEmail.isInputErrorValidation}
                        onKeyPress={e => e.key === 'Enter' && loginHandler()}
-                       autoFocus={true}
                 />
             </div>
             <div className={styles.inputBlock}>

@@ -11,8 +11,9 @@
 }
 
 .avatar {
-    width: 56px;
-    height: 56px;
+  max-width: 56px;
+  min-width: 56px;
+  height: 56px;
 }
 
 .nameBlock {
@@ -30,12 +31,12 @@
 .nameHighlight {
   font-weight: 500;
   color: $gray;
+
   span {
     font-weight: 500;
     color: $TextDark;
   }
 }
-
 
 
 .country {
@@ -79,6 +80,7 @@
 
 .highlightSkill {
   background-color: $purple;
+
   span {
     color: $white;
     font-weight: 500;

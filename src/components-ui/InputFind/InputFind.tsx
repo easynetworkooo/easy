@@ -24,7 +24,7 @@ export const InputFind: FC<InputFindProps> = ({onChangeValue, value, clearFilter
                 <img src={search} alt="search"/>
             </div>
             <div className={styles.inputFind}>
-                <input ref={inputRef} type="text" placeholder={'Search members by name, country or qualification'}
+                <input ref={inputRef} type="text" placeholder={'Search members by name, country'}
                        value={value} onChange={e => onChangeValue(e.target.value)}/>
             </div>
             {

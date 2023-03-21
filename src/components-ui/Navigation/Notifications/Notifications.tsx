@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { USERS } from "../../../constants/nameRoutesConsts";
 import { convertTime } from "../../../helpers/convertTime";
 import { Avatar } from "../../Avatar/Avatar";
+import moment from "moment";
 
 
 export interface NotificationsProps {
@@ -30,11 +31,18 @@ export const Notifications: FC<NotificationsProps> = ({bellNotification, setActi
     const [isGroupsNotifications, setIsGroupsNotifications] = useState<groupsNotifications[] | []>([])
 
     useEffect(() => {
+        const nowDateWithTime = moment().format('YYYY-MM-DD hh:mm:ss')
+        const nowDate = nowDateWithTime.split(' ')[0]
         const groups = notificationsData.reduce((groups: any, item: IBellItem) => {
             const date = item.regdate.split(' ')[0];
             if (!groups[date]) {
-                groups[date] = [];
+                groups[date === nowDate ? item.regdate : date] = [];
             }
+            if (nowDate === date) {
+                groups[item.regdate].push(item)
+                return groups
+            }
+
             groups[date].push(item);
             return groups;
         }, {});
@@ -45,6 +53,7 @@ export const Notifications: FC<NotificationsProps> = ({bellNotification, setActi
                 items: groups[date]
             };
         });
+
 
         setIsGroupsNotifications(groupsNotifications)
     }, [notificationsData])
