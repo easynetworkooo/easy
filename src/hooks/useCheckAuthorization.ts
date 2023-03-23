@@ -39,7 +39,6 @@ export const useCheckAuthorization = () => {
                             bell: dataNotifications.data.value.bell
                         }))
                     } else {
-                        localStorage.removeItem('auth')
                         customErrorNotify(isAuthUser.error.data.value.toString(), 'Error')
                         navigate(AUTH)
                     }
