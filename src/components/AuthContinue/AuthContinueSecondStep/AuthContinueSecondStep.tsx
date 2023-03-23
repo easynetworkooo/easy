@@ -105,7 +105,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
                 <Steps steps={['readyStep', 'secondActiveStep']}/>
             </div>
             <div className={styles.helperTextBlock}>
-                <span>Enter your crypto interests</span>
+                <span>Enter your maximum 10 crypto interests</span>
             </div>
             <div className={styles.interestsBlock} ref={blockRef} onFocus={() => setOpenDropdown(true)}>
                 <div

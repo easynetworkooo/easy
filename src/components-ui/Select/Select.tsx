@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Select.module.scss'
 import dropdown from '../../assets/Select/dropdown.svg'
+import clear from '../../assets/UI/close.svg'
 
 
 export interface SelectProps {
     options: string[],
     placeholder: string,
-    moreGrayBackColor?: any
     disabled?: boolean
     isActiveSelect: string,
     setActiveSelect: (item: string) => void
@@ -16,7 +16,6 @@ export const Select: FC<SelectProps> = ({
                                             options,
                                             disabled,
                                             placeholder,
-                                            moreGrayBackColor,
                                             isActiveSelect,
                                             setActiveSelect
                                         }) => {
@@ -28,13 +27,26 @@ export const Select: FC<SelectProps> = ({
 
     const openDropDownHandler = () => {
         if (disabled === undefined || !disabled) {
+            setOptions(options)
             setOpenDropdown(prevState => !prevState)
         }
     }
 
     const highlightFindTextOption = (option: string) => {
-        const regex = new RegExp(findValue, 'gi');
-        return option.replace(regex, '<span>$&</span>');
+        const optionHighlight = option.slice(0, findValue.toLowerCase().length)
+        const arr: { highlight: boolean; text: string }[] = [
+            {
+                text: optionHighlight,
+                highlight: true
+            }
+            ,
+            {
+                text: option.slice(findValue.toLowerCase().length),
+                highlight: false
+            }
+        ]
+
+        return arr
     }
 
     const chooseOptionSelectHandler = (e: React.MouseEvent<HTMLDivElement>, option: string) => {
@@ -43,6 +55,13 @@ export const Select: FC<SelectProps> = ({
             setFindValue(option)
             setActiveSelect(option)
         }, 0)
+    }
+
+    const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFindValue(e.currentTarget.value)
+        if (!isOpenDropDown) {
+            setOpenDropdown(true)
+        }
 
     }
 
@@ -50,7 +69,7 @@ export const Select: FC<SelectProps> = ({
         if (findValue === '') {
             setOptions(options)
         } else {
-            setOptions(options.filter(item => item.toLowerCase().includes(findValue.toLowerCase())))
+            setOptions(options.filter(item => item.toLowerCase().indexOf(findValue.toLowerCase()) === 0))
 
         }
     }, [findValue, options])
@@ -86,9 +105,11 @@ export const Select: FC<SelectProps> = ({
             <div className={isOpenDropDown ? `${styles.select} ${styles.selectActive}` : styles.select}
                  onFocus={openDropDownHandler}>
                 <input type="text" disabled={disabled} placeholder={placeholder} value={findValue}
-                       onChange={e => setFindValue(e.currentTarget.value)} ref={inputRef}/>
+                       onChange={onChangeInputHandler} ref={inputRef}/>
+                {findValue && <img src={clear} alt="clear" className={styles.clearFilter} onClick={() => setFindValue('')}/>}
                 <img src={dropdown} alt="dropdown"
-                     className={isOpenDropDown ? styles.dropdown : styles.dropdownUnActive} onClick={() => inputRef.current.focus()}/>
+                     className={isOpenDropDown ? styles.dropdown : styles.dropdownUnActive}
+                     onClick={() => inputRef.current.focus()}/>
             </div>
             {isOpenDropDown &&
                 <div className={styles.dropdownBlock}>
@@ -100,7 +121,11 @@ export const Select: FC<SelectProps> = ({
                     {isOptions.map((item, index) =>
                         <div className={styles.dropdownElement} key={index}
                              onClick={(e) => chooseOptionSelectHandler(e, item)}>
-                            <span dangerouslySetInnerHTML={{__html: highlightFindTextOption(item)}}/>
+                            {highlightFindTextOption(item).map((item, key) =>
+                                <span className={item.highlight ? styles.dropdownElementHighlight : styles.dropdownElementText} key={key}>
+                                    {item.text}
+                                </span>
+                            )}
                         </div>
                     )}
                 </div>
