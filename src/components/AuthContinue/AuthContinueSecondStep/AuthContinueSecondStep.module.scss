@@ -135,13 +135,18 @@
   font-weight: 500;
   color: $gray;
 
-  span {
-    font-weight: 500;
-    color: $TextDark;
-  }
   &:hover {
     background-color: $LightWhite;
   }
+}
+
+.findInterestText {
+  color: $gray;
+}
+
+.findInterestHighlight {
+  font-weight: 600;
+  color: $TextDark;
 }
 
 .buttonDoneBlock {

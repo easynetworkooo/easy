@@ -24,7 +24,6 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
 
     const navigate = useNavigate()
 
-    const [isOpenDropdown, setOpenDropdown] = useState(true)
     const [inputFind, setInputFind] = useState('')
     const [debounceFindText] = useDebounce(inputFind, 500)
     const [findItems, setFindItems] = useState<string[]>([])
@@ -38,12 +37,16 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
     const [finishRegister] = authAPI.useFinishRegisterMutation()
 
     const addInterestItemHandler = (interest: string) => {
-        const res = /^[a-zA-Z0-9_ ]+$/.exec(interest);
-        const checkRepeatInterest = isInterestItems.find(item => item.toLowerCase() === interest.toLowerCase())
-        if (interest.length >= 3 && !!res && !checkRepeatInterest) {
-            setInterestItems(prevState => [...prevState, interest])
+        if (isInterestItems.length < 10) {
+            const res = /^[a-zA-Z0-9_ ]+$/.exec(interest);
+            const checkRepeatInterest = isInterestItems.find(item => item.toLowerCase() === interest.toLowerCase())
+            if (interest.length >= 3 && !!res && !checkRepeatInterest) {
+                setInterestItems(prevState => [...prevState, interest])
+            }
+            setInputFind('')
+        } else {
+            customErrorNotify('A maximum of 10 interests can be selected', 'Warning')
         }
-        setInputFind('')
     }
 
     const deleteInterestItemHandler = (e: React.MouseEvent<HTMLImageElement>, interest: string) => {
@@ -52,8 +55,20 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
     }
 
     const highlightFindTextOption = (option: string) => {
-        const regex = new RegExp(inputFind, 'gi');
-        return option.replace(regex, '<span>$&</span>');
+        const optionHighlight = option.slice(0, debounceFindText.toLowerCase().length)
+        const arr: { highlight: boolean; text: string }[] = [
+            {
+                text: optionHighlight,
+                highlight: true
+            }
+            ,
+            {
+                text: option.slice(debounceFindText.toLowerCase().length),
+                highlight: false
+            }
+        ]
+
+        return arr
     }
 
     const endAuthHandler = async () => {
@@ -80,7 +95,7 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
                 setFindItems([...interestsFound.value.map(item => item.name)])
             } else {
                 const items = [...interestsFound.value.map(item => item.name)]
-                setFindItems(items.filter(item => item.toLowerCase().includes(debounceFindText.toLowerCase())))
+                setFindItems(items.filter(item => item.toLowerCase().indexOf(debounceFindText.toLowerCase()) === 0))
 
             }
         }
@@ -88,16 +103,6 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
         // eslint-disable-next-line
     }, [debounceFindText])
 
-    useEffect(() => {
-        const handleOutsideClick = (event: any) => {
-            if (blockRef.current && !blockRef.current.contains(event.target)) {
-                setOpenDropdown(false)
-            }
-        }
-
-        document.addEventListener("click", handleOutsideClick);
-        return () => document.removeEventListener("click", handleOutsideClick);
-    }, [blockRef])
 
     return (
         <div className={styles.secondStepBlock}>
@@ -107,9 +112,9 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
             <div className={styles.helperTextBlock}>
                 <span>Enter your maximum 10 crypto interests</span>
             </div>
-            <div className={styles.interestsBlock} ref={blockRef} onFocus={() => setOpenDropdown(true)}>
+            <div className={styles.interestsBlock} ref={blockRef}>
                 <div
-                    className={isOpenDropdown ? `${styles.selectBlock} ${styles.selectBlockActActive}` : styles.selectBlock}
+                    className={`${styles.selectBlock} ${styles.selectBlockActActive}`}
                     onClick={() => inputRef.current.focus()}>
                     {isInterestItems.map(item =>
                         <div key={item} className={styles.selectInterest}>
@@ -121,29 +126,33 @@ export const AuthContinueSecondStep: FC<AuthContinueSecondStepProps> = ({isCrede
                            onChange={e => setInputFind(e.currentTarget.value)}
                            placeholder={isInterestItems.length > 0 ? '' : 'Add up to 10 of your key interests'}/>
                 </div>
-                {isOpenDropdown &&
-                    <div className={styles.dropdownBlock}>
-                        <span
-                            className={styles.findHeader}>{inputFind.length === 0 ? 'Suggested interest options:' : 'searching results:'}</span>
-                        {inputFind.length === 0 ?
-                            <div className={styles.interestSuggestBlock}>
-                                {interestItems && interestItems.value.interests.map((item, key) =>
-                                    <span key={key} className={styles.interestSuggest}
-                                          onClick={() => addInterestItemHandler(item.name)}>{item.name}</span>
+                <div className={styles.dropdownBlock}>
+                        <span className={styles.findHeader}>
+                            {inputFind.length === 0 ? 'Suggested interest options:' : 'searching results:'}
+                        </span>
+                    {inputFind.length === 0 ?
+                        <div className={styles.interestSuggestBlock}>
+                            {interestItems && interestItems.value.interests.map((item, key) =>
+                                <span key={key} className={styles.interestSuggest}
+                                      onClick={() => addInterestItemHandler(item.name)}>{item.name}</span>
+                            )}
+                        </div>
+                        :
+                        <div className={styles.findInterestBlock}>
+                            {findItems.map((item, key) =>
+                                <span className={styles.findInterest} key={key}
+                                      onClick={() => addInterestItemHandler(item)}>{highlightFindTextOption(item).map((item, key) =>
+                                    <span
+                                        className={item.highlight ? styles.findInterestHighlight : styles.findInterestText}
+                                        key={key}>
+                                        {item.text}
+                                    </span>
                                 )}
-                            </div>
-                            :
-                            <div className={styles.findInterestBlock}>
-                                {findItems.map((item, key) =>
-                                    <span className={styles.findInterest}
-                                          key={key}
-                                          dangerouslySetInnerHTML={{__html: highlightFindTextOption(item)}}
-                                          onClick={() => addInterestItemHandler(item)}/>
-                                )}
-                            </div>
-                        }
-                    </div>
-                }
+                                </span>
+                            )}
+                        </div>
+                    }
+                </div>
             </div>
             <div className={styles.buttonDoneBlock}>
                 <Button buttonColor={'clearButton'} onClick={() => endAuthHandler()}>
