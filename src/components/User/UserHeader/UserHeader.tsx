@@ -4,7 +4,7 @@ import { Avatar, Button, ButtonBack, IconElement, ViewPhotosModal } from "../../
 import likes from "../../../assets/Profile/Like.svg";
 import reposts from "../../../assets/Profile/Repost.svg";
 import views from "../../../assets/Profile/View.svg";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MESSAGES } from "../../../constants/nameRoutesConsts";
 import { userAPI } from "../../../services/UserService";
 import { IUserValue } from "../../../models/IUser";

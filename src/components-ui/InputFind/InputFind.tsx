@@ -2,6 +2,7 @@ import React, { FC, useRef } from 'react';
 import styles from './InputFind.module.scss'
 import search from '../../assets/UI/Search.svg'
 import close from '../../assets/UI/closeHover.svg'
+import enter from '../../assets/UI/enter.svg'
 
 export interface InputFindProps {
     value: string
@@ -29,9 +30,11 @@ export const InputFind: FC<InputFindProps> = ({onChangeValue, value, clearFilter
             </div>
             {
                 value &&
-                <div className={styles.clearFilters} onClick={clearFiltersHandler}>
-                    <img src={close} alt="clear"/>
+                <div className={styles.clearFilters}>
+                    <img src={enter} alt="enterFind"/>
+                    <img src={close} alt="clear" onClick={clearFiltersHandler}/>
                 </div>
+
             }
 
         </div>

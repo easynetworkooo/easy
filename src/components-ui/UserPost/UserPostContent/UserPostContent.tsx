@@ -19,6 +19,7 @@ import { convertTime } from "../../../helpers/convertTime";
 import { Avatar } from "../../Avatar/Avatar";
 import { defaultColor } from "../../../constants/colors";
 import { ViewPhotosModal } from "../../ViewPhotosModal/ViewPhotosModal";
+import { Text } from "../../Text/Text";
 
 export interface UserPostContentProps {
     userPost: IPost
@@ -117,7 +118,7 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                     <span className={styles.date}>{convertTime(userPost.date)}</span>
                 </div>
                 <div className={styles.postText}>
-                    <p>{userPost.text}</p>
+                    <Text text={userPost.text}/>
                 </div>
                 <div className={styles.gallery}>
                     {userPost.imgs.length > 10 && JSON.parse(userPost.imgs).map((item: string) =>

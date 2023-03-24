@@ -72,9 +72,6 @@ export const FilterItems = () => {
         if (searcher.text || searcher.country || searcher.interest) {
             searchUsers(searcher).then((data: any) => {
                 setItemsSearch(data.data.value)
-                if (data.data.value.length === 0) {
-                    customErrorNotify('No users with such parameters were found', 'Error')
-                }
             })
         } else {
             setItemsSearch([])
@@ -114,8 +111,8 @@ export const FilterItems = () => {
                     </>
                 }
                 <div className={styles.finderItemsBlock}>
-                    {itemsSearch.map(item =>
-                        <UserSub dataSub={item} key={item.id} searchParams={isSearchParams}/>
+                    {itemsSearch.map((item, key) =>
+                        <UserSub dataSub={item} key={key} searchParams={isSearchParams}/>
                     )}
                 </div>
             </div>

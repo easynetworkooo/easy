@@ -10,6 +10,7 @@ import { postAPI } from "../../../services/PostService";
 import { serverURL } from "../../../constants/serverURL";
 import { convertTime } from "../../../helpers/convertTime";
 import { Avatar } from "../../Avatar/Avatar";
+import { Text } from "../../Text/Text";
 
 export interface CommentProps {
     comment: IComment
@@ -43,7 +44,7 @@ export const Comment:FC<CommentProps> = ({comment}) => {
                     <span className={styles.date}>{convertTime(comment.date)}</span>
                 </div>
                 <div className={styles.commentText}>
-                    <p>{comment.text}</p>
+                    <Text text={comment.text}/>
                 </div>
                 <div className={styles.actionComment}>
                     {

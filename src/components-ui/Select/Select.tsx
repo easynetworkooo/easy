@@ -106,7 +106,7 @@ export const Select: FC<SelectProps> = ({
                  onFocus={openDropDownHandler}>
                 <input type="text" disabled={disabled} placeholder={placeholder} value={findValue}
                        onChange={onChangeInputHandler} ref={inputRef}/>
-                {findValue && <img src={clear} alt="clear" className={styles.clearFilter} onClick={() => setFindValue('')}/>}
+                {findValue && <img src={clear} alt="clear" className={styles.clearFilter} onClick={() => setActiveSelect('')}/>}
                 <img src={dropdown} alt="dropdown"
                      className={isOpenDropDown ? styles.dropdown : styles.dropdownUnActive}
                      onClick={() => inputRef.current.focus()}/>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Messages.module.scss'
-import { Avatar, InputSend } from "../../components-ui";
+import { Avatar, InputSend, Text } from "../../components-ui";
 import { userAPI } from "../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -169,14 +169,14 @@ export const Messages = () => {
                                     <div className={styles.borderMessage}/>
                                     <div className={styles.message}>
                                         <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null} name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
-                                        <p className={styles.text}>{item.text}</p>
+                                        <Text text={item.text}/>
                                     </div>
                                 </div>
 
                                 :
                                 <div className={styles.messageBlock}>
                                     <div className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
-                                        <p className={styles.text}>{item.text}</p>
+                                        <Text text={item.text}/>
                                     </div>
                                     <div className={styles.borderYourMessage}/>
                                 </div>

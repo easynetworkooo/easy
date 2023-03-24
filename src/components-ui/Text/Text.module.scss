@@ -1,0 +1,17 @@
+@import "src/styles/vars";
+
+.link {
+  color: $blue;
+  font-size: 14px;
+  font-weight: 400;
+
+  &:hover {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 400;
+}

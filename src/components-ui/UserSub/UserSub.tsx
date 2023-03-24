@@ -48,12 +48,12 @@ export const UserSub: FC<UserSubProps> = ({dataSub, searchParams}) => {
                 </span>
             </div>
             <div className={styles.skillsBlock}>
-                {JSON.parse(dataSub.interests).map((item: string) =>
+                {JSON.parse(dataSub.interests).map((item: string, key: number) =>
                     <>
                         {searchParams?.interest === item ?
-                            <span className={`${styles.skill} ${styles.highlightSkill}`} dangerouslySetInnerHTML={{__html: highlightFindTextOption(item, searchParams.interest)}}/>
+                            <span className={`${styles.skill} ${styles.highlightSkill}`} key={key} dangerouslySetInnerHTML={{__html: highlightFindTextOption(item, searchParams.interest)}}/>
                             :
-                            <span className={styles.skill} key={item}>{item}</span>
+                            <span className={styles.skill} key={key}>{item}</span>
                         }
 
                     </>
