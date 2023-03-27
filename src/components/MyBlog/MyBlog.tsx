@@ -6,6 +6,7 @@ import { useAppSelector } from "../../hooks/redux";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { IPost } from "../../models/IPost";
 import { paginationCount } from "../../constants/pagintaionCount";
+import spinner from "../../assets/UI/spinner.svg";
 
 
 export const MyBlog = () => {
@@ -14,8 +15,9 @@ export const MyBlog = () => {
     const [posts, setPosts] = useState<IPost[]>([])
     const [postImages, setPostImages] = useState<any>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)
+    const [loadingPosts, setLoadingPosts] = useState(true)
     const [isFetching, setFetching] = useState(false)
-    const {data: userPosts, isLoading: isLoadingUserPosts} = postAPI.useFetchAllUserPostsQuery({
+    const {data: userPosts, isLoading: isLoadingUserPosts, isFetching: isFetchingPosts} = postAPI.useFetchAllUserPostsQuery({
         userId: id,
         count: currentCount
     })
@@ -43,6 +45,13 @@ export const MyBlog = () => {
             setPosts(userPosts.value.data)
         }
     }, [userPosts])
+
+    useEffect(() => {
+        if (userPosts && !isFetchingPosts && currentCount > userPosts.value.data.length) {
+            setLoadingPosts(false)
+        }
+        // eslint-disable-next-line
+    }, [isFetchingPosts])
 
     useEffect(() => {
         if (isFetching && userPosts && currentCount <= userPosts.value.data.length) {
@@ -78,6 +87,12 @@ export const MyBlog = () => {
                                 <UserPost userPost={item}/>
                             </div>
                         )}
+                        {
+                            loadingPosts &&
+                            <div className={styles.spinnerBlock}>
+                                <img src={spinner} alt="spinner"/>
+                            </div>
+                        }
                     </div>
                     <div className={styles.sendBlock}>
                         <InputSend setSubtractTextarea={setSubtractTextarea} setPostImages={setPostImages} postImages={postImages} setValue={setSendValue}

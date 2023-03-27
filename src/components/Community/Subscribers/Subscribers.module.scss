@@ -22,3 +22,31 @@
     height: 0;
   }
 }
+
+.spinnerBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 40px;
+    animation: 2s linear 0s normal none infinite running rot;
+    -webkit-animation: 2s linear 0s normal none infinite running rot;
+  }
+}
+
+@keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

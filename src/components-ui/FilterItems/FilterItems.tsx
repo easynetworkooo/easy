@@ -7,8 +7,8 @@ import unActiveFilter from '../../assets/UI/unActiveFilter.svg'
 import { userAPI } from "../../services/UserService";
 import { IUserValue } from "../../models/IUser";
 import { UserSub } from "../UserSub/UserSub";
-import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { useDebounce } from "use-debounce";
+import { SubsLoading } from "../Skeletons";
 
 
 export interface defaultSearchParams {
@@ -35,6 +35,7 @@ export const FilterItems = () => {
     const [debounceSearchParams] = useDebounce(isSearchParams, 500)
     const [itemsSearch, setItemsSearch] = useState<IUserValue[]>([])
     const [isShowFilter, setShowFilter] = useState(false)
+    const [isLoadingUsers, setLoadingUsers] = useState(false)
 
     const [hoverImage, setHoverImage] = useState(false)
 
@@ -70,8 +71,10 @@ export const FilterItems = () => {
         }
 
         if (searcher.text || searcher.country || searcher.interest) {
+            setLoadingUsers(true)
             searchUsers(searcher).then((data: any) => {
                 setItemsSearch(data.data.value)
+                setLoadingUsers(false)
             })
         } else {
             setItemsSearch([])
@@ -114,6 +117,9 @@ export const FilterItems = () => {
                     {itemsSearch.map((item, key) =>
                         <UserSub dataSub={item} key={key} searchParams={isSearchParams}/>
                     )}
+                    {isLoadingUsers &&
+                        <SubsLoading/>
+                    }
                 </div>
             </div>
         </div>

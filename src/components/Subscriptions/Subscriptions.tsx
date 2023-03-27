@@ -5,14 +5,16 @@ import avatarProject from "../../assets/UI/AvatarProject.png";
 import { postAPI } from "../../services/PostService";
 import { IPost } from "../../models/IPost";
 import { paginationCount } from "../../constants/pagintaionCount";
+import spinner from "../../assets/UI/spinner.svg";
 
 
 export const Subscriptions = () => {
 
     const [posts, setPosts] = useState<IPost[]>([])
     const [currentCount, setCurrentCount] = useState(paginationCount)
+    const [loadingPosts, setLoadingPosts] = useState(true)
     const [isFetching, setFetching] = useState(false)
-    const {data: usersPosts, isLoading: usersPostLoading} = postAPI.useFetchSubsPostsQuery({
+    const {data: usersPosts, isLoading: usersPostLoading, isFetching: isFetchingPosts} = postAPI.useFetchSubsPostsQuery({
         count: currentCount
     })
 
@@ -29,6 +31,13 @@ export const Subscriptions = () => {
         }
         // eslint-disable-next-line
     }, [isFetching, posts])
+
+    useEffect(() => {
+        if (usersPosts && !isFetchingPosts && currentCount > usersPosts.value.length) {
+            setLoadingPosts(false)
+        }
+        // eslint-disable-next-line
+    }, [isFetchingPosts])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
         if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {
@@ -60,6 +69,12 @@ export const Subscriptions = () => {
                         }
                     </div>
                 )}
+                {
+                    loadingPosts &&
+                    <div className={styles.spinnerBlock}>
+                        <img src={spinner} alt="spinner"/>
+                    </div>
+                }
             </div>
         </div>
     );

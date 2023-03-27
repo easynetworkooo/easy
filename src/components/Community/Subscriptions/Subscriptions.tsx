@@ -4,16 +4,19 @@ import { SubsLoading, UserSub } from "../../../components-ui";
 import { userAPI } from "../../../services/UserService";
 import { useAppSelector } from "../../../hooks/redux";
 import { IUserValue } from "../../../models/IUser";
-import { paginationCount } from "../../../constants/pagintaionCount";
+import { paginationUsersCount } from "../../../constants/pagintaionCount";
+import spinner from "../../../assets/UI/spinner.svg";
 
 
 export const Subscriptions = () => {
+
     const [subscriptions, setSubscriptions] = useState<IUserValue[]>([])
-    const [currentCount, setCurrentCount] = useState(paginationCount)
+    const [currentCount, setCurrentCount] = useState(paginationUsersCount)
     const [isFetching, setFetching] = useState(false)
+    const [loadingUsers, setLoadingUsers] = useState(true)
 
     const {id} = useAppSelector(state => state.userReducer)
-    const {data: subscriptionsData} = userAPI.useFetchGetSubscriptionsQuery({id: id, count: currentCount})
+    const {data: subscriptionsData, isFetching: isFetchingUsers} = userAPI.useFetchGetSubscriptionsQuery({id: id, count: currentCount})
 
     useEffect(() => {
         if (subscriptionsData) {
@@ -23,10 +26,17 @@ export const Subscriptions = () => {
 
     useEffect(() => {
         if (isFetching && subscriptionsData && currentCount <= subscriptionsData.value.length) {
-            setCurrentCount(prevState => prevState + paginationCount)
+            setCurrentCount(prevState => prevState + paginationUsersCount)
         }
         // eslint-disable-next-line
     }, [isFetching, subscriptions])
+
+    useEffect(() => {
+        if (subscriptionsData && !isFetchingUsers && currentCount > subscriptionsData.value.length) {
+            setLoadingUsers(false)
+        }
+        // eslint-disable-next-line
+    }, [isFetchingUsers])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
         if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {
@@ -43,6 +53,12 @@ export const Subscriptions = () => {
                 {subscriptionsData
                     ? subscriptions.map((dataSub) => <UserSub dataSub={dataSub} key={dataSub.id}/>)
                     : <SubsLoading/>
+                }
+                {
+                    loadingUsers &&
+                    <div className={styles.spinnerBlock}>
+                        <img src={spinner} alt="spinner"/>
+                    </div>
                 }
             </div>
         </div>

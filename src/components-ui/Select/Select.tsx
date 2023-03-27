@@ -32,22 +32,22 @@ export const Select: FC<SelectProps> = ({
         }
     }
 
-    const highlightFindTextOption = (option: string) => {
-        const optionHighlight = option.slice(0, findValue.toLowerCase().length)
-        const arr: { highlight: boolean; text: string }[] = [
-            {
-                text: optionHighlight,
-                highlight: true
-            }
-            ,
-            {
-                text: option.slice(findValue.toLowerCase().length),
-                highlight: false
-            }
-        ]
-
-        return arr
-    }
+    // const highlightFindTextOption = (option: string) => {
+    //     const optionHighlight = option.slice(0, findValue.toLowerCase().length)
+    //     const arr: { highlight: boolean; text: string }[] = [
+    //         {
+    //             text: optionHighlight,
+    //             highlight: true
+    //         }
+    //         ,
+    //         {
+    //             text: option.slice(findValue.toLowerCase().length),
+    //             highlight: false
+    //         }
+    //     ]
+    //
+    //     return arr
+    // }
 
     const chooseOptionSelectHandler = (e: React.MouseEvent<HTMLDivElement>, option: string) => {
         setTimeout(() => {
@@ -121,11 +121,9 @@ export const Select: FC<SelectProps> = ({
                     {isOptions.map((item, index) =>
                         <div className={styles.dropdownElement} key={index}
                              onClick={(e) => chooseOptionSelectHandler(e, item)}>
-                            {highlightFindTextOption(item).map((item, key) =>
-                                <span className={item.highlight ? styles.dropdownElementHighlight : styles.dropdownElementText} key={key}>
-                                    {item.text}
+                                <span className={styles.dropdownElementHighlight}>
+                                    {item}
                                 </span>
-                            )}
                         </div>
                     )}
                 </div>
