@@ -37,7 +37,7 @@ export const Subscriptions = () => {
             setLoadingPosts(false)
         }
         // eslint-disable-next-line
-    }, [isFetchingPosts])
+    }, [isFetchingPosts, usersPosts])
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
         if (e.currentTarget.scrollHeight - (e.currentTarget.clientHeight + e.currentTarget.scrollTop) < 10) {

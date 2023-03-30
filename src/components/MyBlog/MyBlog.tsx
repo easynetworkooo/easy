@@ -51,7 +51,7 @@ export const MyBlog = () => {
             setLoadingPosts(false)
         }
         // eslint-disable-next-line
-    }, [isFetchingPosts])
+    }, [isFetchingPosts, userPosts])
 
     useEffect(() => {
         if (isFetching && userPosts && currentCount <= userPosts.value.data.length) {

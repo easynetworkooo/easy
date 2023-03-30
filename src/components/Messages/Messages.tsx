@@ -56,38 +56,27 @@ export const Messages = () => {
     const [fetchUserNotification] = userAPI.useFetchUserNotificationMutation()
     const [fetchGetMessages] = userAPI.useFetchGetMessagesMutation()
 
+
+    //auto find user after click 'Send message' in user page
     useEffect(() => {
         if (dialogsData) {
-            // if (isDialogData.length > 0) {
-            //     if ((isDialogData.find((item: any) => item.opponentId === isUserIdToSend).opponentId) === dialogsData.value[0].opponentId) {
-            //         openDialogHandle(0, dialogsData.value[0].opponentId)
-            //     }
-            // }
-
-            setDialogsData(dialogsData.value)
-        }
-        // eslint-disable-next-line
-    }, [dialogsData])
-
-    useEffect(() => {
-        if (dialogsData && location.state !== null) {
-            setUserIdToSend(location.state.dialog.opponentId)
-            if (dialogsData.value.find(data => data.opponentId === location.state.dialog.opponentId)) {
-                setOpenMessages(dialogsData.value.findIndex(data => data.opponentId === location.state.dialog.opponentId))
-                fetchGetMessages({
-                    id: location.state.dialog.opponentId,
-                    count: currentCountMessages
-                }).then((data: any) => {
-                    setMessagesData(data.data.value)
-                })
+            if (location.state) {
+                const activeOpenDialogIndex = dialogsData.value.findIndex(item => item.opponentId === location.state.dialog.opponentId)
+                if (activeOpenDialogIndex !== -1) {
+                    setDialogsData(dialogsData.value)
+                    openDialogHandle(activeOpenDialogIndex, location.state.dialog.opponentId)
+                    setOpenDialogData(location.state.dialog)
+                    location.state = null
+                    window.history.pushState(null, '')
+                } else {
+                    setDialogsData([{...location.state.dialog}, ...dialogsData.value])
+                    openDialogHandle(0, location.state.dialog.opponentId)
+                    setOpenDialogData(location.state.dialog)
+                    location.state = null
+                    window.history.pushState(null, '')
+                }
             } else {
-                setOpenMessages(0)
-                setDialogsData((prevState: any) => [{
-                    opponentId: location.state.dialog.opponentId,
-                    name: location.state.dialog.name,
-                    lastMessage: '',
-                    img: location.state.dialog.img
-                }, ...prevState])
+                setDialogsData(dialogsData.value)
             }
         }
         // eslint-disable-next-line
@@ -104,8 +93,8 @@ export const Messages = () => {
     }, [socket])
 
     const sendMessageHandler = () => {
-        socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
         setOpenMessages(0)
+        socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
     }
 
     const openDialogHandle = async (index: number, id: number) => {
@@ -113,7 +102,7 @@ export const Messages = () => {
             setPaginationWork(true)
             setCurrentCountMessages(paginationCount)
             setOpenMessages(index)
-            setOpenDialogData(dialogsData.value[index])
+            setOpenDialogData(isDialogsData[index])
             try {
                 const messages: any = await fetchGetMessages({id: id, count: paginationCount})
                 if (messages.data.status === 200) {
@@ -172,7 +161,6 @@ export const Messages = () => {
                                         <Text text={item.text}/>
                                     </div>
                                 </div>
-
                                 :
                                 <div className={styles.messageBlock}>
                                     <div className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>

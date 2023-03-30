@@ -63,6 +63,8 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
             state: {
                 dialog: {
                     opponentId: isUserData.id,
+                    dateLastMessage: '',
+                    color: isUserData.color,
                     name: isUserData.name,
                     img: isUserData.img,
                 }

@@ -40,7 +40,7 @@ export const Content = () => {
            setLoadingPosts(false)
         }
         // eslint-disable-next-line
-    }, [isFetchingPosts])
+    }, [isFetchingPosts, usersPosts])
 
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {

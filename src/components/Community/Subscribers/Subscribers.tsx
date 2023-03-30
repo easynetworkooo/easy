@@ -49,7 +49,7 @@ export const Subscribers = () => {
             setLoadingUsers(false)
         }
         // eslint-disable-next-line
-    }, [isFetchingUsers])
+    }, [isFetchingUsers, subscribersData])
 
 
     const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
