@@ -85,6 +85,7 @@ export const Messages = () => {
     useEffect(() => {
         if (Object.keys(socket).length !== 0) {
             socket.on('message', (data: any) => {
+                console.log(data)
                 setMessagesData(prevState => [data.value, ...prevState])
                 dialogsDataRefetch()
             })
@@ -92,9 +93,23 @@ export const Messages = () => {
         // eslint-disable-next-line
     }, [socket])
 
-    const sendMessageHandler = () => {
+    const fileToBase64 = (file: File): Promise<string | null> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result && reader.result.toString().substr(reader.result.toString().indexOf(',') + 1))
+            reader.onerror = error => reject(error)
+        });
+    }
+
+    const sendMessageHandler = async () => {
         setOpenMessages(0)
-        socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage}))
+        let images: string[] = await Promise.all(postImages.map(async (item: File): Promise<string | null> => {
+            return await fileToBase64(item)
+        }));
+
+        socket.emit('message', JSON.stringify({id: isUserIdToSend, text: isSendValueMessage, images}))
+        setPostImages([])
     }
 
     const openDialogHandle = async (index: number, id: number) => {
@@ -145,11 +160,12 @@ export const Messages = () => {
             <div className={isOpenMessages !== null ? styles.messagesBlock : styles.messagesBlockNone}>
                 <div className={styles.messageUser} onClick={() => navigate(`${USERS}/${isOpenDialogData.name}`)}>
                     <div className={styles.avatarBlock}>
-                        <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null} name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
+                        <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null}
+                                name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
                     </div>
                     <span>{isOpenDialogData.name}</span>
                 </div>
-                <div className={styles.messages} style={{ height: `calc(100vh - 220px - ${isMessageBlockHeight}px)`}}
+                <div className={styles.messages} style={{height: `calc(100vh - 220px - ${isMessageBlockHeight}px)`}}
                      onScroll={(e) => isPaginationWork && onScrollMessageHandler(e)}>
                     {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
                         <React.Fragment key={index}>
@@ -157,22 +173,48 @@ export const Messages = () => {
                                 <div className={styles.messageBlock}>
                                     <div className={styles.borderMessage}/>
                                     <div className={styles.message}>
-                                        <Avatar img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null} name={isOpenDialogData.name} color={isOpenDialogData.color} fontSize={18}/>
-                                        <Text text={item.text}/>
+                                        <div className={styles.avatar}>
+                                            <Avatar
+                                                img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null}
+                                                name={isOpenDialogData.name} color={isOpenDialogData.color}
+                                                fontSize={18}/>
+                                        </div>
+                                        <div className={styles.messageWithPhoto}>
+                                            <Text text={item.text}/>
+                                            {(item.imgs !== '[]' && item.imgs !== '') &&
+                                                <div className={styles.gallery}>
+                                                    {JSON.parse(item.imgs).map((item: string) =>
+                                                        <img src={`${serverURL}/${item}`} key={item} alt="messagePhoto"/>
+                                                    )}
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 :
                                 <div className={styles.messageBlock}>
-                                    <div className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
-                                        <Text text={item.text}/>
+                                    <div
+                                        className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
+                                        <div className={styles.messageWithPhoto}>
+                                            <Text text={item.text}/>
+                                            {(item.imgs !== '[]' && item.imgs !== '') &&
+                                                <div className={styles.gallery}>
+                                                    {JSON.parse(item.imgs).map((item: string) =>
+                                                        <img src={`${serverURL}/${item}`} key={item} alt="messagePhoto"/>
+                                                    )}
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
+
                                     <div className={styles.borderYourMessage}/>
                                 </div>
                             }
                         </React.Fragment>
                     )}
                 </div>
-                <InputSend setSubtractTextarea={setMessageBlockHeight} setPostImages={setPostImages} postImages={postImages} value={isSendValueMessage}
+                <InputSend setSubtractTextarea={setMessageBlockHeight} setPostImages={setPostImages}
+                           postImages={postImages} value={isSendValueMessage}
                            setValue={setSendValueMessage} sendHandler={sendMessageHandler}
                            placeholder='Write a message'/>
             </div>
