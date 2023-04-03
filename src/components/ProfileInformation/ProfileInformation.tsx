@@ -19,18 +19,14 @@ import changeAvatarImage from '../../assets/Profile/ChangeAvatar.svg'
 import like from '../../assets/Profile/Like.svg'
 import repost from '../../assets/Profile/Repost.svg'
 import view from '../../assets/Profile/View.svg'
-import messagesImg from '../../assets/Profile/Messages.svg'
-import activeMessages from '../../assets/Profile/ActiveMessages.svg'
-import community from '../../assets/Profile/Community.svg'
-import activeCommunity from '../../assets/Profile/ActiveCommunity.svg'
-import wallet from '../../assets/Profile/Wallet.svg'
-import activeWallet from '../../assets/Profile/ActiveWallet.svg'
-import myProject from '../../assets/Profile/MyProjects.svg'
-import myProjectActive from '../../assets/Profile/MyProjectsActive.svg'
-import blog from '../../assets/Profile/Blog.svg'
-import activeBlog from '../../assets/Profile/ActiveBlog.svg'
 import { serverURL } from "../../constants/serverURL";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
+import { ReactComponent as MessagesSvg} from '../../assets/Profile/Messages.svg'
+import { ReactComponent as CommunitySvg} from '../../assets/Profile/Community.svg'
+import { ReactComponent as WalletSvg} from '../../assets/Profile/Wallet.svg'
+import { ReactComponent as MyProjectSvg} from '../../assets/Profile/MyProjects.svg'
+import { ReactComponent as BlogSvg } from "../../assets/Profile/Blog.svg";
+import { ReactComponent as HomeSvg } from "../../assets/Profile/Home.svg";
 
 export const ProfileInformation = () => {
 
@@ -98,7 +94,6 @@ export const ProfileInformation = () => {
                     <div className={styles.avatarBlock}>
                         <Avatar img={img ? `${serverURL}${img}` : null} name={name} color={color} fontSize={48}/>
                     </div>
-                    {/*<img src={img ? `${serverURL}${img}` : defaultAvatar} alt="avatar"/>*/}
                 </div>
                 <div className={styles.profileName}>
                     <h2 onClick={() => navigate(`${USERS}/${name}`)}>{name}</h2>
@@ -110,14 +105,12 @@ export const ProfileInformation = () => {
                 </div>
             </div>
             <div className={styles.menuLinksProfile}>
-                <MenuItem image={blog} menuText={'Main'} to={CONTENT} activeImage={activeBlog}/>
-                <MenuItem image={blog} menuText={'My Blog'} to={MY_BLOG} activeImage={activeBlog}/>
-                <MenuItem image={messagesImg} countNotification={messages} menuText={'Messages'} to={MESSAGES}
-                          activeImage={activeMessages}/>
-                <MenuItem image={community} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}
-                          activeImage={activeCommunity}/>
-                <MenuItem image={wallet} menuText={'Wallet'} to={WALLET} activeImage={activeWallet}/>
-                <MenuItem image={myProject} menuText={'Projects'} to={MY_PROJECTS} activeImage={myProjectActive}/>
+                <MenuItem Image={HomeSvg} menuText={'Main'} to={CONTENT}/>
+                <MenuItem Image={BlogSvg} menuText={'My Blog'} to={MY_BLOG}/>
+                <MenuItem Image={MessagesSvg} countNotification={messages} menuText={'Messages'} to={MESSAGES}/>
+                <MenuItem Image={CommunitySvg} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}/>
+                <MenuItem Image={WalletSvg} menuText={'Wallet'} to={WALLET}/>
+                <MenuItem Image={MyProjectSvg} menuText={'Projects'} to={MY_PROJECTS}/>
             </div>
             <div className={styles.buttonCreateProject}>
                 <Button onClick={() => navigate(CREATE_PROJECT)}>

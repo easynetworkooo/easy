@@ -24,6 +24,16 @@
   }
 }
 
+.image * {
+  //fill: none;
+  stroke: $HelperGray;
+
+}
+
+.activeImage * {
+  stroke: $purple;
+}
+
 .menuText {
   span {
     line-height: 17px;
