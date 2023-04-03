@@ -16,7 +16,6 @@ export const AppRouter = () => {
     const location = useLocation();
     const fromPathname = (location.state as ILocationFromState)?.from?.pathname || CONTENT
 
-
     return (
         <Routes>
             <Route key={AUTH} path={AUTH} element={isAuth ? <Navigate to={fromPathname} replace/> : <AuthPage/>}/>

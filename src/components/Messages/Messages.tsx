@@ -85,7 +85,6 @@ export const Messages = () => {
     useEffect(() => {
         if (Object.keys(socket).length !== 0) {
             socket.on('message', (data: any) => {
-                console.log(data)
                 setMessagesData(prevState => [data.value, ...prevState])
                 dialogsDataRefetch()
             })

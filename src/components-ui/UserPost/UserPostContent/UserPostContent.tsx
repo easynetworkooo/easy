@@ -104,7 +104,6 @@ export const UserPostContent: FC<UserPostContentProps> = ({
         }
     }, [userPost.itsrepost, userPost.originalowner, userPost.owner])
 
-
     return (
         <div className={styles.post} onMouseEnter={setShowBasketHandler} onMouseLeave={setShowBasketHandler}>
             <div className={styles.avatarPostCreator} onClick={openUserProfile}>
@@ -149,7 +148,11 @@ export const UserPostContent: FC<UserPostContentProps> = ({
                     {userPost.itsrepost &&
                         <div className={styles.repostInformation}>
                             <img src={reposts} alt=""/>
-                            <span>You retweeted the post {isOwner.name}</span>
+                            {userPost.owner.id === activeUserId ?
+                                <span>You retweeted the post {isOwner.name}</span>
+                                :
+                                <span>Retweeted the post {isOwner.name}</span>
+                            }
                         </div>
                     }
                 </div>

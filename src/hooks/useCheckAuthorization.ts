@@ -39,6 +39,9 @@ export const useCheckAuthorization = () => {
                             bell: dataNotifications.data.value.bell
                         }))
                     } else {
+                        if (isAuthUser.error.status === 409) {
+                            localStorage.removeItem('auth')
+                        }
                         customErrorNotify(isAuthUser.error.data.value.toString(), 'Error')
                         navigate(AUTH)
                     }
@@ -47,7 +50,9 @@ export const useCheckAuthorization = () => {
                 }
             }
         },
-        [checkAuthorization, dispatch, fetchUserNotification, fetchUserProfile, loginReducer, navigate, setNotificationsReducer, setUserReducer]
+
+        // eslint-disable-next-line
+        []
     )
 
     return checkAuthorizationCallback

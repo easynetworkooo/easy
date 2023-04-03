@@ -111,7 +111,7 @@ export const ProfileInformation = () => {
             </div>
             <div className={styles.menuLinksProfile}>
                 <MenuItem image={blog} menuText={'Main'} to={CONTENT} activeImage={activeBlog}/>
-                <MenuItem image={blog} menuText={'Blog'} to={MY_BLOG} activeImage={activeBlog}/>
+                <MenuItem image={blog} menuText={'My Blog'} to={MY_BLOG} activeImage={activeBlog}/>
                 <MenuItem image={messagesImg} countNotification={messages} menuText={'Messages'} to={MESSAGES}
                           activeImage={activeMessages}/>
                 <MenuItem image={community} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}
