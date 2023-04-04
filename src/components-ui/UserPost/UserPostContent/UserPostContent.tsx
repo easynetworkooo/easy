@@ -26,9 +26,6 @@ import { useAppSelector } from "../../../hooks/redux";
 import { convertTime } from "../../../helpers/convertTime";
 import { defaultColor } from "../../../constants/colors";
 
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/captions.css";
-
 export interface UserPostContentProps {
     userPost: IPost
     setActiveModalComments: any
