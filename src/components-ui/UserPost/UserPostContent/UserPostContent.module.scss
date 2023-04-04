@@ -10,8 +10,14 @@
   background-color: $LightWhite;
 }
 
-.avatarPostCreator {
+.avatarPostCreatorLink {
   cursor: pointer;
+  min-width: 56px;
+  max-width: 56px;
+  height: 56px;
+}
+
+.avatarPostCreator {
   min-width: 56px;
   max-width: 56px;
   height: 56px;
@@ -27,7 +33,6 @@
   align-items: center;
   gap: 6px;
   margin-bottom: 4px;
-  cursor: pointer;
 }
 
 .name {
@@ -35,6 +40,14 @@
   font-weight: 500;
   letter-spacing: 0.01em;
   margin-right: 8px;
+}
+
+.nameLink {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .dot {
@@ -83,10 +96,8 @@
 }
 
 .gallery {
-  column-count: 3;
-  column-gap: 10px;
-  grid-gap: 10px;
-  margin-bottom: 10px;
+  width: 500px;
+  margin-bottom: 20px;
 }
 
 .item {

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './UserHeader.module.scss'
-import { Avatar, Button, ButtonBack, IconElement, ViewPhotosModal } from "../../../components-ui";
+import { Avatar, Button, IconElement, ViewPhotosModal } from "../../../components-ui";
 import likes from "../../../assets/Profile/Like.svg";
 import reposts from "../../../assets/Profile/Repost.svg";
 import views from "../../../assets/Profile/View.svg";
@@ -75,12 +75,6 @@ export const UserHeader: FC<UserHeaderProps> = ({isUserData}) => {
 
     return (
         <div className={styles.headerBlock}>
-            {
-                window.history.length > 1 &&
-                <div>
-                    <ButtonBack/>
-                </div>
-            }
             <div className={styles.avatarBlock} onClick={() => viewAvatarHandler(isUserData.img)}>
                 <Avatar img={isUserData.img ? `${serverURL}${isUserData.img}` : null} name={isUserData.name}
                         color={isUserData.color} fontSize={48}/>

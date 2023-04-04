@@ -1,0 +1,53 @@
+@import "src/styles/vars";
+
+.messageBlock {
+  display: flex;
+  align-items: center;
+}
+
+
+.borderMessage {
+  width: 24px;
+  border-bottom: 2px solid $Gray200;
+}
+
+.borderYourMessage {
+  width: 24px;
+  border-bottom: 2px solid $Gray300;
+}
+
+.message {
+  display: flex;
+  max-width: 90%;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 20px;
+  background-color: $LightWhite;
+  .avatar {
+    height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    border-radius: 1000px;
+  }
+}
+
+.text {
+  font-size: 16px;
+  line-height: 130%;
+}
+
+
+.yourMessage {
+  background-color: $Gray300;
+}
+
+.messageWithPhoto {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery {
+  width: 100%;
+  padding: 12px 0;
+  max-width: 400px;
+}

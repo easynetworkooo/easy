@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Messages.module.scss'
-import { Avatar, InputSend, Text } from "../../components-ui";
+import { Avatar, InputSend } from "../../components-ui";
 import { userAPI } from "../../services/UserService";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { IDialogValue } from "../../models/IDialog";
 import { serverURL } from "../../constants/serverURL";
 import { USERS } from "../../constants/nameRoutesConsts";
 import { defaultColor } from "../../constants/colors";
+import { UserMessage } from "./UserMessages/UserMessage";
 
 const paginationCount = 30
 
@@ -43,8 +44,6 @@ export const Messages = () => {
 
     const [postImages, setPostImages] = useState<any>([])
 
-
-    const {id: activeUserId} = useAppSelector(state => state.userReducer)
     const socket = useAppSelector(state => state.socketReducer.socket)
     const {setNotificationsReducer} = notificationSlice.actions
 
@@ -167,49 +166,7 @@ export const Messages = () => {
                 <div className={styles.messages} style={{height: `calc(100vh - 220px - ${isMessageBlockHeight}px)`}}
                      onScroll={(e) => isPaginationWork && onScrollMessageHandler(e)}>
                     {isOpenMessages !== null && isMessagesData.map((item: any, index: number) =>
-                        <React.Fragment key={index}>
-                            {item.fromid !== activeUserId ?
-                                <div className={styles.messageBlock}>
-                                    <div className={styles.borderMessage}/>
-                                    <div className={styles.message}>
-                                        <div className={styles.avatar}>
-                                            <Avatar
-                                                img={isOpenDialogData.img ? `${serverURL}${isOpenDialogData.img}` : null}
-                                                name={isOpenDialogData.name} color={isOpenDialogData.color}
-                                                fontSize={18}/>
-                                        </div>
-                                        <div className={styles.messageWithPhoto}>
-                                            <Text text={item.text}/>
-                                            {(item.imgs !== '[]' && item.imgs !== '') &&
-                                                <div className={styles.gallery}>
-                                                    {JSON.parse(item.imgs).map((item: string) =>
-                                                        <img src={`${serverURL}/${item}`} key={item} alt="messagePhoto"/>
-                                                    )}
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                :
-                                <div className={styles.messageBlock}>
-                                    <div
-                                        className={item.fromid !== activeUserId ? styles.message : `${styles.message} ${styles.yourMessage}`}>
-                                        <div className={styles.messageWithPhoto}>
-                                            <Text text={item.text}/>
-                                            {(item.imgs !== '[]' && item.imgs !== '') &&
-                                                <div className={styles.gallery}>
-                                                    {JSON.parse(item.imgs).map((item: string) =>
-                                                        <img src={`${serverURL}/${item}`} key={item} alt="messagePhoto"/>
-                                                    )}
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-
-                                    <div className={styles.borderYourMessage}/>
-                                </div>
-                            }
-                        </React.Fragment>
+                       <UserMessage key={index} isOpenDialogData={isOpenDialogData} item={item}/>
                     )}
                 </div>
                 <InputSend setSubtractTextarea={setMessageBlockHeight} setPostImages={setPostImages}

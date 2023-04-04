@@ -61,54 +61,6 @@
   flex-direction: column-reverse;
 }
 
-.messageBlock {
-  display: flex;
-  align-items: center;
-}
-
-.borderMessage {
-  width: 24px;
-  border-bottom: 2px solid $Gray200;
-}
-
-.borderYourMessage {
-  width: 24px;
-  border-bottom: 2px solid $Gray300;
-}
-
-.message {
-  width: 100%;
-  display: flex;
-  padding: 8px 16px;
-  margin-right: 20px;
-  gap: 16px;
-  border-radius: 20px;
-  background-color: $LightWhite;
-  .avatar {
-    height: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    border-radius: 1000px;
-  }
-}
-
-.text {
-  font-size: 16px;
-  line-height: 130%;
-}
-
-
-.yourMessage {
-  background-color: $Gray300;
-  margin-left: 90px;
-  margin-right: 0;
-}
-
-.messageWithPhoto {
-  display: flex;
-  flex-direction: column;
-}
-
 .gallery {
   display: flex;
   flex-direction: row;

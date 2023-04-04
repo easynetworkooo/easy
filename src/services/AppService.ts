@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { ICountries } from "../models/ICountries";
 import { ICities } from "../models/ICities";
-import { IInterests, IInterestsFound } from "../models/IInterests";
+import { IInterests } from "../models/IInterests";
 import { serverURL } from "../constants/serverURL";
 
 
