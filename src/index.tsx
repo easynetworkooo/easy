@@ -7,7 +7,6 @@ import "yet-another-react-lightbox/plugins/counter.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import { App, AppProvider } from "./components";
 
-
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

@@ -23,7 +23,6 @@ import { serverURL } from "../../constants/serverURL";
 import { customErrorNotify } from "../../helpers/customErrorNotify";
 import { ReactComponent as MessagesSvg} from '../../assets/Profile/Messages.svg'
 import { ReactComponent as CommunitySvg} from '../../assets/Profile/Community.svg'
-import { ReactComponent as WalletSvg} from '../../assets/Profile/Wallet.svg'
 import { ReactComponent as MyProjectSvg} from '../../assets/Profile/MyProjects.svg'
 import { ReactComponent as BlogSvg } from "../../assets/Profile/Blog.svg";
 import { ReactComponent as HomeSvg } from "../../assets/Profile/Home.svg";
@@ -109,7 +108,6 @@ export const ProfileInformation = () => {
                 <MenuItem Image={BlogSvg} menuText={'My Blog'} to={MY_BLOG}/>
                 <MenuItem Image={MessagesSvg} countNotification={messages} menuText={'Messages'} to={MESSAGES}/>
                 <MenuItem Image={CommunitySvg} countNotification={subscribers} menuText={'Subscribers'} to={COMMUNITY}/>
-                <MenuItem Image={WalletSvg} menuText={'Wallet'} to={WALLET}/>
                 <MenuItem Image={MyProjectSvg} menuText={'Projects'} to={MY_PROJECTS}/>
             </div>
             <div className={styles.buttonCreateProject}>

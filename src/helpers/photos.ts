@@ -3,7 +3,7 @@ import { Photo } from "react-photo-album";
 const breakpoints = [1080, 640, 384, 256, 128, 96, 64, 48]
 
 
-function loadImage(imageUrl: string) {
+function _loadImage(imageUrl: string) {
     const img = new Image()
     img.src = imageUrl
 
@@ -19,12 +19,12 @@ function loadImage(imageUrl: string) {
 
 }
 
-async function createImagesInformation(imagesUrl: string[]) {
-    return Promise.all(imagesUrl.map(item => loadImage(item)))
+async function _createImagesInformation(imagesUrl: string[]) {
+    return Promise.all(imagesUrl.map(item => _loadImage(item)))
 }
 
 export const createPhotos = async (imagesUrl: string[]) => {
-    const photos: any = await createImagesInformation(imagesUrl).then(data => data)
+    const photos: any = await _createImagesInformation(imagesUrl).then(data => data)
 
     return await photos.map((photo: Photo) => (
             {
