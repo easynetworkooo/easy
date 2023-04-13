@@ -16,7 +16,7 @@ const initialState: INotificationsValue = {
 }
 
 export const notificationSlice = createSlice({
-    name: 'auth',
+    name: 'notifications',
     initialState,
     reducers: {
         setNotificationsReducer(state, action: PayloadAction<INotificationsValue>) {

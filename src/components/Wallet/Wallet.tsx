@@ -1,41 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Wallet.module.scss'
 import { WalletConnect } from "./WalletConnect/WalletConnect";
 import { WalletConnected } from "./WalletConnected/WalletConnected";
-import Web3 from "web3";
-import { customErrorNotify } from "../../helpers/customErrorNotify";
+import { useWalletConnect } from "../../hooks/useWalletConnect";
+import { useAppSelector } from "../../hooks/redux";
 
 
 
 
 export const Wallet = () => {
+    const wallet = useAppSelector(state => state.walletReducer)
 
-    const [account, setAccount] = useState('')
-    const [isWalletAuth, setWalletAuth] = useState<boolean>(false)
-
-    const connectWallet = async () => {
-        if (window.ethereum) {
-            const web3Instance = new Web3(window.ethereum)
-            await window.ethereum.request( {method: 'eth_requestAccounts'})
-                .then(() => customErrorNotify('Wallet connected', 'Success'))
-                .catch((e: {message: string, code: number}) => customErrorNotify(`${e.code} ${e.message}`, 'Error'))
-            const accounts = await web3Instance.eth.getAccounts()
-            setWalletAuth(true)
-            setAccount(accounts[0])
-        } else {
-            customErrorNotify('Please download metamask', 'Error')
-        }
-
-
-    }
-
+    const {walletConnectHandler} = useWalletConnect()
     return (
         <div className={styles.walletContainer}>
-            {isWalletAuth
+            {wallet.isWalletConnected
                 ?
-                <WalletConnected account={account}/>
+                <WalletConnected wallet={wallet}/>
                 :
-                <WalletConnect connectWallet={connectWallet}/>
+                <WalletConnect connectWallet={walletConnectHandler}/>
             }
         </div>
     );

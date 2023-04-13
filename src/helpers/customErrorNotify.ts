@@ -1,6 +1,10 @@
 import { toast } from "react-toastify";
 
-export const customErrorNotify = (message: string, type: string) => {
+type NotifyTypes = 'Error' | 'Warning' | 'Success'
+
+
+
+export const customErrorNotify = (message: string, type: NotifyTypes) => {
     if (type === 'Error') {
         toast.error(message, {
             position: "top-right",

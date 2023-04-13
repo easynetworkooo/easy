@@ -3,6 +3,8 @@ import authReducer from './reducers/AuthSlice'
 import userReducer from './reducers/UserSlice'
 import notificationsReducer from './reducers/NotificationSlice'
 import socketReducer from './reducers/SocketSlice'
+import web3Reducer from './reducers/Web3Slice'
+import walletReducer from './reducers/WalletSlice'
 import { userAPI } from "../services/UserService";
 import { appAPI } from "../services/AppService";
 import { authAPI } from "../services/AuthService";
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
     userReducer,
     notificationsReducer,
     socketReducer,
+    web3Reducer,
+    walletReducer,
     [appAPI.reducerPath] : appAPI.reducer,
     [authAPI.reducerPath] : authAPI.reducer,
     [userAPI.reducerPath] : userAPI.reducer,
