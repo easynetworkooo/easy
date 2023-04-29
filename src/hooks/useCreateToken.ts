@@ -26,11 +26,11 @@ export const useCreateToken = () => {
                     gasPrice: 30000000000,
                 }
 
-                const tx = await signer.sendTransaction(transaction)
+                const txResponse = await signer.sendTransaction(transaction)
 
-                const receipt = await provider.getTransactionReceipt(tx.hash)
+                const txReceipt = await txResponse.wait()
 
-                console.log(receipt)
+                console.log(txReceipt)
 
             } catch (e: any) {
                 customErrorNotify(e.error, 'Error')

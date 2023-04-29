@@ -6,6 +6,10 @@ import { Button, Input } from "../../../components-ui";
 import { useCreateLaunchpadFactory } from "../../../hooks/useCreateLaunchpadFactory";
 import { walletAPI } from "../../../services/WalletService";
 import { useAppSelector } from "../../../hooks/redux";
+import { ILaunchpad } from "../../../models/ILaunchpad";
+import { Contract, ethers } from "ethers";
+import { launchpadABI } from "../../../constants/launchpadABI";
+import { ERC20ABI } from "../../../constants/ERC20ABI";
 
 export interface WalletConnectedProps {
     wallet: IWallet
@@ -32,7 +36,20 @@ export const WalletConnected: FC<WalletConnectedProps> = ({wallet}) => {
 
 
     const getSignatureHandler = async () => {
+        const provider = new ethers.BrowserProvider(window.ethereum)
+        const signer = await provider.getSigner()
+        let launchpad: ILaunchpad = await createLaunchpad()
+        const launchpadResponse: any  = await signature(launchpad)
+        launchpad = launchpadResponse.data.value
 
+        const tokenLaunchpadFactoryInstance = new Contract('0xF96392924e7101aCfdA60E7C215e099D163F1cfC', launchpadABI, signer);
+
+        const erc20Instance = new Contract(launchpad.tokenAddress, ERC20ABI, signer);
+        await erc20Instance.approve(tokenLaunchpadFactoryInstance.address, launchpad.depositTokenAmount)
+
+        const txContract = await tokenLaunchpadFactoryInstance.createTokenLaunchpad(launchpad, {gasLimit: 3000000})
+
+        console.log(await txContract.wait());
     }
 
     return (
