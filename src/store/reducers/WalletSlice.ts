@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IWallet } from "../../models/IWallet";
+import { toBigInt } from "ethers";
 
 
 const initialState: IWallet = {
     isWalletConnected: false,
-    addresses: [],
     address: '',
-    networkId: 0,
+    networkId: toBigInt(0),
     networkType: '',
-    chainId: 0,
-    balance: 0
+    balance: toBigInt(0)
 }
 
 export const walletSlice = createSlice({
@@ -18,11 +17,9 @@ export const walletSlice = createSlice({
     reducers: {
         setWallet(state, action: PayloadAction<IWallet>) {
             state.isWalletConnected = action.payload.isWalletConnected
-            state.addresses = action.payload.addresses
             state.address = action.payload.address
             state.networkId = action.payload.networkId
             state.networkType = action.payload.networkType
-            state.chainId = action.payload.chainId
             state.balance = action.payload.balance
         }
     }
