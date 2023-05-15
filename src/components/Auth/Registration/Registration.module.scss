@@ -1,12 +1,22 @@
 @import "src/styles/vars";
 
 .registrationBlock {
-  flex: 1;
   display: flex;
+  flex: 1 1;
+  flex-direction: column;
   justify-content: center;
-  margin: 0 10%;
+  align-items: center;
+  z-index: 10;
+}
+
+.registrationElements {
+  display: flex;
+  width: 100%;
+  padding: 40px 24px;
+  background-color: $white;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .registrationHeader {
@@ -29,13 +39,11 @@
 
 .inputBlock {
   width: 100%;
-  padding: 0 40px;
   margin-top: 24px;
 }
 
 .registrationButtonBlock {
   width: 100%;
-  padding: 0 40px;
   margin-top: 48px;
 }
 
@@ -48,4 +56,54 @@
     color: $purple;
     line-height: 19px;
   }
+}
+
+@media screen and (max-width: 1201px) {
+  .registrationBlock {
+    justify-content: flex-end;
+    margin: 10px;
+  }
+
+  .registrationElements {
+    margin: 10px;
+    border-radius: 20px;
+  }
+
+  .authWithGoogle {
+    padding: 30px 0;
+  }
+
+  .linesWithText {
+    margin-bottom: 30px;
+  }
+
+  .inputBlock {
+    margin-top: 16px;
+  }
+
+  .registrationButtonBlock {
+    margin-top: 24px;
+  }
+
+  .loginBlock {
+    display: none;
+  }
+
+  .registrationHeader {
+    h2 {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
 }

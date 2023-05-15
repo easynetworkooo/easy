@@ -1,11 +1,9 @@
 export interface IWallet {
     isWalletConnected: boolean
-    addresses: string[]
     address: string
-    networkId: number
+    networkId: bigint
     networkType: string
-    chainId: number
-    balance: number
+    balance: bigint
 }
 
 export interface ProviderRpcError {

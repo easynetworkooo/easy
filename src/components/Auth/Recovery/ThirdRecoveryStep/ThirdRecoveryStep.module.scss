@@ -5,9 +5,9 @@
 }
 
 .textBlock {
-  padding: 0 20px;
   margin-bottom: 56px;
-  span{
+
+  span {
     color: $gray;
     line-height: 28px;
     letter-spacing: 0.01em;
@@ -15,11 +15,27 @@
 }
 
 .inputBlock {
-  padding: 0 40px;
   margin-bottom: 24px;
 }
 
 .savePassword {
-  padding: 0 40px;
-  margin-top: 36px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1201px) {
+  .textBlock {
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
 }

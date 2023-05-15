@@ -37,17 +37,19 @@ export const Recovery: FC<RecoveryProps> = ({changeAuthStatus, navigateHandler})
 
     return (
         <div className={styles.recoveryBlock}>
-            <div className={styles.recoveryHeader}>
-                <h2>Recovery password</h2>
-            </div>
-            <div className={styles.stepsContentBlock}>
-                {checkStep(isStep)}
-            </div>
-            <div className={styles.withoutAccountBlock}>
+            <div className={styles.recoveryElements}>
+                <div className={styles.recoveryHeader}>
+                    <h2>Recovery password</h2>
+                </div>
+                <div className={styles.stepsContentBlock}>
+                    {checkStep(isStep)}
+                </div>
+                <div className={styles.withoutAccountBlock}>
                 <span>
                     No have an account?
                     <span className={styles.signUp} onClick={() => changeAuthStatus('Registration')}>Sign Up</span>
                 </span>
+                </div>
             </div>
         </div>
     );
