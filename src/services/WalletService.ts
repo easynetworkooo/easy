@@ -21,7 +21,7 @@ export const walletAPI = createApi({
                 url: '/signature',
                 method: 'POST',
                 body: {
-                    launchpad: launchpad
+                    object: launchpad
                 }
             }),
         }),

@@ -7,7 +7,6 @@
 .textBlock {
   display: flex;
   flex-direction: column;
-  padding: 0 60px;
   margin-bottom: 20px;
   span{
     color: $gray;
@@ -59,6 +58,31 @@
   }
 }
 
-.nextStepBlock {
-  padding: 0 40px;
+
+@media screen and (max-width: 1201px) {
+  .codeBlock {
+    margin-bottom: 24px;
+  }
+
+  .retryReceiveCode {
+    margin-bottom: 40px;
+  }
+
+  .code {
+    input {
+      width: 54px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
 }

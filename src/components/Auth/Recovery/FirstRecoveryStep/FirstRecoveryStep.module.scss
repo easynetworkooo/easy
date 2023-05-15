@@ -5,9 +5,9 @@
 }
 
 .textBlock {
-  padding: 0 80px;
-  margin-bottom: 56px;
-  span{
+  margin-bottom: 24px;
+
+  span {
     color: $gray;
     line-height: 28px;
     letter-spacing: 0.01em;
@@ -16,10 +16,24 @@
 
 .inputBlock {
   width: 100%;
-  padding: 0 40px;
   margin-bottom: 48px;
 }
 
-.nextStepBlock {
-  padding: 0 40px;
+
+@media screen and (max-width: 1201px) {
+  .inputBlock {
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
 }

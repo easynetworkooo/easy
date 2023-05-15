@@ -67,6 +67,7 @@
 
 .name {
   margin-right: 16px;
+
   span {
     cursor: pointer;
     color: $blue;
@@ -78,4 +79,22 @@
     font-size: 12px;
     color: $gray;
   }
+}
+
+@media screen and (max-width: 1201px) {
+
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+  .notificationContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
 }

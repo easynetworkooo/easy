@@ -10,7 +10,7 @@ export interface ILaunchpad {
     owner: string,
     tokenAddress: string,
     fundsPaymentToken: string,
-    depositTokenAmount: number,
+    depositTokenAmount: any,
     lockingTokenAmount: number,
     nonce: number,
     timeFrames: ITimeFrames,

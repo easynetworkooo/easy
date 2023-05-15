@@ -2,7 +2,7 @@
 
 .post {
   display: flex;
-  max-width: 684px;
+  width: 684px;
   position: relative;
   gap: 16px;
   padding: 16px 24px 8px;
@@ -96,7 +96,7 @@
 }
 
 .gallery {
-  width: 500px;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -109,4 +109,28 @@
   cursor: pointer;
   border-radius: 20px;
   width: 100%;
+}
+
+
+@media screen and (max-width: 1201px) {
+  .post {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .post {
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .post {
+   max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
 }

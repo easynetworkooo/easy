@@ -10,9 +10,9 @@ export const useCreateLaunchpadFactory = (timeFrames: ITimeFrames) => {
         const provider = new ethers.BrowserProvider(window.ethereum)
         const launchpad: ILaunchpad = {
             owner: address,
-            tokenAddress: '0x1c81a4EfD0b744CF5bB3f2cE4c3d2bC9B959DD49',
+            tokenAddress: '0xA59Ca7Dfd15b95d482c0C7De17d465718D714352',
             fundsPaymentToken: '0x0000000000000000000000000000000000000000',
-            depositTokenAmount: 1000000000,
+            depositTokenAmount: '100000000000000000000',
             lockingTokenAmount: 0,
             nonce: 0,
             timeFrames: timeFrames,

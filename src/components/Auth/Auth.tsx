@@ -49,11 +49,11 @@ export const Auth: FC = () => {
     const checkStatusAuth = () => {
         if (isAuthStatus === 'Login') {
             return (
-                <Login changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler}/>
+                <Login changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler} authStatus={isAuthStatus}/>
             )
         } else if (isAuthStatus === 'Registration') {
             return (
-                <Registration changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler}/>
+                <Registration changeAuthStatus={changeAuthStatus} navigateHandler={navigateHandler} authStatus={isAuthStatus}/>
             )
         } else if (isAuthStatus === 'Recovery') {
             return (

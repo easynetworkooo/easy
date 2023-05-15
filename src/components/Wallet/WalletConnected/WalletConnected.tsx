@@ -5,7 +5,6 @@ import { useCreateToken } from "../../../hooks/useCreateToken";
 import { Button, Input } from "../../../components-ui";
 import { useCreateLaunchpadFactory } from "../../../hooks/useCreateLaunchpadFactory";
 import { walletAPI } from "../../../services/WalletService";
-import { useAppSelector } from "../../../hooks/redux";
 import { ILaunchpad } from "../../../models/ILaunchpad";
 import { Contract, ethers } from "ethers";
 import { launchpadABI } from "../../../constants/launchpadABI";
@@ -17,7 +16,6 @@ export interface WalletConnectedProps {
 
 export const WalletConnected: FC<WalletConnectedProps> = ({wallet}) => {
     const {createToken} = useCreateToken()
-    const address = useAppSelector(state => state.walletReducer.address)
     const createLaunchpad = useCreateLaunchpadFactory({
         earlyPhaseStart: 1640380800,
         earlyPhaseEnd: 1641907199,
@@ -39,17 +37,21 @@ export const WalletConnected: FC<WalletConnectedProps> = ({wallet}) => {
         const provider = new ethers.BrowserProvider(window.ethereum)
         const signer = await provider.getSigner()
         let launchpad: ILaunchpad = await createLaunchpad()
-        const launchpadResponse: any  = await signature(launchpad)
-        launchpad = launchpadResponse.data.value
+        const launchpadResponse: any = await signature(launchpad)
+        launchpad = launchpadResponse.data
 
         const tokenLaunchpadFactoryInstance = new Contract('0xF96392924e7101aCfdA60E7C215e099D163F1cfC', launchpadABI, signer);
 
         const erc20Instance = new Contract(launchpad.tokenAddress, ERC20ABI, signer);
-        await erc20Instance.approve(tokenLaunchpadFactoryInstance.address, launchpad.depositTokenAmount)
+        const tokenInstanceAddress = await tokenLaunchpadFactoryInstance.getAddress()
+
+        await erc20Instance.approve(tokenInstanceAddress, launchpad.depositTokenAmount)
 
         const txContract = await tokenLaunchpadFactoryInstance.createTokenLaunchpad(launchpad, {gasLimit: 3000000})
 
-        console.log(await txContract.wait());
+        const tx = await txContract.wait()
+
+        console.log(tx.logs[5].args[0])
     }
 
     return (

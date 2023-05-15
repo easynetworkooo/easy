@@ -8,14 +8,16 @@ import { IUserProfile } from "../../../models/IUserProfile";
 import { userAPI } from "../../../services/UserService";
 import { useInput } from "../../../hooks/useInput";
 import { customErrorNotify } from "../../../helpers/customErrorNotify";
+import { AuthTabs } from "../AuthTabs/AuthTabs";
 
 
 export interface RegistrationProps {
     changeAuthStatus: (status: string) => void
+    authStatus: string
     navigateHandler: (continueAuth: boolean, dataProfile: IUserProfile) => void
 }
 
-export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateHandler}) => {
+export const Registration: FC<RegistrationProps> = ({changeAuthStatus, authStatus, navigateHandler}) => {
     const [registration] = authAPI.useRegistrationMutation()
     const [fetchUserProfile] = userAPI.useFetchUserProfileMutation()
 
@@ -51,58 +53,61 @@ export const Registration: FC<RegistrationProps> = ({changeAuthStatus, navigateH
 
     return (
         <div className={styles.registrationBlock}>
-            <div className={styles.registrationHeader}>
-                <h2>Join our community</h2>
-            </div>
-            <div className={styles.authWithGoogle}>
-                <AuthGoogleButton/>
-            </div>
-            <div className={styles.linesWithText}>
-                <LinesWithCenterText/>
-            </div>
-            <div className={styles.inputBlock}>
-                <Input placeholder={'Email'}
-                       type={'text'}
-                       value={isEmail.value}
-                       validations={isEmail.validators}
-                       isInputErrorValidation={isEmail.isInputErrorValidation}
-                       isDirty={isEmail.isDirty}
-                       onChange={(e) => isEmail.onChange(e)}
-                       onBlur={(e) => isEmail.onBlur(e)}
-                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}
-                />
-            </div>
-            <div className={styles.inputBlock}>
-                <Input placeholder={'Password'}
-                       type={'password'}
-                       value={isPassword.value}
-                       validations={isPassword.validators}
-                       isInputErrorValidation={isPassword.isInputErrorValidation}
-                       isDirty={isPassword.isDirty}
-                       onChange={(e) => isPassword.onChange(e)}
-                       onBlur={(e) => isPassword.onBlur(e)}
-                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}
-                />
-            </div>
-            <div className={styles.inputBlock}>
-                <Input placeholder={'Repeat password'} type={'password'} value={isRepeatPassword.value}
-                       onChange={(e) => isRepeatPassword.onChange(e)}
-                       onBlur={e => isRepeatPassword.onBlur(e)}
-                       isInputErrorValidation={isRepeatPassword.isInputErrorValidation}
-                       isDirty={isRepeatPassword.isDirty}
-                       validations={isRepeatPassword.validators}
-                       onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
-            </div>
-            <div className={styles.registrationButtonBlock}>
-                <Button onClick={() => registrationHandler()}>
-                    <span>Sign Up</span>
-                </Button>
-            </div>
-            <div className={styles.loginBlock}>
+            <div className={styles.registrationElements}>
+                <div className={styles.registrationHeader}>
+                    <h2>Join our community</h2>
+                    <AuthTabs changeAuthStatus={changeAuthStatus} authStatus={authStatus}/>
+                </div>
+                <div className={styles.authWithGoogle}>
+                    <AuthGoogleButton/>
+                </div>
+                <div className={styles.linesWithText}>
+                    <LinesWithCenterText/>
+                </div>
+                <div className={styles.inputBlock}>
+                    <Input placeholder={'Email'}
+                           type={'text'}
+                           value={isEmail.value}
+                           validations={isEmail.validators}
+                           isInputErrorValidation={isEmail.isInputErrorValidation}
+                           isDirty={isEmail.isDirty}
+                           onChange={(e) => isEmail.onChange(e)}
+                           onBlur={(e) => isEmail.onBlur(e)}
+                           onKeyPress={e => e.key === 'Enter' && registrationHandler()}
+                    />
+                </div>
+                <div className={styles.inputBlock}>
+                    <Input placeholder={'Password'}
+                           type={'password'}
+                           value={isPassword.value}
+                           validations={isPassword.validators}
+                           isInputErrorValidation={isPassword.isInputErrorValidation}
+                           isDirty={isPassword.isDirty}
+                           onChange={(e) => isPassword.onChange(e)}
+                           onBlur={(e) => isPassword.onBlur(e)}
+                           onKeyPress={e => e.key === 'Enter' && registrationHandler()}
+                    />
+                </div>
+                <div className={styles.inputBlock}>
+                    <Input placeholder={'Repeat password'} type={'password'} value={isRepeatPassword.value}
+                           onChange={(e) => isRepeatPassword.onChange(e)}
+                           onBlur={e => isRepeatPassword.onBlur(e)}
+                           isInputErrorValidation={isRepeatPassword.isInputErrorValidation}
+                           isDirty={isRepeatPassword.isDirty}
+                           validations={isRepeatPassword.validators}
+                           onKeyPress={e => e.key === 'Enter' && registrationHandler()}/>
+                </div>
+                <div className={styles.registrationButtonBlock}>
+                    <Button onClick={() => registrationHandler()}>
+                        <span>Sign Up</span>
+                    </Button>
+                </div>
+                <div className={styles.loginBlock}>
                 <span>
                     Already have an account?<span className={styles.login}
                                                   onClick={() => changeAuthStatus('Login')}>Login</span>
                 </span>
+                </div>
             </div>
         </div>
     );
